@@ -12,5 +12,10 @@ class ResultActionsWrapper(private val actions: ResultActions) {
 		return this
 	}
 
+	fun <T : MockMvcResultMatchersDsl> andExpectCustom(matcher: (ResultActions)->T,dsl: T.() -> Unit): ResultActionsWrapper {
+		matcher(actions).dsl()
+		return this
+	}
+
 	fun andReturn() = actions.andReturn()
 }

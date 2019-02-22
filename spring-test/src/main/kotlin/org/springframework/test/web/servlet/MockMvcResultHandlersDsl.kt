@@ -45,4 +45,8 @@ open class MockMvcResultHandlersDsl(private val actions: ResultActions): MockMvc
 		actions.andDo(resultHandler)
 	}
 
+	fun handle(handler:MvcResult.()-> Unit) {
+		actions.andDo { it.handler() }
+	}
+
 }

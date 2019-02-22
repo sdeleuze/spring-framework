@@ -35,21 +35,20 @@ class DslControllerTest {
 	}
 
 	class ClintMatchers(val matchers: ResultActions) : MockMvcResultMatchersDsl(matchers) {
-//		infix fun String.jsonPath(block: JsonPathResultMatchers.() -> ResultMatcher) {
-//			matchers.add(MockMvcResultMatchers.jsonPath(this).block())
-//		}
-//
-//		infix fun String.jsonPathIs(value: Any?) {
-//			matchers.add(MockMvcResultMatchers.jsonPath(this, CoreMatchers.`is`(value)))
-//		}
+		infix fun String.jsonPath(block: JsonPathResultMatchers.() -> ResultMatcher) {
+			matchers.andExpect(MockMvcResultMatchers.jsonPath(this).block())
+		}
+
+		infix fun String.jsonPathIs(value: Any?) {
+			matchers.andExpect(MockMvcResultMatchers.jsonPath(this, CoreMatchers.`is`(value)))
+		}
 
 
 		fun <T> model(name: String, modelInit: T.() -> Unit) {
-			//TODO Unable to implement this without a ResultAction
-//			matchers.add( MockMvcResultMatchers.model(). { mvcResult ->
-//				val model = mvcResult.modelAndView?.model?.get(name) as T?
-//				model?.modelInit() ?: throw AssertionError("Model attribute $name was not found")
-//			})
+			matchers.andDo { mvcResult ->
+				val model = mvcResult.modelAndView?.model?.get(name) as T?
+				model?.modelInit() ?: throw AssertionError("Model attribute $name was not found")
+			}
 		}
 	}
 
@@ -57,14 +56,12 @@ class DslControllerTest {
 	@Test
 	fun `hello json`() {
 		val name = "Petr"
-		mockMvc.get("/hello/$name") andDo {
-			MockMvcResultHandlers.print()
-		} andExpect {
+		mockMvc.get("/hello/$name").andExpectCustom(::ClintMatchers) {
 
 			content { json("""{"surname":"Petr"}""", false) }  //JsonAssert support (non-strict is the default)
-//			"$.surname" jsonPathIs name //JsonPath
-//
-//			"surname" jsonPath { value("Petr")}
+			"$.surname" jsonPathIs name //JsonPath
+
+			"surname" jsonPath { value("Petr")}
 			jsonPath("surname") { value("Petr") }
 
 			match(HandlerMethod("helloJson"))
@@ -95,16 +92,8 @@ class DslControllerTest {
 				nodeCount(1)
 				string("Petr")
 			}
-
-
-//					actions {
-//						assertTrue(andReturn().response.contentAsString.contains("Hello world"))
-//					}
-//
-			//Also unable to implement
-//					withResult {
-//						assertTrue(response.contentAsString.contains("Hello world"))
-//					}
+		} andDo {
+			handle { response.contentAsString.contains("Hello world") }
 		}
 	}
 
