@@ -9,7 +9,7 @@ import java.net.URI
  * @author Sebastien Deleuze
  * @since 5.2
  */
-fun MockMvc.get(urlTemplate: String, vararg vars: Any?, dsl: MockHttpServletRequestDsl.() -> Unit): ResultActionsWrapper {
+fun MockMvc.get(urlTemplate: String, vararg vars: Any?, dsl: MockHttpServletRequestDsl.() -> Unit = {}): ResultActionsWrapper {
 	val requestBuilder = MockMvcRequestBuilders.get(urlTemplate, vars)
 	return MockHttpServletRequestDsl(requestBuilder).apply(dsl).execute(this)
 }
