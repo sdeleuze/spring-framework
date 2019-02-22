@@ -25,7 +25,7 @@ import java.io.Writer
  * @author Sebastien Deleuze
  */
 @MockMvcDslMarker
-open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestBuilder): (MockMvc) -> MvcResult, MockHttpServletRequestDsl(requestBuilder) {
+open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestBuilder): MockHttpServletRequestDsl(requestBuilder) {
 
 	private val resultHandlers = mutableListOf<ResultHandler>()
 
@@ -55,7 +55,7 @@ open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestB
 		resultHandlers.add(resultHandler)
 	}
 
-	override fun invoke(mockMvc: MockMvc): MvcResult {
+	internal fun execute(mockMvc: MockMvc): MvcResult {
 		val resultActions = mockMvc.perform(requestBuilder)
 		for (resultHandler in resultHandlers) {
 			resultActions.andDo(resultHandler)
