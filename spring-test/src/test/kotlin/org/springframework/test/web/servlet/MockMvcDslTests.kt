@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import java.security.Principal
+import java.util.*
 
 /**
  * MockMvcDsl tests that verify builder, actions, and expect blocks
@@ -42,15 +43,14 @@ class MockMvcDslTests {
 	@Test
 	fun json() {
 		mockMvc {
-			GET("/person/{name}", "Lee") {
+			get("/person/{name}", "Lee") {
 				print()
-				request {
-					secure = true
-					headers {
-						accept = listOf(MediaType.APPLICATION_JSON)
-					}
-					principal = Principal { "foo" }
+				secure = true
+				accept = MediaType.APPLICATION_JSON
+				headers {
+					contentLanguage = Locale.FRANCE
 				}
+				principal = Principal { "foo" }
 				expect {
 					status { isOk }
 					content { contentType("application/json;charset=UTF-8") }
@@ -58,13 +58,11 @@ class MockMvcDslTests {
 					content { json("""{"someBoolean": false}""", false) }
 				}
 			}
-			POST("/person") {
-				request {
-					content = """{ "name": "foo" }"""
-					headers {
-						accept = listOf(MediaType.APPLICATION_JSON)
-						contentType = MediaType.APPLICATION_JSON
-					}
+			post("/person") {
+				content = """{ "name": "foo" }"""
+				headers {
+					accept = listOf(MediaType.APPLICATION_JSON)
+					contentType = MediaType.APPLICATION_JSON
 				}
 				expect {
 					status {
@@ -79,29 +77,25 @@ class MockMvcDslTests {
 	fun `negative assertion tests to verify the matchers throw errors when expected`() {
 		val name = "Petr"
 		mockMvc {
-			GET("/person/$name") {
-				request {
-					headers {
-						accept = listOf(MediaType.APPLICATION_JSON)
-					}
-					print()
-					expect {
-						assertThrows<AssertionError> { content { contentType(MediaType.APPLICATION_ATOM_XML) } }
-						assertThrows<AssertionError> { content { string("Wrong") } }
-						assertThrows<AssertionError> { jsonPath("name", CoreMatchers.`is`("Wrong")) }
-						assertThrows<AssertionError> { content { json("""{"name":"wrong"}""") } }
-						assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
-						assertThrows<AssertionError> { cookie { value("name", "wrong") } }
-						assertThrows<AssertionError> { flash { attribute<String>("name", "wrong") } }
-						assertThrows<AssertionError> { header { stringValues("name", "wrong") } }
-						assertThrows<AssertionError> { model { attributeExists("name", "wrong") } }
-						assertThrows<AssertionError> { redirectedUrl("wrong/Url") }
-						assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
-						assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
-						assertThrows<AssertionError> { status { isAccepted } }
-						assertThrows<AssertionError> { view { name("wrongName") } }
-						assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
-					}
+			get("/person/$name") {
+				accept = MediaType.APPLICATION_JSON
+				print()
+				expect {
+					assertThrows<AssertionError> { content { contentType(MediaType.APPLICATION_ATOM_XML) } }
+					assertThrows<AssertionError> { content { string("Wrong") } }
+					assertThrows<AssertionError> { jsonPath("name", CoreMatchers.`is`("Wrong")) }
+					assertThrows<AssertionError> { content { json("""{"name":"wrong"}""") } }
+					assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
+					assertThrows<AssertionError> { cookie { value("name", "wrong") } }
+					assertThrows<AssertionError> { flash { attribute<String>("name", "wrong") } }
+					assertThrows<AssertionError> { header { stringValues("name", "wrong") } }
+					assertThrows<AssertionError> { model { attributeExists("name", "wrong") } }
+					assertThrows<AssertionError> { redirectedUrl("wrong/Url") }
+					assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
+					assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
+					assertThrows<AssertionError> { status { isAccepted } }
+					assertThrows<AssertionError> { view { name("wrongName") } }
+					assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
 				}
 		}
 		}
@@ -110,12 +104,8 @@ class MockMvcDslTests {
 	@Test
 	fun `negative assertion tests for xpath`() {
 		mockMvc {
-			GET("/person/Clint") {
-				request {
-					headers {
-						accept = listOf(MediaType.APPLICATION_XML)
-					}
-				}
+			get("/person/Clint") {
+				accept = MediaType.APPLICATION_XML
 				print()
 				expect {
 					status {

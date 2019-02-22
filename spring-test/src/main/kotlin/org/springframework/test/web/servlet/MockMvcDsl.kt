@@ -13,62 +13,62 @@ internal annotation class MockMvcDslMarker
 @MockMvcDslMarker
 open class MockMvcDsl(private val mockMvc: MockMvc) {
 
-	fun GET(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun get(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.get(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun GET(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun get(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.get(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun POST(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun post(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.post(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun POST(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun post(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.post(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun PUT(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun put(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.put(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun PUT(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun put(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.put(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun PATCH(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun patch(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.patch(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun PATCH(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun patch(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.patch(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun DELETE(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun delete(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.delete(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun DELETE(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun delete(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.delete(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun OPTIONS(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun options(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.options(urlTemplate, vars)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 
-	fun OPTIONS(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+	fun options(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.options(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}

@@ -1,6 +1,7 @@
 package org.springframework.test.web.servlet
 
 import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
 import org.springframework.test.web.servlet.request.RequestPostProcessor
@@ -34,6 +35,12 @@ open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequest
 
 	var content: String = ""
 		set(value) = builder.content(value).let { value }
+
+	var accept: MediaType = MediaType.ALL
+		set(value) = builder.accept(value).let { value }
+
+	var contentType: MediaType = MediaType.ALL
+		set(value) = builder.contentType(value).let { value }
 
 	fun headers(headers: HttpHeaders.() -> Unit) {
 		builder.headers(HttpHeaders().apply(headers))
