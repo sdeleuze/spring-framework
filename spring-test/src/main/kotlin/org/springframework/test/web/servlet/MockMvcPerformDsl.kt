@@ -51,7 +51,7 @@ open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestB
 		MockMvcResultMatchersDsl(resultMatchers).dsl()
 	}
 
-	fun handler(resultHandler: ResultHandler) {
+	fun handle(resultHandler: ResultHandler) {
 		resultHandlers.add(resultHandler)
 	}
 
