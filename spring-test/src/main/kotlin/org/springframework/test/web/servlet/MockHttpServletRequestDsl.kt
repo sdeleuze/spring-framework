@@ -1,9 +1,9 @@
 package org.springframework.test.web.servlet
 
 import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
+import org.springframework.test.web.servlet.request.RequestPostProcessor
 import org.springframework.util.MultiValueMap
 import java.security.Principal
 import java.util.*
@@ -12,7 +12,7 @@ import javax.servlet.http.Cookie
 /**
  * @author Sebastien Deleuze
  */
-class MockHttpServletRequestDsl(private val builder: MockHttpServletRequestBuilder) {
+open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequestBuilder) {
 
 	var contextPath: String = ""
 		set(value) = builder.contextPath(value).let { value }
@@ -87,5 +87,9 @@ class MockHttpServletRequestDsl(private val builder: MockHttpServletRequestBuild
 
 	var principal: Principal = Principal { "" }
 		set(value) = builder.principal(value).let { value }
+
+	fun with(processor: RequestPostProcessor) {
+		builder.with(processor)
+	}
 
 }

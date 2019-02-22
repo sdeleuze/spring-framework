@@ -1,12 +1,17 @@
 package org.springframework.test.web.servlet
 
+import org.springframework.http.HttpMethod
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import java.net.URI
+
+@DslMarker
+internal annotation class MockMvcDslMarker
 
 /**
  * @author Sebastien Deleuze
  */
-class MockMvcDsl(private val mockMvc: MockMvc) {
+@MockMvcDslMarker
+open class MockMvcDsl(private val mockMvc: MockMvc) {
 
 	fun GET(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.get(urlTemplate, vars)
@@ -65,6 +70,26 @@ class MockMvcDsl(private val mockMvc: MockMvc) {
 
 	fun OPTIONS(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
 		val requestBuilder = MockMvcRequestBuilders.options(uri)
+		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
+	}
+
+	fun request(method: HttpMethod, urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+		val requestBuilder = MockMvcRequestBuilders.request(method, urlTemplate, vars)
+		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
+	}
+
+	fun request(method: HttpMethod, uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+		val requestBuilder = MockMvcRequestBuilders.request(method, uri)
+		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
+	}
+
+	fun multipart(urlTemplate: String, vararg vars: Any, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+		val requestBuilder = MockMvcRequestBuilders.multipart(urlTemplate, vars)
+		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
+	}
+
+	fun multipart(uri: URI, dsl: MockMvcPerformDsl.() -> Unit): MvcResult {
+		val requestBuilder = MockMvcRequestBuilders.multipart(uri)
 		return MockMvcPerformDsl(requestBuilder).apply(dsl).invoke(mockMvc)
 	}
 }

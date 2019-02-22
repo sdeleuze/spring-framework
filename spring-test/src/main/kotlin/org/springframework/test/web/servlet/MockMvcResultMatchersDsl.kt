@@ -22,7 +22,8 @@ import org.springframework.test.web.servlet.result.*
 /**
  * @author Sebastien Deleuze
  */
-class MockMvcResultMatchersDsl(private val matchers: MutableList<ResultMatcher>) {
+@MockMvcDslMarker
+open class MockMvcResultMatchersDsl(private val matchers: MutableList<ResultMatcher>) {
 
 	fun request(matcher: RequestResultMatchers.() -> ResultMatcher) {
 		matchers.add(MockMvcResultMatchers.request().matcher())

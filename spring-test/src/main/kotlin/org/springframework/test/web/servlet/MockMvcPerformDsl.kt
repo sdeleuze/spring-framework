@@ -24,7 +24,8 @@ import java.io.Writer
 /**
  * @author Sebastien Deleuze
  */
-class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestBuilder): (MockMvc) -> MvcResult {
+@MockMvcDslMarker
+open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestBuilder): (MockMvc) -> MvcResult {
 
 	private val resultHandlers = mutableListOf<ResultHandler>()
 
@@ -49,6 +50,10 @@ class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestBuilde
 
 	fun expect(dsl: MockMvcResultMatchersDsl.() -> Unit) {
 		MockMvcResultMatchersDsl(resultMatchers).dsl()
+	}
+
+	fun handler(resultHandler: ResultHandler) {
+		resultHandlers.add(resultHandler)
 	}
 
 	override fun invoke(mockMvc: MockMvc): MvcResult {

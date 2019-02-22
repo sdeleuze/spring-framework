@@ -121,10 +121,7 @@ class MockMvcDslTests {
 					status {
 						isOk
 					}
-					print()
-					expect {
-						assertThrows<AssertionError> { xpath("//wrong") { nodeCount(1) } }
-					}
+					assertThrows<AssertionError> { xpath("//wrong") { nodeCount(1) } }
 				}
 			}
 		}
