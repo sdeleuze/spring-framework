@@ -92,8 +92,8 @@ class DslControllerTest {
 				nodeCount(1)
 				string("Petr")
 			}
-		} andDo {
-			handle { response.contentAsString.contains("Hello world") }
+		} andHandle {
+			response.contentAsString.contains("Hello world")
 		}
 	}
 
