@@ -15,32 +15,32 @@ import javax.servlet.http.Cookie
  */
 open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequestBuilder) {
 
-	var contextPath: String = ""
-		set(value) = builder.contextPath(value).let { contextPath = value }
+	var contextPath: String? = null
+		set(value) = builder.contextPath(value!!).let { contextPath = value }
 
-	var servletPath: String = ""
-		set(value) = builder.servletPath(value).let { servletPath = value }
+	var servletPath: String? = null
+		set(value) = builder.servletPath(value!!).let { servletPath = value }
 
 	var pathInfo: String? = null
 		set(value) = builder.pathInfo(value).let { pathInfo = value }
 
-	var secure: Boolean = false
-		set(value) = builder.secure(value).let { secure = value }
+	var secure: Boolean? = null
+		set(value) = builder.secure(value!!).let { secure = value }
 
-	var characterEncoding: String = ""
-		set(value) = builder.characterEncoding(value).let { characterEncoding = value }
+	var characterEncoding: String? = null
+		set(value) = builder.characterEncoding(value!!).let { characterEncoding = value }
 
-	var contentAsByte: ByteArray = ByteArray(0)
-		set(value) = builder.content(value).let { contentAsByte = value }
+	var contentAsByte: ByteArray? = null
+		set(value) = builder.content(value!!).let { contentAsByte = value }
 
-	var content: String = ""
-		set(value) = builder.content(value).let { content = value }
+	var content: String? = null
+		set(value) = builder.content(value!!).let { content = value }
 
-	var accept: MediaType = MediaType.ALL
+	var accept: MediaType? = null
 		set(value) = builder.accept(value).let { accept = value }
 
-	var contentType: MediaType = MediaType.ALL
-		set(value) = builder.contentType(value).let { contentType = value }
+	var contentType: MediaType? = null
+		set(value) = builder.contentType(value!!).let { contentType = value }
 
 	fun headers(headers: HttpHeaders.() -> Unit) {
 		builder.headers(HttpHeaders().apply(headers))
@@ -86,11 +86,11 @@ open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequest
 		builder.flashAttrs(flashAttributes)
 	}
 
-	var session: MockHttpSession = MockHttpSession()
-		set(value) = builder.session(value).let { session = value }
+	var session: MockHttpSession? = null
+		set(value) = builder.session(value!!).let { session = value }
 
-	var principal: Principal = Principal { "" }
-		set(value) = builder.principal(value).let { principal = value }
+	var principal: Principal? = null
+		set(value) = builder.principal(value!!).let { principal = value }
 
 	fun with(processor: RequestPostProcessor) {
 		builder.with(processor)
