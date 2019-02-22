@@ -22,75 +22,74 @@ import org.springframework.test.web.servlet.result.*
 /**
  * @author Sebastien Deleuze
  */
-@MockMvcDslMarker
-open class MockMvcResultMatchersDsl(private val matchers: MutableList<ResultMatcher>) {
+open class MockMvcResultMatchersDsl(private val actions: ResultActions) {
 
 	fun request(matcher: RequestResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.request().matcher())
+		actions.andExpect(MockMvcResultMatchers.request().matcher())
 	}
 
 	fun view(matcher: ViewResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.view().matcher())
+		actions.andExpect(MockMvcResultMatchers.view().matcher())
 	}
 
 	fun model(matcher: ModelResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.model().matcher())
+		actions.andExpect(MockMvcResultMatchers.model().matcher())
 	}
 
 	fun flash(matcher: FlashAttributeResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.flash().matcher())
+		actions.andExpect(MockMvcResultMatchers.flash().matcher())
 	}
 
 	fun forwardedUrl(expectedUrl: String?) {
-		matchers.add(MockMvcResultMatchers.forwardedUrl(expectedUrl))
+		actions.andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl))
 	}
 
 	fun forwardedUrlTemplate(urlTemplate: String, vararg uriVars: Any) {
-		matchers.add(MockMvcResultMatchers.forwardedUrlTemplate(urlTemplate, *uriVars))
+		actions.andExpect(MockMvcResultMatchers.forwardedUrlTemplate(urlTemplate, *uriVars))
 	}
 
 	fun forwardedUrlPattern(urlPattern: String) {
-		matchers.add(MockMvcResultMatchers.forwardedUrlPattern(urlPattern))
+		actions.andExpect(MockMvcResultMatchers.forwardedUrlPattern(urlPattern))
 	}
 
 	fun redirectedUrl(expectedUrl: String) {
-		matchers.add(MockMvcResultMatchers.redirectedUrl(expectedUrl))
+		actions.andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl))
 	}
 
 	fun redirectedUrlPattern(redirectedUrlPattern: String) {
-		matchers.add(MockMvcResultMatchers.redirectedUrlPattern(redirectedUrlPattern))
+		actions.andExpect(MockMvcResultMatchers.redirectedUrlPattern(redirectedUrlPattern))
 	}
 
 	fun status(matcher: StatusResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.status().matcher())
+		actions.andExpect(MockMvcResultMatchers.status().matcher())
 	}
 
 	fun header(matcher: HeaderResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.header().matcher())
+		actions.andExpect(MockMvcResultMatchers.header().matcher())
 	}
 
 	fun content(matcher: ContentResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.content().matcher())
+		actions.andExpect(MockMvcResultMatchers.content().matcher())
 	}
 
 	fun <T> jsonPath(expression: String, matcher: Matcher<T>) {
-		matchers.add(MockMvcResultMatchers.jsonPath(expression, matcher))
+		actions.andExpect(MockMvcResultMatchers.jsonPath(expression, matcher))
 	}
 
 	fun jsonPath(expression: String, vararg args: Any, block: JsonPathResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.jsonPath(expression, *args).block())
+		actions.andExpect(MockMvcResultMatchers.jsonPath(expression, *args).block())
 	}
 
 	fun xpath(expression: String, vararg args: Any, namespaces: Map<String, String>? = null, xpathInit: XpathResultMatchers.() -> ResultMatcher) {
-		matchers.add(MockMvcResultMatchers.xpath(expression, namespaces, args).xpathInit())
+		actions.andExpect(MockMvcResultMatchers.xpath(expression, namespaces, args).xpathInit())
 	}
 
 	fun cookie(cookieInit: CookieResultMatchers.() -> ResultMatcher) {
 		val cookie = MockMvcResultMatchers.cookie().cookieInit()
-		matchers.add(cookie)
+		actions.andExpect(cookie)
 	}
 
 	fun match(matcher: ResultMatcher) {
-		matchers.add(matcher)
+		actions.andExpect(matcher)
 	}
 }

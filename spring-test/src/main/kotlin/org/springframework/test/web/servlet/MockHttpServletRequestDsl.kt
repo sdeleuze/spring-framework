@@ -96,4 +96,6 @@ open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequest
 		builder.with(processor)
 	}
 
+	internal fun execute(mockMvc: MockMvc) = ResultActionsWrapper(mockMvc.perform(builder))
+
 }

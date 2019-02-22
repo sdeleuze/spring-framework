@@ -42,33 +42,30 @@ class MockMvcDslTests {
 
 	@Test
 	fun json() {
-		mockMvc {
-			get("/person/{name}", "Lee") {
-				print()
+		mockMvc.get("/person/{name}", "Lee") {
 				secure = true
 				accept = MediaType.APPLICATION_JSON
 				headers {
 					contentLanguage = Locale.FRANCE
 				}
 				principal = Principal { "foo" }
-				expect {
-					status { isOk }
-					content { contentType("application/json;charset=UTF-8") }
-					jsonPath("$.name") { value("Lee") }
-					content { json("""{"someBoolean": false}""", false) }
-				}
+		} andExpect {
+			status { isOk }
+			content { contentType("application/json;charset=UTF-8") }
+			jsonPath("$.name") { value("Lee") }
+			content { json("""{"someBoolean": false}""", false) }
+		} andDo {
+			print()
+		}
+		mockMvc.post("/person") {
+			content = """{ "name": "foo" }"""
+			headers {
+				accept = listOf(MediaType.APPLICATION_JSON)
+				contentType = MediaType.APPLICATION_JSON
 			}
-			post("/person") {
-				content = """{ "name": "foo" }"""
-				headers {
-					accept = listOf(MediaType.APPLICATION_JSON)
-					contentType = MediaType.APPLICATION_JSON
-				}
-				expect {
-					status {
-						isCreated
-					}
-				}
+		} andExpect {
+			status {
+				isCreated
 			}
 		}
 	}
@@ -76,44 +73,36 @@ class MockMvcDslTests {
 	@Test
 	fun `negative assertion tests to verify the matchers throw errors when expected`() {
 		val name = "Petr"
-		mockMvc {
-			get("/person/$name") {
-				accept = MediaType.APPLICATION_JSON
-				print()
-				expect {
-					assertThrows<AssertionError> { content { contentType(MediaType.APPLICATION_ATOM_XML) } }
-					assertThrows<AssertionError> { content { string("Wrong") } }
-					assertThrows<AssertionError> { jsonPath("name", CoreMatchers.`is`("Wrong")) }
-					assertThrows<AssertionError> { content { json("""{"name":"wrong"}""") } }
-					assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
-					assertThrows<AssertionError> { cookie { value("name", "wrong") } }
-					assertThrows<AssertionError> { flash { attribute<String>("name", "wrong") } }
-					assertThrows<AssertionError> { header { stringValues("name", "wrong") } }
-					assertThrows<AssertionError> { model { attributeExists("name", "wrong") } }
-					assertThrows<AssertionError> { redirectedUrl("wrong/Url") }
-					assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
-					assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
-					assertThrows<AssertionError> { status { isAccepted } }
-					assertThrows<AssertionError> { view { name("wrongName") } }
-					assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
-				}
-		}
+		mockMvc.get("/person/$name") {
+			accept = MediaType.APPLICATION_JSON
+		} andExpect {
+			assertThrows<AssertionError> { content { contentType(MediaType.APPLICATION_ATOM_XML) } }
+			assertThrows<AssertionError> { content { string("Wrong") } }
+			assertThrows<AssertionError> { jsonPath("name", CoreMatchers.`is`("Wrong")) }
+			assertThrows<AssertionError> { content { json("""{"name":"wrong"}""") } }
+			assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
+			assertThrows<AssertionError> { cookie { value("name", "wrong") } }
+			assertThrows<AssertionError> { flash { attribute<String>("name", "wrong") } }
+			assertThrows<AssertionError> { header { stringValues("name", "wrong") } }
+			assertThrows<AssertionError> { model { attributeExists("name", "wrong") } }
+			assertThrows<AssertionError> { redirectedUrl("wrong/Url") }
+			assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
+			assertThrows<AssertionError> { redirectedUrlPattern("wrong/Url") }
+			assertThrows<AssertionError> { status { isAccepted } }
+			assertThrows<AssertionError> { view { name("wrongName") } }
+			assertThrows<AssertionError> { jsonPath("name") { value("wrong") } }
 		}
 	}
 
 	@Test
 	fun `negative assertion tests for xpath`() {
-		mockMvc {
-			get("/person/Clint") {
-				accept = MediaType.APPLICATION_XML
-				print()
-				expect {
-					status {
-						isOk
-					}
-					assertThrows<AssertionError> { xpath("//wrong") { nodeCount(1) } }
-				}
-			}
+		mockMvc.get("/person/Clint") {
+			accept = MediaType.APPLICATION_XML
+		} andExpect {
+			status { isOk }
+			assertThrows<AssertionError> { xpath("//wrong") { nodeCount(1) } }
+		} andDo {
+			print()
 		}
 	}
 
