@@ -35,9 +35,6 @@ open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequest
 	var content: String = ""
 		set(value) = builder.content(value).let { value }
 
-	var contentTypeAsString: String = ""
-		set(value) = builder.contentType(value).let { value }
-
 	fun headers(headers: HttpHeaders.() -> Unit) {
 		builder.headers(HttpHeaders().apply(headers))
 	}
