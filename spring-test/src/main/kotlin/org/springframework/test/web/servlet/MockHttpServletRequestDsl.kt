@@ -16,31 +16,31 @@ import javax.servlet.http.Cookie
 open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequestBuilder) {
 
 	var contextPath: String = ""
-		set(value) = builder.contextPath(value).let { value }
+		set(value) = builder.contextPath(value).let { contextPath = value }
 
 	var servletPath: String = ""
-		set(value) = builder.servletPath(value).let { value }
+		set(value) = builder.servletPath(value).let { servletPath = value }
 
 	var pathInfo: String? = null
-		set(value) = builder.pathInfo(value).let { value }
+		set(value) = builder.pathInfo(value).let { pathInfo = value }
 
 	var secure: Boolean = false
-		set(value) = builder.secure(value).let { value }
+		set(value) = builder.secure(value).let { secure = value }
 
 	var characterEncoding: String = ""
-		set(value) = builder.characterEncoding(value).let { value }
+		set(value) = builder.characterEncoding(value).let { characterEncoding = value }
 
 	var contentAsByte: ByteArray = ByteArray(0)
-		set(value) = builder.content(value).let { value }
+		set(value) = builder.content(value).let { contentAsByte = value }
 
 	var content: String = ""
-		set(value) = builder.content(value).let { value }
+		set(value) = builder.content(value).let { content = value }
 
 	var accept: MediaType = MediaType.ALL
-		set(value) = builder.accept(value).let { value }
+		set(value) = builder.accept(value).let { accept = value }
 
 	var contentType: MediaType = MediaType.ALL
-		set(value) = builder.contentType(value).let { value }
+		set(value) = builder.contentType(value).let { contentType = value }
 
 	fun headers(headers: HttpHeaders.() -> Unit) {
 		builder.headers(HttpHeaders().apply(headers))
@@ -87,10 +87,10 @@ open class MockHttpServletRequestDsl(private val builder: MockHttpServletRequest
 	}
 
 	var session: MockHttpSession = MockHttpSession()
-		set(value) = builder.session(value).let { value }
+		set(value) = builder.session(value).let { session = value }
 
 	var principal: Principal = Principal { "" }
-		set(value) = builder.principal(value).let { value }
+		set(value) = builder.principal(value).let { principal = value }
 
 	fun with(processor: RequestPostProcessor) {
 		builder.with(processor)

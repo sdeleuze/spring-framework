@@ -31,13 +31,16 @@ open class MockMvcPerformDsl(private val requestBuilder: MockHttpServletRequestB
 
 	private val resultMatchers = mutableListOf<ResultMatcher>()
 
-	fun print(stream: OutputStream? = null, writer: Writer? = null) {
-		resultHandlers.add(when {
-			stream != null && writer != null -> throw IllegalArgumentException("Stream and writer parameters should not be both specified")
-			stream != null -> MockMvcResultHandlers.print(stream)
-			writer != null -> MockMvcResultHandlers.print(writer)
-			else -> MockMvcResultHandlers.print()
-		})
+	fun print() {
+		resultHandlers.add(MockMvcResultHandlers.print())
+	}
+
+	fun print(stream: OutputStream) {
+		resultHandlers.add(MockMvcResultHandlers.print(stream))
+	}
+
+	fun print(writer: Writer) {
+		resultHandlers.add(MockMvcResultHandlers.print(writer))
 	}
 
 	fun log() {
