@@ -1,6 +1,6 @@
 package org.springframework.test.web.servlet
 
-class ResultActionsWrapper(private val actions: ResultActions) {
+class ResultActionsWrapper(val actions: ResultActions) {
 
 	infix fun andExpect(dsl: MockMvcResultMatchersDsl.() -> Unit): ResultActionsWrapper {
 		MockMvcResultMatchersDsl(actions).dsl()
@@ -14,11 +14,6 @@ class ResultActionsWrapper(private val actions: ResultActions) {
 
 	infix fun andHandle(handler:MvcResult.()-> Unit): ResultActionsWrapper {
 		actions.andDo { it.handler() }
-		return this
-	}
-
-	fun <T : MockMvcResultMatchersDsl> andExpectCustom(matcher: (ResultActions)->T,dsl: T.() -> Unit): ResultActionsWrapper {
-		matcher(actions).dsl()
 		return this
 	}
 

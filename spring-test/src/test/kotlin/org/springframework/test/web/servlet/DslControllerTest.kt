@@ -46,11 +46,16 @@ class DslControllerTest {
 		}
 	}
 
+	infix fun ResultActionsWrapper.andExpectClint(dsl: ClintMatchers.()-> Unit): ResultActionsWrapper {
+		ClintMatchers(actions).dsl()
+		return this
+	}
+
 
 	@Test
 	fun `hello json`() {
 		val name = "Petr"
-		mockMvc.get("/hello/$name").andExpectCustom(::ClintMatchers) {
+		mockMvc.get("/hello/$name").andExpectClint {
 
 			content { json("""{"surname":"Petr"}""", false) }  //JsonAssert support (non-strict is the default)
 			"$.surname" jsonPathIs name //JsonPath
@@ -132,7 +137,7 @@ class DslControllerTest {
 			string("Balat")
 		}
 
-	}.andExpectCustom(::ClintMatchers) {
+	}.andExpectClint {
 		model<HelloPostDto>("helloPostDto") {
 			assertEquals("Balat", surname)
 		}
@@ -145,13 +150,13 @@ class DslControllerTest {
 			contentType = MediaType.APPLICATION_JSON
 			content = """{"surname": "Jack"}"""
 			cookie(Cookie("cookieName", "Extra Things"))
-		}.andDo {
+		} andDo {
 			print()
-		}.andExpect {
+		} andExpect {
 			status { isBadRequest }
 			content { json("""{"surname":"Jack"}""") }
 			content { json("""{"surname":"Jack", "extraName":"Extra Things"}""", true) }
-		}.andExpectCustom(::ClintMatchers) {
+		} andExpectClint {
 			"$.surname" jsonPathIs "Jack"
 		} //builder,actions, and expects can be called multiple times
 	}
