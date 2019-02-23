@@ -51,6 +51,16 @@ class DslControllerTest {
 		return this
 	}
 
+	fun ResultActionsWrapper.andDocument(identifier: String, configure: DocumentationScope.() -> Unit): ResultActionsWrapper {
+		actions.andDo(DocumentationScope(identifier).apply(configure).document())
+		return this
+	}
+
+	class DocumentationScope(val id: String){
+		fun document(): ResultHandler {
+			return ResultHandler {  }
+		}
+	}
 
 	@Test
 	fun `hello json`() {
