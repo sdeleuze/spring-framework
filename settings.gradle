@@ -1,7 +1,10 @@
 pluginManagement {
 	repositories {
 		gradlePluginPortal()
-		maven { url 'https://repo.spring.io/plugins-release' }
+		maven { url "https://repo.spring.io/plugins-release" }
+		maven { url "https://dl.bintray.com/kotlin/dokka" }
+		maven { url "https://kotlin.bintray.com/kotlinx" }
+		maven { url "https://dl.bintray.com/jetbrains/markdown/" }
 	}
 }
 

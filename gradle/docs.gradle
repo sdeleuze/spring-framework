@@ -58,55 +58,8 @@ task api(type: Javadoc) {
 	destinationDir = file("$buildDir/docs/javadoc")
 }
 
-/**
- * Produce KDoc for all Spring Framework modules in "build/docs/kdoc"
- */
-dokka {
-	dependsOn {
-		tasks.getByName("api")
-	}
-
-	doFirst {
-		configuration {
-			classpath = moduleProjects.collect { project -> project.jar.outputs.files.getFiles() }.flatten()
-			classpath += files(moduleProjects.collect { it.sourceSets.main.compileClasspath })
-
-			moduleProjects.findAll {
-				it.pluginManager.hasPlugin("kotlin")
-			}.each { project ->
-				def kotlinDirs = project.sourceSets.main.kotlin.srcDirs.collect()
-				kotlinDirs -= project.sourceSets.main.java.srcDirs
-				kotlinDirs.each { dir ->
-					if (dir.exists()) {
-						sourceRoot {
-							path = dir.path
-						}
-					}
-				}
-			}
-		}
-	}
-
-	outputFormat = "html"
-	outputDirectory = "$buildDir/docs/kdoc"
-
-	configuration {
-		moduleName = "spring-framework"
-
-		externalDocumentationLink {
-			url = new URL("https://docs.spring.io/spring-framework/docs/$version/javadoc-api/")
-			packageListUrl = new File(buildDir, "docs/javadoc/package-list").toURI().toURL()
-		}
-		externalDocumentationLink {
-			url = new URL("https://projectreactor.io/docs/core/release/api/")
-		}
-		externalDocumentationLink {
-			url = new URL("https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/")
-		}
-		externalDocumentationLink {
-			url = new URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
-		}
-	}
+tasks.named("dokkaHtmlMultiModule") {
+	outputDirectory.set(new File(buildDir, "docs/kdoc"))
 }
 
 task downloadResources(type: Download) {
@@ -181,7 +134,7 @@ asciidoctorPdf {
 /**
  * Zip all docs (API and reference) into a single archive
  */
-task docsZip(type: Zip, dependsOn: ['api', 'asciidoctor', 'asciidoctorPdf', 'dokka']) {
+task docsZip(type: Zip, dependsOn: ['api', 'asciidoctor', 'asciidoctorPdf', 'dokkaHtmlMultiModule']) {
 	group = "Distribution"
 	description = "Builds -${archiveClassifier} archive containing api and reference " +
 			"for deployment at https://docs.spring.io/spring-framework/docs."
@@ -200,7 +153,7 @@ task docsZip(type: Zip, dependsOn: ['api', 'asciidoctor', 'asciidoctorPdf', 'dok
 	from ("$asciidoctorPdf.outputDir") {
 		into "reference/pdf"
 	}
-	from (dokka) {
+	from (dokkaHtmlMultiModule) {
 		into "kdoc-api"
 	}
 }
