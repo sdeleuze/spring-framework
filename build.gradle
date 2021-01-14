@@ -2,7 +2,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE' apply false
 	id 'io.spring.nohttp' version '0.0.5.RELEASE'
 	id 'org.jetbrains.kotlin.jvm' version '1.4.10' apply false
-	id 'org.jetbrains.dokka' version '1.4.10' apply false
+	id 'org.jetbrains.dokka' version '1.4.20.2'
 	id 'org.asciidoctor.jvm.convert' version '3.1.0'
 	id 'org.asciidoctor.jvm.pdf' version '3.1.0'
 	id 'de.undercouch.download' version '4.1.1'
@@ -289,6 +289,7 @@ configure(allprojects) { project ->
 		}
 		repositories {
 			mavenCentral()
+			mavenLocal()
 			maven { url "https://repo.spring.io/libs-spring-framework-build" }
 			maven { url "https://repo.spring.io/milestone" } // Reactor
 			maven { url "https://dl.bintray.com/kotlin/dokka" }
@@ -317,6 +318,17 @@ configure([rootProject] + javaProjects) { project ->
 	pluginManager.withPlugin("kotlin") {
 		apply plugin: "org.jetbrains.dokka"
 		apply from: "${rootDir}/gradle/docs-dokka.gradle"
+
+		configurations {
+			configure([dokkaHtmlPartialPlugin, dokkaHtmlPartialRuntime]) {
+				resolutionStrategy { // TODO: This will break when bumping Dokka version, spring-dependency-management plugin should be disabled for these configurations entirely
+					dependencySubstitution {
+						substitute module('org.jetbrains.kotlinx:kotlinx-coroutines-core') with module('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1')
+						substitute module('org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm') with module('org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.1')
+					}
+				}
+			}
+		}
 		compileKotlin {
 			kotlinOptions {
 				jvmTarget = "1.8"

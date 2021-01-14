@@ -60,6 +60,7 @@ task api(type: Javadoc) {
 
 tasks.named("dokkaHtmlMultiModule") {
 	outputDirectory.set(new File(buildDir, "docs/kdoc"))
+	it.dependsOn assemble
 }
 
 task downloadResources(type: Download) {
