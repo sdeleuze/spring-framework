@@ -16,18 +16,15 @@
 
 package org.springframework.core;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.ReflectionUtils.MethodFilter;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.*;
 
 /**
  * Helper for resolving synthetic {@link Method#isBridge bridge Methods} to the
@@ -52,9 +49,22 @@ public final class BridgeMethodResolver {
 
 	private static final Map<Method, Method> cache = new ConcurrentReferenceHashMap<>();
 
+	private static final Map<Class<?>, Class<?>> primitivesToWrapper = new HashMap<>(8);
+
 	private BridgeMethodResolver() {
 	}
 
+	static {
+		primitivesToWrapper.put(boolean.class, Boolean.class);
+		primitivesToWrapper.put(byte.class, Byte.class);
+		primitivesToWrapper.put(char.class, Character.class);
+		primitivesToWrapper.put(double.class, Double.class);
+		primitivesToWrapper.put(float.class, Float.class);
+		primitivesToWrapper.put(int.class, Integer.class);
+		primitivesToWrapper.put(long.class, Long.class);
+		primitivesToWrapper.put(short.class, Short.class);
+		primitivesToWrapper.put(void.class, Void.class);
+	}
 
 	/**
 	 * Find the original method for the supplied {@link Method bridge Method}.
@@ -163,11 +173,16 @@ public final class BridgeMethodResolver {
 				}
 			}
 			// A non-array type: compare the type itself.
-			if (!candidateParameter.equals(genericParameter.toClass())) {
+			if (!wrap(candidateParameter).equals(genericParameter.toClass())) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T> Class<T> wrap(Class<T> c) {
+		return c.isPrimitive() ? (Class<T>) primitivesToWrapper.get(c) : c;
 	}
 
 	/**
