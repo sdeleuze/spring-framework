@@ -218,7 +218,11 @@ abstract class AbstractCoroutinesTransactionAspectTests {
 			}
 			catch (actual: Exception) {
 				if (rollbackException) {
-					assertThat(actual).hasMessage(tex.message).isInstanceOf(tex::class.java)
+					Assertions.assertThat(actual)
+						.isExactlyInstanceOf(RuntimeException::class.java)
+						.cause
+						.isExactlyInstanceOf(RuntimeException::class.java)
+						.hasCause(tex)
 				} else {
 					assertThat(actual).hasMessage(ex.message).isInstanceOf(ex::class.java)
 				}
@@ -291,7 +295,11 @@ abstract class AbstractCoroutinesTransactionAspectTests {
 				itb.setName(name)
 			}
 			catch (actual: Exception) {
-				Assertions.assertThat(actual).isEqualTo(ex)
+				Assertions.assertThat(actual)
+					.isExactlyInstanceOf(RuntimeException::class.java)
+					.cause
+					.isExactlyInstanceOf(RuntimeException::class.java)
+					.hasCause(ex)
 			}
 			// Should have invoked target and changed name
 			assertThat(itb.getName()).isEqualTo(name)
