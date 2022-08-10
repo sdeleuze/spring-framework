@@ -13,7 +13,7 @@ dependencies {
 	optional("org.apache.derby:derby")
 	optional("org.apache.derby:derbyclient")
 	optional("org.apache.derby:derbytools")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
+	optional("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	testImplementation(testFixtures(project(":spring-beans")))
 	testImplementation(testFixtures(project(":spring-core")))

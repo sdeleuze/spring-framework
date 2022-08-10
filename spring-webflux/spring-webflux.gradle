@@ -27,7 +27,7 @@ dependencies {
 	}
 	optional("org.eclipse.jetty.websocket:websocket-jetty-client")
 	optional("io.undertow:undertow-websockets-jsr")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
+	optional("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	optional("com.google.protobuf:protobuf-java-util")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")

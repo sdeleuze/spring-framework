@@ -20,7 +20,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
-import kotlin.reflect.full.createInstance
 
 /**
  * Mock object based tests for ListableBeanFactory Kotlin extensions
@@ -83,7 +82,7 @@ class ListableBeanFactoryExtensionsTests {
 	@Test
 	fun `findAnnotationOnBean with String and reified type parameters`() {
 		val name = "bar"
-		every { lbf.findAnnotationOnBean(name, Bar::class.java) } returns Bar::class.createInstance()
+		every { lbf.findAnnotationOnBean(name, Bar::class.java) } returns Bar()
 		val annotation: Bar? = lbf.findAnnotationOnBean(name)
 		verify { lbf.findAnnotationOnBean(name, Bar::class.java) }
 	}

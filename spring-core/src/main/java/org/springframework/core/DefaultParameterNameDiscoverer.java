@@ -38,7 +38,7 @@ public class DefaultParameterNameDiscoverer extends PrioritizedParameterNameDisc
 
 	@SuppressWarnings("removal")
 	public DefaultParameterNameDiscoverer() {
-		if (KotlinDetector.isKotlinReflectPresent()) {
+		if (KotlinDetector.isKotlinReflectLitePresent()) {
 			addDiscoverer(new KotlinReflectionParameterNameDiscoverer());
 		}
 
