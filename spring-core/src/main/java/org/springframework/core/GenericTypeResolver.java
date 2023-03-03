@@ -39,6 +39,7 @@ import org.springframework.util.ConcurrentReferenceHashMap;
  * @author Rob Harrop
  * @author Sam Brannen
  * @author Phillip Webb
+ * @author Sebastien Deleuze
  * @since 2.5.2
  */
 public final class GenericTypeResolver {
@@ -190,6 +191,34 @@ public final class GenericTypeResolver {
 						return ResolvableType.forClassWithGenerics(rawClass, generics).getType();
 					}
 				}
+			}
+		}
+		return genericType;
+	}
+
+	/**
+	 * Resolve the generic parameters of the specified type against their upper or lower bounds.
+	 * @param genericType the (potentially) generic type
+	 * @return the resolved type (possibly the given generic type as-is)
+	 * @since 6.0.7
+	 */
+	public static ResolvableType resolveGenericBounds(ResolvableType genericType) {
+		Class<?> resolved = genericType.resolve();
+		if (resolved != null) {
+			ResolvableType[] generics = genericType.getGenerics();
+			boolean hasBoundToResolve = false;
+			for (int i = 0; i < generics.length; i++) {
+				ResolvableType generic = generics[i];
+				if (generic.getType() instanceof WildcardType) {
+					ResolvableType resolvedGeneric = generic.resolveType();
+					if (resolvedGeneric != ResolvableType.NONE) {
+						generics[i] = resolvedGeneric;
+						hasBoundToResolve = true;
+					}
+				}
+			}
+			if (hasBoundToResolve) {
+				return ResolvableType.forClassWithGenerics(resolved, generics);
 			}
 		}
 		return genericType;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2022 the original author or authors.
+ * Copyright 2002-2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.core.GenericTypeResolver.getTypeVariableMap;
+import static org.springframework.core.GenericTypeResolver.resolveGenericBounds;
 import static org.springframework.core.GenericTypeResolver.resolveReturnTypeArgument;
 import static org.springframework.core.GenericTypeResolver.resolveType;
 import static org.springframework.core.GenericTypeResolver.resolveTypeArgument;
@@ -37,6 +38,7 @@ import static org.springframework.util.ReflectionUtils.findMethod;
 /**
  * @author Juergen Hoeller
  * @author Sam Brannen
+ * @author Sebastien Deleuze
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 class GenericTypeResolverTests {
@@ -174,15 +176,50 @@ class GenericTypeResolverTests {
 	}
 
 	@Test
-	public void resolvePartiallySpecializedTypeVariables() {
+	void resolvePartiallySpecializedTypeVariables() {
 		Type resolved = resolveType(BiGenericClass.class.getTypeParameters()[0], TypeFixedBiGenericClass.class);
 		assertThat(resolved).isEqualTo(D.class);
 	}
 
 	@Test
-	public void resolveTransitiveTypeVariableWithDifferentName() {
+	void resolveTransitiveTypeVariableWithDifferentName() {
 		Type resolved = resolveType(BiGenericClass.class.getTypeParameters()[1], TypeFixedBiGenericClass.class);
 		assertThat(resolved).isEqualTo(E.class);
+	}
+
+	@Test
+	void resolveUpperBound() {
+		Method method = findMethod(MySimpleSuperclassType.class, "upperBound", List.class);
+		ResolvableType resolvedType = resolveGenericBounds(ResolvableType.forMethodParameter(method, 0, MySimpleSuperclassType.class));
+		assertThat(resolvedType.resolveGenerics()).containsExactly(String.class);
+	}
+
+	@Test
+	void resolveLowerBound() {
+		Method method = findMethod(MySimpleSuperclassType.class, "lowerBound", List.class);
+		ResolvableType resolvedType = resolveGenericBounds(ResolvableType.forMethodParameter(method, 0, MySimpleSuperclassType.class));
+		assertThat(resolvedType.resolveGenerics()).containsExactly(String.class);
+	}
+
+	@Test
+	void skipBoundResolutionForUnbounded() {
+		Method method = findMethod(MySimpleSuperclassType.class, "unbounded", List.class);
+		ResolvableType resolvableType = ResolvableType.forMethodParameter(method, 0, MySimpleSuperclassType.class);
+		assertThat(resolveGenericBounds(resolvableType)).isEqualTo(resolvableType);
+	}
+
+	@Test
+	void skipBoundResolutionForResolved() {
+		Method method = findMethod(MySimpleSuperclassType.class, "resolved", List.class);
+		ResolvableType resolvableType = ResolvableType.forMethodParameter(method, 0, MySimpleSuperclassType.class);
+		assertThat(resolveGenericBounds(resolvableType)).isEqualTo(resolvableType);
+	}
+
+	@Test
+	void skipBoundResolutionForNonGeneric() {
+		Method method = findMethod(MySimpleSuperclassType.class, "string", String.class);
+		ResolvableType resolvableType = ResolvableType.forMethodParameter(method, 0, MySimpleSuperclassType.class);
+		assertThat(resolveGenericBounds(resolvableType)).isEqualTo(resolvableType);
 	}
 
 	public interface MyInterfaceType<T> {
@@ -195,6 +232,21 @@ class GenericTypeResolverTests {
 	}
 
 	public abstract class MySuperclassType<T> {
+
+		public void upperBound(List<? extends T> list) {
+		}
+
+		public void lowerBound(List<? super T> list) {
+		}
+
+		public void unbounded(List<?> list) {
+		}
+
+		public void resolved(List<String> list) {
+		}
+
+		public void string(String value) {
+		}
 	}
 
 	public class MySimpleSuperclassType extends MySuperclassType<String> {

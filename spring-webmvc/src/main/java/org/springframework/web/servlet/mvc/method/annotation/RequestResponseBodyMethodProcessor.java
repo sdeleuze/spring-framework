@@ -24,7 +24,9 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.core.Conventions;
+import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
@@ -133,7 +135,9 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 			NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
 		parameter = parameter.nestedIfOptional();
-		Object arg = readWithMessageConverters(webRequest, parameter, parameter.getNestedGenericParameterType());
+		ResolvableType resolvableType = ResolvableType.forMethodParameter(parameter);
+		Type parameterType = GenericTypeResolver.resolveGenericBounds(resolvableType).getType();
+		Object arg = readWithMessageConverters(webRequest, parameter, parameterType);
 		String name = Conventions.getVariableNameForParameter(parameter);
 
 		if (binderFactory != null) {

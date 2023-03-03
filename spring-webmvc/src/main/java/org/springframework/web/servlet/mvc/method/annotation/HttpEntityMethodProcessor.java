@@ -28,6 +28,7 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpEntity;
@@ -152,7 +153,8 @@ public class HttpEntityMethodProcessor extends AbstractMessageConverterMethodPro
 	@Nullable
 	private Type getHttpEntityType(MethodParameter parameter) {
 		Assert.isAssignable(HttpEntity.class, parameter.getParameterType());
-		Type parameterType = parameter.getGenericParameterType();
+		ResolvableType resolvableType = ResolvableType.forMethodParameter(parameter);
+		Type parameterType = GenericTypeResolver.resolveGenericBounds(resolvableType).getType();
 		if (parameterType instanceof ParameterizedType type) {
 			if (type.getActualTypeArguments().length != 1) {
 				throw new IllegalArgumentException("Expected single generic parameter on '" +
