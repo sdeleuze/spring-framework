@@ -90,8 +90,8 @@ class RequestMappingIntegrationTests extends AbstractRequestMappingIntegrationTe
 	void stream(HttpServer httpServer) throws Exception {
 		startServer(httpServer);
 
-		String[] expected = {"0", "1", "2", "3", "4"};
-		assertThat(performGet("/stream", new HttpHeaders(), String[].class).getBody()).isEqualTo(expected);
+		int[] expected = {0, 1, 2, 3, 4};
+		assertThat(performGet("/stream", new HttpHeaders(), int[].class).getBody()).isEqualTo(expected);
 	}
 
 
