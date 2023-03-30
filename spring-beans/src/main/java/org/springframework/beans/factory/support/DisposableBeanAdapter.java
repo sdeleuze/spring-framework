@@ -253,7 +253,15 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	@Nullable
 	private Method determineDestroyMethod(String name) {
 		try {
-			return findDestroyMethod(name);
+			Class<?> beanClass = this.bean.getClass();
+			Method destroyMethod = findDestroyMethod(beanClass, name);
+			for (Class<?> beanInterface : beanClass.getInterfaces()) {
+				if (destroyMethod != null) {
+					break;
+				}
+				destroyMethod = findDestroyMethod(beanInterface, name);
+			}
+			return destroyMethod;
 		}
 		catch (IllegalArgumentException ex) {
 			throw new BeanDefinitionValidationException("Could not find unique destroy method on bean with name '" +
@@ -262,10 +270,10 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	}
 
 	@Nullable
-	private Method findDestroyMethod(String name) {
+	private Method findDestroyMethod(Class<?> clazz, String name) {
 		return (this.nonPublicAccessAllowed ?
-				BeanUtils.findMethodWithMinimalParameters(this.bean.getClass(), name) :
-				BeanUtils.findMethodWithMinimalParameters(this.bean.getClass().getMethods(), name));
+				BeanUtils.findMethodWithMinimalParameters(clazz, name) :
+				BeanUtils.findMethodWithMinimalParameters(clazz.getMethods(), name));
 	}
 
 	/**
