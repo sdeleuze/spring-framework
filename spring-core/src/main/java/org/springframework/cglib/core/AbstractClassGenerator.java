@@ -44,7 +44,7 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 			Boolean.parseBoolean(System.getProperty("cglib.useCache", "true"));
 
 	// See https://github.com/oracle/graal/blob/master/sdk/src/org.graalvm.nativeimage/src/org/graalvm/nativeimage/ImageInfo.java
-	private static final boolean imageCode = (System.getProperty("org.graalvm.nativeimage.imagecode") != null);
+	private static final String imageCode = System.getProperty("org.graalvm.nativeimage.imagecode");
 
 
 	private GeneratorStrategy strategy = DefaultGeneratorStrategy.INSTANCE;
@@ -354,7 +354,7 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 				}
 			}
 			// SPRING PATCH BEGIN
-			if (imageCode) {
+			if ("buildtime".equals(imageCode) || "runtime".equals(imageCode)) {
 				throw new UnsupportedOperationException("CGLIB runtime enhancement not supported on native image. " +
 						"Make sure to include a pre-generated class on the classpath instead: " + getClassName());
 			}

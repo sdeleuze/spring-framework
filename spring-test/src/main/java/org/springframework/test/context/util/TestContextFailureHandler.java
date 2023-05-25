@@ -21,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.core.NativeDetector;
 import org.springframework.core.io.support.SpringFactoriesLoader.FailureHandler;
 
 /**
@@ -51,6 +52,12 @@ class TestContextFailureHandler implements FailureHandler {
 				logger.debug("""
 						Could not load %1$s [%2$s]. Specify custom %1$s classes or make the default %1$s classes \
 						available.""".formatted(factoryType.getSimpleName(), factoryImplementationName), ex);
+			}
+		}
+		else if (NativeDetector.inNativeImage() && ex instanceof IllegalStateException) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Skipping candidate %1$s [%2$s] due to an error when loading it in a native image."
+						.formatted(factoryType.getSimpleName(), factoryImplementationName));
 			}
 		}
 		else {

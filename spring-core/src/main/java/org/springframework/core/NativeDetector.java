@@ -16,6 +16,8 @@
 
 package org.springframework.core;
 
+import org.springframework.lang.Nullable;
+
 /**
  * A common delegate for detecting a GraalVM native image environment.
  *
@@ -25,12 +27,58 @@ package org.springframework.core;
 public abstract class NativeDetector {
 
 	// See https://github.com/oracle/graal/blob/master/sdk/src/org.graalvm.nativeimage/src/org/graalvm/nativeimage/ImageInfo.java
-	private static final boolean imageCode = (System.getProperty("org.graalvm.nativeimage.imagecode") != null);
+	@Nullable
+	private static final String imageCode = System.getProperty("org.graalvm.nativeimage.imagecode");
 
 	/**
-	 * Returns {@code true} if invoked in the context of image building or during image runtime, else {@code false}.
+	 * Returns {@code true} if running in the context of a native image flavor (build-time, runtime, agent) expressed
+	 * by setting {@code org.graalvm.nativeimage.imagecode} system property to any value, else {@code false}.
 	 */
 	public static boolean inNativeImage() {
-		return imageCode;
+		return imageCode != null;
+	}
+
+	/**
+	 * Returns {@code true} if running in the context of a native image flavor (build-time, runtime, agent) expressed
+	 * by setting {@code org.graalvm.nativeimage.imagecode} system property, else {@code false}.
+	 * @since 6.0.10
+	 */
+	public static boolean inNativeImage(Context... contexts) {
+		for (Context context: contexts) {
+			if (context.key.equals(imageCode)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Native context as defined in
+	 * <a href="https://github.com/oracle/graal/blob/master/sdk/src/org.graalvm.nativeimage/src/org/graalvm/nativeimage/ImageInfo.java">ImageInfo.java</a>.
+	 *
+	 * @since 6.0.10
+	 */
+	public enum Context {
+
+		/**
+		 * The code is executing in the context of image building.
+		 */
+		BUILD_TIME("buildtime"),
+
+		/**
+		 * The code is executing at image runtime.
+		 */
+		RUNTIME("runtime");
+
+		private final String key;
+
+		Context(final String key) {
+			this.key = key;
+		}
+
+		@Override
+		public String toString() {
+			return this.key;
+		}
 	}
 }
