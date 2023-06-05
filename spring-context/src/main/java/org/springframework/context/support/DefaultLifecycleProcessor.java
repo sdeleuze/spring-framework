@@ -81,7 +81,9 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 
 
 	public DefaultLifecycleProcessor() {
-		if (!NativeDetector.inNativeImage() && ClassUtils.isPresent("org.crac.Core", getClass().getClassLoader())) {
+		if (!NativeDetector.inNativeImage()
+				&& ClassUtils.isPresent("org.crac.Core", getClass().getClassLoader())
+				&& System.getProperty("spring.checkpoint.restore") == null) {
 			this.cracResource = new CracDelegate().registerResource();
 		}
 	}

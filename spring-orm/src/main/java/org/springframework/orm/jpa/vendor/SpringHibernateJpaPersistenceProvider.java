@@ -51,6 +51,10 @@ class SpringHibernateJpaPersistenceProvider extends HibernatePersistenceProvider
 			System.setProperty(Environment.BYTECODE_PROVIDER, Environment.BYTECODE_PROVIDER_NAME_NONE);
 			System.setProperty(Environment.USE_REFLECTION_OPTIMIZER, Boolean.FALSE.toString());
 		}
+		// To avoid pre-checkpoint connection to the database
+		if (System.getProperty("spring.checkpoint.restore") != null) {
+			System.setProperty("hibernate.temp.use_jdbc_metadata_defaults", Boolean.FALSE.toString());
+		}
 	}
 
 	@Override

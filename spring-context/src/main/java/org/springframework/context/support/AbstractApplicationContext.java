@@ -30,6 +30,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.crac.CheckpointException;
+import org.crac.Core;
+import org.crac.RestoreException;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.CachedIntrospectionResults;
@@ -83,6 +86,7 @@ import org.springframework.core.metrics.ApplicationStartup;
 import org.springframework.core.metrics.StartupStep;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
@@ -931,6 +935,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// Stop using the temporary ClassLoader for type matching.
 		beanFactory.setTempClassLoader(null);
 
+		if (!NativeDetector.inNativeImage()
+				&& ClassUtils.isPresent("org.crac.Core", getClass().getClassLoader())
+				&& "onInstantiate".equalsIgnoreCase(System.getProperty("spring.checkpoint.restore"))) {
+			new CracDelegate().createCheckpoint();
+		}
+
 		// Allow for caching all bean definition metadata, not expecting further changes.
 		beanFactory.freezeConfiguration();
 
@@ -949,6 +959,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Clear context-level resource caches (such as ASM metadata from scanning).
 		clearResourceCaches();
+
+		if (!NativeDetector.inNativeImage()
+				&& ClassUtils.isPresent("org.crac.Core", getClass().getClassLoader())
+				&& "onRefresh".equalsIgnoreCase(System.getProperty("spring.checkpoint.restore"))) {
+			new CracDelegate().createCheckpoint();
+		}
 
 		// Initialize lifecycle processor for this context.
 		initLifecycleProcessor();
@@ -1508,6 +1524,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			sb.append(", parent: ").append(parent.getDisplayName());
 		}
 		return sb.toString();
+	}
+
+	private class CracDelegate {
+
+		public void createCheckpoint() {
+			try {
+				logger.info("Creating checkpoint before application context refresh");
+				Core.checkpointRestore();
+			}
+			catch (CheckpointException | RestoreException e) {
+				logger.error("Error during checkpoint creation", e);
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
 }
