@@ -1,0 +1,31 @@
+[[checkpoint-restore]]
+= JVM checkpoint/restore
+
+The Spring Framework integrates with JVM checkpoint/restore as implemented by https://github.com/CRaC/docs[Project CRaC] in order to allow implementing solutions capable to reduce the startup and warmup times of Spring-based Java applications.
+
+Using this feature requires:
+
+* A checkpoint/restore enabled JVM (Linux only for now).
+* The presence in the classpath of the https://github.com/CRaC/org.crac[`org.crac:crac`] library.
+* Specifying the required `java` command line parameters like `-XX:CRaCCheckpointTo=PATH` or `-XX:CRaCRestoreFrom=PATH`.
+
+WARNING: The files generated when a checkpoint is requested in the path specified by `-XX:CRaCCheckpointTo=PATH` contains a representation of the memory of the running JVM, which may contain secrets and other sensitive data. Using this feature should be done with the assumption that any value "seen" by the JVM, such as configuration properties coming from the environment, will be stored in those CRaC files. As a consequence, the security implications of where and how those files are generated, stored and accessed should be carefully assessed.
+
+Conceptually, checkpoint and restore match respectively with Spring `LifecycleProcessor` close and refresh phases (see more details in xref:core/beans/factory-nature.adoc#beans-factory-lifecycle-processor[the dedicated section]). `DefaultLifecycleProcessor` provides the implementation of the 2 main use cases supported.
+
+WARNING: Leveraging JVM checkpoint/restore typically requires additional lifecycle management to gracefully stop and start using resources like files or sockets and stop active threads.
+
+== On demand checkpoint/restore of a running application
+
+In this use case, a checkpoint is created on demand, for example using the `jcmd application.jar JDK.checkpoint` command. Before the creation of the checkpoint, Spring Framework
+stops all the running beans, giving them a chance to close resources, if needed, by implementing `LifecycleProcessor#onClose`. After restore, the same beans are restarted, implementing `LifecycleProcessor#onRefresh` allowing to reopen resources when relevant. For libraries not depending on Spring, checkpoint/restore custom integration can be provided by implementing `org.crac.Resource` and registering the related instance.
+
+NOTE: If the checkpoint is created on a warmed-up JVM, it will be restored equally warmed-up, allowing potentially peak performance immediately. This method typically requires access to remote services, and thus requires some level of platform integration.
+
+== Automatic checkpoint/restore at startup
+
+In this use case, a checkpoint is created automatically at startup, when the Java `-Dspring.checkpoint.restore=onRefresh` system property is set, at `LifecycleProcessor#onRefresh` level. At this phase, all non-lazy initialized singletons are instantiated, `InitializingBean#afterPropertiesSet` methods have been invoked, but not `LifecycleProcessor#onRefresh` ones and `ContextRefreshedEvent` has not yet been published.
+
+NOTE: Here checkpoint/restore is a way to "fast-forward" the startup of the application to a phase where the application context is about to start, but does not allow to have a fully warmed-up JVM.
+
+WARNING: As mentioned above, and especially in use cases where the CRaC files are shipped as part of a deployable artifact (a container image for example), operate with the assumption that any sensitive data seen by the JVM ends up in the CRaC files, and assess carefully the related security implications.
