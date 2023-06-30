@@ -185,6 +185,15 @@ class GenericTypeResolverTests {
 		assertThat(resolved).isEqualTo(E.class);
 	}
 
+	@Test
+	void resolveUpperBound() {
+		Method method = findMethod(MySuperclassType.class, "upperBound", List.class);
+		Type resolved = resolveType(method.getGenericParameterTypes()[0], MySimpleSuperclassType.class);
+		ResolvableType resolvableType = ResolvableType.forType(resolved);
+		assertThat(resolvableType.hasUnresolvableGenerics()).isFalse();
+		assertThat(resolvableType.resolveGenerics()).hasOnlyElementsOfType(String.class);
+	}
+
 	public interface MyInterfaceType<T> {
 	}
 
@@ -195,6 +204,9 @@ class GenericTypeResolverTests {
 	}
 
 	public abstract class MySuperclassType<T> {
+
+		public void upperBound(List<? extends T> list) {
+		}
 	}
 
 	public class MySimpleSuperclassType extends MySuperclassType<String> {
