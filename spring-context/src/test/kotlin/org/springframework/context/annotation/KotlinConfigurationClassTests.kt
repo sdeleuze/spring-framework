@@ -20,6 +20,7 @@ package org.springframework.context.annotation
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.getBean
 import org.springframework.beans.factory.parsing.BeanDefinitionParsingException
 
@@ -37,6 +38,13 @@ class KotlinConfigurationClassTests {
 		val context = AnnotationConfigApplicationContext(FinalConfigurationWithoutProxy::class.java)
 		val foo = context.getBean<Foo>()
 		assertThat(context.getBean<Bar>().foo).isEqualTo(foo)
+	}
+
+	@Test
+	fun `Configuration with declaration site variance`() {
+		val context = AnnotationConfigApplicationContext(ConfigurationWithDeclarationSiteVariance::class.java)
+		val config = context.getBean<ConfigurationWithDeclarationSiteVariance>()
+		assertThat(config.container).isNotNull()
 	}
 
 
@@ -63,4 +71,23 @@ class KotlinConfigurationClassTests {
 	class Foo
 
 	class Bar(val foo: Foo)
+
+	@Configuration(proxyBeanMethods = false)
+	class ConfigurationWithDeclarationSiteVariance {
+
+		@Autowired
+		lateinit var container: Container<Tuple<String, String>>
+
+		@Bean
+		fun container() : TupleContainer {
+			return TupleContainer()
+		}
+
+	}
+
+	// Works with class Tuple<A, B>
+	class Tuple<out A, out B>
+	interface Container<T>
+	class TupleContainer : Container<Tuple<String, String>>
+
 }
