@@ -17,17 +17,22 @@
 package org.springframework.orm.jpa.vendor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.spi.PersistenceUnitInfo;
+import org.hibernate.boot.cfgxml.internal.ConfigLoader;
+import org.hibernate.boot.cfgxml.spi.LoadedConfig;
+import org.hibernate.boot.registry.BootstrapServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.bytecode.enhance.spi.EnhancementContext;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 import org.hibernate.jpa.boot.internal.PersistenceUnitInfoDescriptor;
+import org.hibernate.jpa.boot.spi.PersistenceUnitDescriptor;
 
 import org.springframework.core.NativeDetector;
 import org.springframework.orm.jpa.persistenceunit.SmartPersistenceUnitInfo;
@@ -43,15 +48,7 @@ import org.springframework.orm.jpa.persistenceunit.SmartPersistenceUnitInfo;
  * @since 4.1
  * @see Configuration#addPackage
  */
-@SuppressWarnings("removal")  // for Environment properties on Hibernate 6.2
 class SpringHibernateJpaPersistenceProvider extends HibernatePersistenceProvider {
-
-	static {
-		if (NativeDetector.inNativeImage()) {
-			System.setProperty(Environment.BYTECODE_PROVIDER, Environment.BYTECODE_PROVIDER_NAME_NONE);
-			System.setProperty(Environment.USE_REFLECTION_OPTIMIZER, Boolean.FALSE.toString());
-		}
-	}
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})  // on Hibernate 6
@@ -60,7 +57,7 @@ class SpringHibernateJpaPersistenceProvider extends HibernatePersistenceProvider
 		if (info instanceof SmartPersistenceUnitInfo smartInfo) {
 			mergedClassesAndPackages.addAll(smartInfo.getManagedPackages());
 		}
-		return new EntityManagerFactoryBuilderImpl(
+		return new SpringEntityManagerFactoryBuilder(
 				new PersistenceUnitInfoDescriptor(info) {
 					@Override
 					public List<String> getManagedClassNames() {
@@ -73,6 +70,36 @@ class SpringHibernateJpaPersistenceProvider extends HibernatePersistenceProvider
 						}
 					}
 				}, properties).build();
+	}
+
+	static class SpringEntityManagerFactoryBuilder extends EntityManagerFactoryBuilderImpl {
+
+		@SuppressWarnings("rawtypes")
+		public SpringEntityManagerFactoryBuilder(PersistenceUnitDescriptor persistenceUnitDescriptor, Map properties) {
+			super(persistenceUnitDescriptor, properties);
+		}
+
+		@Override
+		protected StandardServiceRegistryBuilder getStandardServiceRegistryBuilder(BootstrapServiceRegistry bsr) {
+			return new SpringServiceRegistryBuilder(bsr);
+		}
+	}
+
+	static class SpringServiceRegistryBuilder extends StandardServiceRegistryBuilder {
+
+		@SuppressWarnings("rawtypes")
+		public SpringServiceRegistryBuilder(BootstrapServiceRegistry bootstrapServiceRegistry) {
+			super(bootstrapServiceRegistry,
+					new HashMap(),
+					new ConfigLoader(bootstrapServiceRegistry),
+					new LoadedConfig(null) {
+						@Override
+						protected void addConfigurationValues(Map configurationValues) {
+							// here, do nothing
+						}
+					},
+					SpringServiceInitiators.buildInitiatorList());
+		}
 	}
 
 }
