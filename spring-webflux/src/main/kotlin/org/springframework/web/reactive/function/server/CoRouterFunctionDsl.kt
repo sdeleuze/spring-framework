@@ -17,14 +17,18 @@
 package org.springframework.web.reactive.function.server
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.mono
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.RouterFunctions.nest
+import reactor.core.publisher.Mono
 import java.net.URI
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Allow to create easily a WebFlux.fn [RouterFunction] with a [Coroutines router Kotlin DSL][CoRouterFunctionDsl].
@@ -532,7 +536,12 @@ class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunct
 		builder.filter { serverRequest, handlerFunction ->
 			mono(Dispatchers.Unconfined) {
 				filterFunction(serverRequest) { handlerRequest ->
-					handlerFunction.handle(handlerRequest).awaitSingle()
+					if (handlerFunction is ContextAwareHandlerFunction<*>) {
+						handlerFunction.handle(currentCoroutineContext().minusKey(Job.Key), handlerRequest).awaitSingle()
+					}
+					else {
+						handlerFunction.handle(handlerRequest).awaitSingle()
+					}
 				}
 			}
 		}
@@ -618,11 +627,21 @@ class CoRouterFunctionDsl internal constructor (private val init: (CoRouterFunct
 		return builder.build()
 	}
 
-	private fun asHandlerFunction(init: suspend (ServerRequest) -> ServerResponse) = HandlerFunction {
-		mono(Dispatchers.Unconfined) {
-			init(it)
+	private fun asHandlerFunction(init: suspend (ServerRequest) -> ServerResponse) = object: ContextAwareHandlerFunction<ServerResponse>() {
+		override fun handle(context: CoroutineContext, request: ServerRequest): Mono<ServerResponse> {
+			return mono(context) {
+				init(request)
+			}
 		}
 	}
+
+	abstract class ContextAwareHandlerFunction<T : ServerResponse> : HandlerFunction<T> {
+		override fun handle(request: ServerRequest): Mono<T> {
+			return handle(Dispatchers.Unconfined, request)
+		}
+		abstract fun handle(context: CoroutineContext, request: ServerRequest): Mono<T>
+	}
+
 
 	/**
 	 * @see ServerResponse.from
