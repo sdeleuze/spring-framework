@@ -412,8 +412,8 @@ public class CorsConfiguration {
 
 	/**
 	 * Add a response header to expose.
-	 * <p>The special value {@code "*"} allows all headers to be exposed for
-	 * non-credentialed requests.
+	 * <p>The special value {@code "*"} allows all headers to be exposed, including
+	 * for credentialed requests since major browsers support it.
 	 */
 	public void addExposedHeader(String exposedHeader) {
 		if (this.exposedHeaders == null) {

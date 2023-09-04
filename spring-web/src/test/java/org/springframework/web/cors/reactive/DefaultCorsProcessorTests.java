@@ -166,6 +166,54 @@ public class DefaultCorsProcessorTests {
 	}
 
 	@Test
+	public void actualRequestCredentialsWithWildcardMethod() {
+		ServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest
+				.method(HttpMethod.GET, "http://localhost/test.html")
+				.header(HttpHeaders.ORIGIN, "https://domain2.com"));
+
+		this.conf.addAllowedOrigin("https://domain2.com");
+		this.conf.setAllowCredentials(true);
+		this.conf.addAllowedMethod(CorsConfiguration.ALL);
+		this.processor.process(this.conf, exchange);
+
+		ServerHttpResponse response = exchange.getResponse();
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isEqualTo("https://domain2.com");
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)).isEqualTo("true");
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS)).isEqualTo(HttpMethod.GET.toString());
+		assertThat(response.getHeaders().get(HttpHeaders.VARY)).contains(HttpHeaders.ORIGIN,
+				HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
+		assertThat((Object) response.getStatusCode()).isNull();
+	}
+
+	@Test
+	public void actualRequestCredentialsWithWildcardAllowedHeader() throws Exception {
+		ServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest
+				.method(HttpMethod.GET, "http://localhost/test.html")
+				.header(HttpHeaders.ORIGIN, "https://domain2.com")
+				.header(HttpHeaders.AGE, "0"));
+
+		this.conf.addAllowedOrigin("https://domain2.com");
+		this.conf.setAllowCredentials(true);
+		this.conf.addAllowedHeader(CorsConfiguration.ALL);
+		this.processor.process(this.conf, exchange);
+
+		ServerHttpResponse response = exchange.getResponse();
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isEqualTo("https://domain2.com");
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)).isEqualTo("true");
+		assertThat(response.getHeaders().containsKey(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS)).isTrue();
+		assertThat(response.getHeaders().getFirst(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS))
+				.contains(HttpHeaders.ORIGIN + ", " + HttpHeaders.AGE);
+		assertThat(response.getHeaders().get(HttpHeaders.VARY)).contains(HttpHeaders.ORIGIN,
+				HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
+		assertThat((Object) response.getStatusCode()).isNull();
+	}
+
+	@Test
 	public void actualRequestCaseInsensitiveOriginMatch() {
 		ServerWebExchange exchange = actualRequest();
 		this.conf.addAllowedOrigin("https://DOMAIN2.com");

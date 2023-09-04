@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2022 the original author or authors.
+ * Copyright 2002-2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package org.springframework.web.cors;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -448,4 +449,13 @@ class CorsConfigurationTests {
 		assertThat(config.getAllowedOrigins()).isNull();
 		assertThat(config.getAllowedOriginPatterns()).containsExactly("http://*.com");
 	}
+
+	@Test
+	void validateAllowCredentialsWithAllOrigins() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.setAllowedOrigins(List.of(CorsConfiguration.ALL));
+		assertThatIllegalArgumentException().isThrownBy(config::validateAllowCredentials);
+	}
+
 }

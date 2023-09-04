@@ -139,11 +139,12 @@ public class DefaultCorsProcessor implements CorsProcessor {
 
 		responseHeaders.setAccessControlAllowOrigin(allowOrigin);
 
-		if (preFlightRequest) {
+		boolean allowCredentials = Boolean.TRUE.equals(config.getAllowCredentials());
+		if (preFlightRequest || allowCredentials) {
 			responseHeaders.setAccessControlAllowMethods(allowMethods);
 		}
 
-		if (preFlightRequest && !allowHeaders.isEmpty()) {
+		if ((preFlightRequest || allowCredentials) && !CollectionUtils.isEmpty(allowHeaders)) {
 			responseHeaders.setAccessControlAllowHeaders(allowHeaders);
 		}
 
@@ -151,7 +152,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 			responseHeaders.setAccessControlExposeHeaders(config.getExposedHeaders());
 		}
 
-		if (Boolean.TRUE.equals(config.getAllowCredentials())) {
+		if (allowCredentials) {
 			responseHeaders.setAccessControlAllowCredentials(true);
 		}
 
@@ -190,8 +191,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 
 	/**
 	 * Check the headers and determine the headers for the response of a
-	 * pre-flight request. The default implementation simply delegates to
-	 * {@link org.springframework.web.cors.CorsConfiguration#checkOrigin(String)}.
+	 * pre-flight or credentialed request.
 	 */
 	@Nullable
 	protected List<String> checkHeaders(CorsConfiguration config, List<String> requestHeaders) {
