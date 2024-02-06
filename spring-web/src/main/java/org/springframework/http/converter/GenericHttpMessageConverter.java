@@ -103,4 +103,9 @@ public interface GenericHttpMessageConverter<T> extends HttpMessageConverter<T> 
 	void write(T t, @Nullable Type type, @Nullable MediaType contentType, HttpOutputMessage outputMessage)
 			throws IOException, HttpMessageNotWritableException;
 
+	@Override
+	default GenericHttpMessageConverter<T> asGenericHttpMessageConverter() {
+		return this;
+	}
+
 }

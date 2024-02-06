@@ -205,7 +205,8 @@ final class DefaultRestClient implements RestClient {
 			}
 
 			for (HttpMessageConverter<?> messageConverter : this.messageConverters) {
-				if (messageConverter instanceof GenericHttpMessageConverter genericHttpMessageConverter) {
+				GenericHttpMessageConverter<?> genericHttpMessageConverter = messageConverter.asGenericHttpMessageConverter();
+				if (genericHttpMessageConverter != null) {
 					if (genericHttpMessageConverter.canRead(bodyType, null, contentType)) {
 						if (logger.isDebugEnabled()) {
 							logger.debug("Reading to [" + ResolvableType.forType(bodyType) + "]");
@@ -402,7 +403,8 @@ final class DefaultRestClient implements RestClient {
 			Class<?> bodyClass = body.getClass();
 
 			for (HttpMessageConverter messageConverter : DefaultRestClient.this.messageConverters) {
-				if (messageConverter instanceof GenericHttpMessageConverter genericMessageConverter) {
+				GenericHttpMessageConverter genericMessageConverter = messageConverter.asGenericHttpMessageConverter();
+				if (genericMessageConverter != null) {
 					if (genericMessageConverter.canWrite(bodyType, bodyClass, contentType)) {
 						logBody(body, contentType, genericMessageConverter);
 						genericMessageConverter.write(body, bodyType, contentType, clientRequest);

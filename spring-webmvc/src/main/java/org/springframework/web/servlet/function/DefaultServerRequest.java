@@ -206,7 +206,8 @@ class DefaultServerRequest implements ServerRequest {
 		MediaType contentType = this.headers.contentType().orElse(MediaType.APPLICATION_OCTET_STREAM);
 
 		for (HttpMessageConverter<?> messageConverter : this.messageConverters) {
-			if (messageConverter instanceof GenericHttpMessageConverter<?> genericMessageConverter) {
+			GenericHttpMessageConverter<?> genericMessageConverter = messageConverter.asGenericHttpMessageConverter();
+			if (genericMessageConverter != null) {
 				if (genericMessageConverter.canRead(bodyType, bodyClass, contentType)) {
 					return (T) genericMessageConverter.read(bodyType, bodyClass, this.serverHttpRequest);
 				}

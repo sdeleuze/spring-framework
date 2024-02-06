@@ -302,7 +302,8 @@ final class DefaultEntityResponseBuilder<T> implements EntityResponse.Builder<T>
 			}
 
 			for (HttpMessageConverter<?> messageConverter : context.messageConverters()) {
-				if (messageConverter instanceof GenericHttpMessageConverter genericMessageConverter) {
+				GenericHttpMessageConverter genericMessageConverter = messageConverter.asGenericHttpMessageConverter();
+				if (genericMessageConverter != null) {
 					if (genericMessageConverter.canWrite(entityType, entityClass, contentType)) {
 						genericMessageConverter.write(entity, entityType, contentType, serverResponse);
 						return;

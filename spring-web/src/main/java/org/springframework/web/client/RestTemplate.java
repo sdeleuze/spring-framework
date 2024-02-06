@@ -1022,10 +1022,11 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 
 		private boolean canReadResponse(Type responseType, HttpMessageConverter<?> converter) {
 			Class<?> responseClass = (responseType instanceof Class<?> clazz ? clazz : null);
+			GenericHttpMessageConverter<?> genericConverter = converter.asGenericHttpMessageConverter();
 			if (responseClass != null) {
 				return converter.canRead(responseClass, null);
 			}
-			else if (converter instanceof GenericHttpMessageConverter<?> genericConverter) {
+			else if (genericConverter != null) {
 				return genericConverter.canRead(responseType, null, null);
 			}
 			return false;
@@ -1095,7 +1096,8 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 				HttpHeaders requestHeaders = this.requestEntity.getHeaders();
 				MediaType requestContentType = requestHeaders.getContentType();
 				for (HttpMessageConverter<?> messageConverter : getMessageConverters()) {
-					if (messageConverter instanceof GenericHttpMessageConverter genericConverter) {
+					GenericHttpMessageConverter genericConverter = messageConverter.asGenericHttpMessageConverter();
+					if (genericConverter != null) {
 						if (genericConverter.canWrite(requestBodyType, requestBodyClass, requestContentType)) {
 							if (!requestHeaders.isEmpty()) {
 								requestHeaders.forEach((key, values) -> httpHeaders.put(key, new ArrayList<>(values)));

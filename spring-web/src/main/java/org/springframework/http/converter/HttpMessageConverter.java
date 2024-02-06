@@ -106,4 +106,9 @@ public interface HttpMessageConverter<T> {
 	void write(T t, @Nullable MediaType contentType, HttpOutputMessage outputMessage)
 			throws IOException, HttpMessageNotWritableException;
 
+	@Nullable
+	default GenericHttpMessageConverter<T> asGenericHttpMessageConverter() {
+		return null;
+	}
+
 }

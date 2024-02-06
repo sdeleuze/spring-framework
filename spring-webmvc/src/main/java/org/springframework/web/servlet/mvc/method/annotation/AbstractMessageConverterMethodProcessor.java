@@ -280,10 +280,9 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 		if (selectedMediaType != null) {
 			selectedMediaType = selectedMediaType.removeQualityValue();
 			for (HttpMessageConverter<?> converter : this.messageConverters) {
-				GenericHttpMessageConverter genericConverter =
-						(converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null);
+				GenericHttpMessageConverter genericConverter = converter.asGenericHttpMessageConverter();
 				if (genericConverter != null ?
-						((GenericHttpMessageConverter) converter).canWrite(targetType, valueType, selectedMediaType) :
+						genericConverter.canWrite(targetType, valueType, selectedMediaType) :
 						converter.canWrite(valueType, selectedMediaType)) {
 					body = getAdvice().beforeBodyWrite(body, returnType, selectedMediaType,
 							(Class<? extends HttpMessageConverter<?>>) converter.getClass(),
@@ -383,7 +382,8 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 		}
 		Set<MediaType> result = new LinkedHashSet<>();
 		for (HttpMessageConverter<?> converter : this.messageConverters) {
-			if (converter instanceof GenericHttpMessageConverter<?> ghmc && targetType != null) {
+			GenericHttpMessageConverter<?> ghmc = converter.asGenericHttpMessageConverter();
+			if (targetType != null && ghmc != null) {
 				if (ghmc.canWrite(targetType, valueClass, null)) {
 					result.addAll(converter.getSupportedMediaTypes(valueClass));
 				}

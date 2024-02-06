@@ -174,8 +174,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 			message = new EmptyBodyCheckingHttpInputMessage(inputMessage);
 			for (HttpMessageConverter<?> converter : this.messageConverters) {
 				Class<HttpMessageConverter<?>> converterType = (Class<HttpMessageConverter<?>>) converter.getClass();
-				GenericHttpMessageConverter<?> genericConverter =
-						(converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null);
+				GenericHttpMessageConverter<?> genericConverter = converter.asGenericHttpMessageConverter();
 				if (genericConverter != null ? genericConverter.canRead(targetType, contextClass, contentType) :
 						(targetClass != null && converter.canRead(targetClass, contentType))) {
 					if (message.hasBody()) {
