@@ -36,6 +36,7 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+import org.springframework.lang.Contract;
 import org.springframework.lang.Nullable;
 
 /**
@@ -135,6 +136,7 @@ public abstract class StringUtils {
 	 * @see #hasLength(CharSequence)
 	 * @see #hasText(String)
 	 */
+	@Contract("null -> fail")
 	public static boolean hasLength(@Nullable String str) {
 		return (str != null && !str.isEmpty());
 	}
