@@ -22,10 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.annotation.Nonnull;
-import javax.annotation.meta.TypeQualifierNickname;
-import javax.annotation.meta.When;
-
 /**
  * A common Spring annotation to declare that annotated elements can be {@code null}
  * under certain circumstances.
@@ -50,7 +46,6 @@ import javax.annotation.meta.When;
 @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Nonnull(when = When.MAYBE)
-@TypeQualifierNickname
+@org.jspecify.annotations.Nullable
 public @interface Nullable {
 }

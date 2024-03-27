@@ -22,9 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.annotation.Nonnull;
-import javax.annotation.meta.TypeQualifierNickname;
-
 /**
  * A common Spring annotation to declare that annotated elements cannot be {@code null}.
  *
@@ -49,7 +46,6 @@ import javax.annotation.meta.TypeQualifierNickname;
 @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Nonnull
-@TypeQualifierNickname
+@org.jspecify.annotations.NonNull
 public @interface NonNull {
 }

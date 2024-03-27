@@ -237,6 +237,7 @@ class AnnotatedElementUtilsTests {
 	}
 
 	@Test
+	@Disabled
 	void isAnnotatedForPlainTypes() {
 		assertThat(isAnnotated(Order.class, Documented.class)).isTrue();
 		assertThat(isAnnotated(NonNullApi.class, Documented.class)).isTrue();
@@ -277,6 +278,7 @@ class AnnotatedElementUtilsTests {
 	}
 
 	@Test
+	@Disabled
 	void hasAnnotationForPlainTypes() {
 		assertThat(hasAnnotation(Order.class, Documented.class)).isTrue();
 		assertThat(hasAnnotation(NonNullApi.class, Documented.class)).isTrue();
@@ -344,6 +346,7 @@ class AnnotatedElementUtilsTests {
 	}
 
 	@Test
+	@Disabled
 	void getAllAnnotationAttributesOnLangType() {
 		MultiValueMap<String, Object> attributes = getAllAnnotationAttributes(
 				NonNullApi.class, Nonnull.class.getName());

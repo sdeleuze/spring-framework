@@ -22,8 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.annotation.Nonnull;
-import javax.annotation.meta.TypeQualifierDefault;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A common Spring annotation to declare that fields are to be considered as
@@ -44,7 +43,6 @@ import javax.annotation.meta.TypeQualifierDefault;
 @Target(ElementType.PACKAGE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Nonnull
-@TypeQualifierDefault(ElementType.FIELD)
+@NullMarked // How can I restrict the scope to fields only?
 public @interface NonNullFields {
 }

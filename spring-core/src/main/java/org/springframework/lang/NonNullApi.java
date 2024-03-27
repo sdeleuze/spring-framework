@@ -22,8 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.annotation.Nonnull;
-import javax.annotation.meta.TypeQualifierDefault;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A common Spring annotation to declare that parameters and return values
@@ -45,7 +44,6 @@ import javax.annotation.meta.TypeQualifierDefault;
 @Target(ElementType.PACKAGE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Nonnull
-@TypeQualifierDefault({ElementType.METHOD, ElementType.PARAMETER})
+@NullMarked // How can I restrict the scope to API only?
 public @interface NonNullApi {
 }
