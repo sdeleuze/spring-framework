@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+@file:Suppress("PACKAGE_OR_CLASSIFIER_REDECLARATION")
 package org.springframework.docs.web.websocket.stomp.websocketstomphandlebrokerrelay
 
 import org.springframework.context.annotation.Configuration

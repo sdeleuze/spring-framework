@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("UNUSED_VARIABLE")
+@file:Suppress("UNUSED_VARIABLE", "PACKAGE_OR_CLASSIFIER_REDECLARATION")
 package org.springframework.docs.web.websocket.stomp.websocketstompinterceptors
 
 import org.springframework.messaging.Message

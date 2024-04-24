@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("UNUSED_PARAMETER")
+@file:Suppress("UNUSED_PARAMETER", "PACKAGE_OR_CLASSIFIER_REDECLARATION")
 package org.springframework.docs.web.websocket.stomp.websocketstompdestinationseparator
 
 import org.springframework.messaging.handler.annotation.DestinationVariable

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@file:Suppress("PACKAGE_OR_CLASSIFIER_REDECLARATION")
 package org.springframework.docs.core.aopapi.aopapipointcutsregex
 
 import org.springframework.aop.support.JdkRegexpMethodPointcut
