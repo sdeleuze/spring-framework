@@ -200,16 +200,17 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 	@Override
 	public T get(RegisteredBean registeredBean) throws Exception {
 		Assert.notNull(registeredBean, "'registeredBean' must not be null");
+		if (this.generator != null) {
+			AutowiredArguments arguments = resolveArguments(registeredBean);
+			return invokeBeanSupplier(null, () -> this.generator.apply(registeredBean, arguments));
+		}
 		Executable executable = this.lookup.get(registeredBean);
 		AutowiredArguments arguments = resolveArguments(registeredBean, executable);
-		if (this.generator != null) {
-			return invokeBeanSupplier(executable, () -> this.generator.apply(registeredBean, arguments));
-		}
 		return invokeBeanSupplier(executable,
 				() -> instantiate(registeredBean.getBeanFactory(), executable, arguments.toArray()));
 	}
 
-	private T invokeBeanSupplier(Executable executable, ThrowingSupplier<T> beanSupplier) {
+	private T invokeBeanSupplier(@Nullable Executable executable, ThrowingSupplier<T> beanSupplier) {
 		if (!(executable instanceof Method method)) {
 			return beanSupplier.get();
 		}
@@ -225,7 +226,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 	@Nullable
 	@Override
 	public Method getFactoryMethod() {
-		if (this.lookup instanceof FactoryMethodLookup factoryMethodLookup) {
+		if (this.generator == null && this.lookup instanceof FactoryMethodLookup factoryMethodLookup) {
 			return factoryMethodLookup.get();
 		}
 		return null;
