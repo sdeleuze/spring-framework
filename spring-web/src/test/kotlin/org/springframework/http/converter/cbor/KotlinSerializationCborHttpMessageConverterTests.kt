@@ -31,6 +31,7 @@ import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 
 import org.springframework.core.Ordered
+import org.springframework.core.ResolvableType
 import org.springframework.http.MediaType
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.testfixture.http.MockHttpInputMessage
@@ -67,18 +68,18 @@ class KotlinSerializationCborHttpMessageConverterTests {
 		assertThat(converter.canRead(NotSerializableBean::class.java, MediaType.APPLICATION_CBOR)).isFalse()
 
 		assertThat(converter.canRead(Map::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canRead(typeTokenOf<Map<String, SerializableBean>>(), Map::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canRead(resolvableTypeOf<Map<String, SerializableBean>>(), MediaType.APPLICATION_CBOR)).isTrue()
 		assertThat(converter.canRead(List::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canRead(typeTokenOf<List<SerializableBean>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canRead(resolvableTypeOf<List<SerializableBean>>(), MediaType.APPLICATION_CBOR)).isTrue()
 		assertThat(converter.canRead(Set::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canRead(typeTokenOf<Set<SerializableBean>>(), Set::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canRead(resolvableTypeOf<Set<SerializableBean>>(), MediaType.APPLICATION_CBOR)).isTrue()
 
-		assertThat(converter.canRead(typeTokenOf<List<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
-		assertThat(converter.canRead(typeTokenOf<ArrayList<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
-		assertThat(converter.canRead(typeTokenOf<List<Int>>(), List::class.java, MediaType.APPLICATION_JSON)).isFalse()
+		assertThat(converter.canRead(resolvableTypeOf<List<Int>>(), MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canRead(resolvableTypeOf<ArrayList<Int>>(), MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canRead(resolvableTypeOf<List<Int>>(), MediaType.APPLICATION_JSON)).isFalse()
 
-		assertThat(converter.canRead(typeTokenOf<Ordered>(), Ordered::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canRead(typeTokenOf<List<Ordered>>(), List::class.java, MediaType.APPLICATION_CBOR)).isFalse()
+		assertThat(converter.canRead(resolvableTypeOf<Ordered>(), MediaType.APPLICATION_CBOR)).isFalse()
+		assertThat(converter.canRead(resolvableTypeOf<List<Ordered>>(), MediaType.APPLICATION_CBOR)).isFalse()
 	}
 
 	@Test
@@ -89,17 +90,17 @@ class KotlinSerializationCborHttpMessageConverterTests {
 		assertThat(converter.canWrite(NotSerializableBean::class.java, MediaType.APPLICATION_CBOR)).isFalse()
 
 		assertThat(converter.canWrite(Map::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canWrite(typeTokenOf<Map<String, SerializableBean>>(), Map::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canWrite(resolvableTypeOf<Map<String, SerializableBean>>(), Map::class.java, MediaType.APPLICATION_CBOR)).isTrue()
 		assertThat(converter.canWrite(List::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canWrite(typeTokenOf<List<SerializableBean>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canWrite(resolvableTypeOf<List<SerializableBean>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
 		assertThat(converter.canWrite(Set::class.java, MediaType.APPLICATION_CBOR)).isFalse()
-		assertThat(converter.canWrite(typeTokenOf<Set<SerializableBean>>(), Set::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canWrite(resolvableTypeOf<Set<SerializableBean>>(), Set::class.java, MediaType.APPLICATION_CBOR)).isTrue()
 
-		assertThat(converter.canWrite(typeTokenOf<List<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
-		assertThat(converter.canWrite(typeTokenOf<ArrayList<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
-		assertThat(converter.canWrite(typeTokenOf<List<Int>>(), List::class.java, MediaType.APPLICATION_JSON)).isFalse()
+		assertThat(converter.canWrite(resolvableTypeOf<List<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canWrite(resolvableTypeOf<ArrayList<Int>>(), List::class.java, MediaType.APPLICATION_CBOR)).isTrue()
+		assertThat(converter.canWrite(resolvableTypeOf<List<Int>>(), List::class.java, MediaType.APPLICATION_JSON)).isFalse()
 
-		assertThat(converter.canWrite(typeTokenOf<Ordered>(), Ordered::class.java, MediaType.APPLICATION_CBOR)).isFalse()
+		assertThat(converter.canWrite(resolvableTypeOf<Ordered>(), Ordered::class.java, MediaType.APPLICATION_CBOR)).isFalse()
 	}
 
 	@Test
@@ -139,7 +140,7 @@ class KotlinSerializationCborHttpMessageConverterTests {
 	fun readGenericCollection() {
 		val inputMessage = MockHttpInputMessage(serializableBeanArrayBody)
 		inputMessage.headers.contentType = MediaType.APPLICATION_CBOR
-		val result = converter.read(typeOf<List<SerializableBean>>().javaType, null, inputMessage)
+		val result = converter.read(ResolvableType.forType(typeOf<List<SerializableBean>>().javaType), inputMessage, null)
 				as List<SerializableBean>
 
 		assertThat(result).hasSize(1)
@@ -200,7 +201,7 @@ class KotlinSerializationCborHttpMessageConverterTests {
 	fun writeGenericCollection() {
 		val outputMessage = MockHttpOutputMessage()
 
-		this.converter.write(listOf(serializableBean), typeOf<List<SerializableBean>>().javaType, null, outputMessage)
+		this.converter.write(listOf(serializableBean), ResolvableType.forType(typeOf<List<SerializableBean>>().javaType), null, outputMessage, null)
 
 		assertThat(outputMessage.headers).containsEntry("Content-Type", listOf("application/cbor"))
 		assertThat(outputMessage.bodyAsBytes.isNotEmpty()).isTrue()
@@ -222,10 +223,10 @@ class KotlinSerializationCborHttpMessageConverterTests {
 
 	open class TypeBase<T>
 
-	inline fun <reified T> typeTokenOf(): Type {
+	inline fun <reified T> resolvableTypeOf(): ResolvableType {
 		val base = object : TypeBase<T>() {}
 		val superType = base::class.java.genericSuperclass!!
-		return (superType as ParameterizedType).actualTypeArguments.first()!!
+		return ResolvableType.forType((superType as ParameterizedType).actualTypeArguments.first()!!)
 	}
 
 }
