@@ -37,7 +37,6 @@ dependencies {
 	optional("org.htmlunit:htmlunit") {
 		exclude group: "commons-logging", module: "commons-logging"
 	}
-	optional("org.jetbrains.kotlin:kotlin-reflect")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")

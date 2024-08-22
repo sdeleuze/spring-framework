@@ -23,16 +23,6 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.JvmClassMappingKt;
-import kotlin.reflect.KClass;
-import kotlin.reflect.KFunction;
-import kotlin.reflect.KParameter;
-import kotlin.reflect.KType;
-import kotlin.reflect.full.KCallables;
-import kotlin.reflect.full.KClasses;
-import kotlin.reflect.full.KClassifiers;
-import kotlin.reflect.full.KTypes;
-import kotlin.reflect.jvm.KCallablesJvm;
-import kotlin.reflect.jvm.ReflectJvmMapping;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.Deferred;
@@ -41,6 +31,14 @@ import kotlinx.coroutines.GlobalScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.reactor.MonoKt;
 import kotlinx.coroutines.reactor.ReactorFlowKt;
+import kotlinx.reflect.lite.KClass;
+import kotlinx.reflect.lite.KFunction;
+import kotlinx.reflect.lite.KParameter;
+import kotlinx.reflect.lite.KType;
+import kotlinx.reflect.lite.full.KCallables;
+import kotlinx.reflect.lite.full.KCallablesJvm;
+import kotlinx.reflect.lite.full.KClasses;
+import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -59,10 +57,13 @@ import org.springframework.util.CollectionUtils;
  */
 public abstract class CoroutinesUtils {
 
+	// TODO Missing capability KClassifiers.getStarProjectedType
 	private static final KType flowType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Flow.class));
 
+	// TODO Missing capability KClassifiers.getStarProjectedType
 	private static final KType monoType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Mono.class));
 
+	// TODO Missing capability KClassifiers.getStarProjectedType
 	private static final KType publisherType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Publisher.class));
 
 
@@ -144,16 +145,21 @@ public abstract class CoroutinesUtils {
 							}
 						}
 					}
+					// TODO Missing capability KCallables.callSuspendBy
 					return KCallables.callSuspendBy(function, argMap, continuation);
 				})
 				.handle(CoroutinesUtils::handleResult)
 				.onErrorMap(InvocationTargetException.class, InvocationTargetException::getTargetException);
 
 		KType returnType = function.getReturnType();
+
+		// TODO Missing capability KTypes.isSubtypeOf
 		if (KTypes.isSubtypeOf(returnType, flowType)) {
 			return mono.flatMapMany(CoroutinesUtils::asFlux);
 		}
+		// TODO Missing capability KTypes.isSubtypeOf
 		if (KTypes.isSubtypeOf(returnType, publisherType)) {
+			// TODO Missing capability KTypes.isSubtypeOf
 			if (KTypes.isSubtypeOf(returnType, monoType)) {
 				return mono.flatMap(o -> ((Mono<?>)o));
 			}

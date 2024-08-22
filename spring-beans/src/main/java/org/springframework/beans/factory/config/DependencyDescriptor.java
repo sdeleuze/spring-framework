@@ -24,8 +24,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
 
-import kotlin.reflect.KProperty;
-import kotlin.reflect.jvm.ReflectJvmMapping;
+import kotlinx.reflect.lite.KProperty;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -466,7 +465,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 		 * Check whether the specified {@link Field} represents a nullable Kotlin type or not.
 		 */
 		public static boolean isNullable(Field field) {
-			KProperty<?> property = ReflectJvmMapping.getKotlinProperty(field);
+			KProperty<?> property = kotlinx.reflect.lite.jvm.ReflectJvmMapping.getKotlinProperty(field);
 			return (property != null && property.getReturnType().isMarkedNullable());
 		}
 	}

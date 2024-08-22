@@ -31,7 +31,6 @@ dependencies {
 	optional("org.apache.groovy:groovy-templates")
 	optional("org.apache.poi:poi-ooxml")
 	optional("org.freemarker:freemarker")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	optional("org.jetbrains.kotlinx:kotlinx-serialization-cbor")

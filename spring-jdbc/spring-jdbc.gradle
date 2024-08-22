@@ -13,7 +13,6 @@ dependencies {
 	optional("org.apache.derby:derbytools")
 	optional("com.h2database:h2")
 	optional("org.hsqldb:hsqldb")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	testImplementation(testFixtures(project(":spring-beans")))
 	testImplementation(testFixtures(project(":spring-core")))

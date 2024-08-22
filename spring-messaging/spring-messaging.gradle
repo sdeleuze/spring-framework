@@ -30,7 +30,7 @@ dependencies {
 	testImplementation("org.apache.activemq:activemq-broker")
 	testImplementation("org.apache.activemq:activemq-kahadb-store")
 	testImplementation("org.apache.activemq:activemq-stomp")
-	testImplementation("org.jetbrains.kotlin:kotlin-reflect")
+	testImplementation("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 	testImplementation("org.jetbrains.kotlin:kotlin-stdlib")
 	testImplementation("org.skyscreamer:jsonassert")
 	testImplementation("org.xmlunit:xmlunit-assertj")

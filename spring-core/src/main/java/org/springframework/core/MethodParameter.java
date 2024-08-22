@@ -35,9 +35,9 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import kotlin.Unit;
-import kotlin.reflect.KFunction;
-import kotlin.reflect.KParameter;
-import kotlin.reflect.jvm.ReflectJvmMapping;
+import kotlinx.reflect.lite.KFunction;
+import kotlinx.reflect.lite.KParameter;
+import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
 
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;

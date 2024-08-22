@@ -25,10 +25,10 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-import kotlin.jvm.JvmClassMappingKt;
-import kotlin.reflect.KClass;
-import kotlin.reflect.KFunction;
-import kotlin.reflect.KParameter;
+import kotlinx.reflect.lite.KClass;
+import kotlinx.reflect.lite.KFunction;
+import kotlinx.reflect.lite.KParameter;
+import kotlinx.reflect.lite.jvm.JvmClassMappingKt;
 
 import org.springframework.aot.generate.AccessControl;
 import org.springframework.aot.generate.AccessControl.Visibility;
@@ -403,7 +403,7 @@ public class InstanceSupplierCodeGenerator {
 
 		public static boolean hasConstructorWithOptionalParameter(Class<?> beanClass) {
 			if (KotlinDetector.isKotlinType(beanClass)) {
-				KClass<?> kClass = JvmClassMappingKt.getKotlinClass(beanClass);
+				KClass<?> kClass = JvmClassMappingKt.getLiteKClass(beanClass);
 				for (KFunction<?> constructor : kClass.getConstructors()) {
 					for (KParameter parameter : constructor.getParameters()) {
 						if (parameter.isOptional()) {

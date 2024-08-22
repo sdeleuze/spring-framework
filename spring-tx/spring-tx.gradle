@@ -13,7 +13,6 @@ dependencies {
 	optional("jakarta.interceptor:jakarta.interceptor-api")
 	optional("jakarta.resource:jakarta.resource-api")
 	optional("jakarta.transaction:jakarta.transaction-api")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")

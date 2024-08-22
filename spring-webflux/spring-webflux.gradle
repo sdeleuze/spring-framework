@@ -30,7 +30,7 @@ dependencies {
 	optional("org.eclipse.jetty.websocket:jetty-websocket-jetty-server")
 	optional("org.eclipse.jetty.websocket:jetty-websocket-jetty-client")
 	optional("org.freemarker:freemarker")
-	optional("org.jetbrains.kotlin:kotlin-reflect")
+	optional("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 	optional("org.jetbrains.kotlin:kotlin-stdlib")
 	optional("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	optional("org.webjars:webjars-locator-core")

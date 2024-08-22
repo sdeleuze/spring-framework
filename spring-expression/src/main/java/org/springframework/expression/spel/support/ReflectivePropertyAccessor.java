@@ -27,12 +27,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import kotlin.jvm.JvmClassMappingKt;
-import kotlin.reflect.KClass;
-import kotlin.reflect.KMutableProperty;
-import kotlin.reflect.KProperty;
-import kotlin.reflect.full.KClasses;
-import kotlin.reflect.jvm.ReflectJvmMapping;
+import kotlinx.reflect.lite.KClass;
+import kotlinx.reflect.lite.KMutableProperty;
+import kotlinx.reflect.lite.KProperty;
+import kotlinx.reflect.lite.jvm.JvmClassMappingKt;
+import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
 
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.KotlinDetector;
@@ -743,7 +742,8 @@ public class ReflectivePropertyAccessor implements PropertyAccessor {
 	private static class KotlinDelegate {
 
 		public static boolean isKotlinProperty(Method method, String methodSuffix) {
-			KClass<?> kClass = JvmClassMappingKt.getKotlinClass(method.getDeclaringClass());
+			KClass<?> kClass = JvmClassMappingKt.getLiteKClass(method.getDeclaringClass());
+			// TODO Missing capability KClasses.getMemberProperties
 			for (KProperty<?> property : KClasses.getMemberProperties(kClass)) {
 				if (methodSuffix.equalsIgnoreCase(property.getName()) &&
 						(method.equals(ReflectJvmMapping.getJavaGetter(property)) ||

@@ -31,13 +31,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import kotlin.jvm.JvmClassMappingKt;
-import kotlin.reflect.KClass;
-import kotlin.reflect.KFunction;
-import kotlin.reflect.KParameter;
-import kotlin.reflect.full.KClasses;
-import kotlin.reflect.jvm.KCallablesJvm;
-import kotlin.reflect.jvm.ReflectJvmMapping;
+import kotlinx.reflect.lite.KClass;
+import kotlinx.reflect.lite.KFunction;
+import kotlinx.reflect.lite.KParameter;
+import kotlinx.reflect.lite.full.KCallablesJvm;
+import kotlinx.reflect.lite.full.KClasses;
+import kotlinx.reflect.lite.jvm.JvmClassMappingKt;
+import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
 
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.KotlinDetector;
@@ -867,7 +867,7 @@ public abstract class BeanUtils {
 		@Nullable
 		public static <T> Constructor<T> findPrimaryConstructor(Class<T> clazz) {
 			try {
-				KClass<T> kClass = JvmClassMappingKt.getKotlinClass(clazz);
+				KClass<T> kClass = JvmClassMappingKt.getLiteKClass(clazz);
 				KFunction<T> primaryCtor = KClasses.getPrimaryConstructor(kClass);
 				if (primaryCtor == null) {
 					return null;
