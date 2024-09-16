@@ -56,6 +56,7 @@ dependencies {
 	testImplementation("org.hibernate:hibernate-validator")
 	testImplementation("org.jetbrains.kotlin:kotlin-script-runtime")
 	testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
+	testImplementation("org.jetbrains.kotlin:kotlin-reflect")
 	testRuntimeOnly("com.sun.xml.bind:jaxb-core")
 	testRuntimeOnly("com.sun.xml.bind:jaxb-impl")
 	testRuntimeOnly("com.sun.activation:jakarta.activation")

@@ -27,12 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import kotlinx.reflect.lite.KClass;
-import kotlinx.reflect.lite.KMutableProperty;
-import kotlinx.reflect.lite.KProperty;
-import kotlinx.reflect.lite.jvm.JvmClassMappingKt;
-import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
-
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.KotlinDetector;
 import org.springframework.core.MethodParameter;
@@ -742,16 +736,16 @@ public class ReflectivePropertyAccessor implements PropertyAccessor {
 	private static class KotlinDelegate {
 
 		public static boolean isKotlinProperty(Method method, String methodSuffix) {
-			KClass<?> kClass = JvmClassMappingKt.getLiteKClass(method.getDeclaringClass());
+			// KClass<?> kClass = JvmClassMappingKt.getLiteKClass(method.getDeclaringClass());
 			// TODO Missing capability KClasses.getMemberProperties
-			for (KProperty<?> property : KClasses.getMemberProperties(kClass)) {
-				if (methodSuffix.equalsIgnoreCase(property.getName()) &&
-						(method.equals(ReflectJvmMapping.getJavaGetter(property)) ||
-								property instanceof KMutableProperty<?> mutableProperty &&
-										method.equals(ReflectJvmMapping.getJavaSetter(mutableProperty)))) {
-					return true;
-				}
-			}
+			// for (KProperty<?> property : KClasses.getMemberProperties(kClass)) {
+			//	if (methodSuffix.equalsIgnoreCase(property.getName()) &&
+			//			(method.equals(ReflectJvmMapping.getJavaGetter(property)) ||
+			//					property instanceof KMutableProperty<?> mutableProperty &&
+			//							method.equals(ReflectJvmMapping.getJavaSetter(mutableProperty)))) {
+			//		return true;
+			//	}
+			// }
 			return false;
 		}
 

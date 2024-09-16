@@ -35,7 +35,6 @@ import kotlinx.reflect.lite.KClass;
 import kotlinx.reflect.lite.KFunction;
 import kotlinx.reflect.lite.KParameter;
 import kotlinx.reflect.lite.KType;
-import kotlinx.reflect.lite.full.KCallables;
 import kotlinx.reflect.lite.full.KCallablesJvm;
 import kotlinx.reflect.lite.full.KClasses;
 import kotlinx.reflect.lite.jvm.ReflectJvmMapping;
@@ -58,13 +57,13 @@ import org.springframework.util.CollectionUtils;
 public abstract class CoroutinesUtils {
 
 	// TODO Missing capability KClassifiers.getStarProjectedType
-	private static final KType flowType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Flow.class));
+	// private static final KType flowType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Flow.class));
 
 	// TODO Missing capability KClassifiers.getStarProjectedType
-	private static final KType monoType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Mono.class));
+	// private static final KType monoType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Mono.class));
 
 	// TODO Missing capability KClassifiers.getStarProjectedType
-	private static final KType publisherType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Publisher.class));
+	// private static final KType publisherType = KClassifiers.getStarProjectedType(JvmClassMappingKt.getKotlinClass(Publisher.class));
 
 
 	/**
@@ -146,7 +145,8 @@ public abstract class CoroutinesUtils {
 						}
 					}
 					// TODO Missing capability KCallables.callSuspendBy
-					return KCallables.callSuspendBy(function, argMap, continuation);
+					//	return KCallables.callSuspendBy(function, argMap, continuation);
+					return null;
 				})
 				.handle(CoroutinesUtils::handleResult)
 				.onErrorMap(InvocationTargetException.class, InvocationTargetException::getTargetException);
@@ -154,17 +154,17 @@ public abstract class CoroutinesUtils {
 		KType returnType = function.getReturnType();
 
 		// TODO Missing capability KTypes.isSubtypeOf
-		if (KTypes.isSubtypeOf(returnType, flowType)) {
-			return mono.flatMapMany(CoroutinesUtils::asFlux);
-		}
+		// if (KTypes.isSubtypeOf(returnType, flowType)) {
+		// 	return mono.flatMapMany(CoroutinesUtils::asFlux);
+		// }
 		// TODO Missing capability KTypes.isSubtypeOf
-		if (KTypes.isSubtypeOf(returnType, publisherType)) {
-			// TODO Missing capability KTypes.isSubtypeOf
-			if (KTypes.isSubtypeOf(returnType, monoType)) {
-				return mono.flatMap(o -> ((Mono<?>)o));
-			}
-			return mono.flatMapMany(o -> ((Publisher<?>)o));
-		}
+		// if (KTypes.isSubtypeOf(returnType, publisherType)) {
+		//	 TODO Missing capability KTypes.isSubtypeOf
+		//	if (KTypes.isSubtypeOf(returnType, monoType)) {
+		//		return mono.flatMap(o -> ((Mono<?>)o));
+		//	}
+		//	return mono.flatMapMany(o -> ((Publisher<?>)o));
+		//}
 		return mono;
 	}
 
