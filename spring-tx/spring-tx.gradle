@@ -24,4 +24,5 @@ dependencies {
 	testImplementation("org.aspectj:aspectjweaver")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("jakarta.persistence:jakarta.persistence-api")
+	testImplementation("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 }

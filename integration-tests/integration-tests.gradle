@@ -28,6 +28,7 @@ dependencies {
 	testImplementation("org.hsqldb:hsqldb")
 	testImplementation("org.hibernate:hibernate-core-jakarta")
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	testImplementation("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 }
 
 normalization {

@@ -15,4 +15,5 @@ dependencies {
 	testImplementation(testFixtures(project(":spring-beans")))
 	testImplementation(testFixtures(project(":spring-core")))
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	testImplementation("org.jetbrains.kotlinx:kotlinx.reflect.lite")
 }
