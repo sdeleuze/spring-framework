@@ -35,8 +35,8 @@ public class KotlinConventions {
 
 	private void configure(KotlinCompile compile) {
 		KotlinJvmOptions kotlinOptions = compile.getKotlinOptions();
-		kotlinOptions.setApiVersion("1.7");
-		kotlinOptions.setLanguageVersion("1.7");
+		kotlinOptions.setApiVersion("2.0");
+		kotlinOptions.setLanguageVersion("2.0");
 		kotlinOptions.setJvmTarget("17");
 		kotlinOptions.setJavaParameters(true);
 		kotlinOptions.setAllWarningsAsErrors(true);
