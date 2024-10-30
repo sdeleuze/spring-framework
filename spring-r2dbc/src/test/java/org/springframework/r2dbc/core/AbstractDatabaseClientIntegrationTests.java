@@ -29,6 +29,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.lang.Nullable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -211,8 +212,46 @@ abstract class AbstractDatabaseClientIntegrationTests {
 				.verifyComplete();
 	}
 
+	@Test
+	void batchWithList() {
+		DatabaseClient databaseClient = DatabaseClient.create(connectionFactory);
+		List<ParameterRecord> records = List.of(
+			new ParameterRecord(1, "foo", null),
+			new ParameterRecord(2, "bar", null)
+		);
+		databaseClient.sql("INSERT INTO legoset (id, name, manual) VALUES(:id, :name, :manual)")
+				.batch(records, (record, params) -> params.bind("id", record.id)
+						.bind("name", record.name)
+						.bindNull("manual", Integer.class)
+				)
+				.fetch().rowsUpdated()
+				.as(StepVerifier::create)
+				.expectNext(2L)
+				.verifyComplete();
+	}
 
-	record ParameterRecord(int id, String name, Integer manual) {
+	@Test
+	void batchWithManualBindings() {
+		DatabaseClient databaseClient = DatabaseClient.create(connectionFactory);
+		databaseClient.sql("INSERT INTO legoset (id, name, manual) VALUES(:id, :name, :manual)")
+				.batch()
+				.bind(params -> params.bind("id", 1)
+						.bind("name", "foo")
+						.bindNull("manual", Integer.class)
+				)
+				.bind(params -> params.bind("id", 2)
+						.bind("name", "bar")
+						.bindNull("manual", Integer.class)
+				)
+				.and()
+				.fetch().rowsUpdated()
+				.as(StepVerifier::create)
+				.expectNext(2L)
+				.verifyComplete();
+	}
+
+
+	record ParameterRecord(int id, String name, @Nullable Integer manual) {
 	}
 
 	record ResultRecord(int id) {

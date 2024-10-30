@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.Readable;
@@ -224,6 +225,11 @@ public interface DatabaseClient extends ConnectionAccessor {
 		 */
 		GenericExecuteSpec bindProperties(Object source);
 
+
+		BatchSpec batch();
+
+		<T> GenericExecuteSpec batch(List<T> source, BiFunction<T, Params, Params> paramsFunction);
+
 		/**
 		 * Add the given filter to the end of the filter chain.
 		 * <p>Filter functions are typically used to invoke methods on the Statement
@@ -312,6 +318,20 @@ public interface DatabaseClient extends ConnectionAccessor {
 		 * @return a {@link Mono} ignoring its payload (actively dropping)
 		 */
 		Mono<Void> then();
+	}
+
+	interface Params {
+		Params bind(String name, Object value);
+		Params bind(int index, Object value);
+		Params bindNull(String name, Class<?> type);
+		Params bindNull(int index, Class<?> type);
+	}
+
+	interface BatchSpec {
+		BatchSpec bind(UnaryOperator<Params> paramsFunction);
+
+		// TODO Is there a better name?
+		GenericExecuteSpec and();
 	}
 
 }
