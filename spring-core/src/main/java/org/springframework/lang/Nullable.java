@@ -36,12 +36,13 @@ import javax.annotation.meta.TypeQualifierNickname;
  * overrides should repeat parent {@code @Nullable} annotations unless they behave
  * differently.
  *
- * <p>Can be used in association with {@code @NonNullApi} or {@code @NonNullFields} to
+ * <p>Can be used in association with {@code @NullMarked} or {@code @NonNullFields} to
  * override the default non-nullable semantic to nullable.
  *
  * @author Sebastien Deleuze
  * @author Juergen Hoeller
  * @since 5.0
+ * @deprecated since 7.0; use {@link org.jspecify.annotations.Nullable} instead
  * @see NonNullApi
  * @see NonNullFields
  * @see NonNull
@@ -51,5 +52,6 @@ import javax.annotation.meta.TypeQualifierNickname;
 @Documented
 @CheckForNull
 @TypeQualifierNickname
+@Deprecated
 public @interface Nullable {
 }
