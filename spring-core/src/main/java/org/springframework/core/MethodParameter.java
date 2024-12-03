@@ -18,6 +18,7 @@ package org.springframework.core;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
 import java.lang.reflect.Field;
@@ -421,6 +422,22 @@ public class MethodParameter {
 		for (Annotation ann : getParameterAnnotations()) {
 			if ("Nullable".equals(ann.annotationType().getSimpleName())) {
 				return true;
+			}
+		}
+		if (this.parameterIndex < 0) {
+			for (Annotation ann : this.executable.getAnnotatedReturnType().getAnnotations()) {
+				if ("Nullable".equals(ann.annotationType().getSimpleName())) {
+					return true;
+				}
+			}
+		}
+		else {
+			for (AnnotatedType annotatedType : this.executable.getAnnotatedParameterTypes()) {
+				for (Annotation ann : annotatedType.getAnnotations()) {
+					if ("Nullable".equals(ann.annotationType().getSimpleName())) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
