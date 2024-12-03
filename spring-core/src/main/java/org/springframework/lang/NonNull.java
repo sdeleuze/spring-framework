@@ -35,13 +35,14 @@ import javax.annotation.meta.TypeQualifierNickname;
  * overrides should repeat parent {@code @NonNull} annotations unless they behave
  * differently.
  *
- * <p>Use {@code @NonNullApi} (scope = parameters + return values) and/or {@code @NonNullFields}
+ * <p>Use {@code @NullMarked} (scope = parameters + return values) and/or {@code @NonNullFields}
  * (scope = fields) to set the default behavior to non-nullable in order to avoid annotating
  * your whole codebase with {@code @NonNull}.
  *
  * @author Sebastien Deleuze
  * @author Juergen Hoeller
  * @since 5.0
+ * @deprecated since 7.0; use {@link org.jspecify.annotations.NonNull} instead
  * @see NonNullApi
  * @see NonNullFields
  * @see Nullable
@@ -51,5 +52,6 @@ import javax.annotation.meta.TypeQualifierNickname;
 @Documented
 @Nonnull
 @TypeQualifierNickname
+@Deprecated
 public @interface NonNull {
 }
