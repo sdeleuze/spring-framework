@@ -19,7 +19,7 @@ package org.springframework.util;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Contract for matching routes to patterns.

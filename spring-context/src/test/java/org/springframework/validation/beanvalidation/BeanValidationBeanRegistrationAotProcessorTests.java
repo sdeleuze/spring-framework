@@ -32,6 +32,7 @@ import jakarta.validation.Payload;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.internal.constraintvalidators.bv.PatternValidator;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -45,7 +46,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RegisteredBean;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.core.OverridingClassLoader;
-import org.springframework.lang.Nullable;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;

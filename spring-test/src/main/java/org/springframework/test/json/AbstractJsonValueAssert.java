@@ -31,10 +31,10 @@ import org.assertj.core.api.InstanceOfAssertFactories;
 import org.assertj.core.api.ObjectArrayAssert;
 import org.assertj.core.error.BasicErrorMessageFactory;
 import org.assertj.core.internal.Failures;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.ResolvableType;
 import org.springframework.http.converter.GenericHttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.test.http.HttpMessageContentConverter;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

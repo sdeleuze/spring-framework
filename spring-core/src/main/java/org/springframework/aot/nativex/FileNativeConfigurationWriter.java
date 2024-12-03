@@ -23,7 +23,7 @@ import java.io.Writer;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A {@link NativeConfigurationWriter} implementation that writes the

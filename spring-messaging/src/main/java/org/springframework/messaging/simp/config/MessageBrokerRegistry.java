@@ -19,8 +19,9 @@ package org.springframework.messaging.simp.config;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.event.SmartApplicationListener;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler;
@@ -49,8 +50,7 @@ public class MessageBrokerRegistry {
 
 	private final ChannelRegistration brokerChannelRegistration = new ChannelRegistration();
 
-	@Nullable
-	private String[] applicationDestinationPrefixes;
+	private String @Nullable [] applicationDestinationPrefixes;
 
 	@Nullable
 	private String userDestinationPrefix;

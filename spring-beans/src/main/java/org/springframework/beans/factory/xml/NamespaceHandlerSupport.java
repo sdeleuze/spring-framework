@@ -19,13 +19,13 @@ package org.springframework.beans.factory.xml;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.lang.Nullable;
 
 /**
  * Support class for implementing custom {@link NamespaceHandler NamespaceHandlers}.

@@ -18,8 +18,7 @@ package org.springframework.web.servlet;
 
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by objects that define a mapping between

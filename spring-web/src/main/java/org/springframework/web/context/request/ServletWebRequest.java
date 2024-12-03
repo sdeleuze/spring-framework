@@ -29,12 +29,12 @@ import java.util.TimeZone;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.ETag;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -124,8 +124,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 	}
 
 	@Override
-	@Nullable
-	public String[] getHeaderValues(String headerName) {
+	public String @Nullable [] getHeaderValues(String headerName) {
 		String[] headerValues = StringUtils.toStringArray(getRequest().getHeaders(headerName));
 		return (!ObjectUtils.isEmpty(headerValues) ? headerValues : null);
 	}

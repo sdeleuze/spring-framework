@@ -21,7 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.IdTimestampMessageHeaderInitializer;
 import org.springframework.messaging.support.MessageHeaderAccessor;
@@ -310,8 +311,7 @@ public class SimpMessageHeaderAccessor extends NativeMessageHeaderAccessor {
 		return (Principal) headers.get(USER_HEADER);
 	}
 
-	@Nullable
-	public static long[] getHeartbeat(Map<String, Object> headers) {
+	public static long @Nullable [] getHeartbeat(Map<String, Object> headers) {
 		return (long[]) headers.get(HEART_BEAT_HEADER);
 	}
 

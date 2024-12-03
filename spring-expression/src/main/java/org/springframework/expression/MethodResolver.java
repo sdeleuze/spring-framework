@@ -18,8 +18,9 @@ package org.springframework.expression;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 
 /**
  * A method resolver attempts to locate a method and returns a

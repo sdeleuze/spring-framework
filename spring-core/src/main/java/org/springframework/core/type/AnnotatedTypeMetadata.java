@@ -25,6 +25,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.MergedAnnotation;
 import org.springframework.core.annotation.MergedAnnotation.Adapt;
@@ -32,7 +34,6 @@ import org.springframework.core.annotation.MergedAnnotationCollectors;
 import org.springframework.core.annotation.MergedAnnotationPredicates;
 import org.springframework.core.annotation.MergedAnnotationSelectors;
 import org.springframework.core.annotation.MergedAnnotations;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 
 /**

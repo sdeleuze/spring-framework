@@ -22,6 +22,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
@@ -30,7 +32,6 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
@@ -394,7 +395,7 @@ public class ServiceLocatorFactoryBean implements FactoryBean<Object>, BeanFacto
 		/**
 		 * Check whether a service id was passed in.
 		 */
-		private String tryGetBeanName(@Nullable Object[] args) {
+		private String tryGetBeanName(Object @Nullable [] args) {
 			String beanName = "";
 			if (args != null && args.length == 1 && args[0] != null) {
 				beanName = args[0].toString();

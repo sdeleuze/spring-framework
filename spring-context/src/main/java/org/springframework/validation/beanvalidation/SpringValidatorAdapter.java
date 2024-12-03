@@ -31,12 +31,12 @@ import jakarta.validation.ValidationException;
 import jakarta.validation.executable.ExecutableValidator;
 import jakarta.validation.metadata.BeanDescriptor;
 import jakarta.validation.metadata.ConstraintDescriptor;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -69,8 +69,7 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 	private static final Set<String> internalAnnotationAttributes = Set.of("message", "groups", "payload");
 
 
-	@Nullable
-	private jakarta.validation.Validator targetValidator;
+	private jakarta.validation.@Nullable Validator targetValidator;
 
 
 	/**
@@ -423,8 +422,7 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 		}
 
 		@Override
-		@Nullable
-		public Object[] getArguments() {
+		public Object @Nullable [] getArguments() {
 			return null;
 		}
 

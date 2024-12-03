@@ -16,11 +16,12 @@
 
 package org.springframework.web.reactive.result.method.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.http.HttpCookie;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.server.MissingRequestValueException;

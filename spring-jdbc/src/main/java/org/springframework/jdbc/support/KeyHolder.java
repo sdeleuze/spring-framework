@@ -19,8 +19,9 @@ package org.springframework.jdbc.support;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface for retrieving keys, typically used for auto-generated keys

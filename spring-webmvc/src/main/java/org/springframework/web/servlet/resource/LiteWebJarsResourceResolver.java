@@ -19,10 +19,10 @@ package org.springframework.web.servlet.resource;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 import org.webjars.WebJarVersionLocator;
 
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * A {@code ResourceResolver} that delegates to the chain to locate a resource and then

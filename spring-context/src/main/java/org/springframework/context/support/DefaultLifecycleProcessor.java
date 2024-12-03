@@ -37,6 +37,7 @@ import org.crac.CheckpointException;
 import org.crac.Core;
 import org.crac.RestoreException;
 import org.crac.management.CRaCMXBean;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -49,7 +50,6 @@ import org.springframework.context.Phased;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.core.NativeDetector;
 import org.springframework.core.SpringProperties;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

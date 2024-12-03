@@ -18,8 +18,9 @@ package org.springframework.messaging.handler.annotation;
 
 import java.util.function.Predicate;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 
 /**
  * Predicates for messaging annotations.

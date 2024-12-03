@@ -16,9 +16,10 @@
 
 package org.springframework.web.bind.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.BindingErrorProcessor;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
@@ -59,8 +60,7 @@ public class ConfigurableWebBindingInitializer implements WebBindingInitializer 
 	@Nullable
 	private ConversionService conversionService;
 
-	@Nullable
-	private PropertyEditorRegistrar[] propertyEditorRegistrars;
+	private PropertyEditorRegistrar @Nullable [] propertyEditorRegistrars;
 
 
 	/**
@@ -205,8 +205,7 @@ public class ConfigurableWebBindingInitializer implements WebBindingInitializer 
 	/**
 	 * Return the PropertyEditorRegistrars to be applied to every DataBinder.
 	 */
-	@Nullable
-	public final PropertyEditorRegistrar[] getPropertyEditorRegistrars() {
+	public final PropertyEditorRegistrar @Nullable [] getPropertyEditorRegistrars() {
 		return this.propertyEditorRegistrars;
 	}
 

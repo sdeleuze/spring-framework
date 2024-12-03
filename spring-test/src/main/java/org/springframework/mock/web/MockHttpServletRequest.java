@@ -62,10 +62,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpUpgradeHandler;
 import jakarta.servlet.http.MappingMatch;
 import jakarta.servlet.http.Part;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.util.LinkedMultiValueMap;
@@ -173,8 +173,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	@Nullable
 	private String characterEncoding;
 
-	@Nullable
-	private byte[] content;
+	private byte @Nullable [] content;
 
 	@Nullable
 	private String contentType;
@@ -229,8 +228,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	@Nullable
 	private String authType;
 
-	@Nullable
-	private Cookie[] cookies;
+	private Cookie @Nullable [] cookies;
 
 	private final Map<String, HeaderValueHolder> headers = new LinkedCaseInsensitiveMap<>();
 
@@ -429,7 +427,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	 * @see #getContentAsByteArray()
 	 * @see #getContentAsString()
 	 */
-	public void setContent(@Nullable byte[] content) {
+	public void setContent(byte @Nullable [] content) {
 		this.content = content;
 		this.inputStream = null;
 		this.reader = null;
@@ -442,8 +440,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	 * @see #setContent(byte[])
 	 * @see #getContentAsString()
 	 */
-	@Nullable
-	public byte[] getContentAsByteArray() {
+	public byte @Nullable [] getContentAsByteArray() {
 		return this.content;
 	}
 
@@ -641,8 +638,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	@Nullable
-	public String[] getParameterValues(String name) {
+	public String @Nullable [] getParameterValues(String name) {
 		Assert.notNull(name, "Parameter name must not be null");
 		return this.parameters.get(name);
 	}
@@ -1026,7 +1022,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 		return this.authType;
 	}
 
-	public void setCookies(@Nullable Cookie... cookies) {
+	public void setCookies(Cookie @Nullable ... cookies) {
 		this.cookies = (ObjectUtils.isEmpty(cookies) ? null : cookies);
 		if (this.cookies == null) {
 			removeHeader(HttpHeaders.COOKIE);
@@ -1043,8 +1039,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	@Nullable
-	public Cookie[] getCookies() {
+	public Cookie @Nullable [] getCookies() {
 		return this.cookies;
 	}
 

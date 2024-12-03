@@ -24,13 +24,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.interceptor.CacheEvictOperation;
 import org.springframework.cache.interceptor.CacheOperation;
 import org.springframework.cache.interceptor.CachePutOperation;
 import org.springframework.cache.interceptor.CacheableOperation;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
@@ -232,8 +233,7 @@ public class SpringCacheAnnotationParser implements CacheAnnotationParser, Seria
 
 		private final Class<?> target;
 
-		@Nullable
-		private String[] cacheNames;
+		private String @Nullable [] cacheNames;
 
 		@Nullable
 		private String keyGenerator;

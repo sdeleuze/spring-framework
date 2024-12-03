@@ -17,9 +17,9 @@
 package org.springframework.web.context;
 
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to provide configuration for a web application. This is read-only while

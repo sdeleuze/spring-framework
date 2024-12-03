@@ -25,8 +25,9 @@ import javax.cache.annotation.CacheInvocationParameter;
 import javax.cache.annotation.CacheKeyGenerator;
 import javax.cache.annotation.CacheKeyInvocationContext;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 

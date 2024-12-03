@@ -28,12 +28,12 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -73,8 +73,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 
 	private boolean returnGeneratedKeys = false;
 
-	@Nullable
-	private String[] generatedKeysColumnNames;
+	private String @Nullable [] generatedKeysColumnNames;
 
 	@Nullable
 	private String sql;
@@ -223,8 +222,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 	/**
 	 * Return the column names of the auto generated keys.
 	 */
-	@Nullable
-	public String[] getGeneratedKeysColumnNames() {
+	public String @Nullable [] getGeneratedKeysColumnNames() {
 		return this.generatedKeysColumnNames;
 	}
 
@@ -390,7 +388,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 	 * @param parameters the parameters supplied (may be {@code null})
 	 * @throws InvalidDataAccessApiUsageException if the parameters are invalid
 	 */
-	protected void validateParameters(@Nullable Object[] parameters) throws InvalidDataAccessApiUsageException {
+	protected void validateParameters(Object @Nullable [] parameters) throws InvalidDataAccessApiUsageException {
 		checkCompiled();
 		int declaredInParameters = 0;
 		for (SqlParameter param : this.declaredParameters) {

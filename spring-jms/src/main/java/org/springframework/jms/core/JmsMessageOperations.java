@@ -19,8 +19,8 @@ package org.springframework.jms.core;
 import java.util.Map;
 
 import jakarta.jms.Destination;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.MessagePostProcessor;

@@ -24,10 +24,10 @@ import java.util.function.Function;
 
 import jakarta.servlet.DispatcherType;
 import org.assertj.core.api.AssertProvider;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartHttpServletRequest;
 import org.springframework.test.http.HttpMessageContentConverter;

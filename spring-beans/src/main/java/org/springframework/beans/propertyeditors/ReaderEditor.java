@@ -19,10 +19,11 @@ package org.springframework.beans.propertyeditors;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceEditor;
 import org.springframework.core.io.support.EncodedResource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

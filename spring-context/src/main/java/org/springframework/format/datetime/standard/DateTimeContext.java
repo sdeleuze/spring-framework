@@ -21,10 +21,11 @@ import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
-import org.springframework.lang.Nullable;
 
 /**
  * A context that holds user-specific <code>java.time</code> (JSR-310) settings

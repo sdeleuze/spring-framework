@@ -18,7 +18,8 @@ package org.springframework.beans;
 
 import java.io.Serializable;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -196,6 +197,7 @@ public class PropertyValue extends BeanMetadataAttributeAccessor implements Seri
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO NullAway bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.name, this.value);
 	}

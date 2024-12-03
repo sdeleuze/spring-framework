@@ -20,9 +20,10 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link JdbcAccessor}-aligned subclass of the plain {@link DataSourceTransactionManager},

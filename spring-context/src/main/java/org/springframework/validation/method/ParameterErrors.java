@@ -18,8 +18,9 @@ package org.springframework.validation.method;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -92,7 +93,7 @@ public class ParameterErrors extends ParameterValidationResult implements Errors
 	}
 
 	@Override
-	public void reject(String errorCode, @Nullable Object[] errorArgs, @Nullable String defaultMessage) {
+	public void reject(String errorCode, Object @Nullable [] errorArgs, @Nullable String defaultMessage) {
 		this.errors.reject(errorCode, errorArgs, defaultMessage);
 	}
 
@@ -108,7 +109,7 @@ public class ParameterErrors extends ParameterValidationResult implements Errors
 
 	@Override
 	public void rejectValue(@Nullable String field, String errorCode,
-			@Nullable Object[] errorArgs, @Nullable String defaultMessage) {
+			Object @Nullable [] errorArgs, @Nullable String defaultMessage) {
 
 		this.errors.rejectValue(field, errorCode, errorArgs, defaultMessage);
 	}

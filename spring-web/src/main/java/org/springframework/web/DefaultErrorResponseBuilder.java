@@ -19,10 +19,11 @@ package org.springframework.web;
 import java.net.URI;
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 
@@ -49,8 +50,7 @@ final class DefaultErrorResponseBuilder implements ErrorResponse.Builder {
 
 	private String detailMessageCode;
 
-	@Nullable
-	private Object[] detailMessageArguments;
+	private Object @Nullable [] detailMessageArguments;
 
 
 	DefaultErrorResponseBuilder(Throwable ex, ProblemDetail problemDetail) {
@@ -169,13 +169,12 @@ final class DefaultErrorResponseBuilder implements ErrorResponse.Builder {
 
 		private final String detailMessageCode;
 
-		@Nullable
-		private final Object[] detailMessageArguments;
+		private final Object @Nullable [] detailMessageArguments;
 
 		SimpleErrorResponse(
 				Throwable ex, HttpStatusCode statusCode, @Nullable HttpHeaders headers, ProblemDetail problemDetail,
 				String typeMessageCode, String titleMessageCode, String detailMessageCode,
-				@Nullable Object[] detailMessageArguments) {
+				Object @Nullable [] detailMessageArguments) {
 
 			this.exception = ex;
 			this.statusCode = statusCode;
@@ -218,8 +217,7 @@ final class DefaultErrorResponseBuilder implements ErrorResponse.Builder {
 		}
 
 		@Override
-		@Nullable
-		public Object[] getDetailMessageArguments() {
+		public Object @Nullable [] getDetailMessageArguments() {
 			return this.detailMessageArguments;
 		}
 

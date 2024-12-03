@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
 import reactor.netty5.http.HttpResources;
 import reactor.netty5.resources.ConnectionProvider;
 import reactor.netty5.resources.LoopResources;
@@ -27,7 +28,6 @@ import reactor.netty5.resources.LoopResources;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.http.client.ReactorResourceFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

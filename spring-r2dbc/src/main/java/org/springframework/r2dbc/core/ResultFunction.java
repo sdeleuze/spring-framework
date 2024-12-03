@@ -22,9 +22,9 @@ import java.util.function.Supplier;
 import io.r2dbc.spi.Connection;
 import io.r2dbc.spi.Result;
 import io.r2dbc.spi.Statement;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Flux;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 

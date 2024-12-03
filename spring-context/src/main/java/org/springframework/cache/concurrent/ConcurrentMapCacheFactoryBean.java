@@ -18,10 +18,11 @@ package org.springframework.cache.concurrent;
 
 import java.util.concurrent.ConcurrentMap;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**

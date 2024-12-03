@@ -17,11 +17,11 @@
 package org.springframework.transaction.interceptor;
 
 import org.aopalliance.aop.Advice;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.ClassFilter;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

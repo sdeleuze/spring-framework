@@ -16,7 +16,8 @@
 
 package org.springframework.core.convert;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ObjectUtils;
 
 /**

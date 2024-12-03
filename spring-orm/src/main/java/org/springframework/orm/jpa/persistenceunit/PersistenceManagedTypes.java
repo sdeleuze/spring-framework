@@ -20,8 +20,8 @@ import java.net.URL;
 import java.util.List;
 
 import jakarta.persistence.spi.PersistenceUnitInfo;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

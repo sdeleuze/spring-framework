@@ -33,6 +33,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -44,7 +45,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.servlet.ModelAndView;
@@ -335,7 +335,7 @@ public interface ServerResponse {
 		 * @return this builder
 		 * @see HttpHeaders#add(String, String)
 		 */
-		B header(String headerName, String... headerValues);
+		B header(String headerName, @Nullable String... headerValues);
 
 		/**
 		 * Manipulate this response's headers with the given consumer. The

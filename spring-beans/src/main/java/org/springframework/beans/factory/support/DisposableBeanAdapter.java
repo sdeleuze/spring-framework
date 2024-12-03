@@ -27,6 +27,7 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -35,7 +36,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 import org.springframework.core.ReactiveAdapter;
 import org.springframework.core.ReactiveAdapterRegistry;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -89,11 +89,9 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 
 	private boolean invokeAutoCloseable;
 
-	@Nullable
-	private String[] destroyMethodNames;
+	private String @Nullable [] destroyMethodNames;
 
-	@Nullable
-	private transient Method[] destroyMethods;
+	private transient Method @Nullable [] destroyMethods;
 
 	@Nullable
 	private final List<DestructionAwareBeanPostProcessor> beanPostProcessors;
@@ -177,7 +175,7 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	 * Create a new DisposableBeanAdapter for the given bean.
 	 */
 	private DisposableBeanAdapter(Object bean, String beanName, boolean nonPublicAccessAllowed,
-			boolean invokeDisposableBean, boolean invokeAutoCloseable, @Nullable String[] destroyMethodNames,
+			boolean invokeDisposableBean, boolean invokeAutoCloseable, String @Nullable [] destroyMethodNames,
 			@Nullable List<DestructionAwareBeanPostProcessor> postProcessors) {
 
 		this.bean = bean;
@@ -408,8 +406,7 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	 * <p>Also processes the {@link java.io.Closeable} and {@link java.lang.AutoCloseable}
 	 * interfaces, reflectively calling the "close" method on implementing beans as well.
 	 */
-	@Nullable
-	static String[] inferDestroyMethodsIfNecessary(Class<?> target, RootBeanDefinition beanDefinition) {
+	static String @Nullable [] inferDestroyMethodsIfNecessary(Class<?> target, RootBeanDefinition beanDefinition) {
 		String[] destroyMethodNames = beanDefinition.getDestroyMethodNames();
 		if (destroyMethodNames != null && destroyMethodNames.length > 1) {
 			return destroyMethodNames;

@@ -19,8 +19,9 @@ package org.springframework.cache.interceptor;
 import java.util.Collection;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.CacheManager;
-import org.springframework.lang.Nullable;
 
 /**
  * A {@link CacheResolver} that forces the resolution to a configurable

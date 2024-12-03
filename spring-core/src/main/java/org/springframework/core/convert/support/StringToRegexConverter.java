@@ -17,9 +17,9 @@
 package org.springframework.core.convert.support;
 
 import kotlin.text.Regex;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 
 /**
  * Converts from a String to a Kotlin {@link Regex}.

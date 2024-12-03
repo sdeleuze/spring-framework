@@ -22,9 +22,9 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.PageContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.PropertyAccessor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.support.BindStatus;
 import org.springframework.web.servlet.support.RequestDataValueProcessor;

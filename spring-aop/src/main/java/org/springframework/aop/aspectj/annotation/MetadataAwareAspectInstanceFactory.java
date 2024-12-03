@@ -16,8 +16,9 @@
 
 package org.springframework.aop.aspectj.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.aspectj.AspectInstanceFactory;
-import org.springframework.lang.Nullable;
 
 /**
  * Subinterface of {@link org.springframework.aop.aspectj.AspectInstanceFactory}

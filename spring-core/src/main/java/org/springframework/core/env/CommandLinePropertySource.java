@@ -19,7 +19,8 @@ package org.springframework.core.env;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.StringUtils;
 
 /**

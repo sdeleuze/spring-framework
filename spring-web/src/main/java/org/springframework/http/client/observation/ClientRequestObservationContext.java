@@ -17,10 +17,10 @@
 package org.springframework.http.client.observation;
 
 import io.micrometer.observation.transport.RequestReplySenderContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.lang.Nullable;
 
 /**
  * Context that holds information for metadata collection during the

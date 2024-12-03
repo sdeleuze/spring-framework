@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
@@ -47,7 +48,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.WebApplicationContext;
@@ -357,12 +357,12 @@ class StubWebApplicationContext implements WebApplicationContext {
 
 	@Override
 	@Nullable
-	public String getMessage(String code, @Nullable Object[] args, @Nullable String defaultMessage, Locale locale) {
+	public String getMessage(String code, Object @Nullable [] args, @Nullable String defaultMessage, Locale locale) {
 		return this.messageSource.getMessage(code, args, defaultMessage, locale);
 	}
 
 	@Override
-	public String getMessage(String code, @Nullable Object[] args, Locale locale) throws NoSuchMessageException {
+	public String getMessage(String code, Object @Nullable [] args, Locale locale) throws NoSuchMessageException {
 		return this.messageSource.getMessage(code, args, locale);
 	}
 

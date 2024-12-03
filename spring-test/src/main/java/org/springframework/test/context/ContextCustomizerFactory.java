@@ -18,7 +18,7 @@ package org.springframework.test.context;
 
 import java.util.List;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Factory for creating {@link ContextCustomizer ContextCustomizers}.

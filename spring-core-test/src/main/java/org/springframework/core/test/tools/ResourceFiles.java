@@ -19,7 +19,7 @@ package org.springframework.core.test.tools;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An immutable collection of {@link ResourceFile} instances.

@@ -19,9 +19,10 @@ package org.springframework.core.io;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.env.PropertyResolver;
 import org.springframework.core.env.StandardEnvironment;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 

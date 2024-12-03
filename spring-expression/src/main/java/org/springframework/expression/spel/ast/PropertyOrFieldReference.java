@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.asm.Label;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.convert.TypeDescriptor;
@@ -37,7 +39,6 @@ import org.springframework.expression.spel.ExpressionState;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelMessage;
 import org.springframework.expression.spel.support.ReflectivePropertyAccessor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
@@ -178,6 +179,7 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
 	 * @return the value of the property
 	 * @throws EvaluationException if any problem accessing the property, or if it cannot be found
 	 */
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private TypedValue readProperty(TypedValue contextObject, EvaluationContext evalContext, String name)
 			throws EvaluationException {
 
@@ -230,6 +232,7 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
 		}
 	}
 
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private void writeProperty(
 			TypedValue contextObject, EvaluationContext evalContext, String name, @Nullable Object newValue)
 			throws EvaluationException {

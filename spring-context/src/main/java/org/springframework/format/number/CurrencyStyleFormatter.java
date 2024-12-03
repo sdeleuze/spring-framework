@@ -24,7 +24,7 @@ import java.text.ParseException;
 import java.util.Currency;
 import java.util.Locale;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A BigDecimal formatter for number values in currency style.

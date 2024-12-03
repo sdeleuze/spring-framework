@@ -16,10 +16,11 @@
 
 package org.springframework.expression.spel;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.asm.MethodVisitor;
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.TypedValue;
-import org.springframework.lang.Nullable;
 
 /**
  * Represents a node in the abstract syntax tree (AST) for a parsed Spring

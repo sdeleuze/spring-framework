@@ -25,8 +25,7 @@ import jakarta.jms.Queue;
 import jakarta.jms.QueueSender;
 import jakarta.jms.Topic;
 import jakarta.jms.TopicPublisher;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * JMS MessageProducer decorator that adapts calls to a shared MessageProducer

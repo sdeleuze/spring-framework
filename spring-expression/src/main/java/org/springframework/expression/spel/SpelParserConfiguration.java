@@ -18,8 +18,9 @@ package org.springframework.expression.spel;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.SpringProperties;
-import org.springframework.lang.Nullable;
 
 /**
  * Configuration object for the SpEL expression parser.

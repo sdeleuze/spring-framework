@@ -17,11 +17,11 @@
 package org.springframework.aop.aspectj;
 
 import org.aopalliance.aop.Advice;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.AfterAdvice;
 import org.springframework.aop.BeforeAdvice;
-import org.springframework.lang.Nullable;
 
 /**
  * Utility methods for dealing with AspectJ advisors.

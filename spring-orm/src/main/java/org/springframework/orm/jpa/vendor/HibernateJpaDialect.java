@@ -47,6 +47,7 @@ import org.hibernate.exception.DataException;
 import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.exception.LockAcquisitionException;
 import org.hibernate.exception.SQLGrammarException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.DataAccessException;
@@ -61,7 +62,6 @@ import org.springframework.jdbc.datasource.ConnectionHandle;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.support.SQLExceptionSubclassTranslator;
 import org.springframework.jdbc.support.SQLExceptionTranslator;
-import org.springframework.lang.Nullable;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.jpa.DefaultJpaDialect;

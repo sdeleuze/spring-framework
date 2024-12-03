@@ -36,6 +36,7 @@ class ResponseEntityKotlinTests {
 	}
 
 	@Test
+	@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 	fun ofNullNullable() {
 		val responseEntity = ResponseEntity.ofNullable<Int>(null)
 		assertThat(responseEntity).isNotNull()

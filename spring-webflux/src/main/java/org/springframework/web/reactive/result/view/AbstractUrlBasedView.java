@@ -18,10 +18,10 @@ package org.springframework.web.reactive.result.view;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * Abstract base class for URL-based views. Provides a consistent way of

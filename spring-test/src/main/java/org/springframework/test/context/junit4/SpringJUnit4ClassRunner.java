@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
@@ -35,7 +36,6 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import org.springframework.lang.Nullable;
 import org.springframework.test.annotation.ProfileValueUtils;
 import org.springframework.test.annotation.TestAnnotationUtils;
 import org.springframework.test.context.TestContextManager;

@@ -36,8 +36,9 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.lang.Contract;
-import org.springframework.lang.Nullable;
 
 /**
  * Miscellaneous {@link String} utility methods.
@@ -990,7 +991,7 @@ public abstract class StringUtils {
 	 * @param str the {@code String} to append
 	 * @return the new array (never {@code null})
 	 */
-	public static String[] addStringToArray(@Nullable String[] array, String str) {
+	public static String[] addStringToArray(String @Nullable [] array, String str) {
 		if (ObjectUtils.isEmpty(array)) {
 			return new String[] {str};
 		}
@@ -1009,8 +1010,7 @@ public abstract class StringUtils {
 	 * @param array2 the second array (can be {@code null})
 	 * @return the new array ({@code null} if both given arrays were {@code null})
 	 */
-	@Nullable
-	public static String[] concatenateStringArrays(@Nullable String[] array1, @Nullable String[] array2) {
+	public static String @Nullable [] concatenateStringArrays(String @Nullable [] array1, String @Nullable [] array2) {
 		if (ObjectUtils.isEmpty(array1)) {
 			return array2;
 		}
@@ -1081,8 +1081,7 @@ public abstract class StringUtils {
 	 * index 1 being after the delimiter (neither element includes the delimiter);
 	 * or {@code null} if the delimiter wasn't found in the given input {@code String}
 	 */
-	@Nullable
-	public static String[] split(@Nullable String toSplit, @Nullable String delimiter) {
+	public static String @Nullable [] split(@Nullable String toSplit, @Nullable String delimiter) {
 		if (!hasLength(toSplit) || !hasLength(delimiter)) {
 			return null;
 		}
@@ -1353,7 +1352,7 @@ public abstract class StringUtils {
 	 * @param delim the delimiter to use (typically a ",")
 	 * @return the delimited {@code String}
 	 */
-	public static String arrayToDelimitedString(@Nullable Object[] arr, String delim) {
+	public static String arrayToDelimitedString(Object @Nullable [] arr, String delim) {
 		if (ObjectUtils.isEmpty(arr)) {
 			return "";
 		}
@@ -1375,7 +1374,7 @@ public abstract class StringUtils {
 	 * @param arr the array to display (potentially {@code null} or empty)
 	 * @return the delimited {@code String}
 	 */
-	public static String arrayToCommaDelimitedString(@Nullable Object[] arr) {
+	public static String arrayToCommaDelimitedString(Object @Nullable [] arr) {
 		return arrayToDelimitedString(arr, ",");
 	}
 

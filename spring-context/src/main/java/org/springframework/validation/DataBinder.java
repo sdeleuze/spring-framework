@@ -37,6 +37,7 @@ import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
@@ -60,7 +61,6 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.format.Formatter;
 import org.springframework.format.support.FormatterPropertyEditorAdapter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.PatternMatchUtils;
@@ -168,14 +168,11 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 
 	private int autoGrowCollectionLimit = DEFAULT_AUTO_GROW_COLLECTION_LIMIT;
 
-	@Nullable
-	private String[] allowedFields;
+	private String @Nullable [] allowedFields;
 
-	@Nullable
-	private String[] disallowedFields;
+	private String @Nullable [] disallowedFields;
 
-	@Nullable
-	private String[] requiredFields;
+	private String @Nullable [] requiredFields;
 
 	@Nullable
 	private NameResolver nameResolver;
@@ -535,8 +532,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @return array of allowed field patterns
 	 * @see #setAllowedFields(String...)
 	 */
-	@Nullable
-	public String[] getAllowedFields() {
+	public String @Nullable [] getAllowedFields() {
 		return this.allowedFields;
 	}
 
@@ -564,7 +560,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @see #setAllowedFields
 	 * @see #isAllowed(String)
 	 */
-	public void setDisallowedFields(@Nullable String... disallowedFields) {
+	public void setDisallowedFields(String @Nullable... disallowedFields) {
 		if (disallowedFields == null) {
 			this.disallowedFields = null;
 		}
@@ -583,8 +579,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @return array of disallowed field patterns
 	 * @see #setDisallowedFields(String...)
 	 */
-	@Nullable
-	public String[] getDisallowedFields() {
+	public String @Nullable [] getDisallowedFields() {
 		return this.disallowedFields;
 	}
 
@@ -601,7 +596,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @see #setBindingErrorProcessor
 	 * @see DefaultBindingErrorProcessor#MISSING_FIELD_ERROR_CODE
 	 */
-	public void setRequiredFields(@Nullable String... requiredFields) {
+	public void setRequiredFields(String @Nullable ... requiredFields) {
 		this.requiredFields = PropertyAccessorUtils.canonicalPropertyNames(requiredFields);
 		if (logger.isDebugEnabled()) {
 			logger.debug("DataBinder requires binding of required fields [" +
@@ -613,8 +608,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * Return the fields that are required for each binding process.
 	 * @return array of field names
 	 */
-	@Nullable
-	public String[] getRequiredFields() {
+	public String @Nullable [] getRequiredFields() {
 		return this.requiredFields;
 	}
 
@@ -1094,8 +1088,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Nullable
-	private <V> V[] createArray(String paramPath, ResolvableType type, ValueResolver valueResolver) {
+	private <V> V @Nullable [] createArray(String paramPath, ResolvableType type, ValueResolver valueResolver) {
 		ResolvableType elementType = type.getNested(2);
 		SortedSet<Integer> indexes = getIndexes(paramPath, valueResolver);
 		if (indexes == null) {

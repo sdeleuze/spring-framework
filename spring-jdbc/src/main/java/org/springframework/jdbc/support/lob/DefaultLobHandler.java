@@ -30,8 +30,7 @@ import java.sql.SQLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Default implementation of the {@link LobHandler} interface.
@@ -226,7 +225,7 @@ public class DefaultLobHandler extends AbstractLobHandler {
 	protected class DefaultLobCreator implements LobCreator {
 
 		@Override
-		public void setBlobAsBytes(PreparedStatement ps, int paramIndex, @Nullable byte[] content)
+		public void setBlobAsBytes(PreparedStatement ps, int paramIndex, byte @Nullable [] content)
 				throws SQLException {
 
 			if (streamAsLob) {

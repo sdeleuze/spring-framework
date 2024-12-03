@@ -19,7 +19,8 @@ package org.springframework.cache.interceptor;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.CollectionUtils;
 
 /**

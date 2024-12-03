@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -31,7 +33,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
-import org.springframework.lang.Nullable;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.View;
 
@@ -77,8 +78,7 @@ public class ResourceBundleViewResolver extends AbstractCachingViewResolver
 	@Nullable
 	private String defaultParentView;
 
-	@Nullable
-	private Locale[] localesToInitialize;
+	private Locale @Nullable [] localesToInitialize;
 
 	private int order = Ordered.LOWEST_PRECEDENCE;  // default: same as non-Ordered
 

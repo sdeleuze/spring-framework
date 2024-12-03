@@ -16,9 +16,10 @@
 
 package org.springframework.scheduling.annotation;
 
+import org.jspecify.annotations.NonNull;
+
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.AdviceModeImportSelector;
-import org.springframework.lang.NonNull;
 
 /**
  * Selects which implementation of {@link AbstractAsyncConfiguration} should

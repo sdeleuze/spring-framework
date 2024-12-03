@@ -24,8 +24,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.jstl.core.Config;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * JSP-aware (and JSTL-aware) subclass of RequestContext, allowing for

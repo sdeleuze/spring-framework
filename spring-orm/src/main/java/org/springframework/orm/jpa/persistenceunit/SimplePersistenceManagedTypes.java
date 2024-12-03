@@ -19,7 +19,7 @@ package org.springframework.orm.jpa.persistenceunit;
 import java.net.URL;
 import java.util.List;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A simple {@link PersistenceManagedTypes} implementation that holds the list

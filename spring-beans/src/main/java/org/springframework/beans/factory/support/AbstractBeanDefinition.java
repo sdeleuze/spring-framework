@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataAttributeAccessor;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -32,7 +34,6 @@ import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.io.DescriptiveResource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -182,8 +183,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
 
-	@Nullable
-	private String[] dependsOn;
+	private String @Nullable [] dependsOn;
 
 	private boolean autowireCandidate = true;
 
@@ -216,11 +216,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private MethodOverrides methodOverrides = new MethodOverrides();
 
-	@Nullable
-	private String[] initMethodNames;
+	private String @Nullable [] initMethodNames;
 
-	@Nullable
-	private String[] destroyMethodNames;
+	private String @Nullable [] destroyMethodNames;
 
 	private boolean enforceInitMethod = true;
 
@@ -710,7 +708,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * <p>The default is no beans to explicitly depend on.
 	 */
 	@Override
-	public void setDependsOn(@Nullable String... dependsOn) {
+	public void setDependsOn(String @Nullable ... dependsOn) {
 		this.dependsOn = dependsOn;
 	}
 
@@ -719,8 +717,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * <p>The default is no beans to explicitly depend on.
 	 */
 	@Override
-	@Nullable
-	public String[] getDependsOn() {
+	public String @Nullable [] getDependsOn() {
 		return this.dependsOn;
 	}
 
@@ -1038,7 +1035,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * @since 6.0
 	 * @see #setInitMethodName
 	 */
-	public void setInitMethodNames(@Nullable String... initMethodNames) {
+	public void setInitMethodNames(String @Nullable ... initMethodNames) {
 		this.initMethodNames = initMethodNames;
 	}
 
@@ -1046,8 +1043,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * Return the names of the initializer methods.
 	 * @since 6.0
 	 */
-	@Nullable
-	public String[] getInitMethodNames() {
+	public String @Nullable [] getInitMethodNames() {
 		return this.initMethodNames;
 	}
 
@@ -1098,7 +1094,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * @since 6.0
 	 * @see #setDestroyMethodName
 	 */
-	public void setDestroyMethodNames(@Nullable String... destroyMethodNames) {
+	public void setDestroyMethodNames(String @Nullable ... destroyMethodNames) {
 		this.destroyMethodNames = destroyMethodNames;
 	}
 
@@ -1106,8 +1102,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * Return the names of the destroy methods.
 	 * @since 6.0
 	 */
-	@Nullable
-	public String[] getDestroyMethodNames() {
+	public String @Nullable [] getDestroyMethodNames() {
 		return this.destroyMethodNames;
 	}
 

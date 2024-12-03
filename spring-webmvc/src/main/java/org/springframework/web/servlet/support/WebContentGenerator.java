@@ -27,11 +27,11 @@ import java.util.concurrent.TimeUnit;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -86,8 +86,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 
 	private int cacheSeconds = -1;
 
-	@Nullable
-	private String[] varyByRequestHeaders;
+	private String @Nullable [] varyByRequestHeaders;
 
 
 	/**
@@ -128,7 +127,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * <p>Default is GET, HEAD and POST for simple form controller types;
 	 * unrestricted for general controllers and interceptors.
 	 */
-	public final void setSupportedMethods(@Nullable String... methods) {
+	public final void setSupportedMethods(String @Nullable ... methods) {
 		if (!ObjectUtils.isEmpty(methods)) {
 			this.supportedMethods = new LinkedHashSet<>(Arrays.asList(methods));
 		}
@@ -141,8 +140,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	/**
 	 * Return the HTTP methods that this content generator supports.
 	 */
-	@Nullable
-	public final String[] getSupportedMethods() {
+	public final String @Nullable [] getSupportedMethods() {
 		return (this.supportedMethods != null ? StringUtils.toStringArray(this.supportedMethods) : null);
 	}
 
@@ -254,8 +252,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * Return the configured request header names for the "Vary" response header.
 	 * @since 4.3
 	 */
-	@Nullable
-	public final String[] getVaryByRequestHeaders() {
+	public final String @Nullable [] getVaryByRequestHeaders() {
 		return this.varyByRequestHeaders;
 	}
 

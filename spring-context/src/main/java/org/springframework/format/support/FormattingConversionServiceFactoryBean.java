@@ -18,6 +18,8 @@ package org.springframework.format.support;
 
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EmbeddedValueResolverAware;
@@ -28,7 +30,6 @@ import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.Parser;
 import org.springframework.format.Printer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
 /**

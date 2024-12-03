@@ -17,8 +17,7 @@
 package org.springframework.http.converter.json;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A simple holder for the POJO to serialize via

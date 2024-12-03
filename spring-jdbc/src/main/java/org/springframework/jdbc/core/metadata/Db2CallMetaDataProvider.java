@@ -20,7 +20,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.Locale;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * DB2 specific implementation for the {@link CallMetaDataProvider} interface.

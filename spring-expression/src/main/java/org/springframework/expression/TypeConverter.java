@@ -16,8 +16,9 @@
 
 package org.springframework.expression;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 
 /**
  * A type converter can convert values between different types encountered during

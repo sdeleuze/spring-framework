@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
@@ -35,7 +36,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.util.PropertyPlaceholderHelper;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
@@ -214,7 +214,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * Add interceptors mapped to a set of path patterns.
 	 */
 	public StandaloneMockMvcBuilder addMappedInterceptors(
-			@Nullable String[] pathPatterns, HandlerInterceptor... interceptors) {
+			String @Nullable [] pathPatterns, HandlerInterceptor... interceptors) {
 
 		for (HandlerInterceptor interceptor : interceptors) {
 			this.mappedInterceptors.add(new MappedInterceptor(pathPatterns, null, interceptor));

@@ -20,8 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A holder for a {@link RequestCondition} useful when the type of the request

@@ -31,6 +31,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.concurrent.ImmediateEventExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
@@ -45,7 +46,6 @@ import reactor.netty.resources.LoopResources;
 import reactor.netty.tcp.TcpClient;
 import reactor.util.retry.Retry;
 
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.tcp.ReconnectStrategy;
 import org.springframework.messaging.tcp.TcpConnection;

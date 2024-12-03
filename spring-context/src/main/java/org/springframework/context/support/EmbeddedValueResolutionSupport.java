@@ -16,8 +16,9 @@
 
 package org.springframework.context.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.EmbeddedValueResolverAware;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
 /**

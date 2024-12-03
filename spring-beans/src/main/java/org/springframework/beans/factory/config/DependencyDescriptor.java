@@ -26,6 +26,7 @@ import java.util.Optional;
 
 import kotlin.reflect.KProperty;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -36,7 +37,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -55,8 +55,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	@Nullable
 	private String methodName;
 
-	@Nullable
-	private Class<?>[] parameterTypes;
+	private Class<?> @Nullable [] parameterTypes;
 
 	private int parameterIndex;
 

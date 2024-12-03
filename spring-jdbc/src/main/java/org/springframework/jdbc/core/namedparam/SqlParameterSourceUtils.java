@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.core.SqlParameterValue;
-import org.springframework.lang.Nullable;
 
 /**
  * Class that provides helper methods for the use of {@link SqlParameterSource},

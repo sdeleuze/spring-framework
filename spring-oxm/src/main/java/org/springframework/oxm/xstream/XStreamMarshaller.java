@@ -66,6 +66,7 @@ import com.thoughtworks.xstream.mapper.Mapper;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 import com.thoughtworks.xstream.security.ForbiddenClassException;
 import com.thoughtworks.xstream.security.TypePermission;
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -76,7 +77,6 @@ import org.xml.sax.ext.LexicalHandler;
 
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.oxm.MarshallingFailureException;
 import org.springframework.oxm.UncategorizedMappingException;
 import org.springframework.oxm.UnmarshallingFailureException;
@@ -142,18 +142,15 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 	@Nullable
 	private Mapper mapper;
 
-	@Nullable
-	private Class<? extends MapperWrapper>[] mapperWrappers;
+	private Class<? extends MapperWrapper> @Nullable [] mapperWrappers;
 
 	private ConverterLookup converterLookup = new DefaultConverterLookup();
 
 	private ConverterRegistry converterRegistry = (ConverterRegistry) this.converterLookup;
 
-	@Nullable
-	private ConverterMatcher[] converters;
+	private ConverterMatcher @Nullable [] converters;
 
-	@Nullable
-	private TypePermission[] typePermissions;
+	private TypePermission @Nullable [] typePermissions;
 
 	@Nullable
 	private MarshallingStrategy marshallingStrategy;
@@ -170,8 +167,7 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 	@Nullable
 	private Map<String, String> fieldAliases;
 
-	@Nullable
-	private Class<?>[] useAttributeForTypes;
+	private Class<?> @Nullable [] useAttributeForTypes;
 
 	@Nullable
 	private Map<?, ?> useAttributeFor;
@@ -182,8 +178,7 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 	@Nullable
 	private Map<Class<?>, String> omittedFields;
 
-	@Nullable
-	private Class<?>[] annotatedClasses;
+	private Class<?> @Nullable [] annotatedClasses;
 
 	private boolean autodetectAnnotations;
 
@@ -191,8 +186,7 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 
 	private NameCoder nameCoder = new XmlFriendlyNameCoder();
 
-	@Nullable
-	private Class<?>[] supportedClasses;
+	private Class<?> @Nullable [] supportedClasses;
 
 	@Nullable
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();

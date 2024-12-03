@@ -20,9 +20,10 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 
+import org.jspecify.annotations.NonNull;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.SpringProperties;
-import org.springframework.lang.NonNull;
 
 /**
  * {@link BeanInfoFactory} implementation that performs standard

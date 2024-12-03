@@ -19,10 +19,11 @@ package org.springframework.cache.interceptor;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.ClassFilter;
 import org.springframework.aop.support.StaticMethodMatcherPointcut;
 import org.springframework.cache.CacheManager;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**

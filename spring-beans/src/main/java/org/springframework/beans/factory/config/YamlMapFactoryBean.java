@@ -19,9 +19,10 @@ package org.springframework.beans.factory.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * Factory for a {@code Map} that reads from a YAML source, preserving the

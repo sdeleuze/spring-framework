@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.BeanNameAware;
@@ -41,7 +42,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.MethodIntrospector;
 import org.springframework.core.ReactiveAdapterRegistry;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.ReactiveMessageHandler;
@@ -502,8 +502,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	 * Extract the destination from the given message.
 	 * @see #getDirectLookupMappings(Object)
 	 */
-	@Nullable
-	protected abstract RouteMatcher.Route getDestination(Message<?> message);
+	protected abstract RouteMatcher.@Nullable Route getDestination(Message<?> message);
 
 	@SuppressWarnings("NullAway")
 	private void addMatchesToCollection(
@@ -540,7 +539,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	 * @param destination the destination
 	 * @param message the message
 	 */
-	protected void handleNoMatch(@Nullable RouteMatcher.Route destination, Message<?> message) {
+	protected void handleNoMatch(RouteMatcher.@Nullable Route destination, Message<?> message) {
 		logger.debug("No handlers for destination '" +
 				(destination != null ? destination.value() : "") + "'");
 	}

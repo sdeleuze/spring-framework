@@ -26,9 +26,9 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 import io.r2dbc.spi.Statement;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 

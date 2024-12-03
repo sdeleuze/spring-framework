@@ -19,6 +19,8 @@ package org.springframework.beans.factory.config;
 import java.beans.PropertyEditor;
 import java.util.concurrent.Executor;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.TypeConverter;
@@ -28,7 +30,6 @@ import org.springframework.beans.factory.HierarchicalBeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.metrics.ApplicationStartup;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
 /**

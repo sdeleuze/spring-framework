@@ -18,7 +18,8 @@ package org.springframework.web.servlet.i18n;
 
 import java.util.TimeZone;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.web.servlet.LocaleContextResolver;
 
 /**

@@ -16,9 +16,10 @@
 
 package org.springframework.cache.jcache.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.interceptor.CacheResolver;
-import org.springframework.lang.Nullable;
 
 /**
  * An extension of {@link CachingConfigurerSupport} that also implements

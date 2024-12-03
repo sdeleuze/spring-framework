@@ -26,7 +26,8 @@ import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 import javax.management.ObjectName;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -141,8 +142,7 @@ public class NotificationListenerHolder {
 	 * be registered as a listener for {@link javax.management.Notification Notifications}.
 	 * @throws MalformedObjectNameException if an {@code ObjectName} is malformed
 	 */
-	@Nullable
-	public ObjectName[] getResolvedObjectNames() throws MalformedObjectNameException {
+	public ObjectName @Nullable [] getResolvedObjectNames() throws MalformedObjectNameException {
 		if (this.mappedObjectNames == null) {
 			return null;
 		}
@@ -166,6 +166,7 @@ public class NotificationListenerHolder {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.notificationListener, this.notificationFilter,
 				this.handback, this.mappedObjectNames);

@@ -22,7 +22,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.concurrent.ScheduledFuture;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Task scheduler interface that abstracts the scheduling of

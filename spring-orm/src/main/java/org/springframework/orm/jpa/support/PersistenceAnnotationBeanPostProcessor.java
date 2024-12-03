@@ -38,6 +38,7 @@ import jakarta.persistence.PersistenceContextType;
 import jakarta.persistence.PersistenceProperty;
 import jakarta.persistence.PersistenceUnit;
 import jakarta.persistence.SynchronizationType;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aot.generate.GeneratedClass;
 import org.springframework.aot.generate.GeneratedMethod;
@@ -73,7 +74,6 @@ import org.springframework.javapoet.CodeBlock;
 import org.springframework.javapoet.MethodSpec;
 import org.springframework.jndi.JndiLocatorDelegate;
 import org.springframework.jndi.JndiTemplate;
-import org.springframework.lang.Nullable;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.orm.jpa.EntityManagerProxy;

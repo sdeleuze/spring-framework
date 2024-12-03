@@ -21,8 +21,9 @@ import java.sql.Driver;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

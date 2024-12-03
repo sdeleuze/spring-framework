@@ -16,7 +16,8 @@
 
 package org.springframework.validation;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -65,7 +66,7 @@ public class FieldError extends ObjectError {
 	 * @param defaultMessage the default message to be used to resolve this message
 	 */
 	public FieldError(String objectName, String field, @Nullable Object rejectedValue, boolean bindingFailure,
-			@Nullable String[] codes, @Nullable Object[] arguments, @Nullable String defaultMessage) {
+			String @Nullable [] codes, Object @Nullable [] arguments, @Nullable String defaultMessage) {
 
 		super(objectName, codes, arguments, defaultMessage);
 		Assert.notNull(field, "Field must not be null");

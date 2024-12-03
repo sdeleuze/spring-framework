@@ -16,9 +16,10 @@
 
 package org.springframework.web.context.request;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
-import org.springframework.lang.Nullable;
 
 /**
  * Abstract {@link Scope} implementation that reads from a particular scope

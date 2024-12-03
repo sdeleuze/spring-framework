@@ -25,9 +25,8 @@ import java.sql.SQLException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Document;
-
-import org.springframework.lang.Nullable;
 
 /**
  * Abstraction for handling XML fields in specific databases. Its main purpose

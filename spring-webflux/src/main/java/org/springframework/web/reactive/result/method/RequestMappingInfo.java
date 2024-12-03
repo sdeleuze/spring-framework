@@ -21,7 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -476,20 +477,15 @@ public final class RequestMappingInfo implements RequestCondition<RequestMapping
 
 		private String[] paths;
 
-		@Nullable
-		private RequestMethod[] methods;
+		private RequestMethod @Nullable [] methods;
 
-		@Nullable
-		private String[] params;
+		private String @Nullable [] params;
 
-		@Nullable
-		private String[] headers;
+		private String @Nullable [] headers;
 
-		@Nullable
-		private String[] consumes;
+		private String @Nullable [] consumes;
 
-		@Nullable
-		private String[] produces;
+		private String @Nullable [] produces;
 
 		private boolean hasContentType;
 

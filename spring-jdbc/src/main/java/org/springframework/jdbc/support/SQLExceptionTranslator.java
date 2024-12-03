@@ -18,8 +18,9 @@ package org.springframework.jdbc.support;
 
 import java.sql.SQLException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
-import org.springframework.lang.Nullable;
 
 /**
  * Strategy interface for translating between {@link SQLException SQLExceptions}

@@ -22,9 +22,9 @@ import java.util.Map;
 
 import bsh.EvalError;
 import bsh.Interpreter;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.lang.Nullable;
 import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.ScriptEvaluator;
 import org.springframework.scripting.ScriptSource;

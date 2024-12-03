@@ -22,7 +22,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Simple JDBC {@link Blob} adapter that exposes a given byte array or binary stream.
@@ -34,8 +34,7 @@ import org.springframework.lang.Nullable;
 @Deprecated
 class PassThroughBlob implements Blob {
 
-	@Nullable
-	private byte[] content;
+	private byte @Nullable [] content;
 
 	@Nullable
 	private InputStream binaryStream;

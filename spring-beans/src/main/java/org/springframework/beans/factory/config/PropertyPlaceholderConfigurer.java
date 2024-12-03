@@ -19,10 +19,11 @@ package org.springframework.beans.factory.config;
 import java.util.Map;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.core.SpringProperties;
 import org.springframework.core.env.AbstractEnvironment;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.PropertyPlaceholderHelper;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;

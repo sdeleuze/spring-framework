@@ -21,9 +21,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 import org.springframework.test.context.bean.override.BeanOverrideHandler;
 import org.springframework.test.context.bean.override.BeanOverrideStrategy;
 import org.springframework.util.ReflectionUtils;

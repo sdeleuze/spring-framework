@@ -19,7 +19,8 @@ package org.springframework.messaging.simp.stomp;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.converter.SimpleMessageConverter;
 import org.springframework.scheduling.TaskScheduler;

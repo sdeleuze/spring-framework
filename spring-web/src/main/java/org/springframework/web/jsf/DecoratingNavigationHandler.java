@@ -18,8 +18,7 @@ package org.springframework.web.jsf;
 
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Base class for JSF NavigationHandler implementations that want

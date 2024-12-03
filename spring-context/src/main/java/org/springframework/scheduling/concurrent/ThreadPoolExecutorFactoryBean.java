@@ -26,8 +26,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.lang.Nullable;
 
 /**
  * JavaBean that allows for configuring a {@link java.util.concurrent.ThreadPoolExecutor}

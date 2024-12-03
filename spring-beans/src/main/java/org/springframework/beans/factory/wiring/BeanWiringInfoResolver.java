@@ -16,7 +16,7 @@
 
 package org.springframework.beans.factory.wiring;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Strategy interface to be implemented by objects than can resolve bean name

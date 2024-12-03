@@ -16,7 +16,7 @@
 
 package org.springframework.ui.context;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Sub-interface of ThemeSource to be implemented by objects that

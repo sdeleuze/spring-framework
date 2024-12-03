@@ -19,10 +19,10 @@ package org.springframework.jca.support;
 import jakarta.resource.ResourceException;
 import jakarta.resource.spi.ConnectionManager;
 import jakarta.resource.spi.ManagedConnectionFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link org.springframework.beans.factory.FactoryBean} that creates

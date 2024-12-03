@@ -18,12 +18,12 @@ package org.springframework.jms.listener.adapter;
 
 import jakarta.jms.JMSException;
 import jakarta.jms.Session;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.jms.listener.SubscriptionNameProvider;
 import org.springframework.jms.support.JmsHeaderMapper;
 import org.springframework.jms.support.converter.MessageConversionException;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.AbstractMessageSendingTemplate;
@@ -104,6 +104,7 @@ public class MessagingMessageListenerAdapter extends AbstractAdaptableMessageLis
 	 * with a dedicated error message.
 	 */
 	@Nullable
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private Object invokeHandler(jakarta.jms.Message jmsMessage, @Nullable Session session, Message<?> message) {
 		InvocableHandlerMethod handlerMethod = getHandlerMethod();
 		try {

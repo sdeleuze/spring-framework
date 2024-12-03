@@ -25,10 +25,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.simp.stomp.StompBrokerRelayMessageHandler;
 import org.springframework.scheduling.SchedulingTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
@@ -166,8 +166,7 @@ public class WebSocketMessageBrokerStats implements SmartInitializingSingleton {
 	 * is configured.
 	 * @since 6.2
 	 */
-	@Nullable
-	public SubProtocolWebSocketHandler.Stats getWebSocketSessionStats() {
+	public SubProtocolWebSocketHandler.@Nullable Stats getWebSocketSessionStats() {
 		return (this.webSocketHandler != null ? this.webSocketHandler.getStats() : null);
 	}
 
@@ -176,8 +175,7 @@ public class WebSocketMessageBrokerStats implements SmartInitializingSingleton {
 	 * Can return {@code null} if no {@link SubProtocolHandler} was found.
 	 * @since 6.2
 	 */
-	@Nullable
-	public StompSubProtocolHandler.Stats getStompSubProtocolStats() {
+	public StompSubProtocolHandler.@Nullable Stats getStompSubProtocolStats() {
 		return (this.stompSubProtocolHandler != null ? this.stompSubProtocolHandler.getStats() : null);
 	}
 
@@ -187,8 +185,7 @@ public class WebSocketMessageBrokerStats implements SmartInitializingSingleton {
 	 * is configured.
 	 * @since 6.2
 	 */
-	@Nullable
-	public StompBrokerRelayMessageHandler.Stats getStompBrokerRelayStats() {
+	public StompBrokerRelayMessageHandler.@Nullable Stats getStompBrokerRelayStats() {
 		return (this.stompBrokerRelay != null ? this.stompBrokerRelay.getStats() : null);
 	}
 

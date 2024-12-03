@@ -21,7 +21,7 @@ import java.lang.annotation.Annotation;
 import javax.cache.annotation.CacheInvocationParameter;
 import javax.cache.annotation.CacheKeyInvocationContext;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The default {@link CacheKeyInvocationContext} implementation.

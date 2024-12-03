@@ -19,8 +19,7 @@ package org.springframework.mail.javamail;
 import jakarta.activation.FileTypeMap;
 import jakarta.mail.Session;
 import jakarta.mail.internet.MimeMessage;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Special subclass of the standard JavaMail {@link MimeMessage}, carrying a

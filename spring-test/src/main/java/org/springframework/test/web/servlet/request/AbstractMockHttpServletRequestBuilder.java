@@ -36,6 +36,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.Mergeable;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -45,7 +46,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
@@ -110,8 +110,7 @@ public abstract class AbstractMockHttpServletRequestBuilder<B extends AbstractMo
 	@Nullable
 	private String characterEncoding;
 
-	@Nullable
-	private byte[] content;
+	private byte @Nullable [] content;
 
 	@Nullable
 	private String contentType;

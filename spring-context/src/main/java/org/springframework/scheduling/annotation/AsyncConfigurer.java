@@ -18,8 +18,9 @@ package org.springframework.scheduling.annotation;
 
 import java.util.concurrent.Executor;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to be implemented by @{@link org.springframework.context.annotation.Configuration

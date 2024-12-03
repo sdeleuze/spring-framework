@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -28,7 +29,6 @@ import org.springframework.cache.interceptor.AbstractCacheInvoker;
 import org.springframework.cache.interceptor.BasicOperation;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheOperationInvoker;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

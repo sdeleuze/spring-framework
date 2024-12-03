@@ -20,9 +20,10 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
-import org.springframework.lang.Nullable;
 
 /**
  * Simply calls {@link Object#toString()} to convert any supported object

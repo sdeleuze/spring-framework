@@ -17,8 +17,7 @@
 package org.springframework.web.cors;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by classes (usually HTTP request handlers) that

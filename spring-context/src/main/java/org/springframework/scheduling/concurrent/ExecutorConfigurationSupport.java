@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
@@ -38,7 +39,6 @@ import org.springframework.context.SmartLifecycle;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.VirtualThreadTaskExecutor;
-import org.springframework.lang.Nullable;
 
 /**
  * Base class for setting up a {@link java.util.concurrent.ExecutorService}

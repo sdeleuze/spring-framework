@@ -18,11 +18,12 @@ package org.springframework.http.codec.support;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.codec.Decoder;
 import org.springframework.http.codec.ClientCodecConfigurer;
 import org.springframework.http.codec.HttpMessageReader;
 import org.springframework.http.codec.ServerSentEventHttpMessageReader;
-import org.springframework.lang.Nullable;
 
 /**
  * Default implementation of {@link ClientCodecConfigurer.ClientDefaultCodecs}.

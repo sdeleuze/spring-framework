@@ -19,7 +19,7 @@ package org.springframework.jdbc.core.metadata;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * SQL Server specific implementation for the {@link CallMetaDataProvider} interface.

@@ -27,10 +27,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.Lifecycle;
 import org.springframework.http.HttpHeaders;
-import org.springframework.lang.Nullable;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -72,8 +72,7 @@ public class SockJsClient implements WebSocketClient, Lifecycle {
 
 	private final List<Transport> transports;
 
-	@Nullable
-	private String[] httpHeaderNames;
+	private String @Nullable [] httpHeaderNames;
 
 	private InfoReceiver infoReceiver;
 
@@ -133,8 +132,7 @@ public class SockJsClient implements WebSocketClient, Lifecycle {
 	 * The configured HTTP header names to be copied from the handshake
 	 * headers and also included in other HTTP requests.
 	 */
-	@Nullable
-	public String[] getHttpHeaderNames() {
+	public String @Nullable [] getHttpHeaderNames() {
 		return this.httpHeaderNames;
 	}
 

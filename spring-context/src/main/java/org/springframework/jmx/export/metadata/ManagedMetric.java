@@ -16,8 +16,9 @@
 
 package org.springframework.jmx.export.metadata;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jmx.support.MetricType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

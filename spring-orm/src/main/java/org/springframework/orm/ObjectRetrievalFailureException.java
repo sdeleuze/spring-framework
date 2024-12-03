@@ -16,8 +16,9 @@
 
 package org.springframework.orm;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown if a mapped object could not be retrieved via its identifier.

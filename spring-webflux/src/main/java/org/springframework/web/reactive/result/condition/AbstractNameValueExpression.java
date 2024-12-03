@@ -18,7 +18,8 @@ package org.springframework.web.reactive.result.condition;
 
 import java.util.Locale;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ServerWebExchange;
 

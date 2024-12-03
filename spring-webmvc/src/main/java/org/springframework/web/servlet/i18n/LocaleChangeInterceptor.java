@@ -23,8 +23,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -52,8 +52,7 @@ public class LocaleChangeInterceptor implements HandlerInterceptor {
 
 	private String paramName = DEFAULT_PARAM_NAME;
 
-	@Nullable
-	private String[] httpMethods;
+	private String @Nullable [] httpMethods;
 
 	private boolean ignoreInvalidLocale = false;
 
@@ -87,8 +86,7 @@ public class LocaleChangeInterceptor implements HandlerInterceptor {
 	 * Return the configured HTTP methods.
 	 * @since 4.2
 	 */
-	@Nullable
-	public String[] getHttpMethods() {
+	public String @Nullable [] getHttpMethods() {
 		return this.httpMethods;
 	}
 

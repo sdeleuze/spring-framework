@@ -121,6 +121,7 @@ public class SimplePropertyRowMapper<T> implements RowMapper<T> {
 
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public T mapRow(ResultSet rs, int rowNumber) throws SQLException {
 		Object[] args = new Object[this.constructorParameterNames.length];
 		Set<Integer> usedIndex = new HashSet<>();

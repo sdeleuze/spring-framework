@@ -29,7 +29,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -114,7 +115,7 @@ final class TypeMappedAnnotation<A extends Annotation> extends AbstractMergedAnn
 
 	private TypeMappedAnnotation(AnnotationTypeMapping mapping, @Nullable ClassLoader classLoader,
 			@Nullable Object source, @Nullable Object rootAttributes, ValueExtractor valueExtractor,
-			int aggregateIndex, @Nullable int[] resolvedRootMirrors) {
+			int aggregateIndex, int @Nullable [] resolvedRootMirrors) {
 
 		this.mapping = mapping;
 		this.classLoader = classLoader;

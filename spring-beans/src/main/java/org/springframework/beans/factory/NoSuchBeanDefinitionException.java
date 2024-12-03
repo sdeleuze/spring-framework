@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when a {@code BeanFactory} is asked for a bean instance for which it

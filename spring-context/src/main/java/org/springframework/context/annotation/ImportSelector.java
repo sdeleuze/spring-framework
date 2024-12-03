@@ -18,8 +18,9 @@ package org.springframework.context.annotation;
 
 import java.util.function.Predicate;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to be implemented by types that determine which @{@link Configuration}

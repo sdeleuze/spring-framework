@@ -16,8 +16,9 @@
 
 package org.springframework.web.bind;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link ServletRequestBindingException} subclass that indicates a missing parameter.

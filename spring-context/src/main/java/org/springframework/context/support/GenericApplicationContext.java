@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.support.ClassHintUtils;
 import org.springframework.beans.BeanUtils;
@@ -45,7 +47,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.metrics.ApplicationStartup;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -612,8 +613,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 		}
 
 		@Override
-		@Nullable
-		public Constructor<?>[] getPreferredConstructors() {
+		public Constructor<?> @Nullable [] getPreferredConstructors() {
 			Constructor<?>[] fromAttribute = super.getPreferredConstructors();
 			if (fromAttribute != null) {
 				return fromAttribute;

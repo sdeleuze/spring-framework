@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Adapts a given {@link Map} to the {@link MultiValueMap} contract.

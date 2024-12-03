@@ -20,9 +20,10 @@ import java.util.Properties;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * Subclass of PropertyPlaceholderConfigurer that supports JDK 1.4's

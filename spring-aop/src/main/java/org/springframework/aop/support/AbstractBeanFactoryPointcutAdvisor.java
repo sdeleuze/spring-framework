@@ -20,10 +20,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.aopalliance.aop.Advice;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

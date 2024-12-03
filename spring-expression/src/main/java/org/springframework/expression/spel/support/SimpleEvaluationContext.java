@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.BeanResolver;
@@ -37,7 +39,6 @@ import org.springframework.expression.TypeLocator;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelMessage;
-import org.springframework.lang.Nullable;
 
 /**
  * A basic implementation of {@link EvaluationContext} that focuses on a subset

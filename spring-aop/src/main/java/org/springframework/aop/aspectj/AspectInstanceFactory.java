@@ -16,8 +16,9 @@
 
 package org.springframework.aop.aspectj;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.Ordered;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface implemented to provide an instance of an AspectJ aspect.

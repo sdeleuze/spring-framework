@@ -16,8 +16,9 @@
 
 package org.springframework.aop.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.Pointcut;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to be implemented by pointcuts that use String expressions.

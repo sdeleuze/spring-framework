@@ -23,6 +23,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.StringJoiner;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.TypeDescriptor;
@@ -34,7 +36,6 @@ import org.springframework.expression.spel.ExpressionState;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelMessage;
 import org.springframework.expression.spel.support.ReflectionHelper;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
@@ -115,6 +116,7 @@ public class FunctionReference extends SpelNodeImpl {
 	 * @return the return value of the invoked Java method
 	 * @throws EvaluationException if there is any problem invoking the method
 	 */
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private TypedValue executeFunctionViaMethod(ExpressionState state, Method method) throws EvaluationException {
 		Object[] functionArgs = getArguments(state);
 
@@ -174,6 +176,7 @@ public class FunctionReference extends SpelNodeImpl {
 	 * @throws EvaluationException if there is any problem invoking the method
 	 * @since 6.1
 	 */
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private TypedValue executeFunctionViaMethodHandle(ExpressionState state, MethodHandle methodHandle) throws EvaluationException {
 		Object[] functionArgs = getArguments(state);
 		MethodType declaredParams = methodHandle.type();

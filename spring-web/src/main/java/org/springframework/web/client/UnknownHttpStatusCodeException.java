@@ -18,8 +18,9 @@ package org.springframework.web.client;
 
 import java.nio.charset.Charset;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when an unknown (or custom) HTTP status code is received.

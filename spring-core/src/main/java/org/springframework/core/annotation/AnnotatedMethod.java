@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
@@ -232,7 +233,7 @@ public class AnnotatedMethod {
 	// Support methods for use in subclass variants
 
 	@Nullable
-	protected static Object findProvidedArgument(MethodParameter parameter, @Nullable Object... providedArgs) {
+	protected static Object findProvidedArgument(MethodParameter parameter, @Nullable Object @Nullable ... providedArgs) {
 		if (!ObjectUtils.isEmpty(providedArgs)) {
 			for (Object providedArg : providedArgs) {
 				if (parameter.getParameterType().isInstance(providedArg)) {
@@ -254,8 +255,7 @@ public class AnnotatedMethod {
 	 */
 	protected class AnnotatedMethodParameter extends SynthesizingMethodParameter {
 
-		@Nullable
-		private volatile Annotation[] combinedAnnotations;
+		private volatile Annotation @Nullable [] combinedAnnotations;
 
 		public AnnotatedMethodParameter(int index) {
 			super(AnnotatedMethod.this.getBridgedMethod(), index);

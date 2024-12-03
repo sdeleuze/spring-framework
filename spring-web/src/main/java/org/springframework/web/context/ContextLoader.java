@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import jakarta.servlet.ServletContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +38,6 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -222,7 +222,7 @@ public class ContextLoader {
 	 * @see #customizeContext
 	 */
 	@SuppressWarnings("unchecked")
-	public void setContextInitializers(@Nullable ApplicationContextInitializer<?>... initializers) {
+	public void setContextInitializers(ApplicationContextInitializer<?> @Nullable ... initializers) {
 		if (initializers != null) {
 			for (ApplicationContextInitializer<?> initializer : initializers) {
 				this.contextInitializers.add((ApplicationContextInitializer<ConfigurableApplicationContext>) initializer);

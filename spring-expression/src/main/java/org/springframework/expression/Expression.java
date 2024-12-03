@@ -16,8 +16,9 @@
 
 package org.springframework.expression;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 
 /**
  * An expression capable of evaluating itself against context objects.

@@ -27,11 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.Contract;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -121,7 +122,7 @@ public class TypeDescriptor implements Serializable {
 	 * @param annotations the type annotations
 	 * @since 4.0
 	 */
-	public TypeDescriptor(ResolvableType resolvableType, @Nullable Class<?> type, @Nullable Annotation[] annotations) {
+	public TypeDescriptor(ResolvableType resolvableType, @Nullable Class<?> type, Annotation @Nullable [] annotations) {
 		this.resolvableType = resolvableType;
 		this.type = (type != null ? type : resolvableType.toClass());
 		this.annotatedElement = AnnotatedElementAdapter.from(annotations);
@@ -758,7 +759,7 @@ public class TypeDescriptor implements Serializable {
 			this.annotations = annotations;
 		}
 
-		private static AnnotatedElementAdapter from(@Nullable Annotation[] annotations) {
+		private static AnnotatedElementAdapter from(Annotation @Nullable [] annotations) {
 			if (annotations == null || annotations.length == 0) {
 				return EMPTY;
 			}

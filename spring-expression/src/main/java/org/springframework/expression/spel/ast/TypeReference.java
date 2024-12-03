@@ -19,13 +19,14 @@ package org.springframework.expression.spel.ast;
 import java.lang.reflect.Array;
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Type;
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.CodeFlow;
 import org.springframework.expression.spel.ExpressionState;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

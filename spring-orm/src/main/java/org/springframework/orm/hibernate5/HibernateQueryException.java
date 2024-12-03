@@ -17,9 +17,9 @@
 package org.springframework.orm.hibernate5;
 
 import org.hibernate.QueryException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
-import org.springframework.lang.Nullable;
 
 /**
  * Hibernate-specific subclass of InvalidDataAccessResourceUsageException,

@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.Set;
 
 import io.rsocket.frame.FrameType;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.AbstractMessageCondition;
 import org.springframework.util.Assert;

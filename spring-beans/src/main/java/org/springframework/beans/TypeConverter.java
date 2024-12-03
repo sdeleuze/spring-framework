@@ -18,9 +18,10 @@ package org.springframework.beans;
 
 import java.lang.reflect.Field;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface that defines type conversion methods. Typically (but not necessarily)

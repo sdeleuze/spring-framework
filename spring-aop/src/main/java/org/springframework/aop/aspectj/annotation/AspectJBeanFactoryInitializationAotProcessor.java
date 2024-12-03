@@ -18,6 +18,8 @@ package org.springframework.aop.aspectj.annotation;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AbstractAspectJAdvice;
 import org.springframework.aot.generate.GenerationContext;
@@ -27,7 +29,6 @@ import org.springframework.beans.factory.aot.BeanFactoryInitializationAotContrib
 import org.springframework.beans.factory.aot.BeanFactoryInitializationAotProcessor;
 import org.springframework.beans.factory.aot.BeanFactoryInitializationCode;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**

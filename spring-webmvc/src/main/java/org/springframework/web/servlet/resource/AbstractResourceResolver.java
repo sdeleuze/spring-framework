@@ -21,9 +21,9 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * Base class for {@link org.springframework.web.servlet.resource.ResourceResolver}

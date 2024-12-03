@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -39,7 +40,6 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.codec.Decoder;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.CompositeMessageCondition;
 import org.springframework.messaging.handler.DestinationPatternsMessageCondition;
@@ -326,8 +326,7 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 	}
 
 	@Override
-	@Nullable
-	protected RouteMatcher.Route getDestination(Message<?> message) {
+	protected RouteMatcher.@Nullable Route getDestination(Message<?> message) {
 		return (RouteMatcher.Route) message.getHeaders()
 				.get(DestinationPatternsMessageCondition.LOOKUP_DESTINATION_HEADER);
 	}

@@ -16,8 +16,9 @@
 
 package org.springframework.core.convert.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 
 /**
  * Converts a String to a Character.

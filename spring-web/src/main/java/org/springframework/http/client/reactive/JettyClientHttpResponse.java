@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.reactive.client.ReactiveResponse;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Flux;
 
 import org.springframework.core.io.buffer.DataBuffer;
@@ -30,7 +31,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.support.JettyHeadersAdapter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

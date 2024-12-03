@@ -20,10 +20,11 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.SqlOutParameter;
 import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.lang.Nullable;
 
 /**
  * Oracle-specific implementation for the {@link CallMetaDataProvider} interface.

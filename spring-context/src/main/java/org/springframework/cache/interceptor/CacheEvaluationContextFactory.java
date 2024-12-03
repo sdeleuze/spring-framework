@@ -19,10 +19,11 @@ package org.springframework.cache.interceptor;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.function.SingletonSupplier;
 
 /**

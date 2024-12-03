@@ -19,12 +19,13 @@ package org.springframework.cache.jcache.interceptor;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.BasicOperation;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheResolver;
-import org.springframework.lang.Nullable;
 
 /**
  * A simple {@link CacheResolver} that resolves the exception cache

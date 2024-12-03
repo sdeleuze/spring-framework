@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.SpringProperties;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -34,7 +36,6 @@ import org.springframework.core.annotation.RepeatableContainers;
 import org.springframework.core.style.DefaultToStringStyler;
 import org.springframework.core.style.SimpleValueStyler;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.lang.Nullable;
 import org.springframework.test.context.NestedTestConfiguration.EnclosingConfiguration;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;

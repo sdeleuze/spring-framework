@@ -18,9 +18,10 @@ package org.springframework.beans.factory.support;
 
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.Mergeable;
-import org.springframework.lang.Nullable;
 
 /**
  * Tag class which represents a Spring-managed {@link Properties} instance

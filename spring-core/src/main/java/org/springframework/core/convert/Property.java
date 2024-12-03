@@ -24,8 +24,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
@@ -62,8 +63,7 @@ public final class Property {
 
 	private final MethodParameter methodParameter;
 
-	@Nullable
-	private Annotation[] annotations;
+	private Annotation @Nullable [] annotations;
 
 
 	public Property(Class<?> objectType, @Nullable Method readMethod, @Nullable Method writeMethod) {

@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A {@link ConcurrentHashMap} that uses {@link ReferenceType#SOFT soft} or
@@ -904,8 +904,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
 		private int referenceIndex;
 
-		@Nullable
-		private Reference<K, V>[] references;
+		private Reference<K, V> @Nullable [] references;
 
 		@Nullable
 		private Reference<K, V> reference;

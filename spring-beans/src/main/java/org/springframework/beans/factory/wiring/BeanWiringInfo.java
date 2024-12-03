@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory.wiring;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

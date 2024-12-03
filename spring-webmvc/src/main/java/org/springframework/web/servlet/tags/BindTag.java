@@ -20,8 +20,8 @@ import java.beans.PropertyEditor;
 
 import jakarta.servlet.jsp.JspTagException;
 import jakarta.servlet.jsp.PageContext;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.support.BindStatus;

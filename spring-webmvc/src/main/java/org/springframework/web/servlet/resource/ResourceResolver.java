@@ -19,9 +19,9 @@ package org.springframework.web.servlet.resource;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * A strategy for resolving a request to a server-side resource.

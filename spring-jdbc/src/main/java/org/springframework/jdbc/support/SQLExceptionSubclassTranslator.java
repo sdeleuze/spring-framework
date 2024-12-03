@@ -30,6 +30,8 @@ import java.sql.SQLTransactionRollbackException;
 import java.sql.SQLTransientConnectionException;
 import java.sql.SQLTransientException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -42,7 +44,6 @@ import org.springframework.dao.QueryTimeoutException;
 import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link SQLExceptionTranslator} implementation which analyzes the specific

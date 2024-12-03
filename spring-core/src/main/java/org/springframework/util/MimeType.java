@@ -29,7 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeSet;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a MIME Type, as originally defined in RFC 2046 and subsequently

@@ -23,9 +23,9 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.weaver.tools.JoinPointMatch;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.ProxyMethodInvocation;
-import org.springframework.lang.Nullable;
 
 /**
  * Spring AOP around advice (MethodInterceptor) that wraps

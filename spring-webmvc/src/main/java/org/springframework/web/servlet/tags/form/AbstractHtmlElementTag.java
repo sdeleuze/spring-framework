@@ -21,8 +21,8 @@ import java.util.Map;
 
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.DynamicAttributes;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

@@ -16,8 +16,9 @@
 
 package org.springframework.messaging.handler;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.Ordered;
-import org.springframework.lang.Nullable;
 
 /**
  * Represents a Spring-managed bean with cross-cutting functionality to be

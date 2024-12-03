@@ -17,10 +17,10 @@
 package org.springframework.web.context.request;
 
 import jakarta.faces.context.FacesContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.NamedInheritableThreadLocal;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**

@@ -19,7 +19,7 @@ package org.springframework.beans;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Exception thrown when instantiation of a bean failed.

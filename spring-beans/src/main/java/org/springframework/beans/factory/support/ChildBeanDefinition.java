@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**

@@ -17,12 +17,12 @@
 package org.springframework.jms.config;
 
 import jakarta.resource.spi.ResourceAdapter;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.listener.endpoint.JmsActivationSpecConfig;
 import org.springframework.jms.listener.endpoint.JmsActivationSpecFactory;
 import org.springframework.jms.listener.endpoint.JmsMessageEndpointManager;
 import org.springframework.jms.support.destination.DestinationResolver;
-import org.springframework.lang.Nullable;
 
 /**
  * A {@link JmsListenerContainerFactory} implementation to build a

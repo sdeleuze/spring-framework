@@ -16,7 +16,7 @@
 
 package org.springframework.r2dbc.core;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by objects that can provide SQL strings.

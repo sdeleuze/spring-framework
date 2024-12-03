@@ -20,8 +20,8 @@ import java.util.function.Consumer;
 
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.Statement;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.r2dbc.core.binding.BindMarkersFactory;
 import org.springframework.r2dbc.core.binding.BindMarkersFactoryResolver;
 import org.springframework.util.Assert;

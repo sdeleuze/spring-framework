@@ -20,8 +20,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.Cache;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

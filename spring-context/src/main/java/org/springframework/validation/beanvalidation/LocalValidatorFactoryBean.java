@@ -43,6 +43,7 @@ import jakarta.validation.ValidatorFactory;
 import jakarta.validation.bootstrap.GenericBootstrap;
 import jakarta.validation.bootstrap.ProviderSpecificBootstrap;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -51,7 +52,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
@@ -102,8 +102,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 	@Nullable
 	private ParameterNameDiscoverer parameterNameDiscoverer;
 
-	@Nullable
-	private Resource[] mappingLocations;
+	private Resource @Nullable [] mappingLocations;
 
 	private final Map<String, String> validationPropertyMap = new HashMap<>();
 
@@ -252,7 +251,7 @@ public class LocalValidatorFactoryBean extends SpringValidatorAdapter
 
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({"rawtypes", "unchecked", "NullAway"}) // TODO NullAway bug?
 	public void afterPropertiesSet() {
 		Configuration<?> configuration;
 		if (this.providerClass != null) {

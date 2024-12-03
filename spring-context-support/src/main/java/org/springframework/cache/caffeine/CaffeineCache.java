@@ -23,9 +23,9 @@ import java.util.function.Supplier;
 
 import com.github.benmanes.caffeine.cache.AsyncCache;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.cache.support.AbstractValueAdaptingCache;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

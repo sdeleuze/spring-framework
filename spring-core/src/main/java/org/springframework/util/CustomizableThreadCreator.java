@@ -19,7 +19,7 @@ package org.springframework.util;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Simple customizable helper class for creating new {@link Thread} instances.

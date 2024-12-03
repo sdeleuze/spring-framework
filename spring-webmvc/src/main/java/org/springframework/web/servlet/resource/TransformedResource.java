@@ -18,9 +18,10 @@ package org.springframework.web.servlet.resource;
 
 import java.io.IOException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * An extension of {@link ByteArrayResource} that a {@link ResourceTransformer}

@@ -35,6 +35,7 @@ import kotlin.reflect.KType;
 import kotlin.reflect.full.KClasses;
 import kotlin.reflect.jvm.KCallablesJvm;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.SynchronousSink;
 import reactor.core.scheduler.Scheduler;
@@ -49,7 +50,6 @@ import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.lang.Contract;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.method.MethodValidator;
@@ -182,7 +182,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 */
 	@SuppressWarnings({"unchecked", "NullAway"})
 	public Mono<HandlerResult> invoke(
-			ServerWebExchange exchange, BindingContext bindingContext, Object... providedArgs) {
+			ServerWebExchange exchange, BindingContext bindingContext, @Nullable Object... providedArgs) {
 
 		return getMethodArgumentValuesOnScheduler(exchange, bindingContext, providedArgs).flatMap(args -> {
 			if (shouldValidateArguments() && this.methodValidator != null) {
@@ -237,13 +237,13 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	}
 
 	private Mono<Object[]> getMethodArgumentValuesOnScheduler(
-			ServerWebExchange exchange, BindingContext bindingContext, Object... providedArgs) {
+			ServerWebExchange exchange, BindingContext bindingContext, @Nullable Object... providedArgs) {
 		Mono<Object[]> argumentValuesMono = getMethodArgumentValues(exchange, bindingContext, providedArgs);
 		return this.invocationScheduler != null ? argumentValuesMono.publishOn(this.invocationScheduler) : argumentValuesMono;
 	}
 
 	private Mono<Object[]> getMethodArgumentValues(
-			ServerWebExchange exchange, BindingContext bindingContext, Object... providedArgs) {
+			ServerWebExchange exchange, BindingContext bindingContext, @Nullable Object... providedArgs) {
 
 		MethodParameter[] parameters = getMethodParameters();
 		if (ObjectUtils.isEmpty(parameters)) {

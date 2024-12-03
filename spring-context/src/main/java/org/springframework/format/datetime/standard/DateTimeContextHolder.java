@@ -19,8 +19,9 @@ package org.springframework.format.datetime.standard;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.lang.Nullable;
 
 /**
  * A holder for a thread-local user {@link DateTimeContext}.

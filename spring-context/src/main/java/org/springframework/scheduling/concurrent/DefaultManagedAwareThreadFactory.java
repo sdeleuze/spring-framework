@@ -23,11 +23,11 @@ import javax.naming.NamingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jndi.JndiLocatorDelegate;
 import org.springframework.jndi.JndiTemplate;
-import org.springframework.lang.Nullable;
 
 /**
  * JNDI-based variant of {@link CustomizableThreadFactory}, performing a default lookup

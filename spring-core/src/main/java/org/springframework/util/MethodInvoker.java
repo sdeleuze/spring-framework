@@ -20,7 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Helper class that allows for specifying a method to invoke in a declarative
@@ -53,8 +53,7 @@ public class MethodInvoker {
 	@Nullable
 	private String staticMethod;
 
-	@Nullable
-	private Object[] arguments;
+	private Object @Nullable [] arguments;
 
 	/** The method we will call. */
 	@Nullable
@@ -136,7 +135,7 @@ public class MethodInvoker {
 	 * Set arguments for the method invocation. If this property is not set,
 	 * or the Object array is of length 0, a method with no arguments is assumed.
 	 */
-	public void setArguments(@Nullable Object... arguments) {
+	public void setArguments(Object @Nullable ... arguments) {
 		this.arguments = arguments;
 	}
 

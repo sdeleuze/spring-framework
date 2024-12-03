@@ -28,9 +28,9 @@ import java.util.Set;
 
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpFields;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.util.MultiValueMap;
@@ -48,8 +48,7 @@ public final class JettyHeadersAdapter implements MultiValueMap<String, String> 
 
 	private final HttpFields headers;
 
-	@Nullable
-	private final HttpFields.Mutable mutable;
+	private final HttpFields.@Nullable Mutable mutable;
 
 
 	/**

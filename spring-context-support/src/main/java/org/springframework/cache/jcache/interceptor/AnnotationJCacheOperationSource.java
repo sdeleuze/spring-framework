@@ -31,10 +31,11 @@ import javax.cache.annotation.CacheRemoveAll;
 import javax.cache.annotation.CacheResolverFactory;
 import javax.cache.annotation.CacheResult;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**

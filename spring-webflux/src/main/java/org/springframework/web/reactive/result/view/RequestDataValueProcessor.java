@@ -18,7 +18,8 @@ package org.springframework.web.reactive.result.view;
 
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.web.server.ServerWebExchange;
 
 /**

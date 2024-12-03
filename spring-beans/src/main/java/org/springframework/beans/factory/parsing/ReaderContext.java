@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory.parsing;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * Context that gets passed along a bean definition reading process,

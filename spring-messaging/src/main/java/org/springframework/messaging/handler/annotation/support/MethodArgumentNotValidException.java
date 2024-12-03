@@ -16,8 +16,9 @@
 
 package org.springframework.messaging.handler.annotation.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.invocation.MethodArgumentResolutionException;
 import org.springframework.validation.BindingResult;

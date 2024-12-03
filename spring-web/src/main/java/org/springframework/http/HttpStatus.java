@@ -16,7 +16,7 @@
 
 package org.springframework.http;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Enumeration of HTTP status codes.

@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Reusable query in which concrete subclasses must implement the abstract
@@ -64,7 +64,7 @@ public abstract class MappingSqlQuery<T> extends MappingSqlQueryWithParameters<T
 	 */
 	@Override
 	@Nullable
-	protected final T mapRow(ResultSet rs, int rowNum, @Nullable Object[] parameters, @Nullable Map<?, ?> context)
+	protected final T mapRow(ResultSet rs, int rowNum, Object @Nullable [] parameters, @Nullable Map<?, ?> context)
 			throws SQLException {
 
 		return mapRow(rs, rowNum);

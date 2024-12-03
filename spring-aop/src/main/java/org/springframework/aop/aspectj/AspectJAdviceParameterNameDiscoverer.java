@@ -28,9 +28,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.weaver.tools.PointcutParser;
 import org.aspectj.weaver.tools.PointcutPrimitive;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
@@ -172,6 +172,7 @@ public class AspectJAdviceParameterNameDiscoverer implements ParameterNameDiscov
 
 	private Class<?>[] argumentTypes = new Class<?>[0];
 
+	@Nullable
 	private String[] parameterNameBindings = new String[0];
 
 	private int numberOfRemainingUnboundArguments;
@@ -221,8 +222,7 @@ public class AspectJAdviceParameterNameDiscoverer implements ParameterNameDiscov
 	 * @return the parameter names
 	 */
 	@Override
-	@Nullable
-	public String[] getParameterNames(Method method) {
+	public String @Nullable [] getParameterNames(Method method) {
 		this.argumentTypes = method.getParameterTypes();
 		this.numberOfRemainingUnboundArguments = this.argumentTypes.length;
 		this.parameterNameBindings = new String[this.numberOfRemainingUnboundArguments];
@@ -289,8 +289,7 @@ public class AspectJAdviceParameterNameDiscoverer implements ParameterNameDiscov
 	 * {@link #setRaiseExceptions(boolean) raiseExceptions} has been set to {@code true}
 	 */
 	@Override
-	@Nullable
-	public String[] getParameterNames(Constructor<?> ctor) {
+	public String @Nullable [] getParameterNames(Constructor<?> ctor) {
 		if (this.raiseExceptions) {
 			throw new UnsupportedOperationException("An advice method can never be a constructor");
 		}

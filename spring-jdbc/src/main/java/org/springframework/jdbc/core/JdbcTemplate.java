@@ -41,6 +41,8 @@ import java.util.stream.StreamSupport;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.dao.support.DataAccessUtils;
@@ -53,7 +55,6 @@ import org.springframework.jdbc.support.JdbcAccessor;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedCaseInsensitiveMap;
@@ -763,13 +764,13 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	@Deprecated
 	@Override
 	@Nullable
-	public <T> T query(String sql, @Nullable Object[] args, ResultSetExtractor<T> rse) throws DataAccessException {
+	public <T> T query(String sql, Object @Nullable [] args, ResultSetExtractor<T> rse) throws DataAccessException {
 		return query(sql, newArgPreparedStatementSetter(args), rse);
 	}
 
 	@Override
 	@Nullable
-	public <T> T query(String sql, ResultSetExtractor<T> rse, @Nullable Object... args) throws DataAccessException {
+	public <T> T query(String sql, ResultSetExtractor<T> rse, Object @Nullable ... args) throws DataAccessException {
 		return query(sql, newArgPreparedStatementSetter(args), rse);
 	}
 
@@ -790,12 +791,12 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
 	@Deprecated
 	@Override
-	public void query(String sql, @Nullable Object[] args, RowCallbackHandler rch) throws DataAccessException {
+	public void query(String sql, Object @Nullable [] args, RowCallbackHandler rch) throws DataAccessException {
 		query(sql, newArgPreparedStatementSetter(args), rch);
 	}
 
 	@Override
-	public void query(String sql, RowCallbackHandler rch, @Nullable Object... args) throws DataAccessException {
+	public void query(String sql, RowCallbackHandler rch, Object @Nullable ... args) throws DataAccessException {
 		query(sql, newArgPreparedStatementSetter(args), rch);
 	}
 
@@ -816,12 +817,12 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
 	@Deprecated
 	@Override
-	public <T> List<T> query(String sql, @Nullable Object[] args, RowMapper<T> rowMapper) throws DataAccessException {
+	public <T> List<T> query(String sql, Object @Nullable [] args, RowMapper<T> rowMapper) throws DataAccessException {
 		return result(query(sql, args, new RowMapperResultSetExtractor<>(rowMapper)));
 	}
 
 	@Override
-	public <T> List<T> query(String sql, RowMapper<T> rowMapper, @Nullable Object... args) throws DataAccessException {
+	public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object @Nullable ... args) throws DataAccessException {
 		return result(query(sql, args, new RowMapperResultSetExtractor<>(rowMapper)));
 	}
 
@@ -869,7 +870,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	@Override
-	public <T> Stream<T> queryForStream(String sql, RowMapper<T> rowMapper, @Nullable Object... args) throws DataAccessException {
+	public <T> Stream<T> queryForStream(String sql, RowMapper<T> rowMapper, Object @Nullable ... args) throws DataAccessException {
 		return queryForStream(new SimplePreparedStatementCreator(sql), newArgPreparedStatementSetter(args), rowMapper);
 	}
 
@@ -885,14 +886,14 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	@Deprecated
 	@Override
 	@Nullable
-	public <T> T queryForObject(String sql, @Nullable Object[] args, RowMapper<T> rowMapper) throws DataAccessException {
+	public <T> T queryForObject(String sql, Object @Nullable [] args, RowMapper<T> rowMapper) throws DataAccessException {
 		List<T> results = query(sql, args, new RowMapperResultSetExtractor<>(rowMapper, 1));
 		return DataAccessUtils.nullableSingleResult(results);
 	}
 
 	@Override
 	@Nullable
-	public <T> T queryForObject(String sql, RowMapper<T> rowMapper, @Nullable Object... args) throws DataAccessException {
+	public <T> T queryForObject(String sql, RowMapper<T> rowMapper, Object @Nullable ... args) throws DataAccessException {
 		List<T> results = query(sql, args, new RowMapperResultSetExtractor<>(rowMapper, 1));
 		return DataAccessUtils.nullableSingleResult(results);
 	}
@@ -908,13 +909,13 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	@Deprecated
 	@Override
 	@Nullable
-	public <T> T queryForObject(String sql, @Nullable Object[] args, Class<T> requiredType) throws DataAccessException {
+	public <T> T queryForObject(String sql, Object @Nullable [] args, Class<T> requiredType) throws DataAccessException {
 		return queryForObject(sql, args, getSingleColumnRowMapper(requiredType));
 	}
 
 	@Override
 	@Nullable
-	public <T> T queryForObject(String sql, Class<T> requiredType, @Nullable Object... args) throws DataAccessException {
+	public <T> T queryForObject(String sql, Class<T> requiredType, Object @Nullable ... args) throws DataAccessException {
 		return queryForObject(sql, args, getSingleColumnRowMapper(requiredType));
 	}
 
@@ -924,7 +925,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	@Override
-	public Map<String, Object> queryForMap(String sql, @Nullable Object... args) throws DataAccessException {
+	public Map<String, Object> queryForMap(String sql, Object @Nullable ... args) throws DataAccessException {
 		return result(queryForObject(sql, args, getColumnMapRowMapper()));
 	}
 
@@ -935,12 +936,12 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
 	@Deprecated
 	@Override
-	public <T> List<T> queryForList(String sql, @Nullable Object[] args, Class<T> elementType) throws DataAccessException {
+	public <T> List<T> queryForList(String sql, Object @Nullable [] args, Class<T> elementType) throws DataAccessException {
 		return query(sql, args, getSingleColumnRowMapper(elementType));
 	}
 
 	@Override
-	public <T> List<T> queryForList(String sql, Class<T> elementType, @Nullable Object... args) throws DataAccessException {
+	public <T> List<T> queryForList(String sql, Class<T> elementType, Object @Nullable ... args) throws DataAccessException {
 		return query(sql, args, getSingleColumnRowMapper(elementType));
 	}
 
@@ -950,7 +951,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryForList(String sql, @Nullable Object... args) throws DataAccessException {
+	public List<Map<String, Object>> queryForList(String sql, Object @Nullable ... args) throws DataAccessException {
 		return query(sql, args, getColumnMapRowMapper());
 	}
 
@@ -960,7 +961,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	@Override
-	public SqlRowSet queryForRowSet(String sql, @Nullable Object... args) throws DataAccessException {
+	public SqlRowSet queryForRowSet(String sql, Object @Nullable ... args) throws DataAccessException {
 		return result(query(sql, args, new SqlRowSetResultSetExtractor()));
 	}
 
@@ -1022,7 +1023,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	@Override
-	public int update(String sql, @Nullable Object... args) throws DataAccessException {
+	public int update(String sql, Object @Nullable ... args) throws DataAccessException {
 		return update(sql, newArgPreparedStatementSetter(args));
 	}
 
@@ -1461,7 +1462,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	 * @param args object array with arguments
 	 * @return the new PreparedStatementSetter to use
 	 */
-	protected PreparedStatementSetter newArgPreparedStatementSetter(@Nullable Object[] args) {
+	protected PreparedStatementSetter newArgPreparedStatementSetter(Object @Nullable [] args) {
 		return new ArgumentPreparedStatementSetter(args);
 	}
 

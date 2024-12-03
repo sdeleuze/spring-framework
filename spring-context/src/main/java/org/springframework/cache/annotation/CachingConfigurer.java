@@ -16,11 +16,12 @@
 
 package org.springframework.cache.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to be implemented by @{@link org.springframework.context.annotation.Configuration

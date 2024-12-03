@@ -20,12 +20,13 @@ import java.lang.reflect.Constructor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.TypeConverter;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -64,11 +65,9 @@ public class DataClassRowMapper<T> extends BeanPropertyRowMapper<T> {
 	@Nullable
 	private Constructor<T> mappedConstructor;
 
-	@Nullable
-	private String[] constructorParameterNames;
+	private String @Nullable [] constructorParameterNames;
 
-	@Nullable
-	private TypeDescriptor[] constructorParameterTypes;
+	private TypeDescriptor @Nullable [] constructorParameterTypes;
 
 
 	/**

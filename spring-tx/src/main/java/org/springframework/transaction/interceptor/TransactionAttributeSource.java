@@ -18,7 +18,7 @@ package org.springframework.transaction.interceptor;
 
 import java.lang.reflect.Method;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Strategy interface used by {@link TransactionInterceptor} for metadata retrieval.

@@ -19,10 +19,11 @@ package org.springframework.core.type.filter;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Inherited;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.classreading.MetadataReader;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**

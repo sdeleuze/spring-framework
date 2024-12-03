@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory.aot;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.RegisteredBean;
-import org.springframework.lang.Nullable;
 
 /**
  * AOT processor that makes bean registration contributions by processing

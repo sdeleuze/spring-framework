@@ -20,8 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.ConfigurableObjectInputStream;
-import org.springframework.lang.Nullable;
 
 /**
  * A default {@link Deserializer} implementation that reads an input stream

@@ -21,6 +21,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.hint.ExecutableMode;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.TypeConverter;
@@ -31,7 +33,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.config.DependencyDescriptor;
 import org.springframework.beans.factory.support.RegisteredBean;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
@@ -62,12 +63,11 @@ public final class AutowiredMethodArgumentsResolver extends AutowiredElementReso
 
 	private final boolean required;
 
-	@Nullable
-	private final String[] shortcutBeanNames;
+	private final String @Nullable [] shortcutBeanNames;
 
 
 	private AutowiredMethodArgumentsResolver(String methodName, Class<?>[] parameterTypes,
-			boolean required, @Nullable String[] shortcutBeanNames) {
+			boolean required, String @Nullable [] shortcutBeanNames) {
 
 		Assert.hasText(methodName, "'methodName' must not be empty");
 		this.methodName = methodName;

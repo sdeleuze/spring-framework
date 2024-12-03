@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import io.rsocket.Payload;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,7 +28,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.core.codec.Encoder;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.invocation.reactive.AbstractEncoderMethodReturnValueHandler;
 import org.springframework.messaging.rsocket.PayloadUtils;

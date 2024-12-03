@@ -16,10 +16,10 @@
 
 package org.springframework.beans.factory.xml;
 
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Element;
 
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface used by the {@link DefaultBeanDefinitionDocumentReader} to handle custom,

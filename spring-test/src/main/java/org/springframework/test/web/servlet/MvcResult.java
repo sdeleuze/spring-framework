@@ -16,7 +16,8 @@
 
 package org.springframework.test.web.servlet;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.servlet.FlashMap;
@@ -55,8 +56,7 @@ public interface MvcResult {
 	 * Return interceptors around the handler.
 	 * @return interceptors, or {@code null} if none were selected
 	 */
-	@Nullable
-	HandlerInterceptor[] getInterceptors();
+	HandlerInterceptor @Nullable [] getInterceptors();
 
 	/**
 	 * Return the {@code ModelAndView} prepared by the handler.

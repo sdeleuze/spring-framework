@@ -17,8 +17,7 @@
 package org.springframework.web.servlet.tags.form;
 
 import jakarta.servlet.jsp.JspException;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The {@code <textarea>} tag renders an HTML 'textarea'.

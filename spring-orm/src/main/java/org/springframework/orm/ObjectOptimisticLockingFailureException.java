@@ -16,8 +16,9 @@
 
 package org.springframework.orm;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown on an optimistic locking violation for a mapped object.

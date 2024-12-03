@@ -18,9 +18,10 @@ package org.springframework.jdbc.support.incrementer;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -25,8 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import io.netty.handler.codec.http.HttpHeaders;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.util.MultiValueMap;

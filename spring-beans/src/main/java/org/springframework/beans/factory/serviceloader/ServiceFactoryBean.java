@@ -19,8 +19,9 @@ package org.springframework.beans.factory.serviceloader;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link org.springframework.beans.factory.FactoryBean} that exposes the

@@ -23,6 +23,8 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.DataAccessException;
@@ -33,7 +35,6 @@ import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.InvalidResultSetAccessException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.function.SingletonSupplier;
 import org.springframework.util.function.SupplierUtils;
 

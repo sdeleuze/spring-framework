@@ -35,8 +35,8 @@ import jakarta.jms.TopicConnection;
 import jakarta.jms.TopicConnectionFactory;
 import jakarta.jms.TopicSession;
 import jakarta.jms.TransactionInProgressException;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Generic interface for a web request. Mainly intended for generic web
@@ -51,8 +51,7 @@ public interface WebRequest extends RequestAttributes {
 	 * @since 3.0
 	 * @see jakarta.servlet.http.HttpServletRequest#getHeaders(String)
 	 */
-	@Nullable
-	String[] getHeaderValues(String headerName);
+	String @Nullable [] getHeaderValues(String headerName);
 
 	/**
 	 * Return an Iterator over request header names.
@@ -75,8 +74,7 @@ public interface WebRequest extends RequestAttributes {
 	 * <p>A single-value parameter will be exposed as an array with a single element.
 	 * @see jakarta.servlet.http.HttpServletRequest#getParameterValues(String)
 	 */
-	@Nullable
-	String[] getParameterValues(String paramName);
+	String @Nullable [] getParameterValues(String paramName);
 
 	/**
 	 * Return an Iterator over request parameter names.

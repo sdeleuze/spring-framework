@@ -16,7 +16,8 @@
 
 package org.springframework.jmx.export.metadata;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.StringUtils;
 
 /**
@@ -27,8 +28,7 @@ import org.springframework.util.StringUtils;
  */
 public class ManagedNotification {
 
-	@Nullable
-	private String[] notificationTypes;
+	private String @Nullable [] notificationTypes;
 
 	@Nullable
 	private String name;
@@ -55,8 +55,7 @@ public class ManagedNotification {
 	/**
 	 * Return the list of notification types.
 	 */
-	@Nullable
-	public String[] getNotificationTypes() {
+	public String @Nullable [] getNotificationTypes() {
 		return this.notificationTypes;
 	}
 

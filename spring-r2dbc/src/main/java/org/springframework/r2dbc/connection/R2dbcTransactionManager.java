@@ -24,10 +24,10 @@ import io.r2dbc.spi.IsolationLevel;
 import io.r2dbc.spi.Option;
 import io.r2dbc.spi.R2dbcException;
 import io.r2dbc.spi.Result;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.reactive.AbstractReactiveTransactionManager;

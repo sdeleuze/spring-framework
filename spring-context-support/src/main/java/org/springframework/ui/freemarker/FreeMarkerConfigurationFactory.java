@@ -33,12 +33,12 @@ import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -101,8 +101,7 @@ public class FreeMarkerConfigurationFactory {
 	@Nullable
 	private List<TemplateLoader> postTemplateLoaders;
 
-	@Nullable
-	private String[] templateLoaderPaths;
+	private String @Nullable [] templateLoaderPaths;
 
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 

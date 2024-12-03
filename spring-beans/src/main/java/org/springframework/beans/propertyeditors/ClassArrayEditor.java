@@ -19,7 +19,8 @@ package org.springframework.beans.propertyeditors;
 import java.beans.PropertyEditorSupport;
 import java.util.StringJoiner;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

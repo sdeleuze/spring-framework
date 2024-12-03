@@ -19,6 +19,8 @@ package org.springframework.jdbc.support;
 import java.sql.SQLException;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -28,7 +30,6 @@ import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.dao.QueryTimeoutException;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link SQLExceptionTranslator} implementation that analyzes the SQL state in

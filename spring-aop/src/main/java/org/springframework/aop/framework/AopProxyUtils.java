@@ -23,13 +23,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.SpringProxy;
 import org.springframework.aop.TargetClassAware;
 import org.springframework.aop.TargetSource;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.aop.target.SingletonTargetSource;
 import org.springframework.core.DecoratingProxy;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -253,7 +254,7 @@ public abstract class AopProxyUtils {
 	 * @return a cloned argument array, or the original if no adaptation is needed
 	 * @since 4.2.3
 	 */
-	static Object[] adaptArgumentsIfNecessary(Method method, @Nullable Object[] arguments) {
+	static Object[] adaptArgumentsIfNecessary(Method method, Object @Nullable [] arguments) {
 		if (ObjectUtils.isEmpty(arguments)) {
 			return new Object[0];
 		}

@@ -29,7 +29,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
@@ -90,7 +91,7 @@ public class DynamicClassLoader extends ClassLoader {
 	}
 
 	@Nullable
-	private Class<?> defineClass(String name, @Nullable byte[] bytes) {
+	private Class<?> defineClass(String name, byte @Nullable [] bytes) {
 		if (bytes == null) {
 			return null;
 		}
@@ -132,8 +133,7 @@ public class DynamicClassLoader extends ClassLoader {
 		return super.findResource(name);
 	}
 
-	@Nullable
-	private byte[] findClassBytes(String name) {
+	private byte @Nullable [] findClassBytes(String name) {
 		ClassFile classFile = this.classFiles.get(name);
 		if (classFile != null) {
 			return classFile.getContent();

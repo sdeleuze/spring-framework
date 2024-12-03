@@ -16,7 +16,8 @@
 
 package org.springframework.jdbc.support;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -35,8 +36,7 @@ import org.springframework.util.StringUtils;
  */
 public class SQLErrorCodes {
 
-	@Nullable
-	private String[] databaseProductNames;
+	private String @Nullable [] databaseProductNames;
 
 	private boolean useSqlStateForTranslation = false;
 
@@ -60,8 +60,7 @@ public class SQLErrorCodes {
 
 	private String[] cannotSerializeTransactionCodes = new String[0];
 
-	@Nullable
-	private CustomSQLErrorCodesTranslation[] customTranslations;
+	private CustomSQLErrorCodesTranslation @Nullable [] customTranslations;
 
 	@Nullable
 	private SQLExceptionTranslator customSqlExceptionTranslator;
@@ -89,8 +88,7 @@ public class SQLErrorCodes {
 		this.databaseProductNames = databaseProductNames;
 	}
 
-	@Nullable
-	public String[] getDatabaseProductNames() {
+	public String @Nullable [] getDatabaseProductNames() {
 		return this.databaseProductNames;
 	}
 
@@ -190,8 +188,7 @@ public class SQLErrorCodes {
 		this.customTranslations = customTranslations;
 	}
 
-	@Nullable
-	public CustomSQLErrorCodesTranslation[] getCustomTranslations() {
+	public CustomSQLErrorCodesTranslation @Nullable [] getCustomTranslations() {
 		return this.customTranslations;
 	}
 

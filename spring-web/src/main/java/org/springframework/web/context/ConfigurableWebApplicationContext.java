@@ -18,9 +18,9 @@ package org.springframework.web.context;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface to be implemented by configurable web application contexts.
@@ -105,7 +105,6 @@ public interface ConfigurableWebApplicationContext extends WebApplicationContext
 	 * Return the config locations for this web application context,
 	 * or {@code null} if none specified.
 	 */
-	@Nullable
-	String[] getConfigLocations();
+	String @Nullable [] getConfigLocations();
 
 }

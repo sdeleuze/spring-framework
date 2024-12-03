@@ -18,7 +18,7 @@ package org.springframework.util;
 
 import java.util.Properties;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Utility class for working with Strings that have placeholder values in them.

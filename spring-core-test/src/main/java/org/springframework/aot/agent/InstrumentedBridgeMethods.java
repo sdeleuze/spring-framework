@@ -31,7 +31,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Instrumented version of JDK methods to be used by bytecode rewritten by the {@link RuntimeHintsAgent}.

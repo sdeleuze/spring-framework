@@ -21,10 +21,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.context.MessageSource;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -117,7 +118,7 @@ public class WebExchangeBindException extends ServerWebInputException implements
 	}
 
 	@Override
-	public void reject(String errorCode, @Nullable Object[] errorArgs, @Nullable String defaultMessage) {
+	public void reject(String errorCode, Object @Nullable [] errorArgs, @Nullable String defaultMessage) {
 		this.bindingResult.reject(errorCode, errorArgs, defaultMessage);
 	}
 
@@ -133,7 +134,7 @@ public class WebExchangeBindException extends ServerWebInputException implements
 
 	@Override
 	public void rejectValue(@Nullable String field, String errorCode,
-			@Nullable Object[] errorArgs, @Nullable String defaultMessage) {
+			Object @Nullable [] errorArgs, @Nullable String defaultMessage) {
 
 		this.bindingResult.rejectValue(field, errorCode, errorArgs, defaultMessage);
 	}

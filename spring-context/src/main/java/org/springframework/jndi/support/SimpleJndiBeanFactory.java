@@ -25,6 +25,8 @@ import java.util.Set;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
@@ -35,7 +37,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.ResolvableType;
 import org.springframework.jndi.JndiLocatorSupport;
 import org.springframework.jndi.TypeMismatchNamingException;
-import org.springframework.lang.Nullable;
 
 /**
  * Simple JNDI-based implementation of Spring's

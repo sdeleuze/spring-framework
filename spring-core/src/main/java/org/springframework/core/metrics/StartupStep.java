@@ -18,7 +18,7 @@ package org.springframework.core.metrics;
 
 import java.util.function.Supplier;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Step recording metrics about a particular phase or action happening during the {@link ApplicationStartup}.

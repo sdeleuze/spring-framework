@@ -22,6 +22,7 @@ import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
 import jakarta.jms.JMSException;
 import jakarta.jms.Session;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jms.InvalidDestinationException;
@@ -29,7 +30,6 @@ import org.springframework.jms.JmsException;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessagingMessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.converter.MessageConversionException;
@@ -426,7 +426,7 @@ public class JmsMessagingTemplate extends AbstractMessagingTemplate<Destination>
 	}
 
 	@Nullable
-	protected Message<?> convertJmsMessage(@Nullable jakarta.jms.Message message) {
+	protected Message<?> convertJmsMessage(jakarta.jms.@Nullable Message message) {
 		if (message == null) {
 			return null;
 		}

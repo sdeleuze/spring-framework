@@ -18,8 +18,9 @@ package org.springframework.jndi;
 
 import javax.naming.NamingException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.TargetSource;
-import org.springframework.lang.Nullable;
 
 /**
  * AOP {@link org.springframework.aop.TargetSource} that provides

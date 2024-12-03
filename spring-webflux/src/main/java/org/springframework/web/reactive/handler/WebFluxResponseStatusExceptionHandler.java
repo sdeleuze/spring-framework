@@ -16,9 +16,10 @@
 
 package org.springframework.web.reactive.handler;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.handler.ResponseStatusExceptionHandler;
 

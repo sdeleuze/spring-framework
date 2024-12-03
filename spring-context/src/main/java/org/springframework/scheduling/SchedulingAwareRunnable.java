@@ -16,7 +16,7 @@
 
 package org.springframework.scheduling;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Extension of the {@link Runnable} interface, adding special callbacks

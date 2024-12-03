@@ -21,7 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;

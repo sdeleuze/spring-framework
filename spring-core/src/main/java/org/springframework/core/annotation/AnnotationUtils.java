@@ -30,11 +30,12 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.annotation.AnnotationTypeMapping.MirrorSets.MirrorSet;
 import org.springframework.core.annotation.MergedAnnotation.Adapt;
 import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.ReflectionUtils;
@@ -266,8 +267,7 @@ public abstract class AnnotationUtils {
 	 * @deprecated as of 5.2 since it is superseded by the {@link MergedAnnotations} API
 	 */
 	@Deprecated
-	@Nullable
-	public static Annotation[] getAnnotations(AnnotatedElement annotatedElement) {
+	public static Annotation @Nullable [] getAnnotations(AnnotatedElement annotatedElement) {
 		try {
 			return synthesizeAnnotationArray(annotatedElement.getAnnotations(), annotatedElement);
 		}
@@ -291,8 +291,7 @@ public abstract class AnnotationUtils {
 	 * @deprecated as of 5.2 since it is superseded by the {@link MergedAnnotations} API
 	 */
 	@Deprecated
-	@Nullable
-	public static Annotation[] getAnnotations(Method method) {
+	public static Annotation @Nullable [] getAnnotations(Method method) {
 		try {
 			return synthesizeAnnotationArray(BridgeMethodResolver.findBridgedMethod(method).getAnnotations(), method);
 		}

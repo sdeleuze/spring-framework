@@ -17,8 +17,7 @@
 package org.springframework.aop.interceptor;
 
 import org.aopalliance.intercept.MethodInvocation;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * AOP Alliance {@code MethodInterceptor} that can be introduced in a chain

@@ -34,6 +34,7 @@ import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.spi.mapper.MappingProvider;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
@@ -44,7 +45,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ClientHttpRequest;
-import org.springframework.lang.Nullable;
 import org.springframework.test.json.JsonAssert;
 import org.springframework.test.json.JsonComparator;
 import org.springframework.test.json.JsonCompareMode;

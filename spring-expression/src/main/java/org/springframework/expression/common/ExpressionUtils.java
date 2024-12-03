@@ -16,12 +16,13 @@
 
 package org.springframework.expression.common;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.TypeConverter;
 import org.springframework.expression.TypedValue;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**

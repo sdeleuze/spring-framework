@@ -33,6 +33,7 @@ import kotlin.reflect.KMutableProperty;
 import kotlin.reflect.KProperty;
 import kotlin.reflect.full.KClasses;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.KotlinDetector;
@@ -46,7 +47,6 @@ import org.springframework.expression.PropertyAccessor;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.CodeFlow;
 import org.springframework.expression.spel.CompilablePropertyAccessor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
@@ -109,8 +109,7 @@ public class ReflectivePropertyAccessor implements PropertyAccessor {
 	 * Returns {@code null} which means this is a general purpose accessor.
 	 */
 	@Override
-	@Nullable
-	public Class<?>[] getSpecificTargetClasses() {
+	public Class<?> @Nullable [] getSpecificTargetClasses() {
 		return null;
 	}
 

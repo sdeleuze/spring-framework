@@ -22,8 +22,8 @@ import jakarta.servlet.jsp.tagext.TagSupport;
 import jakarta.servlet.jsp.tagext.TryCatchFinally;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.support.JspAwareRequestContext;
 import org.springframework.web.servlet.support.RequestContext;

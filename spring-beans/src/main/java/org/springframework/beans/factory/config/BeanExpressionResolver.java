@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
-import org.springframework.lang.Nullable;
 
 /**
  * Strategy interface for resolving a value by evaluating it as an expression,

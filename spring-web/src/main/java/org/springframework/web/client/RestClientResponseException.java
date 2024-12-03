@@ -22,11 +22,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedCaseInsensitiveMap;
@@ -87,7 +88,7 @@ public class RestClientResponseException extends RestClientException {
 	 */
 	public RestClientResponseException(
 			String message, HttpStatusCode statusCode, String statusText, @Nullable HttpHeaders headers,
-			@Nullable byte[] responseBody, @Nullable Charset responseCharset) {
+			byte @Nullable [] responseBody, @Nullable Charset responseCharset) {
 
 		super(message);
 		this.statusCode = statusCode;

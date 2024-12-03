@@ -31,9 +31,9 @@ import java.util.concurrent.TimeUnit;
 
 import jakarta.enterprise.concurrent.LastExecution;
 import jakarta.enterprise.concurrent.ManagedScheduledExecutorService;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.task.TaskRejectedException;
-import org.springframework.lang.Nullable;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;

@@ -18,7 +18,7 @@ package org.springframework.scripting;
 
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Spring's strategy interface for evaluating a script.

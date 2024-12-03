@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.asm.ClassWriter;
 import org.springframework.asm.MethodVisitor;
@@ -32,7 +33,6 @@ import org.springframework.expression.spel.CodeFlow;
 import org.springframework.expression.spel.CompiledExpression;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.ast.SpelNodeImpl;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.ReflectionUtils;

@@ -58,6 +58,7 @@ public class BeanReference extends SpelNodeImpl {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public TypedValue getValueInternal(ExpressionState state) throws EvaluationException {
 		BeanResolver beanResolver = state.getEvaluationContext().getBeanResolver();
 		if (beanResolver == null) {

@@ -16,7 +16,7 @@
 
 package org.springframework.cache.interceptor;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Class describing a cache 'cacheable' operation.

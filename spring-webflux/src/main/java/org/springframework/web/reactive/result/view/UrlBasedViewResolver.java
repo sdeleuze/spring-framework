@@ -19,13 +19,13 @@ package org.springframework.web.reactive.result.view;
 import java.util.Locale;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.PatternMatchUtils;
 
@@ -81,8 +81,7 @@ public class UrlBasedViewResolver extends ViewResolverSupport
 
 	private String suffix = "";
 
-	@Nullable
-	private String[] viewNames;
+	private String @Nullable [] viewNames;
 
 	private Function<String, RedirectView> redirectViewProvider = RedirectView::new;
 
@@ -161,8 +160,7 @@ public class UrlBasedViewResolver extends ViewResolverSupport
 	 * Return the view names (or name patterns) that can be handled by this
 	 * {@link ViewResolver}.
 	 */
-	@Nullable
-	protected String[] getViewNames() {
+	protected String @Nullable [] getViewNames() {
 		return this.viewNames;
 	}
 

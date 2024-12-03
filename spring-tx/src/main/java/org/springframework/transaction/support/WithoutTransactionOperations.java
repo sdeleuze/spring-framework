@@ -18,7 +18,8 @@ package org.springframework.transaction.support;
 
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 

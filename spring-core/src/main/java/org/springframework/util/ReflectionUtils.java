@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Simple utility class for working with the reflection API and handling
@@ -229,7 +229,7 @@ public abstract class ReflectionUtils {
 	 * @return the Method object, or {@code null} if none found
 	 */
 	@Nullable
-	public static Method findMethod(Class<?> clazz, String name, @Nullable Class<?>... paramTypes) {
+	public static Method findMethod(Class<?> clazz, String name, Class<?> @Nullable ... paramTypes) {
 		Assert.notNull(clazz, "Class must not be null");
 		Assert.notNull(name, "Method name must not be null");
 		Class<?> searchType = clazz;
@@ -276,7 +276,7 @@ public abstract class ReflectionUtils {
 	 * @return the invocation result, if any
 	 */
 	@Nullable
-	public static Object invokeMethod(Method method, @Nullable Object target, @Nullable Object... args) {
+	public static Object invokeMethod(Method method, @Nullable Object target, @Nullable Object @Nullable ... args) {
 		try {
 			return method.invoke(target, args);
 		}

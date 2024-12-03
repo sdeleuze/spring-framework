@@ -19,7 +19,7 @@ package org.springframework.aot.hint;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A hint that describes the need to access a {@link ResourceBundle}.

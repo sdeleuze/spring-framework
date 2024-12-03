@@ -21,9 +21,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.aspectj.weaver.tools.ShadowMatch;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.support.ExpressionPointcut;
-import org.springframework.lang.Nullable;
 
 /**
  * Internal {@link ShadowMatch} utilities.

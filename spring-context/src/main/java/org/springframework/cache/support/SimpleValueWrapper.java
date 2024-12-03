@@ -18,8 +18,9 @@ package org.springframework.cache.support;
 
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.Cache.ValueWrapper;
-import org.springframework.lang.Nullable;
 
 /**
  * Straightforward implementation of {@link org.springframework.cache.Cache.ValueWrapper},

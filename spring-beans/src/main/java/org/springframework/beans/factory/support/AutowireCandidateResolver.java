@@ -16,10 +16,11 @@
 
 package org.springframework.beans.factory.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.DependencyDescriptor;
-import org.springframework.lang.Nullable;
 
 /**
  * Strategy interface for determining whether a specific bean definition

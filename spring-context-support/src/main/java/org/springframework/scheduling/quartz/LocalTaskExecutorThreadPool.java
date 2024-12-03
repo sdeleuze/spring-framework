@@ -21,11 +21,11 @@ import java.util.concurrent.RejectedExecutionException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.quartz.SchedulerConfigException;
 import org.quartz.spi.ThreadPool;
 
 import org.springframework.aot.hint.annotation.Reflective;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

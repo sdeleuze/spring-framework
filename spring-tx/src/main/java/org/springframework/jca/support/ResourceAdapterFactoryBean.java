@@ -21,12 +21,12 @@ import jakarta.resource.spi.BootstrapContext;
 import jakarta.resource.spi.ResourceAdapter;
 import jakarta.resource.spi.XATerminator;
 import jakarta.resource.spi.work.WorkManager;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link org.springframework.beans.factory.FactoryBean} that bootstraps

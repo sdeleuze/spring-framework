@@ -23,7 +23,7 @@ import java.sql.ShardingKey;
 
 import javax.sql.DataSource;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An adapter for a target {@link DataSource}, designed to apply sharding keys, if specified,

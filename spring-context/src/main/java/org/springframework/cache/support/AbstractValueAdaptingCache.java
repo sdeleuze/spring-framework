@@ -16,8 +16,9 @@
 
 package org.springframework.cache.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.Cache;
-import org.springframework.lang.Nullable;
 
 /**
  * Common base class for {@link Cache} implementations that need to adapt
@@ -117,8 +118,7 @@ public abstract class AbstractValueAdaptingCache implements Cache {
 	 * @param storeValue the original value
 	 * @return the wrapped value
 	 */
-	@Nullable
-	protected Cache.ValueWrapper toValueWrapper(@Nullable Object storeValue) {
+	protected Cache.@Nullable ValueWrapper toValueWrapper(@Nullable Object storeValue) {
 		return (storeValue != null ? new SimpleValueWrapper(fromStoreValue(storeValue)) : null);
 	}
 

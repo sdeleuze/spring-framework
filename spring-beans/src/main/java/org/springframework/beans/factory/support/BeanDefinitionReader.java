@@ -16,10 +16,11 @@
 
 package org.springframework.beans.factory.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.Nullable;
 
 /**
  * Simple interface for bean definition readers that specifies load methods with

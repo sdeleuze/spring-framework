@@ -16,7 +16,7 @@
 
 package org.springframework.web.context.request;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Request-backed {@link org.springframework.beans.factory.config.Scope}

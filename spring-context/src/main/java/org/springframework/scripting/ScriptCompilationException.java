@@ -16,8 +16,9 @@
 
 package org.springframework.scripting;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception to be thrown on script compilation failure.

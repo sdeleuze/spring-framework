@@ -16,8 +16,9 @@
 
 package org.springframework.aop.framework.autoproxy;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.lang.Nullable;
 
 /**
  * {@code BeanPostProcessor} implementation that creates AOP proxies based on all

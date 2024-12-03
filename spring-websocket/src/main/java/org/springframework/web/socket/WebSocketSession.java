@@ -24,8 +24,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.lang.Nullable;
 
 /**
  * A WebSocket session abstraction. Allows sending messages over a WebSocket

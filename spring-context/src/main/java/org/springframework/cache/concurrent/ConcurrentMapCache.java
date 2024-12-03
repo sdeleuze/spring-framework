@@ -23,9 +23,10 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 import org.springframework.core.serializer.support.SerializationDelegate;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -24,9 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.Mergeable;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -605,6 +606,7 @@ public class ConstructorArgumentValues {
 		 * directly, to allow for multiple ValueHolder instances with the
 		 * same content to reside in the same Set.
 		 */
+		@SuppressWarnings("NullAway") // TODO NullAway bug?
 		private int contentHashCode() {
 			return ObjectUtils.nullSafeHash(this.value, this.type);
 		}

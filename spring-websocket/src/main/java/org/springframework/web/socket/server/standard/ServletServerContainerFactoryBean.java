@@ -19,10 +19,10 @@ package org.springframework.web.socket.server.standard;
 import jakarta.servlet.ServletContext;
 import jakarta.websocket.WebSocketContainer;
 import jakarta.websocket.server.ServerContainer;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.ServletContextAware;
 

@@ -19,10 +19,11 @@ package org.springframework.beans.factory.config;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
-import org.springframework.lang.Nullable;
 
 /**
  * Allows for making a properties file from a classpath location available

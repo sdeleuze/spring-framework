@@ -28,6 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.aopalliance.aop.Advice;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.Pointcut;
@@ -48,7 +49,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.core.SmartClassLoader;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -101,8 +101,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * Convenience constant for subclasses: Return value for "do not proxy".
 	 * @see #getAdvicesAndAdvisorsForBean
 	 */
-	@Nullable
-	protected static final Object[] DO_NOT_PROXY = null;
+	protected static final Object @Nullable [] DO_NOT_PROXY = null;
 
 	/**
 	 * Convenience constant for subclasses: Return value for
@@ -129,8 +128,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 	private boolean applyCommonInterceptorsFirst = true;
 
-	@Nullable
-	private TargetSourceCreator[] customTargetSourceCreators;
+	private TargetSourceCreator @Nullable [] customTargetSourceCreators;
 
 	@Nullable
 	private BeanFactory beanFactory;
@@ -256,8 +254,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	}
 
 	@Override
-	@Nullable
-	public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName) {
+	public Constructor<?> @Nullable [] determineCandidateConstructors(Class<?> beanClass, String beanName) {
 		return null;
 	}
 
@@ -460,19 +457,19 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @see #buildAdvisors
 	 */
 	protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
-			@Nullable Object[] specificInterceptors, TargetSource targetSource) {
+			Object @Nullable [] specificInterceptors, TargetSource targetSource) {
 
 		return buildProxy(beanClass, beanName, specificInterceptors, targetSource, false);
 	}
 
 	private Class<?> createProxyClass(Class<?> beanClass, @Nullable String beanName,
-			@Nullable Object[] specificInterceptors, TargetSource targetSource) {
+			Object @Nullable [] specificInterceptors, TargetSource targetSource) {
 
 		return (Class<?>) buildProxy(beanClass, beanName, specificInterceptors, targetSource, true);
 	}
 
 	private Object buildProxy(Class<?> beanClass, @Nullable String beanName,
-			@Nullable Object[] specificInterceptors, TargetSource targetSource, boolean classOnly) {
+			Object @Nullable [] specificInterceptors, TargetSource targetSource, boolean classOnly) {
 
 		if (this.beanFactory instanceof ConfigurableListableBeanFactory clbf) {
 			AutoProxyUtils.exposeTargetClass(clbf, beanName, beanClass);
@@ -554,7 +551,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * specific to this bean (may be empty, but not null)
 	 * @return the list of Advisors for the given bean
 	 */
-	protected Advisor[] buildAdvisors(@Nullable String beanName, @Nullable Object[] specificInterceptors) {
+	protected Advisor[] buildAdvisors(@Nullable String beanName, Object @Nullable [] specificInterceptors) {
 		// Handle prototypes correctly...
 		Advisor[] commonInterceptors = resolveInterceptorNames();
 
@@ -633,8 +630,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @see #DO_NOT_PROXY
 	 * @see #PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS
 	 */
-	@Nullable
-	protected abstract Object[] getAdvicesAndAdvisorsForBean(Class<?> beanClass, String beanName,
+	protected abstract Object @Nullable [] getAdvicesAndAdvisorsForBean(Class<?> beanClass, String beanName,
 			@Nullable TargetSource customTargetSource) throws BeansException;
 
 }

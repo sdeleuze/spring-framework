@@ -36,6 +36,7 @@ import io.rsocket.transport.ClientTransport;
 import io.rsocket.transport.netty.client.TcpClientTransport;
 import io.rsocket.transport.netty.client.WebsocketClientTransport;
 import io.rsocket.util.DefaultPayload;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
@@ -47,7 +48,6 @@ import org.springframework.core.codec.StringDecoder;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.core.io.buffer.NettyDataBufferFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MimeType;
@@ -81,8 +81,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 	@Nullable
 	private String setupRoute;
 
-	@Nullable
-	private Object[] setupRouteVars;
+	private Object @Nullable [] setupRouteVars;
 
 	@Nullable
 	private Map<Object, MimeType> setupMetadata;

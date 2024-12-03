@@ -38,6 +38,8 @@ import javax.management.modelmbean.ModelMBean;
 import javax.management.modelmbean.ModelMBeanInfo;
 import javax.management.modelmbean.RequiredModelMBean;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.aop.support.AopUtils;
@@ -62,7 +64,6 @@ import org.springframework.jmx.export.notification.ModelMBeanNotificationPublish
 import org.springframework.jmx.export.notification.NotificationPublisherAware;
 import org.springframework.jmx.support.JmxUtils;
 import org.springframework.jmx.support.MBeanRegistrationSupport;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -180,12 +181,10 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	private final Set<String> excludedBeans = new HashSet<>();
 
 	/** The MBeanExporterListeners registered with this exporter. */
-	@Nullable
-	private MBeanExporterListener[] listeners;
+	private MBeanExporterListener @Nullable [] listeners;
 
 	/** The NotificationListeners to register for the MBeans registered by this exporter. */
-	@Nullable
-	private NotificationListenerBean[] notificationListeners;
+	private NotificationListenerBean @Nullable [] notificationListeners;
 
 	/** Map of actually registered NotificationListeners. */
 	private final Map<NotificationListenerBean, ObjectName[]> registeredNotificationListeners = new LinkedHashMap<>();

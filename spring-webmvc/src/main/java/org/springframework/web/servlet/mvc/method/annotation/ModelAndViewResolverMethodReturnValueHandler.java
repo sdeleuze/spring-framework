@@ -19,8 +19,9 @@ package org.springframework.web.servlet.mvc.method.annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.NativeWebRequest;

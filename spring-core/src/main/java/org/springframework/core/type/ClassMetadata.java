@@ -16,7 +16,7 @@
 
 package org.springframework.core.type;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface that defines abstract metadata of a specific class,

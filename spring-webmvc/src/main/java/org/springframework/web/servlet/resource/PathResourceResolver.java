@@ -27,12 +27,12 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.log.LogFormatUtils;
 import org.springframework.http.server.PathContainer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.ServletRequestPathUtils;
 import org.springframework.web.util.UriUtils;
@@ -52,8 +52,7 @@ import org.springframework.web.util.UrlPathHelper;
  */
 public class PathResourceResolver extends AbstractResourceResolver {
 
-	@Nullable
-	private Resource[] allowedLocations;
+	private Resource @Nullable [] allowedLocations;
 
 	private final Map<Resource, Charset> locationCharsets = new HashMap<>(4);
 
@@ -78,12 +77,11 @@ public class PathResourceResolver extends AbstractResourceResolver {
 	 * @since 4.1.2
 	 * @see ResourceHttpRequestHandler#initAllowedLocations()
 	 */
-	public void setAllowedLocations(@Nullable Resource... locations) {
+	public void setAllowedLocations(Resource @Nullable ... locations) {
 		this.allowedLocations = locations;
 	}
 
-	@Nullable
-	public Resource[] getAllowedLocations() {
+	public Resource @Nullable [] getAllowedLocations() {
 		return this.allowedLocations;
 	}
 

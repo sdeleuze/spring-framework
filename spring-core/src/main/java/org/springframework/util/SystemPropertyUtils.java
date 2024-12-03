@@ -16,7 +16,7 @@
 
 package org.springframework.util;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Helper class for resolving placeholders in texts. Usually applied to file paths.

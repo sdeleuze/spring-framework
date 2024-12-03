@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Internal class used by {@link SourceFiles} and {@link ResourceFiles} to

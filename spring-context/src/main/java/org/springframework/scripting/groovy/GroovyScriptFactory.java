@@ -26,12 +26,12 @@ import groovy.lang.Script;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.control.customizers.CompilationCustomizer;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.ScriptFactory;
 import org.springframework.scripting.ScriptSource;
@@ -201,8 +201,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 	 * @return {@code null} always
 	 */
 	@Override
-	@Nullable
-	public Class<?>[] getScriptInterfaces() {
+	public Class<?> @Nullable [] getScriptInterfaces() {
 		return null;
 	}
 
@@ -222,7 +221,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 	 */
 	@Override
 	@Nullable
-	public Object getScriptedObject(ScriptSource scriptSource, @Nullable Class<?>... actualInterfaces)
+	public Object getScriptedObject(ScriptSource scriptSource, Class<?> @Nullable ... actualInterfaces)
 			throws IOException, ScriptCompilationException {
 
 		synchronized (this.scriptClassMonitor) {

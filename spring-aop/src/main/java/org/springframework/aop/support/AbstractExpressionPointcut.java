@@ -18,7 +18,7 @@ package org.springframework.aop.support;
 
 import java.io.Serializable;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Abstract superclass for expression pointcuts,

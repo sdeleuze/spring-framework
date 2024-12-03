@@ -19,8 +19,9 @@ package org.springframework.core.annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
 /**

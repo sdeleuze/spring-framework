@@ -21,9 +21,9 @@ import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageConsumer;
 import jakarta.jms.Session;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.support.JmsAccessor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

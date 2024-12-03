@@ -25,11 +25,11 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.aspectj.lang.reflect.SourceLocation;
 import org.aspectj.runtime.internal.AroundClosure;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.ProxyMethodInvocation;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -55,8 +55,7 @@ public class MethodInvocationProceedingJoinPoint implements ProceedingJoinPoint,
 
 	private final ProxyMethodInvocation methodInvocation;
 
-	@Nullable
-	private Object[] args;
+	private Object @Nullable [] args;
 
 	/** Lazily initialized signature object. */
 	@Nullable
@@ -180,8 +179,7 @@ public class MethodInvocationProceedingJoinPoint implements ProceedingJoinPoint,
 	 */
 	private class MethodSignatureImpl implements MethodSignature {
 
-		@Nullable
-		private volatile String[] parameterNames;
+		private volatile String @Nullable [] parameterNames;
 
 		@Override
 		public String getName() {
@@ -219,8 +217,7 @@ public class MethodInvocationProceedingJoinPoint implements ProceedingJoinPoint,
 		}
 
 		@Override
-		@Nullable
-		public String[] getParameterNames() {
+		public String @Nullable [] getParameterNames() {
 			String[] parameterNames = this.parameterNames;
 			if (parameterNames == null) {
 				parameterNames = parameterNameDiscoverer.getParameterNames(getMethod());

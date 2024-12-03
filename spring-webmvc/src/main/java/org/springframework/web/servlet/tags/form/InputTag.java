@@ -19,8 +19,7 @@ package org.springframework.web.servlet.tags.form;
 import java.util.Map;
 
 import jakarta.servlet.jsp.JspException;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The {@code <input>} tag renders an HTML 'input' tag with type 'text' using

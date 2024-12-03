@@ -22,8 +22,9 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.lang.Contract;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.ObjectUtils;
@@ -71,8 +72,7 @@ public abstract class RepeatableContainers {
 		return new ExplicitRepeatableContainer(this, repeatable, container);
 	}
 
-	@Nullable
-	Annotation[] findRepeatedAnnotations(Annotation annotation) {
+	Annotation @Nullable [] findRepeatedAnnotations(Annotation annotation) {
 		if (this.parent == null) {
 			return null;
 		}
@@ -155,8 +155,7 @@ public abstract class RepeatableContainers {
 		}
 
 		@Override
-		@Nullable
-		Annotation[] findRepeatedAnnotations(Annotation annotation) {
+		Annotation @Nullable [] findRepeatedAnnotations(Annotation annotation) {
 			Method method = getRepeatedAnnotationsMethod(annotation.annotationType());
 			if (method != null) {
 				return (Annotation[]) AnnotationUtils.invokeAnnotationMethod(method, annotation);
@@ -241,8 +240,7 @@ public abstract class RepeatableContainers {
 		}
 
 		@Override
-		@Nullable
-		Annotation[] findRepeatedAnnotations(Annotation annotation) {
+		Annotation @Nullable [] findRepeatedAnnotations(Annotation annotation) {
 			if (this.container.isAssignableFrom(annotation.annotationType())) {
 				return (Annotation[]) AnnotationUtils.invokeAnnotationMethod(this.valueMethod, annotation);
 			}

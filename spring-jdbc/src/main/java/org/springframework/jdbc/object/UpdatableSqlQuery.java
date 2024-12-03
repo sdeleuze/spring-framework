@@ -22,8 +22,9 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.Nullable;
 
 /**
  * Reusable RDBMS query in which concrete subclasses must implement
@@ -62,7 +63,7 @@ public abstract class UpdatableSqlQuery<T> extends SqlQuery<T> {
 	 * implementation of the {@code updateRow()} method.
 	 */
 	@Override
-	protected RowMapper<T> newRowMapper(@Nullable Object[] parameters, @Nullable Map<?, ?> context) {
+	protected RowMapper<T> newRowMapper(Object @Nullable [] parameters, @Nullable Map<?, ?> context) {
 		return new RowMapperImpl(context);
 	}
 

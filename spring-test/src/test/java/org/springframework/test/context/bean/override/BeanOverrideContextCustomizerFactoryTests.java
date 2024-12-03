@@ -19,10 +19,10 @@ package org.springframework.test.context.bean.override;
 import java.util.Collections;
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import org.springframework.lang.Nullable;
 import org.springframework.test.context.bean.override.DummyBean.DummyBeanOverrideProcessor.DummyBeanOverrideHandler;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -28,6 +28,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import io.micrometer.observation.ObservationRegistry;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -45,7 +46,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.observation.ClientRequestObservationConvention;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.lang.CheckReturnValue;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;

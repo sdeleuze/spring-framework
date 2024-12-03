@@ -18,10 +18,10 @@ package org.springframework.messaging.handler.invocation;
 
 import java.lang.reflect.Method;
 
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 
 import static org.assertj.core.api.Assertions.assertThat;

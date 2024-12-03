@@ -20,7 +20,7 @@ import java.time.Instant;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A representation of a scheduled task at runtime,

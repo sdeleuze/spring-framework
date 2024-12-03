@@ -17,8 +17,8 @@
 package org.springframework.orm.jpa;
 
 import jakarta.persistence.EntityManager;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.SavepointManager;
 import org.springframework.transaction.support.ResourceHolderSupport;
 import org.springframework.util.Assert;

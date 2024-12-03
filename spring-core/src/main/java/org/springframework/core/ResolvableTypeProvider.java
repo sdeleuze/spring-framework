@@ -16,7 +16,7 @@
 
 package org.springframework.core;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Any object can implement this interface to provide its actual {@link ResolvableType}.

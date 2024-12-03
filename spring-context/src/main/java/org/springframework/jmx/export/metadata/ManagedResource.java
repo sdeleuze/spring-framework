@@ -16,7 +16,7 @@
 
 package org.springframework.jmx.export.metadata;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Metadata indicating that instances of an annotated class

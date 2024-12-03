@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.TypeMismatchDataAccessException;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
-import org.springframework.lang.Nullable;
 
 /**
  * SQL "function" wrapper for a query that returns a single row of results.

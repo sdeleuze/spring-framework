@@ -35,12 +35,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.AjType;
 import org.aspectj.lang.reflect.AjTypeSystem;
 import org.aspectj.lang.reflect.PerClauseKind;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.framework.AopConfigException;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.SpringProperties;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 
 /**
  * Abstract base class for factories that can create Spring AOP Advisors
@@ -242,8 +242,7 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 		private static final String[] EMPTY_ARRAY = new String[0];
 
 		@Override
-		@Nullable
-		public String[] getParameterNames(Method method) {
+		public String @Nullable [] getParameterNames(Method method) {
 			if (method.getParameterCount() == 0) {
 				return EMPTY_ARRAY;
 			}

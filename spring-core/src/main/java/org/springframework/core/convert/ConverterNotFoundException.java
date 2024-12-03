@@ -16,7 +16,7 @@
 
 package org.springframework.core.convert;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Exception to be thrown when a suitable converter could not be found

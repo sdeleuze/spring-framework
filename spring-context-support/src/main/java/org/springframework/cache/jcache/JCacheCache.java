@@ -24,8 +24,9 @@ import javax.cache.processor.EntryProcessor;
 import javax.cache.processor.EntryProcessorException;
 import javax.cache.processor.MutableEntry;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.support.AbstractValueAdaptingCache;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

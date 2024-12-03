@@ -45,6 +45,7 @@ import jakarta.persistence.spi.PersistenceProvider;
 import jakarta.persistence.spi.PersistenceUnitInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.BeanClassLoaderAware;
@@ -58,7 +59,6 @@ import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.PersistenceExceptionTranslator;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -492,7 +492,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	 * Delegate an incoming invocation from the proxy, dispatching to EntityManagerFactoryInfo
 	 * or the native EntityManagerFactory accordingly.
 	 */
-	Object invokeProxyMethod(Method method, @Nullable Object[] args) throws Throwable {
+	Object invokeProxyMethod(Method method, Object @Nullable [] args) throws Throwable {
 		if (method.getDeclaringClass().isAssignableFrom(EntityManagerFactoryInfo.class)) {
 			return method.invoke(this, args);
 		}

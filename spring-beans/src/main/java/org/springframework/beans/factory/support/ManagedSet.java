@@ -20,9 +20,10 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.Mergeable;
-import org.springframework.lang.Nullable;
 
 /**
  * Tag collection class used to hold managed Set values, which may

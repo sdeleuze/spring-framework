@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
 import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -30,7 +31,6 @@ import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

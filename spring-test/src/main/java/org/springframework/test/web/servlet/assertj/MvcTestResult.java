@@ -17,8 +17,8 @@
 package org.springframework.test.web.servlet.assertj;
 
 import org.assertj.core.api.AssertProvider;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;

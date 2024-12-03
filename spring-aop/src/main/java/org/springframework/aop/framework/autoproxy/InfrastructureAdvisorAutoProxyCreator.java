@@ -16,9 +16,10 @@
 
 package org.springframework.aop.framework.autoproxy;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.lang.Nullable;
 
 /**
  * Auto-proxy creator that considers infrastructure Advisor beans only,

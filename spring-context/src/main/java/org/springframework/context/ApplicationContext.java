@@ -16,12 +16,13 @@
 
 package org.springframework.context;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.HierarchicalBeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.core.env.EnvironmentCapable;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.lang.Nullable;
 
 /**
  * Central interface to provide configuration for an application.

@@ -20,10 +20,10 @@ import java.text.SimpleDateFormat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * A {@link FactoryBean} for creating a Google Gson 2.x {@link Gson} instance.

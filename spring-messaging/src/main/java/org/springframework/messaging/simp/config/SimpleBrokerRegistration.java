@@ -16,7 +16,8 @@
 
 package org.springframework.messaging.simp.config;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler;
@@ -34,8 +35,7 @@ public class SimpleBrokerRegistration extends AbstractBrokerRegistration {
 	@Nullable
 	private TaskScheduler taskScheduler;
 
-	@Nullable
-	private long[] heartbeat;
+	private long @Nullable [] heartbeat;
 
 	@Nullable
 	private String selectorHeaderName;

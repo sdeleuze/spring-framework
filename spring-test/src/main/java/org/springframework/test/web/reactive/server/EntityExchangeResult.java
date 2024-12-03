@@ -16,7 +16,7 @@
 
 package org.springframework.test.web.reactive.server;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@code ExchangeResult} sub-class that exposes the response body fully

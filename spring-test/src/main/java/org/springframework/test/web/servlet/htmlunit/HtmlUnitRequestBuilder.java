@@ -39,10 +39,10 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.NameValuePair;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.Mergeable;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockPart;

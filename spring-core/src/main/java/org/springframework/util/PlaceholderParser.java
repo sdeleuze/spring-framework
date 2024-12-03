@@ -26,8 +26,8 @@ import java.util.function.Function;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 
 /**
@@ -211,8 +211,7 @@ final class PlaceholderParser {
 		return new NestedPlaceholderPart(text, parts, null);
 	}
 
-	@Nullable
-	private String[] splitKeyAndDefault(String value) {
+	private String @Nullable [] splitKeyAndDefault(String value) {
 		if (this.separator == null || !value.contains(this.separator)) {
 			return null;
 		}

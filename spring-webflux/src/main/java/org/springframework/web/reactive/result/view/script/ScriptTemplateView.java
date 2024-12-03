@@ -30,6 +30,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.BeansException;
@@ -40,7 +41,6 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.scripting.support.StandardScriptEvalException;
 import org.springframework.scripting.support.StandardScriptUtils;
 import org.springframework.util.Assert;
@@ -85,8 +85,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 	@Nullable
 	private Boolean sharedEngine;
 
-	@Nullable
-	private String[] scripts;
+	private String @Nullable [] scripts;
 
 	@Nullable
 	private String renderObject;
@@ -94,8 +93,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 	@Nullable
 	private String renderFunction;
 
-	@Nullable
-	private String[] resourceLoaderPaths;
+	private String @Nullable [] resourceLoaderPaths;
 
 	@Nullable
 	private volatile ScriptEngineManager scriptEngineManager;

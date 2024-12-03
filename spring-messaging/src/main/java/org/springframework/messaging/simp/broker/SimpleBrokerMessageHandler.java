@@ -24,7 +24,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
@@ -66,8 +67,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 	@Nullable
 	private TaskScheduler taskScheduler;
 
-	@Nullable
-	private long[] heartbeatValue;
+	private long @Nullable [] heartbeatValue;
 
 	@Nullable
 	private MessageHeaderInitializer headerInitializer;
@@ -237,8 +237,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 	 * The configured value for the heart-beat settings.
 	 * @since 4.2
 	 */
-	@Nullable
-	public long[] getHeartbeatValue() {
+	public long @Nullable [] getHeartbeatValue() {
 		return this.heartbeatValue;
 	}
 
@@ -459,7 +458,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 
 
 		public SessionInfo(String sessionId, @Nullable Principal user, MessageChannel outboundChannel,
-				@Nullable long[] clientHeartbeat, @Nullable long[] serverHeartbeat) {
+				long @Nullable [] clientHeartbeat, long @Nullable [] serverHeartbeat) {
 
 			this.sessionId = sessionId;
 			this.user = user;

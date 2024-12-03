@@ -17,8 +17,8 @@
 package org.springframework.web.servlet.tags;
 
 import jakarta.servlet.jsp.JspException;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.web.util.HtmlUtils;
 
 /**

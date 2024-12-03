@@ -27,10 +27,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.async.DeferredResult.DeferredResultHandler;
@@ -84,8 +84,7 @@ public final class WebAsyncManager {
 	@Nullable
 	private volatile Object concurrentResult = RESULT_NONE;
 
-	@Nullable
-	private volatile Object[] concurrentResultContext;
+	private volatile Object @Nullable [] concurrentResultContext;
 
 	private final AtomicReference<State> state = new AtomicReference<>(State.NOT_STARTED);
 
@@ -171,8 +170,7 @@ public final class WebAsyncManager {
 	 * Get the additional processing context saved at the start of concurrent handling.
 	 * @see #clearConcurrentResult()
 	 */
-	@Nullable
-	public Object[] getConcurrentResultContext() {
+	public Object @Nullable [] getConcurrentResultContext() {
 		return this.concurrentResultContext;
 	}
 

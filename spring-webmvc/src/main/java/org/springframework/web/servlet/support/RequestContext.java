@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.jsp.jstl.core.Config;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
@@ -34,7 +35,6 @@ import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleTimeZoneAwareLocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -110,8 +110,7 @@ public class RequestContext {
 	private TimeZone timeZone;
 
 	@Deprecated
-	@Nullable
-	private org.springframework.ui.context.Theme theme;
+	private org.springframework.ui.context.@Nullable Theme theme;
 
 	@Nullable
 	private Boolean defaultHtmlEscape;
@@ -435,7 +434,7 @@ public class RequestContext {
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
 	@Deprecated(since = "6.0")
-	public void changeTheme(@Nullable org.springframework.ui.context.Theme theme) {
+	public void changeTheme(org.springframework.ui.context.@Nullable Theme theme) {
 		org.springframework.web.servlet.ThemeResolver themeResolver = RequestContextUtils.getThemeResolver(this.request);
 		if (themeResolver == null) {
 			throw new IllegalStateException("Cannot change theme if no ThemeResolver configured");
@@ -639,7 +638,7 @@ public class RequestContext {
 	 * @param defaultMessage the String to return if the lookup fails
 	 * @return the message
 	 */
-	public String getMessage(String code, @Nullable Object[] args, String defaultMessage) {
+	public String getMessage(String code, Object @Nullable [] args, String defaultMessage) {
 		return getMessage(code, args, defaultMessage, isDefaultHtmlEscape());
 	}
 
@@ -662,7 +661,7 @@ public class RequestContext {
 	 * @param htmlEscape if the message should be HTML-escaped
 	 * @return the message
 	 */
-	public String getMessage(String code, @Nullable Object[] args, String defaultMessage, boolean htmlEscape) {
+	public String getMessage(String code, Object @Nullable [] args, String defaultMessage, boolean htmlEscape) {
 		String msg = getMessageSource().getMessage(code, args, defaultMessage, getLocale());
 		if (msg == null) {
 			return "";
@@ -687,7 +686,7 @@ public class RequestContext {
 	 * @return the message
 	 * @throws org.springframework.context.NoSuchMessageException if not found
 	 */
-	public String getMessage(String code, @Nullable Object[] args) throws NoSuchMessageException {
+	public String getMessage(String code, Object @Nullable [] args) throws NoSuchMessageException {
 		return getMessage(code, args, isDefaultHtmlEscape());
 	}
 
@@ -710,7 +709,7 @@ public class RequestContext {
 	 * @return the message
 	 * @throws org.springframework.context.NoSuchMessageException if not found
 	 */
-	public String getMessage(String code, @Nullable Object[] args, boolean htmlEscape) throws NoSuchMessageException {
+	public String getMessage(String code, Object @Nullable [] args, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = getMessageSource().getMessage(code, args, getLocale());
 		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
 	}
@@ -763,7 +762,7 @@ public class RequestContext {
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
 	@Deprecated
-	public String getThemeMessage(String code, @Nullable Object[] args, String defaultMessage) {
+	public String getThemeMessage(String code, Object @Nullable [] args, String defaultMessage) {
 		String msg = getTheme().getMessageSource().getMessage(code, args, defaultMessage, getLocale());
 		return (msg != null ? msg : "");
 	}
@@ -810,7 +809,7 @@ public class RequestContext {
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
 	@Deprecated
-	public String getThemeMessage(String code, @Nullable Object[] args) throws NoSuchMessageException {
+	public String getThemeMessage(String code, Object @Nullable [] args) throws NoSuchMessageException {
 		return getTheme().getMessageSource().getMessage(code, args, getLocale());
 	}
 

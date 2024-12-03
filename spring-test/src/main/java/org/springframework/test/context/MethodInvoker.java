@@ -18,7 +18,7 @@ package org.springframework.test.context;
 
 import java.lang.reflect.Method;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@code MethodInvoker} defines a generic API for invoking a {@link Method}

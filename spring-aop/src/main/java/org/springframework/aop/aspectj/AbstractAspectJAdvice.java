@@ -31,6 +31,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.weaver.tools.JoinPointMatch;
 import org.aspectj.weaver.tools.PointcutParameter;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.AopInvocationException;
 import org.springframework.aop.MethodMatcher;
@@ -42,7 +43,6 @@ import org.springframework.aop.support.MethodMatchers;
 import org.springframework.aop.support.StaticMethodMatcher;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -118,8 +118,7 @@ public abstract class AbstractAspectJAdvice implements Advice, AspectJPrecedence
 	 * This will be non-null if the creator of this advice object knows the argument names
 	 * and sets them explicitly.
 	 */
-	@Nullable
-	private String[] argumentNames;
+	private String @Nullable [] argumentNames;
 
 	/** Non-null if after throwing advice binds the thrown value. */
 	@Nullable

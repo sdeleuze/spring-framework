@@ -18,7 +18,8 @@ package org.springframework.jdbc.datasource.embedded;
 
 import java.sql.Driver;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ClassUtils;
 
 /**

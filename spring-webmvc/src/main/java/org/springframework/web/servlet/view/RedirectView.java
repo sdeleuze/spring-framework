@@ -29,11 +29,11 @@ import java.util.regex.Pattern;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -105,8 +105,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 
 	private boolean propagateQueryParams = false;
 
-	@Nullable
-	private String[] hosts;
+	private String @Nullable [] hosts;
 
 
 	/**
@@ -274,8 +273,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	 * Return the configured application hosts.
 	 * @since 4.3
 	 */
-	@Nullable
-	public String[] getHosts() {
+	public String @Nullable [] getHosts() {
 		return this.hosts;
 	}
 

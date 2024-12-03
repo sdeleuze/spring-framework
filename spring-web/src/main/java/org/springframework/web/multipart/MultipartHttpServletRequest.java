@@ -17,10 +17,10 @@
 package org.springframework.web.multipart;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.lang.Nullable;
 
 /**
  * Provides additional methods for dealing with multipart content within a

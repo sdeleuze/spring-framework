@@ -21,6 +21,7 @@ import java.io.IOException;
 import jakarta.el.ELContext;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.PageContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.context.expression.EnvironmentAccessor;
@@ -35,7 +36,6 @@ import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.expression.spel.support.StandardTypeConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.util.JavaScriptUtils;
 import org.springframework.web.util.TagUtils;
@@ -223,8 +223,7 @@ public class EvalTag extends HtmlEscapingAwareTag {
 		}
 
 		@Override
-		@Nullable
-		public Class<?>[] getSpecificTargetClasses() {
+		public Class<?> @Nullable [] getSpecificTargetClasses() {
 			return null;
 		}
 

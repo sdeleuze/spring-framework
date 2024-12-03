@@ -16,12 +16,13 @@
 
 package org.springframework.aop.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.aspectj.AspectInstanceFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.core.Ordered;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

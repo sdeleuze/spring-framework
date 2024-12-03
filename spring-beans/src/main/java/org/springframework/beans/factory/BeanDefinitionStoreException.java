@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.FatalBeanException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when a BeanFactory encounters an invalid bean definition:

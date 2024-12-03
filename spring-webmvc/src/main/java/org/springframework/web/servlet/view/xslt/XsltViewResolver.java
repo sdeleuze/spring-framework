@@ -21,7 +21,8 @@ import java.util.Properties;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 

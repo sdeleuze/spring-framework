@@ -33,13 +33,13 @@ import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.CollectionFactory;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.convert.ConversionException;
 import org.springframework.core.convert.ConverterNotFoundException;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -1086,8 +1086,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 
 		public String canonicalName;
 
-		@Nullable
-		public String[] keys;
+		public String @Nullable [] keys;
 	}
 
 }

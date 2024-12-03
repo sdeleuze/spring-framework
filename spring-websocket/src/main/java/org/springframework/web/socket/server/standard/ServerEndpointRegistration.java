@@ -28,10 +28,10 @@ import jakarta.websocket.Extension;
 import jakarta.websocket.HandshakeResponse;
 import jakarta.websocket.server.HandshakeRequest;
 import jakarta.websocket.server.ServerEndpointConfig;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.socket.handler.BeanCreatingHandlerProvider;
 

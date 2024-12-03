@@ -16,10 +16,11 @@
 
 package org.springframework.http.server.reactive;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.http.ResponseCookie;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 
 /**

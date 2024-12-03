@@ -21,8 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import jakarta.servlet.SessionCookieConfig;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Mock implementation of the {@link jakarta.servlet.SessionCookieConfig} interface.

@@ -19,10 +19,10 @@ package org.springframework.web.reactive.function.server;
 import java.time.Duration;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import org.springframework.lang.Nullable;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.testfixture.http.server.reactive.bootstrap.HttpServer;

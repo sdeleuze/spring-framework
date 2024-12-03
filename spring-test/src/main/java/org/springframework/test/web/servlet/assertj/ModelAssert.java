@@ -24,8 +24,8 @@ import java.util.function.Predicate;
 import org.assertj.core.api.AbstractMapAssert;
 import org.assertj.core.error.BasicErrorMessageFactory;
 import org.assertj.core.internal.Failures;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.test.validation.AbstractBindingResultAssert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.BindingResultUtils;

@@ -18,8 +18,9 @@ package org.springframework.test.context.aot;
 
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.AotDetector;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
