@@ -32,11 +32,10 @@ class ResponseEntityKotlinTests {
 		val responseEntity = ResponseEntity.ofNullable(entity)
 		assertThat(responseEntity).isNotNull()
 		assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
-		assertThat(responseEntity.body as Int).isEqualTo(entity)
+		assertThat(responseEntity.body).isEqualTo(entity)
 	}
 
 	@Test
-	@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 	fun ofNullNullable() {
 		val responseEntity = ResponseEntity.ofNullable<Int>(null)
 		assertThat(responseEntity).isNotNull()
