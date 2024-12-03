@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -30,7 +32,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.DependencyDescriptor;
 import org.springframework.beans.factory.support.RegisteredBean;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
@@ -258,6 +259,7 @@ public abstract class ResourceElementResolver {
 		}
 
 		@Override
+		@SuppressWarnings("NullAway") // Bug?
 		public void resolveAndSet(RegisteredBean registeredBean, Object instance) {
 			Assert.notNull(registeredBean, "'registeredBean' must not be null");
 			Assert.notNull(instance, "'instance' must not be null");

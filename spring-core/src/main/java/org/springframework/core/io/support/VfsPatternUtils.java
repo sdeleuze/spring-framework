@@ -21,8 +21,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.net.URL;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.VfsUtils;
-import org.springframework.lang.Nullable;
 
 /**
  * Artificial class used for accessing the {@link VfsUtils} methods

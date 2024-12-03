@@ -23,6 +23,7 @@ import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.contextpropagation.ObservationThreadLocalAccessor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import reactor.core.observability.DefaultSignalListener;
 import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
@@ -41,7 +42,6 @@ import org.springframework.http.server.reactive.observation.DefaultServerRequest
 import org.springframework.http.server.reactive.observation.ServerHttpObservationDocumentation;
 import org.springframework.http.server.reactive.observation.ServerRequestObservationContext;
 import org.springframework.http.server.reactive.observation.ServerRequestObservationConvention;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;

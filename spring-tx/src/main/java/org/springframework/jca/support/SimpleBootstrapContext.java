@@ -24,8 +24,8 @@ import jakarta.resource.spi.XATerminator;
 import jakarta.resource.spi.work.WorkContext;
 import jakarta.resource.spi.work.WorkManager;
 import jakarta.transaction.TransactionSynchronizationRegistry;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

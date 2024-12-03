@@ -22,11 +22,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.core.DisposableSqlTypeValue;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
-import org.springframework.lang.Nullable;
 
 /**
  * Object to represent an SQL BLOB/CLOB value parameter. BLOBs can either be an

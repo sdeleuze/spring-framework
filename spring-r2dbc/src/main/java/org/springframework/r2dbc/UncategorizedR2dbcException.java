@@ -17,9 +17,9 @@
 package org.springframework.r2dbc;
 
 import io.r2dbc.spi.R2dbcException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.dao.UncategorizedDataAccessException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when we can't classify a {@link R2dbcException} into

@@ -19,7 +19,7 @@ package org.springframework.core.env;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Holder containing one or more {@link PropertySource} objects.

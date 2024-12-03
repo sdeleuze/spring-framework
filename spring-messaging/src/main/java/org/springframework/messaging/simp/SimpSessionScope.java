@@ -16,9 +16,10 @@
 
 package org.springframework.messaging.simp;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
-import org.springframework.lang.Nullable;
 
 /**
  * A {@link Scope} implementation exposing the attributes of a SiMP session

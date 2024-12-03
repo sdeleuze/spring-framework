@@ -29,8 +29,7 @@ import java.util.Set;
 
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.FilterRegistration;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Mock implementation of {@link FilterRegistration}.

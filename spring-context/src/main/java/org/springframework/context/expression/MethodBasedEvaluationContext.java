@@ -19,10 +19,11 @@ package org.springframework.context.expression;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.KotlinDetector;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**

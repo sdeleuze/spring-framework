@@ -17,11 +17,11 @@
 package org.springframework.aop.support;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.DynamicIntroductionAdvice;
 import org.springframework.aop.IntroductionInterceptor;
 import org.springframework.aop.ProxyMethodInvocation;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

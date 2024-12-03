@@ -20,10 +20,11 @@ import java.beans.PropertyEditor;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -61,8 +62,7 @@ public class BindStatus {
 
 	private final String[] errorCodes;
 
-	@Nullable
-	private String[] errorMessages;
+	private String @Nullable [] errorMessages;
 
 	@Nullable
 	private List<? extends ObjectError> objectErrors;

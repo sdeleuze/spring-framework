@@ -28,6 +28,7 @@ import java.util.Set;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -43,7 +44,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotatedMethod;
-import org.springframework.lang.Nullable;
 import org.springframework.objenesis.ObjenesisException;
 import org.springframework.objenesis.SpringObjenesis;
 import org.springframework.util.AntPathMatcher;
@@ -725,8 +725,7 @@ public class MvcUriComponentsBuilder {
 		@Nullable
 		private Method controllerMethod;
 
-		@Nullable
-		private Object[] argumentValues;
+		private Object @Nullable [] argumentValues;
 
 		ControllerMethodInvocationInterceptor(Class<?> controllerType) {
 			this.controllerType = controllerType;
@@ -767,7 +766,7 @@ public class MvcUriComponentsBuilder {
 
 		@Override
 		@Nullable
-		public Object invoke(Object proxy, Method method, @Nullable Object[] args) {
+		public Object invoke(Object proxy, Method method, Object @Nullable [] args) {
 			return intercept(proxy, method, (args != null ? args : new Object[0]), null);
 		}
 

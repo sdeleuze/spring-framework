@@ -20,8 +20,9 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.lang.reflect.Method;
 
+import org.jspecify.annotations.NonNull;
+
 import org.springframework.core.Ordered;
-import org.springframework.lang.NonNull;
 
 /**
  * Extension of {@link StandardBeanInfoFactory} that supports "non-standard"

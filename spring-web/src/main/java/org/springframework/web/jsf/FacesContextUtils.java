@@ -18,8 +18,8 @@ package org.springframework.web.jsf;
 
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.WebUtils;

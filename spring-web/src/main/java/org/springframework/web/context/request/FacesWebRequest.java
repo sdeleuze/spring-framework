@@ -23,8 +23,8 @@ import java.util.Map;
 
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
@@ -91,8 +91,7 @@ public class FacesWebRequest extends FacesRequestAttributes implements NativeWeb
 	}
 
 	@Override
-	@Nullable
-	public String[] getHeaderValues(String headerName) {
+	public String @Nullable [] getHeaderValues(String headerName) {
 		return getExternalContext().getRequestHeaderValuesMap().get(headerName);
 	}
 
@@ -113,8 +112,7 @@ public class FacesWebRequest extends FacesRequestAttributes implements NativeWeb
 	}
 
 	@Override
-	@Nullable
-	public String[] getParameterValues(String paramName) {
+	public String @Nullable [] getParameterValues(String paramName) {
 		return getExternalContext().getRequestParameterValuesMap().get(paramName);
 	}
 

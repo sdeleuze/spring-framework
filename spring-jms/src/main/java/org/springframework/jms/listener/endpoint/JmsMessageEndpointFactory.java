@@ -20,9 +20,9 @@ import jakarta.jms.Message;
 import jakarta.jms.MessageListener;
 import jakarta.resource.ResourceException;
 import jakarta.resource.spi.UnavailableException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jca.endpoint.AbstractMessageEndpointFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

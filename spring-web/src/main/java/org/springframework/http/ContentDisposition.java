@@ -28,7 +28,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StreamUtils;
@@ -239,6 +240,7 @@ public final class ContentDisposition {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.type, this.name,this.filename,
 				this.charset, this.size, this.creationDate, this.modificationDate, this.readDate);

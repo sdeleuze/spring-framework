@@ -18,7 +18,7 @@ package org.springframework.jmx.export.metadata;
 
 import java.lang.reflect.Method;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface used by the {@code MetadataMBeanInfoAssembler} to

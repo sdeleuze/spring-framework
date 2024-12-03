@@ -20,7 +20,7 @@ package org.springframework.aot.hint;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A hint that describes the need for Java serialization at runtime.

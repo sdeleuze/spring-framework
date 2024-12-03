@@ -17,9 +17,9 @@
 package org.springframework.web.context.support;
 
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.lang.Nullable;
 import org.springframework.web.context.ServletContextAware;
 
 /**

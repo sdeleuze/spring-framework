@@ -24,8 +24,7 @@ import jakarta.jms.Queue;
 import jakarta.jms.QueueReceiver;
 import jakarta.jms.Topic;
 import jakarta.jms.TopicSubscriber;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * JMS MessageConsumer decorator that adapts all calls

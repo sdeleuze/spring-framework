@@ -18,9 +18,9 @@ package org.springframework.aop.target.dynamic;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.TargetSource;
-import org.springframework.lang.Nullable;
 
 /**
  * Abstract {@link org.springframework.aop.TargetSource} implementation that

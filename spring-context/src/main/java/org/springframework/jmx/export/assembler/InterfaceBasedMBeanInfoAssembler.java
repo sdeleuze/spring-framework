@@ -23,9 +23,10 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -61,8 +62,7 @@ import org.springframework.util.StringUtils;
 public class InterfaceBasedMBeanInfoAssembler extends AbstractConfigurableMBeanInfoAssembler
 		implements BeanClassLoaderAware, InitializingBean {
 
-	@Nullable
-	private Class<?>[] managedInterfaces;
+	private Class<?> @Nullable [] managedInterfaces;
 
 	/** Mappings of bean keys to an array of classes. */
 	@Nullable

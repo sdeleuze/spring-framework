@@ -18,7 +18,8 @@ package org.springframework.http.codec;
 
 import java.time.Duration;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -114,6 +115,7 @@ public final class ServerSentEvent<T> {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.id, this.event, this.retry, this.comment, this.data);
 	}

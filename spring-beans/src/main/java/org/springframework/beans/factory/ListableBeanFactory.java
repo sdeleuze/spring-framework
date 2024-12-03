@@ -20,9 +20,10 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 
 /**
  * Extension of the {@link BeanFactory} interface to be implemented by bean factories

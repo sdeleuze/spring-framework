@@ -27,13 +27,13 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import jakarta.servlet.ServletRequest;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpAsyncRequestControl;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.socket.CloseStatus;

@@ -16,7 +16,7 @@
 
 package org.springframework.aop;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A {@code TargetSource} is used to obtain the current "target" of

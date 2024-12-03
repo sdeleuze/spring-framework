@@ -20,9 +20,9 @@ import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.tagext.TagSupport;
 import jakarta.servlet.jsp.tagext.TryCatchFinally;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.PropertyAccessor;
-import org.springframework.lang.Nullable;
 
 /**
  * <p>The {@code <nestedPath>} tag supports and assists with nested beans or

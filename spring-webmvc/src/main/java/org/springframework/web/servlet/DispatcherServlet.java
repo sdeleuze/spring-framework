@@ -37,6 +37,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.BeanInitializationException;
@@ -52,7 +53,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.ServletServerHttpRequest;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
@@ -791,8 +791,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @see #getWebApplicationContext()
 	 */
 	@Deprecated
-	@Nullable
-	public final org.springframework.ui.context.ThemeSource getThemeSource() {
+	public final org.springframework.ui.context.@Nullable ThemeSource getThemeSource() {
 		return (getWebApplicationContext() instanceof org.springframework.ui.context.ThemeSource themeSource ?
 				themeSource : null);
 	}

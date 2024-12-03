@@ -19,7 +19,7 @@ package org.springframework.messaging.simp.user;
 import java.security.Principal;
 import java.util.Set;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a connected user.

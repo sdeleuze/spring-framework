@@ -19,8 +19,9 @@ package org.springframework.web.multipart;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.AbstractResource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -18,11 +18,10 @@ package org.springframework.messaging.rsocket;
 
 import io.rsocket.Payload;
 import io.rsocket.RSocket;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import org.springframework.lang.Nullable;
 
 /**
  * {@link RSocket} that saves the name of the invoked method and the input payload(s).

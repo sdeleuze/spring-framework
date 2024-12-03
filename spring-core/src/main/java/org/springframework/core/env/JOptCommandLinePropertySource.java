@@ -22,8 +22,8 @@ import java.util.List;
 
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 

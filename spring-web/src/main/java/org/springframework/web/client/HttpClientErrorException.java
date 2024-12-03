@@ -18,10 +18,11 @@ package org.springframework.web.client;
 
 import java.nio.charset.Charset;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when an HTTP 4xx is received.

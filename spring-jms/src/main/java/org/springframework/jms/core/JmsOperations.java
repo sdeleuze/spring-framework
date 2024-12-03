@@ -19,9 +19,9 @@ package org.springframework.jms.core;
 import jakarta.jms.Destination;
 import jakarta.jms.Message;
 import jakarta.jms.Queue;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.JmsException;
-import org.springframework.lang.Nullable;
 
 /**
  * Specifies a basic set of JMS operations.

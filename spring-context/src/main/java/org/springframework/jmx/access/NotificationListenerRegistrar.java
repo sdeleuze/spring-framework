@@ -27,13 +27,13 @@ import javax.management.remote.JMXServiceURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jmx.JmxException;
 import org.springframework.jmx.MBeanServerNotFoundException;
 import org.springframework.jmx.support.NotificationListenerHolder;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -67,8 +67,7 @@ public class NotificationListenerRegistrar extends NotificationListenerHolder
 	@Nullable
 	private String agentId;
 
-	@Nullable
-	private ObjectName[] actualObjectNames;
+	private ObjectName @Nullable [] actualObjectNames;
 
 
 	/**

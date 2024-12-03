@@ -30,7 +30,7 @@ import java.util.Random;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Miscellaneous {@link MimeType} utility methods.

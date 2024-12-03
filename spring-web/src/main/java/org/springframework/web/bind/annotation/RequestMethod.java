@@ -16,8 +16,9 @@
 
 package org.springframework.web.bind.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpMethod;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

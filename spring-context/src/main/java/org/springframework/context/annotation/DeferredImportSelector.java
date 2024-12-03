@@ -16,8 +16,9 @@
 
 package org.springframework.context.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.lang.Nullable;
 
 /**
  * A variation of {@link ImportSelector} that runs after all {@code @Configuration} beans

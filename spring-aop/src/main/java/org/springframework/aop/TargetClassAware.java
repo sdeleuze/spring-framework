@@ -16,7 +16,7 @@
 
 package org.springframework.aop;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Minimal interface for exposing the target class behind a proxy.

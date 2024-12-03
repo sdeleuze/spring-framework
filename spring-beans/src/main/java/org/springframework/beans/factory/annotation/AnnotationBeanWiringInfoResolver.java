@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.wiring.BeanWiringInfo;
 import org.springframework.beans.factory.wiring.BeanWiringInfoResolver;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

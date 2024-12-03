@@ -22,8 +22,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.stream.Stream;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 /**
  * A test {@link ClassLoader} that can be used in a testing context to control the

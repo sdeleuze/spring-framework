@@ -16,8 +16,9 @@
 
 package org.springframework.messaging.simp;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 
 /**

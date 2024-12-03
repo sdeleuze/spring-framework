@@ -21,9 +21,9 @@ import java.lang.reflect.AnnotatedElement;
 
 import jakarta.ejb.ApplicationException;
 import jakarta.ejb.TransactionAttributeType;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 

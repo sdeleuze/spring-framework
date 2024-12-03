@@ -34,6 +34,7 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.integrator.spi.Integrator;
 import org.hibernate.service.ServiceRegistry;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -52,7 +53,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.core.type.filter.TypeFilter;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link FactoryBean} that creates a Hibernate {@link SessionFactory}. This is the usual
@@ -87,23 +87,17 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 	@Nullable
 	private DataSource dataSource;
 
-	@Nullable
-	private Resource[] configLocations;
+	private Resource @Nullable [] configLocations;
 
-	@Nullable
-	private String[] mappingResources;
+	private String @Nullable [] mappingResources;
 
-	@Nullable
-	private Resource[] mappingLocations;
+	private Resource @Nullable [] mappingLocations;
 
-	@Nullable
-	private Resource[] cacheableMappingLocations;
+	private Resource @Nullable [] cacheableMappingLocations;
 
-	@Nullable
-	private Resource[] mappingJarLocations;
+	private Resource @Nullable [] mappingJarLocations;
 
-	@Nullable
-	private Resource[] mappingDirectoryLocations;
+	private Resource @Nullable [] mappingDirectoryLocations;
 
 	@Nullable
 	private Interceptor entityInterceptor;
@@ -129,23 +123,18 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 	@Nullable
 	private Properties hibernateProperties;
 
-	@Nullable
-	private TypeFilter[] entityTypeFilters;
+	private TypeFilter @Nullable [] entityTypeFilters;
 
-	@Nullable
-	private Class<?>[] annotatedClasses;
+	private Class<?> @Nullable [] annotatedClasses;
 
-	@Nullable
-	private String[] annotatedPackages;
+	private String @Nullable [] annotatedPackages;
 
-	@Nullable
-	private String[] packagesToScan;
+	private String @Nullable [] packagesToScan;
 
 	@Nullable
 	private AsyncTaskExecutor bootstrapExecutor;
 
-	@Nullable
-	private Integrator[] hibernateIntegrators;
+	private Integrator @Nullable [] hibernateIntegrators;
 
 	private boolean metadataSourcesAccessed = false;
 

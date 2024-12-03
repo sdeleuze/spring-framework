@@ -19,11 +19,12 @@ package org.springframework.context.aot;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.generate.FileSystemGeneratedFiles;
 import org.springframework.aot.generate.GeneratedFiles.Kind;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.nativex.FileNativeConfigurationWriter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.FileSystemUtils;
 

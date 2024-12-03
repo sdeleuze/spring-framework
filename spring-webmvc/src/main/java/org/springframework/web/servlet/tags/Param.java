@@ -16,7 +16,7 @@
 
 package org.springframework.web.servlet.tags;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Bean used to pass name-value pair parameters from a {@link ParamTag} to a

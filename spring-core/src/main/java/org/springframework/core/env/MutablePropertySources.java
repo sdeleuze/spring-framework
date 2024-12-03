@@ -22,7 +22,7 @@ import java.util.Spliterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Stream;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The default implementation of the {@link PropertySources} interface.

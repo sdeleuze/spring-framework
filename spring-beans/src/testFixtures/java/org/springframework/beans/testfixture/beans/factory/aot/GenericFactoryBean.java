@@ -16,9 +16,10 @@
 
 package org.springframework.beans.testfixture.beans.factory.aot;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.lang.Nullable;
 
 /**
  * A public {@link FactoryBean} with a generic type.

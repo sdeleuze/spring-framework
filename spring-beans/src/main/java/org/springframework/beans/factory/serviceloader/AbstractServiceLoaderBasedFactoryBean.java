@@ -18,9 +18,10 @@ package org.springframework.beans.factory.serviceloader;
 
 import java.util.ServiceLoader;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

@@ -17,8 +17,7 @@
 package org.springframework.aop;
 
 import org.aopalliance.intercept.MethodInvocation;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Extension of the AOP Alliance {@link org.aopalliance.intercept.MethodInvocation}

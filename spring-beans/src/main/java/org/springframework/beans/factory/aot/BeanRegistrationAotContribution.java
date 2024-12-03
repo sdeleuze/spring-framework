@@ -18,8 +18,9 @@ package org.springframework.beans.factory.aot;
 
 import java.util.function.UnaryOperator;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.generate.GenerationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -17,8 +17,7 @@
 package org.springframework.web.servlet;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Strategy interface for translating an incoming

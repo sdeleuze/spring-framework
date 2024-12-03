@@ -19,7 +19,8 @@ package org.springframework.beans.factory.support;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.function.ThrowingBiFunction;
 import org.springframework.util.function.ThrowingSupplier;

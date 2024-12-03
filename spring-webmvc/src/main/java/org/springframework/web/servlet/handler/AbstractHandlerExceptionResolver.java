@@ -23,10 +23,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.log.LogFormatUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -67,8 +67,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	@Nullable
 	private Set<?> mappedHandlers;
 
-	@Nullable
-	private Class<?>[] mappedHandlerClasses;
+	private Class<?> @Nullable [] mappedHandlerClasses;
 
 	@Nullable
 	private Log warnLogger;
@@ -134,8 +133,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 * Return the {@link #setMappedHandlerClasses(Class[]) configured} mapped
 	 * handler classes.
 	 */
-	@Nullable
-	protected Class<?>[] getMappedHandlerClasses() {
+	protected Class<?> @Nullable [] getMappedHandlerClasses() {
 		return this.mappedHandlerClasses;
 	}
 

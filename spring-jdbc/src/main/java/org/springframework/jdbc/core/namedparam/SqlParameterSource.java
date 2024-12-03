@@ -16,8 +16,9 @@
 
 package org.springframework.jdbc.core.namedparam;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.support.JdbcUtils;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface that defines common functionality for objects that can
@@ -97,8 +98,7 @@ public interface SqlParameterSource {
 	 * @since 5.0.3
 	 * @see SqlParameterSourceUtils#extractCaseInsensitiveParameterNames
 	 */
-	@Nullable
-	default String[] getParameterNames() {
+	default String @Nullable [] getParameterNames() {
 		return null;
 	}
 

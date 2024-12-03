@@ -24,8 +24,9 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.InvalidResultSetAccessException;
-import org.springframework.lang.Nullable;
 
 /**
  * Mirror interface for {@link javax.sql.RowSet}, representing a disconnected variant of

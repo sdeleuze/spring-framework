@@ -19,13 +19,14 @@ package org.springframework.beans.factory.xml;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.parsing.ComponentDefinition;
 import org.springframework.beans.factory.parsing.CompositeComponentDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.lang.Nullable;
 
 /**
  * Context that gets passed along a bean definition parsing process,

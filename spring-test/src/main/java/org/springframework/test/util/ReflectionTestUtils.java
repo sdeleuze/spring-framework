@@ -21,9 +21,9 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.support.AopUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.MethodInvoker;
@@ -329,6 +329,7 @@ public abstract class ReflectionTestUtils {
 	 * @see ReflectionUtils#invokeMethod(Method, Object, Object[])
 	 * @see AopTestUtils#getUltimateTargetObject(Object)
 	 */
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public static void invokeSetterMethod(Object target, String name, @Nullable Object value, @Nullable Class<?> type) {
 		Assert.notNull(target, "Target object must not be null");
 		Assert.hasText(name, "Method name must not be empty");

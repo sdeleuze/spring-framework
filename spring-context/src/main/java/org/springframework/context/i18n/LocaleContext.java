@@ -18,7 +18,7 @@ package org.springframework.context.i18n;
 
 import java.util.Locale;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Strategy interface for determining the current Locale.

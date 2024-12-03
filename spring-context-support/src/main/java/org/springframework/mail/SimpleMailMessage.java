@@ -19,7 +19,8 @@ package org.springframework.mail;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -50,14 +51,11 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 	@Nullable
 	private String replyTo;
 
-	@Nullable
-	private String[] to;
+	private String @Nullable [] to;
 
-	@Nullable
-	private String[] cc;
+	private String @Nullable [] cc;
 
-	@Nullable
-	private String[] bcc;
+	private String @Nullable [] bcc;
 
 	@Nullable
 	private Date sentDate;
@@ -122,8 +120,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 		this.to = to;
 	}
 
-	@Nullable
-	public String[] getTo() {
+	public String @Nullable [] getTo() {
 		return this.to;
 	}
 
@@ -137,8 +134,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 		this.cc = cc;
 	}
 
-	@Nullable
-	public String[] getCc() {
+	public String @Nullable [] getCc() {
 		return this.cc;
 	}
 
@@ -152,8 +148,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 		this.bcc = bcc;
 	}
 
-	@Nullable
-	public String[] getBcc() {
+	public String @Nullable [] getBcc() {
 		return this.bcc;
 	}
 
@@ -235,6 +230,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.from, this.replyTo, this.to, this.cc,
 				this.bcc, this.sentDate, this.subject);
@@ -255,8 +251,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 	}
 
 
-	@Nullable
-	private static String[] copyOrNull(@Nullable String[] state) {
+	private static String @Nullable [] copyOrNull(String @Nullable [] state) {
 		if (state == null) {
 			return null;
 		}

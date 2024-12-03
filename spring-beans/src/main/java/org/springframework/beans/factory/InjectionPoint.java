@@ -22,8 +22,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -48,8 +49,7 @@ public class InjectionPoint {
 	@Nullable
 	protected Field field;
 
-	@Nullable
-	private volatile Annotation[] fieldAnnotations;
+	private volatile Annotation @Nullable [] fieldAnnotations;
 
 
 	/**

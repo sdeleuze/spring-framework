@@ -32,8 +32,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockFilterRegistration;
 import org.springframework.mock.web.MockServletContext;

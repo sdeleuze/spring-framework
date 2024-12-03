@@ -16,7 +16,7 @@
 
 package org.springframework.aot.generate;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Thrown when value code generation fails.

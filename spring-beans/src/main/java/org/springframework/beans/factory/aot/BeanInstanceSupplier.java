@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.hint.ExecutableMode;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
@@ -43,7 +45,6 @@ import org.springframework.beans.factory.support.RegisteredBean;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.support.SimpleInstantiationStrategy;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -91,14 +92,13 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 	@Nullable
 	private final ThrowingBiFunction<RegisteredBean, AutowiredArguments, T> generatorWithArguments;
 
-	@Nullable
-	private final String[] shortcutBeanNames;
+	private final String @Nullable [] shortcutBeanNames;
 
 
 	private BeanInstanceSupplier(ExecutableLookup lookup,
 			@Nullable ThrowingFunction<RegisteredBean, T> generatorWithoutArguments,
 			@Nullable ThrowingBiFunction<RegisteredBean, AutowiredArguments, T> generatorWithArguments,
-			@Nullable String[] shortcutBeanNames) {
+			String @Nullable [] shortcutBeanNames) {
 
 		this.lookup = lookup;
 		this.generatorWithoutArguments = generatorWithoutArguments;

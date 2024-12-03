@@ -25,7 +25,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ObjectUtils;
 
@@ -558,8 +559,7 @@ public class RequestEntity<T> extends HttpEntity<T> {
 		@Nullable
 		private final String uriTemplate;
 
-		@Nullable
-		private final Object[] uriVarsArray;
+		private final Object @Nullable [] uriVarsArray;
 
 		@Nullable
 		private final Map<String, ?> uriVarsMap;
@@ -697,8 +697,7 @@ public class RequestEntity<T> extends HttpEntity<T> {
 
 		private final String uriTemplate;
 
-		@Nullable
-		private final Object[] uriVarsArray;
+		private final Object @Nullable [] uriVarsArray;
 
 		@Nullable
 		private final Map<String, ?> uriVarsMap;
@@ -706,7 +705,7 @@ public class RequestEntity<T> extends HttpEntity<T> {
 		UriTemplateRequestEntity(
 				@Nullable T body, @Nullable MultiValueMap<String, String> headers,
 				@Nullable HttpMethod method, @Nullable Type type, String uriTemplate,
-				@Nullable Object[] uriVarsArray, @Nullable Map<String, ?> uriVarsMap) {
+				Object @Nullable [] uriVarsArray, @Nullable Map<String, ?> uriVarsMap) {
 
 			super(body, headers, method, null, type);
 			this.uriTemplate = uriTemplate;
@@ -718,8 +717,7 @@ public class RequestEntity<T> extends HttpEntity<T> {
 			return this.uriTemplate;
 		}
 
-		@Nullable
-		public Object[] getVars() {
+		public Object @Nullable [] getVars() {
 			return this.uriVarsArray;
 		}
 

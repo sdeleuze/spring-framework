@@ -16,7 +16,7 @@
 
 package org.springframework.web.context.request;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Abstraction for accessing attribute objects associated with a request.

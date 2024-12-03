@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory.support;
 
+import org.jspecify.annotations.NonNull;
+
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.lang.NonNull;
 
 /**
  * Subclass of {@link BeanDefinitionStoreException} indicating an invalid override

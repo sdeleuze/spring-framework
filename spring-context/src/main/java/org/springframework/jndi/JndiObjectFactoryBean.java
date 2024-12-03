@@ -24,6 +24,7 @@ import javax.naming.NamingException;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.SimpleTypeConverter;
@@ -34,7 +35,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -73,8 +73,7 @@ import org.springframework.util.ClassUtils;
 public class JndiObjectFactoryBean extends JndiObjectLocator
 		implements FactoryBean<Object>, BeanFactoryAware, BeanClassLoaderAware {
 
-	@Nullable
-	private Class<?>[] proxyInterfaces;
+	private Class<?> @Nullable [] proxyInterfaces;
 
 	private boolean lookupOnStartup = true;
 

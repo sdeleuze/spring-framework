@@ -18,6 +18,7 @@ package org.springframework.beans.factory.xml;
 
 import java.io.StringReader;
 
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -31,7 +32,6 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.Nullable;
 
 /**
  * Extension of {@link org.springframework.beans.factory.parsing.ReaderContext},

@@ -16,10 +16,11 @@
 
 package org.springframework.aot.generate;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.hint.AbstractTypeReference;
 import org.springframework.aot.hint.TypeReference;
 import org.springframework.javapoet.ClassName;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -19,8 +19,7 @@ package org.springframework.web.servlet.tags;
 import java.beans.PropertyEditor;
 
 import jakarta.servlet.jsp.JspException;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by JSP tags that expose a

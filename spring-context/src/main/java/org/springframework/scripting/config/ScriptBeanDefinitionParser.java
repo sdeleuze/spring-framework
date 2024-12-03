@@ -18,6 +18,7 @@ package org.springframework.scripting.config;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.Element;
 
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
@@ -29,7 +30,6 @@ import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.beans.factory.xml.XmlReaderContext;
-import org.springframework.lang.Nullable;
 import org.springframework.scripting.support.ScriptFactoryPostProcessor;
 import org.springframework.util.StringUtils;
 import org.springframework.util.xml.DomUtils;

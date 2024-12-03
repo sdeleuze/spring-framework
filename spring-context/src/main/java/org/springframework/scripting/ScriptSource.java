@@ -18,7 +18,7 @@ package org.springframework.scripting;
 
 import java.io.IOException;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface that defines the source of a script.

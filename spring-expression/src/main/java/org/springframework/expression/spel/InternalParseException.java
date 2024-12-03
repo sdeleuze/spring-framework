@@ -16,7 +16,7 @@
 
 package org.springframework.expression.spel;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Wraps a real parse exception. This exception flows to the top parse method and then

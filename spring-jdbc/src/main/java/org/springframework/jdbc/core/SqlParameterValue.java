@@ -16,7 +16,7 @@
 
 package org.springframework.jdbc.core;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Object to represent an SQL parameter value, including parameter meta-data

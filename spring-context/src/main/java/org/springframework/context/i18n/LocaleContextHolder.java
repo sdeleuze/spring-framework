@@ -19,9 +19,10 @@ package org.springframework.context.i18n;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NamedInheritableThreadLocal;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.lang.Nullable;
 
 /**
  * Simple holder class that associates a LocaleContext instance

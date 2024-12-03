@@ -16,8 +16,9 @@
 
 package org.springframework.test.context.aot;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.AotDetector;
-import org.springframework.lang.Nullable;
 
 /**
  * Holder for metadata specific to ahead-of-time (AOT) support in the <em>Spring

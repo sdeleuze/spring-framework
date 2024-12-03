@@ -28,8 +28,8 @@ import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import io.netty5.handler.codec.http.headers.HttpHeaders;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.util.MultiValueMap;

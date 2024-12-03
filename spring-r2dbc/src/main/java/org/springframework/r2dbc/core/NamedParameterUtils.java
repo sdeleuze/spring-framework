@@ -26,9 +26,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import io.r2dbc.spi.Parameter;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.lang.Nullable;
 import org.springframework.r2dbc.core.binding.BindMarker;
 import org.springframework.r2dbc.core.binding.BindMarkers;
 import org.springframework.r2dbc.core.binding.BindMarkersFactory;

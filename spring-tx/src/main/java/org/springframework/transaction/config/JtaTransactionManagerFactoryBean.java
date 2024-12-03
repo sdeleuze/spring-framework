@@ -16,9 +16,10 @@
 
 package org.springframework.transaction.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.jta.JtaTransactionManager;
 

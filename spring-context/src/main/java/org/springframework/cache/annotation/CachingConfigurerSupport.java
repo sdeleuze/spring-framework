@@ -16,11 +16,12 @@
 
 package org.springframework.cache.annotation;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.lang.Nullable;
 
 /**
  * An implementation of {@link CachingConfigurer} with empty methods allowing

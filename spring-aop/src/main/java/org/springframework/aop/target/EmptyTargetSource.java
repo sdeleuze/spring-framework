@@ -19,8 +19,9 @@ package org.springframework.aop.target;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.TargetSource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**

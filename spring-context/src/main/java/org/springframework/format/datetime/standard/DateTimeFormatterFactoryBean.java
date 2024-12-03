@@ -18,9 +18,10 @@ package org.springframework.format.datetime.standard;
 
 import java.time.format.DateTimeFormatter;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link FactoryBean} that creates a JSR-310 {@link java.time.format.DateTimeFormatter}.

@@ -17,8 +17,7 @@
 package org.springframework.web;
 
 import jakarta.servlet.ServletException;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Exception thrown when an HTTP request handler requires a pre-existing session.

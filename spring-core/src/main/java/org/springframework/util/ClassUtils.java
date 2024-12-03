@@ -52,7 +52,7 @@ import java.util.TimeZone;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Miscellaneous {@code java.lang.Class} utility methods.
@@ -1289,7 +1289,7 @@ public abstract class ClassUtils {
 	 * @see Class#getMethod
 	 */
 	@Nullable
-	public static Method getMethodIfAvailable(Class<?> clazz, String methodName, @Nullable Class<?>... paramTypes) {
+	public static Method getMethodIfAvailable(Class<?> clazz, String methodName, @Nullable Class<?> @Nullable ... paramTypes) {
 		Assert.notNull(clazz, "Class must not be null");
 		Assert.notNull(methodName, "Method name must not be null");
 		if (paramTypes != null) {
@@ -1604,7 +1604,7 @@ public abstract class ClassUtils {
 
 
 	@Nullable
-	private static Method getMethodOrNull(Class<?> clazz, String methodName, Class<?>[] paramTypes) {
+	private static Method getMethodOrNull(Class<?> clazz, String methodName, @Nullable Class<?> @Nullable [] paramTypes) {
 		try {
 			return clazz.getMethod(methodName, paramTypes);
 		}

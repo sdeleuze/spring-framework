@@ -17,8 +17,7 @@
 package org.springframework.web.servlet.mvc.condition;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Contract for request mapping conditions.

@@ -22,11 +22,12 @@ import java.util.Properties;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link FactoryBean} for a JCache {@link CacheManager javax.cache.CacheManager},

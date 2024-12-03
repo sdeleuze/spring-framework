@@ -18,8 +18,7 @@ package org.springframework.mock.web;
 
 import jakarta.servlet.http.HttpServletMapping;
 import jakarta.servlet.http.MappingMatch;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Mock implementation of {@link HttpServletMapping}.

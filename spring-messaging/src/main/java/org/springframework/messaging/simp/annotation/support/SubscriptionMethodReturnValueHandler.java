@@ -17,9 +17,9 @@
 package org.springframework.messaging.simp.annotation.support;
 
 import org.apache.commons.logging.Log;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.core.AbstractMessageSendingTemplate;

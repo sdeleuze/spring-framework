@@ -21,9 +21,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.FatalBeanException;
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown when a BeanFactory encounters an error when
@@ -150,8 +151,7 @@ public class BeanCreationException extends FatalBeanException {
 	 * Return the related causes, if any.
 	 * @return the array of related causes, or {@code null} if none
 	 */
-	@Nullable
-	public Throwable[] getRelatedCauses() {
+	public Throwable @Nullable [] getRelatedCauses() {
 		if (this.relatedCauses == null) {
 			return null;
 		}

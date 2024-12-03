@@ -16,8 +16,9 @@
 
 package org.springframework.dao.support;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface implemented by Spring integrations with data access technologies

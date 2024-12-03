@@ -33,6 +33,7 @@ import jakarta.persistence.ValidationMode;
 import jakarta.persistence.spi.PersistenceUnitInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ResourceLoaderAware;
@@ -47,7 +48,6 @@ import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.jdbc.datasource.lookup.DataSourceLookup;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.jdbc.datasource.lookup.MapDataSourceLookup;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ResourceUtils;
 
@@ -113,14 +113,12 @@ public class DefaultPersistenceUnitManager
 	@Nullable
 	private PersistenceManagedTypes managedTypes;
 
-	@Nullable
-	private String[] packagesToScan;
+	private String @Nullable [] packagesToScan;
 
 	@Nullable
 	private ManagedClassNameFilter managedClassNameFilter;
 
-	@Nullable
-	private String[] mappingResources;
+	private String @Nullable [] mappingResources;
 
 	@Nullable
 	private SharedCacheMode sharedCacheMode;
@@ -136,8 +134,7 @@ public class DefaultPersistenceUnitManager
 	@Nullable
 	private DataSource defaultJtaDataSource;
 
-	@Nullable
-	private PersistenceUnitPostProcessor[] persistenceUnitPostProcessors;
+	private PersistenceUnitPostProcessor @Nullable [] persistenceUnitPostProcessors;
 
 	@Nullable
 	private LoadTimeWeaver loadTimeWeaver;
@@ -392,8 +389,7 @@ public class DefaultPersistenceUnitManager
 	 * Return the PersistenceUnitPostProcessors to be applied to each
 	 * PersistenceUnitInfo that has been parsed by this manager.
 	 */
-	@Nullable
-	public PersistenceUnitPostProcessor[] getPersistenceUnitPostProcessors() {
+	public PersistenceUnitPostProcessor @Nullable [] getPersistenceUnitPostProcessors() {
 		return this.persistenceUnitPostProcessors;
 	}
 

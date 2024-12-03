@@ -19,8 +19,9 @@ package org.springframework.test.web.client;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.client.ClientHttpRequest;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

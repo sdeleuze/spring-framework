@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by objects that configure and manage a
@@ -63,8 +63,7 @@ public interface ScriptTemplateConfig {
 	/**
 	 * Return the scripts to be loaded by the script engine (library or user provided).
 	 */
-	@Nullable
-	String[] getScripts();
+	String @Nullable [] getScripts();
 
 	/**
 	 * Return the object where the render function belongs (optional).

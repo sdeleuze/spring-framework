@@ -16,11 +16,12 @@
 
 package org.springframework.aop.aspectj;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractGenericPointcutAdvisor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.lang.Nullable;
 
 /**
  * Spring AOP Advisor that can be used for any AspectJ pointcut expression.

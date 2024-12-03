@@ -19,8 +19,9 @@ package org.springframework.cache.annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.interceptor.CacheOperation;
-import org.springframework.lang.Nullable;
 
 /**
  * Strategy interface for parsing known caching annotation types.

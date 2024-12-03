@@ -16,10 +16,11 @@
 
 package org.springframework.web.service.invoker;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 
 /**
  * Contract to abstract an HTTP client from {@linkplain HttpServiceProxyFactory}

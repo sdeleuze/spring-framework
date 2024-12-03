@@ -16,7 +16,7 @@
 
 package org.springframework.core.env;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@link PropertyResolver} implementation that resolves property values against

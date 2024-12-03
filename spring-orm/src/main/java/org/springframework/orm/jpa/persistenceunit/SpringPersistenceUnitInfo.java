@@ -18,11 +18,11 @@ package org.springframework.orm.jpa.persistenceunit;
 
 import jakarta.persistence.spi.ClassTransformer;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.DecoratingClassLoader;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.instrument.classloading.SimpleThrowawayClassLoader;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

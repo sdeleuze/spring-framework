@@ -21,11 +21,12 @@ import java.util.List;
 
 import javax.lang.model.element.Modifier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.javapoet.ClassName;
 import org.springframework.javapoet.CodeBlock;
 import org.springframework.javapoet.MethodSpec;
 import org.springframework.javapoet.TypeName;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

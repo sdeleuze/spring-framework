@@ -18,8 +18,9 @@ package org.springframework.beans.factory.config;
 
 import java.util.Comparator;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataElement;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -228,6 +229,7 @@ public class TypedStringValue implements BeanMetadataElement, Comparable<TypedSt
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO NullAway bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.value, this.targetType);
 	}

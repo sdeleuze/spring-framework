@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.simp.SimpLogging;
 import org.springframework.messaging.support.MessageBuilder;
@@ -302,8 +302,7 @@ public class StompDecoder {
 		return sb.toString();
 	}
 
-	@Nullable
-	private byte[] readPayload(ByteBuffer byteBuffer, StompHeaderAccessor headerAccessor) {
+	private byte @Nullable [] readPayload(ByteBuffer byteBuffer, StompHeaderAccessor headerAccessor) {
 		Integer contentLength;
 		try {
 			contentLength = headerAccessor.getContentLength();

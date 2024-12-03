@@ -16,7 +16,7 @@
 
 package org.springframework.messaging.tcp;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A contract to determine the frequency of reconnect attempts after connection failure.

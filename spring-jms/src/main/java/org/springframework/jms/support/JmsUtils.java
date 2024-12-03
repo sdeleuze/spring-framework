@@ -25,6 +25,7 @@ import jakarta.jms.QueueRequestor;
 import jakarta.jms.Session;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.InvalidClientIDException;
 import org.springframework.jms.InvalidDestinationException;
@@ -39,7 +40,6 @@ import org.springframework.jms.ResourceAllocationException;
 import org.springframework.jms.TransactionInProgressException;
 import org.springframework.jms.TransactionRolledBackException;
 import org.springframework.jms.UncategorizedJmsException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

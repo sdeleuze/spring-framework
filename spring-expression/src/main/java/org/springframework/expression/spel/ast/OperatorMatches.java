@@ -81,6 +81,7 @@ public class OperatorMatches extends Operator {
 	 * (for example, the regex is invalid)
 	 */
 	@Override
+	@SuppressWarnings("NullAway") // TODO Bug?
 	public BooleanTypedValue getValueInternal(ExpressionState state) throws EvaluationException {
 		SpelNodeImpl leftOp = getLeftOperand();
 		SpelNodeImpl rightOp = getRightOperand();

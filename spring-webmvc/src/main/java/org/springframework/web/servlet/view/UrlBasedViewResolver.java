@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.Properties;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.PatternMatchUtils;
@@ -118,8 +118,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 
 	private boolean redirectHttp10Compatible = true;
 
-	@Nullable
-	private String[] redirectHosts;
+	private String @Nullable [] redirectHosts;
 
 	@Nullable
 	private String requestContextAttribute;
@@ -133,11 +132,9 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	@Nullable
 	private Boolean exposeContextBeansAsAttributes;
 
-	@Nullable
-	private String[] exposedContextBeanNames;
+	private String @Nullable [] exposedContextBeanNames;
 
-	@Nullable
-	private String[] viewNames;
+	private String @Nullable [] viewNames;
 
 	private int order = Ordered.LOWEST_PRECEDENCE;
 
@@ -281,8 +278,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 * Return the configured application hosts for redirect purposes.
 	 * @since 4.3
 	 */
-	@Nullable
-	public String[] getRedirectHosts() {
+	public String @Nullable [] getRedirectHosts() {
 		return this.redirectHosts;
 	}
 
@@ -396,8 +392,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 		this.exposedContextBeanNames = exposedContextBeanNames;
 	}
 
-	@Nullable
-	protected String[] getExposedContextBeanNames() {
+	protected String @Nullable [] getExposedContextBeanNames() {
 		return this.exposedContextBeanNames;
 	}
 
@@ -416,8 +411,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 * Return the view names (or name patterns) that can be handled by this
 	 * {@link org.springframework.web.servlet.ViewResolver}.
 	 */
-	@Nullable
-	protected String[] getViewNames() {
+	protected String @Nullable [] getViewNames() {
 		return this.viewNames;
 	}
 

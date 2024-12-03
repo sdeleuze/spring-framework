@@ -38,6 +38,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import jakarta.validation.executable.ExecutableValidator;
 import jakarta.validation.metadata.ConstraintDescriptor;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
@@ -50,7 +51,6 @@ import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.function.SingletonSupplier;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -235,7 +235,7 @@ public class MethodValidationAdapter implements MethodValidator {
 
 	@Override
 	public final MethodValidationResult validateArguments(
-			Object target, Method method, @Nullable MethodParameter[] parameters,
+			Object target, Method method, MethodParameter @Nullable [] parameters,
 			Object[] arguments, Class<?>[] groups) {
 
 		Set<ConstraintViolation<Object>> violations =

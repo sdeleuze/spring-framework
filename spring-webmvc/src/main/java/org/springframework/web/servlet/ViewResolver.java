@@ -18,7 +18,7 @@ package org.springframework.web.servlet;
 
 import java.util.Locale;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface to be implemented by objects that can resolve views by name.

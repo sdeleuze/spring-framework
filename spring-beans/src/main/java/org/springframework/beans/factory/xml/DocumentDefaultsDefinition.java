@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory.xml;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.parsing.DefaultsDefinition;
-import org.springframework.lang.Nullable;
 
 /**
  * Simple JavaBean that holds the defaults specified at the {@code <beans>}

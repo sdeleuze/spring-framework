@@ -18,8 +18,9 @@ package org.springframework.web.socket.messaging;
 
 import java.security.Principal;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.ApplicationEvent;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
 

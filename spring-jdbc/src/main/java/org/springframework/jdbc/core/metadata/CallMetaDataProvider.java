@@ -20,8 +20,9 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface specifying the API to be implemented by a class providing call meta-data.

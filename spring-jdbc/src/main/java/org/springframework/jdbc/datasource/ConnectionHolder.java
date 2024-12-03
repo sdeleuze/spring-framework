@@ -20,7 +20,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.transaction.support.ResourceHolderSupport;
 import org.springframework.util.Assert;
 

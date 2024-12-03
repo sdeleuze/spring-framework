@@ -16,7 +16,7 @@
 
 package org.springframework.transaction;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface that defines Spring-compliant transaction properties.

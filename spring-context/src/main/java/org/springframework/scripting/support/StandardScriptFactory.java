@@ -23,8 +23,9 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.lang.Nullable;
 import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.ScriptFactory;
 import org.springframework.scripting.ScriptSource;
@@ -54,8 +55,7 @@ public class StandardScriptFactory implements ScriptFactory, BeanClassLoaderAwar
 
 	private final String scriptSourceLocator;
 
-	@Nullable
-	private final Class<?>[] scriptInterfaces;
+	private final Class<?> @Nullable [] scriptInterfaces;
 
 	@Nullable
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
@@ -105,7 +105,7 @@ public class StandardScriptFactory implements ScriptFactory, BeanClassLoaderAwar
 	 * is supposed to implement
 	 */
 	public StandardScriptFactory(
-			@Nullable String scriptEngineName, String scriptSourceLocator, @Nullable Class<?>... scriptInterfaces) {
+			@Nullable String scriptEngineName, String scriptSourceLocator, Class<?> @Nullable ... scriptInterfaces) {
 
 		Assert.hasText(scriptSourceLocator, "'scriptSourceLocator' must not be empty");
 		this.scriptEngineName = scriptEngineName;
@@ -125,8 +125,7 @@ public class StandardScriptFactory implements ScriptFactory, BeanClassLoaderAwar
 	}
 
 	@Override
-	@Nullable
-	public Class<?>[] getScriptInterfaces() {
+	public Class<?> @Nullable [] getScriptInterfaces() {
 		return this.scriptInterfaces;
 	}
 
@@ -141,7 +140,7 @@ public class StandardScriptFactory implements ScriptFactory, BeanClassLoaderAwar
 	 */
 	@Override
 	@Nullable
-	public Object getScriptedObject(ScriptSource scriptSource, @Nullable Class<?>... actualInterfaces)
+	public Object getScriptedObject(ScriptSource scriptSource, Class<?> @Nullable ... actualInterfaces)
 			throws IOException, ScriptCompilationException {
 
 		Object script = evaluateScript(scriptSource);

@@ -24,7 +24,8 @@ import java.time.temporal.ValueRange;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 

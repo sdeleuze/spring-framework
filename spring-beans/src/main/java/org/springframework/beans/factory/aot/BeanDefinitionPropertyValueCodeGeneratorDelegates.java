@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aot.generate.GeneratedMethod;
 import org.springframework.aot.generate.GeneratedMethods;
 import org.springframework.aot.generate.ValueCodeGenerator;
@@ -37,7 +39,6 @@ import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.beans.factory.support.ManagedSet;
 import org.springframework.javapoet.AnnotationSpec;
 import org.springframework.javapoet.CodeBlock;
-import org.springframework.lang.Nullable;
 
 /**
  * Code generator {@link Delegate} for common bean definition property values.

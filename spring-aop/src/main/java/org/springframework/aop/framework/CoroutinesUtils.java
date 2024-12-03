@@ -19,10 +19,10 @@ package org.springframework.aop.framework;
 import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.reactive.ReactiveFlowKt;
 import kotlinx.coroutines.reactor.MonoKt;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
-import org.springframework.lang.Nullable;
 
 /**
  * Package-visible class designed to avoid a hard dependency on Kotlin and Coroutines dependency at runtime.

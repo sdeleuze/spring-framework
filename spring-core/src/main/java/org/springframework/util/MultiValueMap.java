@@ -19,7 +19,7 @@ package org.springframework.util;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Extension of the {@code Map} interface that stores multiple values.

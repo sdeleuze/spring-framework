@@ -16,7 +16,7 @@
 
 package org.springframework.messaging;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A {@link MessageChannel} from which messages may be actively received through polling.

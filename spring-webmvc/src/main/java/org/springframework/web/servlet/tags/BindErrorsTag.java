@@ -19,8 +19,8 @@ package org.springframework.web.servlet.tags;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.PageContext;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.validation.Errors;
 
 /**

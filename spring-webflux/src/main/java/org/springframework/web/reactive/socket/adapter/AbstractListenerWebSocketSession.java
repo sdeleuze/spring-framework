@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -31,7 +32,6 @@ import reactor.util.concurrent.Queues;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.server.reactive.AbstractListenerReadPublisher;
 import org.springframework.http.server.reactive.AbstractListenerWriteProcessor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.reactive.socket.CloseStatus;
 import org.springframework.web.reactive.socket.HandshakeInfo;
@@ -63,8 +63,7 @@ public abstract class AbstractListenerWebSocketSession<T> extends AbstractWebSoc
 	private static final int RECEIVE_BUFFER_SIZE = 8192;
 
 
-	@Nullable
-	private final Sinks.Empty<Void> handlerCompletionSink;
+	private final Sinks.@Nullable Empty<Void> handlerCompletionSink;
 
 	private final WebSocketReceivePublisher receivePublisher;
 
@@ -96,7 +95,7 @@ public abstract class AbstractListenerWebSocketSession<T> extends AbstractWebSoc
 	 * communicate the end of handling.
 	 */
 	public AbstractListenerWebSocketSession(T delegate, String id, HandshakeInfo info,
-			DataBufferFactory bufferFactory, @Nullable Sinks.Empty<Void> handlerCompletionSink) {
+			DataBufferFactory bufferFactory, Sinks.@Nullable Empty<Void> handlerCompletionSink) {
 
 		super(delegate, id, info, bufferFactory);
 		this.receivePublisher = new WebSocketReceivePublisher();

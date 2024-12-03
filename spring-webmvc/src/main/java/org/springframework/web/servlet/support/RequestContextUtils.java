@@ -24,10 +24,10 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.ContextLoader;
@@ -184,9 +184,8 @@ public abstract class RequestContextUtils {
 	 * @return the current ThemeResolver, or {@code null} if not found
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
-	@Nullable
 	@Deprecated(since = "6.0")
-	public static org.springframework.web.servlet.ThemeResolver getThemeResolver(HttpServletRequest request) {
+	public static org.springframework.web.servlet.@Nullable ThemeResolver getThemeResolver(HttpServletRequest request) {
 		return (org.springframework.web.servlet.ThemeResolver) request.getAttribute(DispatcherServlet.THEME_RESOLVER_ATTRIBUTE);
 	}
 
@@ -197,9 +196,8 @@ public abstract class RequestContextUtils {
 	 * @return the current ThemeSource
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
-	@Nullable
 	@Deprecated(since = "6.0")
-	public static org.springframework.ui.context.ThemeSource getThemeSource(HttpServletRequest request) {
+	public static org.springframework.ui.context.@Nullable ThemeSource getThemeSource(HttpServletRequest request) {
 		return (org.springframework.ui.context.ThemeSource) request.getAttribute(DispatcherServlet.THEME_SOURCE_ATTRIBUTE);
 	}
 
@@ -211,9 +209,8 @@ public abstract class RequestContextUtils {
 	 * @see #getThemeResolver
 	 * @deprecated as of 6.0, with no direct replacement
 	 */
-	@Nullable
 	@Deprecated(since = "6.0")
-	public static org.springframework.ui.context.Theme getTheme(HttpServletRequest request) {
+	public static org.springframework.ui.context.@Nullable Theme getTheme(HttpServletRequest request) {
 		org.springframework.web.servlet.ThemeResolver themeResolver = getThemeResolver(request);
 		org.springframework.ui.context.ThemeSource themeSource = getThemeSource(request);
 		if (themeResolver != null && themeSource != null) {

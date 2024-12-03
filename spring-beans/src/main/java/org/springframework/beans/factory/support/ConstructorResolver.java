@@ -38,6 +38,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.BeanUtils;
@@ -68,7 +69,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -133,7 +133,7 @@ class ConstructorResolver {
 	 */
 	@SuppressWarnings("NullAway")
 	public BeanWrapper autowireConstructor(String beanName, RootBeanDefinition mbd,
-			@Nullable Constructor<?>[] chosenCtors, @Nullable Object[] explicitArgs) {
+			Constructor<?> @Nullable [] chosenCtors, Object @Nullable [] explicitArgs) {
 
 		BeanWrapperImpl bw = new BeanWrapperImpl();
 		this.beanFactory.initBeanWrapper(bw);
@@ -395,7 +395,7 @@ class ConstructorResolver {
 	 */
 	@SuppressWarnings("NullAway")
 	public BeanWrapper instantiateUsingFactoryMethod(
-			String beanName, RootBeanDefinition mbd, @Nullable Object[] explicitArgs) {
+			String beanName, RootBeanDefinition mbd, @Nullable Object @Nullable [] explicitArgs) {
 
 		BeanWrapperImpl bw = new BeanWrapperImpl();
 		this.beanFactory.initBeanWrapper(bw);
@@ -719,7 +719,7 @@ class ConstructorResolver {
 	 */
 	private ArgumentsHolder createArgumentArray(
 			String beanName, RootBeanDefinition mbd, @Nullable ConstructorArgumentValues resolvedValues,
-			BeanWrapper bw, Class<?>[] paramTypes, @Nullable String[] paramNames, Executable executable,
+			BeanWrapper bw, Class<?>[] paramTypes, String @Nullable [] paramNames, Executable executable,
 			boolean autowiring, boolean fallback) throws UnsatisfiedDependencyException {
 
 		TypeConverter customConverter = this.beanFactory.getCustomTypeConverter();
@@ -1288,8 +1288,7 @@ class ConstructorResolver {
 	 * This variant adds a lenient fallback to the default constructor if available, similar to
 	 * {@link org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#determineCandidateConstructors}.
 	 */
-	@Nullable
-	static Constructor<?>[] determinePreferredConstructors(Class<?> clazz) {
+	static Constructor<?> @Nullable [] determinePreferredConstructors(Class<?> clazz) {
 		Constructor<?> primaryCtor = BeanUtils.findPrimaryConstructor(clazz);
 
 		Constructor<?> defaultCtor;
@@ -1401,8 +1400,7 @@ class ConstructorResolver {
 	 */
 	private static class ConstructorPropertiesChecker {
 
-		@Nullable
-		public static String[] evaluate(Constructor<?> candidate, int paramCount) {
+		public static String @Nullable [] evaluate(Constructor<?> candidate, int paramCount) {
 			ConstructorProperties cp = candidate.getAnnotation(ConstructorProperties.class);
 			if (cp != null) {
 				String[] names = cp.value();

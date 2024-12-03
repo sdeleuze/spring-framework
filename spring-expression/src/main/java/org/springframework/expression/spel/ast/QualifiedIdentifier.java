@@ -16,10 +16,11 @@
 
 package org.springframework.expression.spel.ast;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.ExpressionState;
-import org.springframework.lang.Nullable;
 
 /**
  * Represents a dot separated sequence of strings that indicate a package qualified type

@@ -17,8 +17,7 @@
 package org.springframework.context.i18n;
 
 import io.micrometer.context.ThreadLocalAccessor;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Adapt {@link LocaleContextHolder} to the {@link ThreadLocalAccessor} contract

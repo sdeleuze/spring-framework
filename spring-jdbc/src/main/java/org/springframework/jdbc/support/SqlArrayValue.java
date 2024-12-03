@@ -20,8 +20,9 @@ import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

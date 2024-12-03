@@ -19,7 +19,8 @@ package org.springframework.web.socket.sockjs.client;
 import java.net.URI;
 import java.util.UUID;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.IdGenerator;
 import org.springframework.util.JdkIdGenerator;
 import org.springframework.util.StringUtils;

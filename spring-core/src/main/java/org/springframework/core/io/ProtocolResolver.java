@@ -16,7 +16,7 @@
 
 package org.springframework.core.io;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A resolution strategy for protocol-specific resource handles.

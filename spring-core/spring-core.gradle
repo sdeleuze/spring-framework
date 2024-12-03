@@ -71,6 +71,7 @@ dependencies {
 	api(files(javapoetRepackJar))
 	api(files(objenesisRepackJar))
 	api(project(":spring-jcl"))
+	api("org.jspecify:jspecify")
 	compileOnly("io.projectreactor.tools:blockhound")
 	compileOnly("org.graalvm.sdk:graal-sdk")
 	optional("io.micrometer:context-propagation")

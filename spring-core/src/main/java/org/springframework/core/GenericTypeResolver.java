@@ -25,7 +25,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
@@ -135,8 +136,7 @@ public final class GenericTypeResolver {
 	 * @return the resolved type of each argument, with the array size matching the
 	 * number of actual type arguments, or {@code null} if not resolvable
 	 */
-	@Nullable
-	public static Class<?>[] resolveTypeArguments(Class<?> clazz, Class<?> genericType) {
+	public static Class<?> @Nullable [] resolveTypeArguments(Class<?> clazz, Class<?> genericType) {
 		ResolvableType type = ResolvableType.forClass(clazz).as(genericType);
 		if (!type.hasGenerics() || !type.hasResolvableGenerics()) {
 			return null;

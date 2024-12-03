@@ -17,8 +17,7 @@
 package org.springframework.web.bind;
 
 import jakarta.servlet.ServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Parameter extraction methods, for an approach distinct from data binding,

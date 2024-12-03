@@ -18,11 +18,11 @@ package org.springframework.beans.factory.xml;
 
 import java.io.IOException;
 
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

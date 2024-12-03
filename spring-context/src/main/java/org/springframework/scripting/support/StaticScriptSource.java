@@ -16,7 +16,8 @@
 
 package org.springframework.scripting.support;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.scripting.ScriptSource;
 import org.springframework.util.Assert;
 

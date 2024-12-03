@@ -19,8 +19,7 @@ package org.springframework.web.servlet.support;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A contract for inspecting and potentially modifying request data values such

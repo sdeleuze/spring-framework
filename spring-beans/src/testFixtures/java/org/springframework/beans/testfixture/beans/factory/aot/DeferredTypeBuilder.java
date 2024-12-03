@@ -18,8 +18,9 @@ package org.springframework.beans.testfixture.beans.factory.aot;
 
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.javapoet.TypeSpec;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

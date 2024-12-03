@@ -17,8 +17,7 @@
 package org.springframework.web.reactive.function.client;
 
 import io.micrometer.observation.transport.RequestReplySenderContext;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Context that holds information for metadata collection during the
@@ -54,7 +53,7 @@ public class ClientRequestObservationContext extends RequestReplySenderContext<C
 	}
 
 
-	private static void setRequestHeader(@Nullable ClientRequest.Builder request, String name, String value) {
+	private static void setRequestHeader(ClientRequest.@Nullable Builder request, String name, String value) {
 		if (request != null) {
 			request.headers(headers -> headers.set(name, value));
 		}

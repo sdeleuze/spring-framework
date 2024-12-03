@@ -22,8 +22,7 @@ import java.util.Map;
 
 import io.micrometer.context.ThreadLocalAccessor;
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Adapt {@link RequestContextHolder} to the {@link ThreadLocalAccessor} contract

@@ -16,8 +16,9 @@
 
 package org.springframework.beans.factory.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.lang.Nullable;
 
 /**
  * Strategy interface used by a {@link ConfigurableBeanFactory},

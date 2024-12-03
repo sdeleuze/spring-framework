@@ -19,10 +19,10 @@ package org.springframework.jms.listener.endpoint;
 import java.util.Map;
 
 import jakarta.jms.Session;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.support.QosSettings;
 import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

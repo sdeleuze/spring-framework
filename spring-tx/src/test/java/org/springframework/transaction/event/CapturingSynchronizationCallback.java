@@ -16,8 +16,9 @@
 
 package org.springframework.transaction.event;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.ApplicationEvent;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Juergen Hoeller

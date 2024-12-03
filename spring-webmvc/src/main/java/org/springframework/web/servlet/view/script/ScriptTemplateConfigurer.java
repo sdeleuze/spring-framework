@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An implementation of Spring MVC's {@link ScriptTemplateConfig} for creating
@@ -63,8 +63,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	@Nullable
 	private Boolean sharedEngine;
 
-	@Nullable
-	private String[] scripts;
+	private String @Nullable [] scripts;
 
 	@Nullable
 	private String renderObject;
@@ -190,8 +189,7 @@ public class ScriptTemplateConfigurer implements ScriptTemplateConfig {
 	}
 
 	@Override
-	@Nullable
-	public String[] getScripts() {
+	public String @Nullable [] getScripts() {
 		return this.scripts;
 	}
 

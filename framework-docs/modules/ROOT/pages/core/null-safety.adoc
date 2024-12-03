@@ -9,8 +9,8 @@ declare nullability of APIs and fields:
 specific parameter, return value, or field can be `null`.
 * {spring-framework-api}/lang/NonNull.html[`@NonNull`]: Annotation to indicate that a specific
 parameter, return value, or field cannot be `null` (not needed on parameters, return values,
-and fields where `@NonNullApi` and `@NonNullFields` apply, respectively).
-* {spring-framework-api}/lang/NonNullApi.html[`@NonNullApi`]: Annotation at the package level
+and fields where `@NullMarked` and `@NonNullFields` apply, respectively).
+* {spring-framework-api}/lang/NonNullApi.html[`@NullMarked`]: Annotation at the package level
 that declares non-null as the default semantics for parameters and return values.
 * {spring-framework-api}/lang/NonNullFields.html[`@NonNullFields`]: Annotation at the package
 level that declares non-null as the default semantics for fields.

@@ -16,9 +16,10 @@
 
 package org.springframework.beans.factory.config;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -43,8 +44,7 @@ public class BeanDefinitionHolder implements BeanMetadataElement {
 
 	private final String beanName;
 
-	@Nullable
-	private final String[] aliases;
+	private final String @Nullable [] aliases;
 
 
 	/**
@@ -62,7 +62,7 @@ public class BeanDefinitionHolder implements BeanMetadataElement {
 	 * @param beanName the name of the bean, as specified for the bean definition
 	 * @param aliases alias names for the bean, or {@code null} if none
 	 */
-	public BeanDefinitionHolder(BeanDefinition beanDefinition, String beanName, @Nullable String[] aliases) {
+	public BeanDefinitionHolder(BeanDefinition beanDefinition, String beanName, String @Nullable [] aliases) {
 		Assert.notNull(beanDefinition, "BeanDefinition must not be null");
 		Assert.notNull(beanName, "Bean name must not be null");
 		this.beanDefinition = beanDefinition;
@@ -103,8 +103,7 @@ public class BeanDefinitionHolder implements BeanMetadataElement {
 	 * Return the alias names for the bean, as specified directly for the bean definition.
 	 * @return the array of alias names, or {@code null} if none
 	 */
-	@Nullable
-	public String[] getAliases() {
+	public String @Nullable [] getAliases() {
 		return this.aliases;
 	}
 
@@ -172,6 +171,7 @@ public class BeanDefinitionHolder implements BeanMetadataElement {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // TODO NullAway bug?
 	public int hashCode() {
 		return ObjectUtils.nullSafeHash(this.beanDefinition, this.beanName, this.aliases);
 	}

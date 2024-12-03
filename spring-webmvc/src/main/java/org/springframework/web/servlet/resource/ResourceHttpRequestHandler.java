@@ -30,6 +30,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -45,7 +46,6 @@ import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.ResourceRegionHttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -554,10 +554,9 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 	 * {@link #setMediaTypes(Map)} instead, or if you need to change behavior,
 	 * you can override {@link #getMediaType(HttpServletRequest, Resource)}.
 	 */
-	@Nullable
 	@Deprecated
 	@SuppressWarnings("deprecation")
-	protected org.springframework.web.accept.PathExtensionContentNegotiationStrategy initContentNegotiationStrategy() {
+	protected org.springframework.web.accept.@Nullable PathExtensionContentNegotiationStrategy initContentNegotiationStrategy() {
 		return null;
 	}
 

@@ -18,9 +18,9 @@ package org.springframework.test.web.servlet.htmlunit.webdriver;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
+import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import org.springframework.lang.Nullable;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebConnectionBuilderSupport;
 import org.springframework.test.web.servlet.htmlunit.WebRequestMatcher;

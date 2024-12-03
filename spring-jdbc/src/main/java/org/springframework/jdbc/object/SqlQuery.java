@@ -21,13 +21,14 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
-import org.springframework.lang.Nullable;
 
 /**
  * Reusable operation object representing an SQL query.
@@ -108,7 +109,7 @@ public abstract class SqlQuery<T> extends SqlOperation {
 	 * @return a List of objects, one per row of the ResultSet. Normally all these
 	 * will be of the same class, although it is possible to use different types.
 	 */
-	public List<T> execute(@Nullable Object[] params, @Nullable Map<?, ?> context) throws DataAccessException {
+	public List<T> execute(Object @Nullable [] params, @Nullable Map<?, ?> context) throws DataAccessException {
 		validateParameters(params);
 		RowMapper<T> rowMapper = newRowMapper(params, context);
 		return getJdbcTemplate().query(newPreparedStatementCreator(params), rowMapper);
@@ -251,7 +252,7 @@ public abstract class SqlQuery<T> extends SqlOperation {
 	 * @see org.springframework.dao.support.DataAccessUtils#singleResult
 	 */
 	@Nullable
-	public T findObject(@Nullable Object[] params, @Nullable Map<?, ?> context) throws DataAccessException {
+	public T findObject(Object @Nullable [] params, @Nullable Map<?, ?> context) throws DataAccessException {
 		List<T> results = execute(params, context);
 		return DataAccessUtils.singleResult(results);
 	}
@@ -372,6 +373,6 @@ public abstract class SqlQuery<T> extends SqlOperation {
 	 * but it can be useful for creating the objects of the result list.
 	 * @see #execute
 	 */
-	protected abstract RowMapper<T> newRowMapper(@Nullable Object[] parameters, @Nullable Map<?, ?> context);
+	protected abstract RowMapper<T> newRowMapper(Object @Nullable [] parameters, @Nullable Map<?, ?> context);
 
 }

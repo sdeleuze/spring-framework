@@ -16,8 +16,9 @@
 
 package org.springframework.messaging;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 
 /**
  * The base exception for any failures related to messaging.

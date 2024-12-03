@@ -16,8 +16,9 @@
 
 package org.springframework.web.socket.sockjs;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 
 /**
  * Base class for exceptions raised while processing SockJS HTTP requests.

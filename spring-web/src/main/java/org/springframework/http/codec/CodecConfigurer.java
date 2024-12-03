@@ -19,9 +19,10 @@ package org.springframework.http.codec;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.codec.Decoder;
 import org.springframework.core.codec.Encoder;
-import org.springframework.lang.Nullable;
 
 /**
  * Defines a common interface for configuring either client or server HTTP

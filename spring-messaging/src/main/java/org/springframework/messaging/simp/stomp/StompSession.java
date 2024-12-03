@@ -18,7 +18,7 @@ package org.springframework.messaging.simp.stomp;
 
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a STOMP session with operations to send messages,

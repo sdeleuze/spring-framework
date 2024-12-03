@@ -19,10 +19,11 @@ package org.springframework.web.reactive.function;
 import java.util.Collections;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 
 /**
  * Exception thrown to indicate that a {@code Content-Type} is not supported.

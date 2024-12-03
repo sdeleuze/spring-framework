@@ -20,7 +20,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.Date;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Context object encapsulating last execution times and last completion time

@@ -19,7 +19,7 @@ package org.springframework.jdbc.datasource;
 import java.sql.SQLException;
 import java.sql.ShardingKey;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Strategy interface for determining sharding keys which are used to establish direct

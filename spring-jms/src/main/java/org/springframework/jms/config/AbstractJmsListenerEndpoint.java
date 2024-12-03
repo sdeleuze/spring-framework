@@ -17,12 +17,12 @@
 package org.springframework.jms.config;
 
 import jakarta.jms.MessageListener;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jms.listener.AbstractMessageListenerContainer;
 import org.springframework.jms.listener.MessageListenerContainer;
 import org.springframework.jms.listener.endpoint.JmsActivationSpecConfig;
 import org.springframework.jms.listener.endpoint.JmsMessageEndpointManager;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**

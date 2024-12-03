@@ -16,8 +16,9 @@
 
 package org.springframework.aop.target;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeansException;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link org.springframework.aop.TargetSource} that lazily accesses a

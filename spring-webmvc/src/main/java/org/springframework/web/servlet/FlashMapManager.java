@@ -18,8 +18,7 @@ package org.springframework.web.servlet;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A strategy interface for retrieving and saving FlashMap instances.

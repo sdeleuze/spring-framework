@@ -16,7 +16,7 @@
 
 package org.springframework.core.convert;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A service interface for type conversion. This is the entry point into the convert system.

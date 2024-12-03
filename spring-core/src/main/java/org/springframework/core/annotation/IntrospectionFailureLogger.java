@@ -18,8 +18,7 @@ package org.springframework.core.annotation;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Log facade used to handle annotation introspection failures (in particular

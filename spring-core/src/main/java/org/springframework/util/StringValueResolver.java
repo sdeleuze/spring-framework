@@ -16,7 +16,7 @@
 
 package org.springframework.util;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Simple strategy interface for resolving a String value.

@@ -26,12 +26,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -109,12 +110,10 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	boolean constructorArgumentsResolved = false;
 
 	/** Package-visible field for caching fully resolved constructor arguments. */
-	@Nullable
-	Object[] resolvedConstructorArguments;
+	Object @Nullable [] resolvedConstructorArguments;
 
 	/** Package-visible field for caching partly prepared constructor arguments. */
-	@Nullable
-	Object[] preparedConstructorArguments;
+	Object @Nullable [] preparedConstructorArguments;
 
 	/** Common lock for the two post-processing fields below. */
 	final Object postProcessingLock = new Object();
@@ -393,8 +392,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 * (in which case the regular no-arg default constructor will be called)
 	 * @since 5.1
 	 */
-	@Nullable
-	public Constructor<?>[] getPreferredConstructors() {
+	public Constructor<?> @Nullable [] getPreferredConstructors() {
 		Object attribute = getAttribute(PREFERRED_CONSTRUCTORS_ATTRIBUTE);
 		if (attribute == null) {
 			return null;

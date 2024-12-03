@@ -18,10 +18,11 @@ package org.springframework.aot.generate;
 
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.javapoet.ClassName;
 import org.springframework.javapoet.CodeBlock;
 import org.springframework.javapoet.TypeName;
-import org.springframework.lang.Nullable;
 
 /**
  * A reference to a method with convenient code generation for

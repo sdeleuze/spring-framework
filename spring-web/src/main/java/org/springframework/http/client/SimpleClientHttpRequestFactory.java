@@ -24,8 +24,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpMethod;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

@@ -21,10 +21,10 @@ import java.util.TimeZone;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link org.springframework.web.servlet.LocaleResolver} implementation

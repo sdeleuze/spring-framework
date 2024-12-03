@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Expressions are executed in an evaluation context. It is in this context that

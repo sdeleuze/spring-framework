@@ -16,8 +16,9 @@
 
 package org.springframework.expression.spel;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.expression.EvaluationException;
-import org.springframework.lang.Nullable;
 
 /**
  * Root exception for Spring EL related exceptions.
@@ -37,28 +38,28 @@ public class SpelEvaluationException extends EvaluationException {
 	private final SpelMessage message;
 
 	@Nullable
-	private final Object[] inserts;
+	private final Object @Nullable [] inserts;
 
 
-	public SpelEvaluationException(SpelMessage message, @Nullable Object... inserts) {
+	public SpelEvaluationException(SpelMessage message, @Nullable Object @Nullable ... inserts) {
 		super(message.formatMessage(inserts));
 		this.message = message;
 		this.inserts = inserts;
 	}
 
-	public SpelEvaluationException(int position, SpelMessage message, @Nullable Object... inserts) {
+	public SpelEvaluationException(int position, SpelMessage message, @Nullable Object @Nullable ... inserts) {
 		super(position, message.formatMessage(inserts));
 		this.message = message;
 		this.inserts = inserts;
 	}
 
-	public SpelEvaluationException(int position, @Nullable Throwable cause, SpelMessage message, @Nullable Object... inserts) {
+	public SpelEvaluationException(int position, @Nullable Throwable cause, SpelMessage message, @Nullable Object @Nullable... inserts) {
 		super(position, message.formatMessage(inserts), cause);
 		this.message = message;
 		this.inserts = inserts;
 	}
 
-	public SpelEvaluationException(@Nullable Throwable cause, SpelMessage message, @Nullable Object... inserts) {
+	public SpelEvaluationException(@Nullable Throwable cause, SpelMessage message, @Nullable Object @Nullable ... inserts) {
 		super(message.formatMessage(inserts), cause);
 		this.message = message;
 		this.inserts = inserts;
@@ -83,7 +84,7 @@ public class SpelEvaluationException extends EvaluationException {
 	 * Return the message inserts.
 	 */
 	@Nullable
-	public Object[] getInserts() {
+	public Object @Nullable [] getInserts() {
 		return this.inserts;
 	}
 

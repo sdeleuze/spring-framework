@@ -25,6 +25,8 @@ import java.util.stream.Stream;
 
 import javax.sql.DataSource;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -42,7 +44,6 @@ import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.SqlRowSetResultSetExtractor;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ConcurrentLruCache;
 
@@ -351,7 +352,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 
 	@Override
 	public int update(
-			String sql, SqlParameterSource paramSource, KeyHolder generatedKeyHolder, @Nullable String[] keyColumnNames)
+			String sql, SqlParameterSource paramSource, KeyHolder generatedKeyHolder, String @Nullable [] keyColumnNames)
 			throws DataAccessException {
 
 		PreparedStatementCreator psc = getPreparedStatementCreator(sql, paramSource, pscf -> {
@@ -401,7 +402,7 @@ public class NamedParameterJdbcTemplate implements NamedParameterJdbcOperations 
 
 	@Override
 	public int[] batchUpdate(String sql, SqlParameterSource[] batchArgs, KeyHolder generatedKeyHolder,
-			@Nullable String[] keyColumnNames) {
+			String @Nullable [] keyColumnNames) {
 
 		if (batchArgs.length == 0) {
 			return new int[0];

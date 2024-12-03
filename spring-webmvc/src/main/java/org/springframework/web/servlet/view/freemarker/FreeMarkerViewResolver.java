@@ -19,8 +19,8 @@ package org.springframework.web.servlet.view.freemarker;
 import java.util.Locale;
 
 import freemarker.template.Configuration;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;

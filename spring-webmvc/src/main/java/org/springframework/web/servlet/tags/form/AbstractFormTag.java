@@ -19,8 +19,8 @@ package org.springframework.web.servlet.tags.form;
 import java.beans.PropertyEditor;
 
 import jakarta.servlet.jsp.JspException;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.tags.HtmlEscapingAwareTag;
 

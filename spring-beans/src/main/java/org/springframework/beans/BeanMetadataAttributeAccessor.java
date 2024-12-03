@@ -16,8 +16,9 @@
 
 package org.springframework.beans;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.AttributeAccessorSupport;
-import org.springframework.lang.Nullable;
 
 /**
  * Extension of {@link org.springframework.core.AttributeAccessorSupport},

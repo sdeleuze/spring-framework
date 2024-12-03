@@ -28,10 +28,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.format.Formatter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
@@ -82,8 +83,7 @@ public class DateFormatter implements Formatter<Date> {
 	@Nullable
 	private String pattern;
 
-	@Nullable
-	private String[] fallbackPatterns;
+	private String @Nullable [] fallbackPatterns;
 
 	private int style = DateFormat.DEFAULT;
 

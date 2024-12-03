@@ -18,10 +18,11 @@ package org.springframework.validation;
 
 import java.io.Serializable;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.ConfigurablePropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
-import org.springframework.lang.Nullable;
 
 /**
  * Default implementation of the {@link Errors} and {@link BindingResult}

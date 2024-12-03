@@ -19,7 +19,7 @@ package org.springframework.scheduling;
 import java.time.Instant;
 import java.util.Date;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Common interface for trigger objects that determine the next execution time

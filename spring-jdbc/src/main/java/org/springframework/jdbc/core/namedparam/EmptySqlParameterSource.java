@@ -16,7 +16,7 @@
 
 package org.springframework.jdbc.core.namedparam;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A simple empty implementation of the {@link SqlParameterSource} interface.
@@ -55,8 +55,7 @@ public class EmptySqlParameterSource implements SqlParameterSource {
 	}
 
 	@Override
-	@Nullable
-	public String[] getParameterNames() {
+	public String @Nullable [] getParameterNames() {
 		return null;
 	}
 

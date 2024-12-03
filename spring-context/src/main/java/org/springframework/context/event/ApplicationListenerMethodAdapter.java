@@ -29,6 +29,7 @@ import java.util.concurrent.CompletionStage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -46,7 +47,6 @@ import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.Order;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -271,7 +271,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 		return shouldHandle(event, resolveArguments(event));
 	}
 
-	private boolean shouldHandle(ApplicationEvent event, @Nullable Object[] args) {
+	private boolean shouldHandle(ApplicationEvent event, Object @Nullable [] args) {
 		if (args == null) {
 			return false;
 		}
@@ -290,8 +290,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 	 * Can return {@code null} to indicate that no suitable arguments could be resolved
 	 * and therefore the method should not be invoked at all for the specified event.
 	 */
-	@Nullable
-	protected Object[] resolveArguments(ApplicationEvent event) {
+	protected Object @Nullable [] resolveArguments(ApplicationEvent event) {
 		ResolvableType declaredEventType = getResolvableType(event);
 		if (declaredEventType == null) {
 			return null;
@@ -363,7 +362,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 	 * Invoke the event listener method with the given argument values.
 	 */
 	@Nullable
-	protected Object doInvoke(@Nullable Object... args) {
+	protected Object doInvoke(Object @Nullable ... args) {
 		Object bean = getTargetBean();
 		// Detect package-protected NullBean instance through equals(null) check
 		if (bean.equals(null)) {
@@ -444,7 +443,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 	 * beans, and others). Event listener beans that require proxying should prefer
 	 * class-based proxy mechanisms.
 	 */
-	private void assertTargetBean(Method method, Object targetBean, @Nullable Object[] args) {
+	private void assertTargetBean(Method method, Object targetBean, Object @Nullable [] args) {
 		Class<?> methodDeclaringClass = method.getDeclaringClass();
 		Class<?> targetBeanClass = targetBean.getClass();
 		if (!methodDeclaringClass.isAssignableFrom(targetBeanClass)) {
@@ -457,7 +456,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 	}
 
 	@SuppressWarnings("NullAway")
-	private String getInvocationErrorMessage(Object bean, @Nullable String message, @Nullable Object[] resolvedArgs) {
+	private String getInvocationErrorMessage(Object bean, @Nullable String message, Object @Nullable [] resolvedArgs) {
 		StringBuilder sb = new StringBuilder(getDetailedErrorMessage(bean, message));
 		sb.append("Resolved arguments: \n");
 		for (int i = 0; i < resolvedArgs.length; i++) {

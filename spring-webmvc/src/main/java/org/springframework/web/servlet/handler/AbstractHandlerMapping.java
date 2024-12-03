@@ -26,6 +26,7 @@ import jakarta.servlet.DispatcherType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -33,7 +34,6 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.log.LogDelegateFactory;
 import org.springframework.http.server.RequestPath;
-import org.springframework.lang.Nullable;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -288,8 +288,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 * or more specifically before
 	 * {@link org.springframework.context.ApplicationContextAware#setApplicationContext}.
 	 */
-	@Nullable
-	public final HandlerInterceptor[] getAdaptedInterceptors() {
+	public final HandlerInterceptor @Nullable [] getAdaptedInterceptors() {
 		return (!this.adaptedInterceptors.isEmpty() ?
 				this.adaptedInterceptors.toArray(new HandlerInterceptor[0]) : null);
 	}
@@ -298,8 +297,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 * Return all configured {@link MappedInterceptor}s as an array.
 	 * @return the array of {@link MappedInterceptor}s, or {@code null} if none
 	 */
-	@Nullable
-	protected final MappedInterceptor[] getMappedInterceptors() {
+	protected final MappedInterceptor @Nullable [] getMappedInterceptors() {
 		List<MappedInterceptor> mappedInterceptors = new ArrayList<>(this.adaptedInterceptors.size());
 		for (HandlerInterceptor interceptor : this.adaptedInterceptors) {
 			if (interceptor instanceof MappedInterceptor mappedInterceptor) {

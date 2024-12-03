@@ -20,11 +20,11 @@ import java.io.IOException;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ResourceLoaderAware;
-import org.springframework.lang.Nullable;
 
 /**
  * Factory bean that creates a FreeMarker {@link Configuration} and provides it

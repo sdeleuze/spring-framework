@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.asm.Label;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.core.convert.TypeDescriptor;
@@ -41,7 +43,6 @@ import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelMessage;
 import org.springframework.expression.spel.support.ReflectiveMethodExecutor;
 import org.springframework.expression.spel.support.ReflectiveMethodResolver;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -110,6 +111,7 @@ public class MethodReference extends SpelNodeImpl {
 		return result;
 	}
 
+	@SuppressWarnings("NullAway") // TODO Bug?
 	private TypedValue getValueInternal(EvaluationContext evaluationContext,
 			@Nullable Object value, @Nullable TypeDescriptor targetType, Object[] arguments) {
 

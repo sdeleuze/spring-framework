@@ -19,7 +19,7 @@ package org.springframework.context.i18n;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Simple implementation of the {@link TimeZoneAwareLocaleContext} interface,

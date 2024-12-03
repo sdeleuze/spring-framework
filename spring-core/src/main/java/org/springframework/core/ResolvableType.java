@@ -34,10 +34,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.SerializableTypeWrapper.FieldTypeProvider;
 import org.springframework.core.SerializableTypeWrapper.MethodParameterTypeProvider;
 import org.springframework.core.SerializableTypeWrapper.TypeProvider;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
@@ -130,11 +131,9 @@ public class ResolvableType implements Serializable {
 	@Nullable
 	private volatile ResolvableType superType;
 
-	@Nullable
-	private volatile ResolvableType[] interfaces;
+	private volatile ResolvableType @Nullable [] interfaces;
 
-	@Nullable
-	private volatile ResolvableType[] generics;
+	private volatile ResolvableType @Nullable [] generics;
 
 	@Nullable
 	private volatile Boolean unresolvableGenerics;

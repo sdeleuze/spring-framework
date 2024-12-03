@@ -23,13 +23,13 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import jakarta.servlet.ServletContext;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.util.Assert;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -124,7 +124,7 @@ public class RouterFunctionMockMvcBuilder extends AbstractMockMvcBuilder<RouterF
 	/**
 	 * Add interceptors mapped to a set of path patterns.
 	 */
-	public RouterFunctionMockMvcBuilder addMappedInterceptors(@Nullable String[] pathPatterns,
+	public RouterFunctionMockMvcBuilder addMappedInterceptors(String @Nullable [] pathPatterns,
 			HandlerInterceptor... interceptors) {
 
 		for (HandlerInterceptor interceptor : interceptors) {

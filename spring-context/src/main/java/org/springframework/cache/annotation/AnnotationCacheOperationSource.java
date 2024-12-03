@@ -23,9 +23,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.cache.interceptor.AbstractFallbackCacheOperationSource;
 import org.springframework.cache.interceptor.CacheOperation;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**

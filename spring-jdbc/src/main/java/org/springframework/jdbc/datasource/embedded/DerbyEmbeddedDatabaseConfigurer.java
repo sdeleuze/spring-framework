@@ -23,8 +23,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.LogFactory;
 import org.apache.derby.jdbc.EmbeddedDriver;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@link EmbeddedDatabaseConfigurer} for the Apache Derby database.

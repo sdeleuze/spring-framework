@@ -16,8 +16,9 @@
 
 package org.springframework.test.context.cache;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.ApplicationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.test.annotation.DirtiesContext.HierarchyMode;
 import org.springframework.test.context.MergedContextConfiguration;
 

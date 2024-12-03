@@ -24,9 +24,9 @@ import bsh.EvalError;
 import bsh.Interpreter;
 import bsh.Primitive;
 import bsh.XThis;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -86,7 +86,7 @@ public abstract class BshScriptUtils {
 	 * @return the scripted Java object
 	 * @throws EvalError in case of BeanShell parsing failure
 	 */
-	public static Object createBshObject(String scriptSource, @Nullable Class<?>[] scriptInterfaces, @Nullable ClassLoader classLoader)
+	public static Object createBshObject(String scriptSource, Class<?> @Nullable [] scriptInterfaces, @Nullable ClassLoader classLoader)
 			throws EvalError {
 
 		Object result = evaluateBshScript(scriptSource, scriptInterfaces, classLoader);
@@ -149,7 +149,7 @@ public abstract class BshScriptUtils {
 	 * @throws EvalError in case of BeanShell parsing failure
 	 */
 	static Object evaluateBshScript(
-			String scriptSource, @Nullable Class<?>[] scriptInterfaces, @Nullable ClassLoader classLoader)
+			String scriptSource, Class<?> @Nullable [] scriptInterfaces, @Nullable ClassLoader classLoader)
 			throws EvalError {
 
 		Assert.hasText(scriptSource, "Script source must not be empty");

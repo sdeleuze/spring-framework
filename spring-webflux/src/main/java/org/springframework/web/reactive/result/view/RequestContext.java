@@ -22,13 +22,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
@@ -256,7 +257,7 @@ public class RequestContext {
 	 * @param defaultMessage the String to return if the lookup fails
 	 * @return the message
 	 */
-	public String getMessage(String code, @Nullable Object[] args, String defaultMessage) {
+	public String getMessage(String code, Object @Nullable [] args, String defaultMessage) {
 		return getMessage(code, args, defaultMessage, isDefaultHtmlEscape());
 	}
 
@@ -279,7 +280,7 @@ public class RequestContext {
 	 * @param htmlEscape if the message should be HTML-escaped
 	 * @return the message
 	 */
-	public String getMessage(String code, @Nullable Object[] args, String defaultMessage, boolean htmlEscape) {
+	public String getMessage(String code, Object @Nullable [] args, String defaultMessage, boolean htmlEscape) {
 		String msg = this.messageSource.getMessage(code, args, defaultMessage, this.locale);
 		if (msg == null) {
 			return "";
@@ -304,7 +305,7 @@ public class RequestContext {
 	 * @return the message
 	 * @throws org.springframework.context.NoSuchMessageException if not found
 	 */
-	public String getMessage(String code, @Nullable Object[] args) throws NoSuchMessageException {
+	public String getMessage(String code, Object @Nullable [] args) throws NoSuchMessageException {
 		return getMessage(code, args, isDefaultHtmlEscape());
 	}
 
@@ -327,7 +328,7 @@ public class RequestContext {
 	 * @return the message
 	 * @throws org.springframework.context.NoSuchMessageException if not found
 	 */
-	public String getMessage(String code, @Nullable Object[] args, boolean htmlEscape) throws NoSuchMessageException {
+	public String getMessage(String code, Object @Nullable [] args, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = this.messageSource.getMessage(code, args, this.locale);
 		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
 	}

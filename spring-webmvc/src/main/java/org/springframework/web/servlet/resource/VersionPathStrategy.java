@@ -16,7 +16,7 @@
 
 package org.springframework.web.servlet.resource;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A strategy for extracting and embedding a resource version in its URL path.

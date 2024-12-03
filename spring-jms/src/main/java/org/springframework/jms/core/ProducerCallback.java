@@ -19,8 +19,7 @@ package org.springframework.jms.core;
 import jakarta.jms.JMSException;
 import jakarta.jms.MessageProducer;
 import jakarta.jms.Session;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Callback for sending a message to a JMS destination.

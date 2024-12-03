@@ -18,11 +18,12 @@ package org.springframework.web.server;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
-import org.springframework.lang.Nullable;
 import org.springframework.web.ErrorResponseException;
 
 /**
@@ -92,7 +93,7 @@ public class ResponseStatusException extends ErrorResponseException {
 	 */
 	protected ResponseStatusException(
 			HttpStatusCode status, @Nullable String reason, @Nullable Throwable cause,
-			@Nullable String messageDetailCode, @Nullable Object[] messageDetailArguments) {
+			@Nullable String messageDetailCode, Object @Nullable [] messageDetailArguments) {
 
 		super(status, ProblemDetail.forStatus(status), cause, messageDetailCode, messageDetailArguments);
 		this.reason = reason;

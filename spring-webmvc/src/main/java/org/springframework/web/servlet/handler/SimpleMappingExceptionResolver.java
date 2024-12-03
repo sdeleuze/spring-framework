@@ -24,8 +24,8 @@ import java.util.Properties;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -52,8 +52,7 @@ public class SimpleMappingExceptionResolver extends AbstractHandlerExceptionReso
 	@Nullable
 	private Properties exceptionMappings;
 
-	@Nullable
-	private Class<?>[] excludedExceptions;
+	private Class<?> @Nullable [] excludedExceptions;
 
 	@Nullable
 	private String defaultErrorView;

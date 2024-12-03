@@ -16,7 +16,7 @@
 
 package org.springframework.validation;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Extended variant of the {@link Validator} interface, adding support for

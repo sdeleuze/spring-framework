@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.quartz.Calendar;
 import org.quartz.JobDetail;
 import org.quartz.JobListener;
@@ -38,7 +39,6 @@ import org.quartz.xml.XMLSchedulingDataProcessor;
 
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
@@ -63,8 +63,7 @@ public abstract class SchedulerAccessor implements ResourceLoaderAware {
 
 	private boolean overwriteExistingJobs = false;
 
-	@Nullable
-	private String[] jobSchedulingDataLocations;
+	private String @Nullable [] jobSchedulingDataLocations;
 
 	@Nullable
 	private List<JobDetail> jobDetails;
@@ -75,14 +74,11 @@ public abstract class SchedulerAccessor implements ResourceLoaderAware {
 	@Nullable
 	private List<Trigger> triggers;
 
-	@Nullable
-	private SchedulerListener[] schedulerListeners;
+	private SchedulerListener @Nullable [] schedulerListeners;
 
-	@Nullable
-	private JobListener[] globalJobListeners;
+	private JobListener @Nullable [] globalJobListeners;
 
-	@Nullable
-	private TriggerListener[] globalTriggerListeners;
+	private TriggerListener @Nullable [] globalTriggerListeners;
 
 	@Nullable
 	private PlatformTransactionManager transactionManager;

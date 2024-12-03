@@ -77,6 +77,7 @@ import jakarta.xml.bind.attachment.AttachmentMarshaller;
 import jakarta.xml.bind.attachment.AttachmentUnmarshaller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -87,7 +88,6 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.oxm.GenericMarshaller;
 import org.springframework.oxm.GenericUnmarshaller;
 import org.springframework.oxm.MarshallingFailureException;
@@ -145,11 +145,9 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	@Nullable
 	private String contextPath;
 
-	@Nullable
-	private Class<?>[] classesToBeBound;
+	private Class<?> @Nullable [] classesToBeBound;
 
-	@Nullable
-	private String[] packagesToScan;
+	private String @Nullable [] packagesToScan;
 
 	@Nullable
 	private Map<String, ?> jaxbContextProperties;
@@ -160,20 +158,16 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	@Nullable
 	private Map<String, ?> unmarshallerProperties;
 
-	@Nullable
-	private Marshaller.Listener marshallerListener;
+	private Marshaller.@Nullable Listener marshallerListener;
 
-	@Nullable
-	private Unmarshaller.Listener unmarshallerListener;
+	private Unmarshaller.@Nullable Listener unmarshallerListener;
 
 	@Nullable
 	private ValidationEventHandler validationEventHandler;
 
-	@Nullable
-	private XmlAdapter<?, ?>[] adapters;
+	private XmlAdapter<?, ?> @Nullable [] adapters;
 
-	@Nullable
-	private Resource[] schemaResources;
+	private Resource @Nullable [] schemaResources;
 
 	private String schemaLanguage = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
@@ -251,8 +245,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	/**
 	 * Return the list of Java classes to be recognized by a newly created JAXBContext.
 	 */
-	@Nullable
-	public Class<?>[] getClassesToBeBound() {
+	public Class<?> @Nullable [] getClassesToBeBound() {
 		return this.classesToBeBound;
 	}
 
@@ -270,8 +263,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	/**
 	 * Return the packages to search for JAXB2 annotations.
 	 */
-	@Nullable
-	public String[] getPackagesToScan() {
+	public String @Nullable [] getPackagesToScan() {
 		return this.packagesToScan;
 	}
 

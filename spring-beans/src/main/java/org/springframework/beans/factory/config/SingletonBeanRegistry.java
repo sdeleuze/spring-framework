@@ -18,7 +18,7 @@ package org.springframework.beans.factory.config;
 
 import java.util.function.Consumer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface that defines a registry for shared bean instances.

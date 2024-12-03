@@ -24,8 +24,8 @@ import java.util.function.IntPredicate;
 import io.netty5.buffer.Buffer;
 import io.netty5.buffer.BufferComponent;
 import io.netty5.buffer.ComponentIterator;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 

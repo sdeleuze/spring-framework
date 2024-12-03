@@ -44,6 +44,7 @@ import java.util.TimeZone;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.InputSource;
 
 import org.springframework.beans.propertyeditors.ByteArrayPropertyEditor;
@@ -74,7 +75,6 @@ import org.springframework.beans.propertyeditors.ZoneIdEditor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourceArrayPropertyEditor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**

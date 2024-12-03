@@ -17,9 +17,9 @@
 package org.springframework.jms;
 
 import jakarta.jms.JMSException;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.lang.Nullable;
 
 /**
  * Base class for exception thrown by the framework whenever it

@@ -29,7 +29,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@link MergedAnnotations} implementation that searches for and adapts
@@ -59,8 +59,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 
 	private final Predicate<Class<?>> searchEnclosingClass;
 
-	@Nullable
-	private final Annotation[] annotations;
+	private final Annotation @Nullable [] annotations;
 
 	private final RepeatableContainers repeatableContainers;
 
@@ -561,8 +560,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 
 		private int aggregateCursor;
 
-		@Nullable
-		private int[] mappingCursors;
+		private int @Nullable [] mappingCursors;
 
 		AggregatesSpliterator(@Nullable Object requiredType, List<Aggregate> aggregates) {
 			this.requiredType = requiredType;

@@ -16,13 +16,14 @@
 
 package org.springframework.aop.target;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.aop.support.DefaultIntroductionAdvisor;
 import org.springframework.aop.support.DelegatingIntroductionInterceptor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.lang.Nullable;
 
 /**
  * Abstract base class for pooling {@link org.springframework.aop.TargetSource}

@@ -38,8 +38,8 @@ import kotlin.Unit;
 import kotlin.reflect.KFunction;
 import kotlin.reflect.KParameter;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.Nullable;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -90,8 +90,7 @@ public class MethodParameter {
 	@Nullable
 	private volatile Type genericParameterType;
 
-	@Nullable
-	private volatile Annotation[] parameterAnnotations;
+	private volatile Annotation @Nullable [] parameterAnnotations;
 
 	@Nullable
 	private volatile ParameterNameDiscoverer parameterNameDiscoverer;
@@ -882,8 +881,7 @@ public class MethodParameter {
 	 */
 	private static class FieldAwareConstructorParameter extends MethodParameter {
 
-		@Nullable
-		private volatile Annotation[] combinedAnnotations;
+		private volatile Annotation @Nullable [] combinedAnnotations;
 
 		public FieldAwareConstructorParameter(Constructor<?> constructor, int parameterIndex, String fieldName) {
 			super(constructor, parameterIndex);

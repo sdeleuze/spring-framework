@@ -39,13 +39,13 @@ import kotlin.reflect.KParameter;
 import kotlin.reflect.full.KClasses;
 import kotlin.reflect.jvm.KCallablesJvm;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.KotlinDetector;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -182,7 +182,7 @@ public abstract class BeanUtils {
 	 * @throws BeanInstantiationException if the bean cannot be instantiated
 	 * @see Constructor#newInstance
 	 */
-	public static <T> T instantiateClass(Constructor<T> ctor, Object... args) throws BeanInstantiationException {
+	public static <T> T instantiateClass(Constructor<T> ctor, @Nullable Object ... args) throws BeanInstantiationException {
 		Assert.notNull(ctor, "Constructor must not be null");
 		try {
 			ReflectionUtils.makeAccessible(ctor);
@@ -609,7 +609,7 @@ public abstract class BeanUtils {
 	 * @param beanClasses the classes to check against
 	 * @return the property type, or {@code Object.class} as fallback
 	 */
-	public static Class<?> findPropertyType(String propertyName, @Nullable Class<?>... beanClasses) {
+	public static Class<?> findPropertyType(String propertyName, Class<?> @Nullable ... beanClasses) {
 		if (beanClasses != null) {
 			for (Class<?> beanClass : beanClasses) {
 				PropertyDescriptor pd = getPropertyDescriptor(beanClass, propertyName);
@@ -803,7 +803,7 @@ public abstract class BeanUtils {
 	 * @see BeanWrapper
 	 */
 	private static void copyProperties(Object source, Object target, @Nullable Class<?> editable,
-			@Nullable String... ignoreProperties) throws BeansException {
+			String @Nullable ... ignoreProperties) throws BeansException {
 
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
@@ -912,7 +912,7 @@ public abstract class BeanUtils {
 		 * @param args the constructor arguments to apply
 		 * (use {@code null} for unspecified parameter if needed)
 		 */
-		public static <T> T instantiateClass(Constructor<T> ctor, Object... args)
+		public static <T> T instantiateClass(Constructor<T> ctor, @Nullable Object ... args)
 				throws IllegalAccessException, InvocationTargetException, InstantiationException {
 
 			KFunction<T> kotlinConstructor = ReflectJvmMapping.getKotlinFunction(ctor);

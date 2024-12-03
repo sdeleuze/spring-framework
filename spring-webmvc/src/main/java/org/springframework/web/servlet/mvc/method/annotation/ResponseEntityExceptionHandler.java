@@ -19,6 +19,7 @@ package org.springframework.web.servlet.mvc.method.annotation;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
@@ -32,7 +33,6 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.BindException;
 import org.springframework.validation.method.MethodValidationException;
 import org.springframework.web.ErrorResponse;
@@ -607,7 +607,7 @@ public abstract class ResponseEntityExceptionHandler implements MessageSourceAwa
 	 */
 	protected ProblemDetail createProblemDetail(
 			Exception ex, HttpStatusCode status, String defaultDetail, @Nullable String detailMessageCode,
-			@Nullable Object[] detailMessageArguments, WebRequest request) {
+			Object @Nullable [] detailMessageArguments, WebRequest request) {
 
 		ErrorResponse.Builder builder = ErrorResponse.builder(ex, status, defaultDetail);
 		if (detailMessageCode != null) {

@@ -27,8 +27,9 @@ import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.TimeZone;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.lang.Contract;
-import org.springframework.lang.Nullable;
 
 /**
  * Miscellaneous object utility methods.
@@ -113,7 +114,7 @@ public abstract class ObjectUtils {
 	 * @see #isEmpty(Object)
 	 */
 	@Contract("null -> true")
-	public static boolean isEmpty(@Nullable Object[] array) {
+	public static boolean isEmpty(@Nullable Object @Nullable [] array) {
 		return (array == null || array.length == 0);
 	}
 
@@ -188,7 +189,7 @@ public abstract class ObjectUtils {
 	 * @param element the element to check for
 	 * @return whether the element has been found in the given array
 	 */
-	public static boolean containsElement(@Nullable Object[] array, Object element) {
+	public static boolean containsElement(Object @Nullable [] array, Object element) {
 		if (array == null) {
 			return false;
 		}
@@ -253,7 +254,7 @@ public abstract class ObjectUtils {
 	 * @param obj the object to append
 	 * @return the new array (of the same component type; never {@code null})
 	 */
-	public static <A, O extends A> A[] addObjectToArray(@Nullable A[] array, @Nullable O obj) {
+	public static <A, O extends A> A[] addObjectToArray(A @Nullable [] array, @Nullable O obj) {
 		return addObjectToArray(array, obj, (array != null ? array.length : 0));
 	}
 
@@ -266,7 +267,7 @@ public abstract class ObjectUtils {
 	 * @return the new array (of the same component type; never {@code null})
 	 * @since 6.0
 	 */
-	public static <A, O extends A> A[] addObjectToArray(@Nullable A[] array, @Nullable O obj, int position) {
+	public static <A, O extends A> A[] addObjectToArray(A @Nullable [] array, @Nullable O obj, int position) {
 		Class<?> componentType = Object.class;
 		if (array != null) {
 			componentType = array.getClass().componentType();
@@ -398,7 +399,7 @@ public abstract class ObjectUtils {
 	 * @return a hash value of the elements
 	 * @since 6.1
 	 */
-	public static int nullSafeHash(@Nullable Object... elements) {
+	public static int nullSafeHash(@Nullable Object @Nullable ... elements) {
 		if (elements == null) {
 			return 0;
 		}
@@ -459,7 +460,7 @@ public abstract class ObjectUtils {
 	 * @deprecated as of 6.1 in favor of {@link Arrays#hashCode(Object[])}
 	 */
 	@Deprecated(since = "6.1")
-	public static int nullSafeHashCode(@Nullable Object[] array) {
+	public static int nullSafeHashCode(Object @Nullable [] array) {
 		return Arrays.hashCode(array);
 	}
 
@@ -651,7 +652,7 @@ public abstract class ObjectUtils {
 	 * @param array the array to build a String representation for
 	 * @return a String representation of {@code array}
 	 */
-	public static String nullSafeToString(@Nullable Object[] array) {
+	public static String nullSafeToString(Object @Nullable [] array) {
 		if (array == null) {
 			return NULL_STRING;
 		}

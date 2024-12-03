@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
 import org.springframework.context.MessageSource;
@@ -29,7 +30,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.method.MethodValidationException;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.ErrorResponseException;
@@ -361,7 +361,7 @@ public abstract class ResponseEntityExceptionHandler implements MessageSourceAwa
 	 */
 	protected ProblemDetail createProblemDetail(
 			Exception ex, HttpStatusCode status, String defaultDetail, @Nullable String detailMessageCode,
-			@Nullable Object[] detailMessageArguments, ServerWebExchange exchange) {
+			Object @Nullable [] detailMessageArguments, ServerWebExchange exchange) {
 
 		ErrorResponse.Builder builder = ErrorResponse.builder(ex, status, defaultDetail);
 		if (detailMessageCode != null) {

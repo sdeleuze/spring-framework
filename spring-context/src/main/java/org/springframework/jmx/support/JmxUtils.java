@@ -32,9 +32,9 @@ import javax.management.ObjectName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.jmx.MBeanServerNotFoundException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -136,8 +136,7 @@ public abstract class JmxUtils {
 	 * @return the parameter types as classes
 	 * @throws ClassNotFoundException if a parameter type could not be resolved
 	 */
-	@Nullable
-	public static Class<?>[] parameterInfoToTypes(@Nullable MBeanParameterInfo[] paramInfo)
+	public static Class<?> @Nullable [] parameterInfoToTypes(MBeanParameterInfo @Nullable [] paramInfo)
 			throws ClassNotFoundException {
 
 		return parameterInfoToTypes(paramInfo, ClassUtils.getDefaultClassLoader());
@@ -151,9 +150,8 @@ public abstract class JmxUtils {
 	 * @return the parameter types as classes
 	 * @throws ClassNotFoundException if a parameter type could not be resolved
 	 */
-	@Nullable
-	public static Class<?>[] parameterInfoToTypes(
-			@Nullable MBeanParameterInfo[] paramInfo, @Nullable ClassLoader classLoader)
+	public static Class<?> @Nullable [] parameterInfoToTypes(
+			MBeanParameterInfo @Nullable [] paramInfo, @Nullable ClassLoader classLoader)
 			throws ClassNotFoundException {
 
 		Class<?>[] types = null;

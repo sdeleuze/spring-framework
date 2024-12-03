@@ -41,11 +41,11 @@ import kotlinx.coroutines.GlobalScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.reactor.MonoKt;
 import kotlinx.coroutines.reactor.ReactorFlowKt;
+import org.jspecify.annotations.Nullable;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
@@ -92,7 +92,7 @@ public abstract class CoroutinesUtils {
 	 * @return the method invocation result as reactive stream
 	 * @throws IllegalArgumentException if {@code method} is not a suspending function
 	 */
-	public static Publisher<?> invokeSuspendingFunction(Method method, Object target, @Nullable Object... args) {
+	public static Publisher<?> invokeSuspendingFunction(Method method, Object target, @Nullable Object @Nullable ... args) {
 		return invokeSuspendingFunction(Dispatchers.getUnconfined(), method, target, args);
 	}
 
@@ -110,7 +110,7 @@ public abstract class CoroutinesUtils {
 	 */
 	@SuppressWarnings({"DataFlowIssue", "NullAway"})
 	public static Publisher<?> invokeSuspendingFunction(
-			CoroutineContext context, Method method, @Nullable Object target, @Nullable Object... args) {
+			CoroutineContext context, Method method, @Nullable Object target, @Nullable Object @Nullable ... args) {
 
 		Assert.isTrue(KotlinDetector.isSuspendingFunction(method), "Method must be a suspending function");
 		KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);

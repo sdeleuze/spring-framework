@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
@@ -220,8 +221,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 	 * Get the accept-version header.
 	 * @since 5.0.7
 	 */
-	@Nullable
-	public String[] getAcceptVersion() {
+	public String @Nullable [] getAcceptVersion() {
 		String value = getFirst(ACCEPT_VERSION);
 		return value != null ? StringUtils.commaDelimitedListToStringArray(value) : null;
 	}

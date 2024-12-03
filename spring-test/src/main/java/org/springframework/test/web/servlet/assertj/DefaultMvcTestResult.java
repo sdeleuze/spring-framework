@@ -16,7 +16,8 @@
 
 package org.springframework.test.web.servlet.assertj;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.test.http.HttpMessageContentConverter;
 import org.springframework.test.web.servlet.MvcResult;
 

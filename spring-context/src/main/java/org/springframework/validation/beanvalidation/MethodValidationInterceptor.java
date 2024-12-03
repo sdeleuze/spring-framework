@@ -30,6 +30,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -40,7 +41,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapter;
 import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -268,8 +268,7 @@ public class MethodValidationInterceptor implements MethodInterceptor {
 			return arguments;
 		}
 
-		@Nullable
-		private static Class<?>[] determineValidationGroups(Parameter parameter) {
+		private static Class<?> @Nullable [] determineValidationGroups(Parameter parameter) {
 			Validated validated = AnnotationUtils.findAnnotation(parameter, Validated.class);
 			if (validated != null) {
 				return validated.value();

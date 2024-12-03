@@ -35,6 +35,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
@@ -47,7 +48,6 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
@@ -205,7 +205,7 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 		return metadata;
 	}
 
-	private static String[] safeMerge(@Nullable String[] existingNames, Collection<LifecycleMethod> detectedMethods) {
+	private static String[] safeMerge(String @Nullable [] existingNames, Collection<LifecycleMethod> detectedMethods) {
 		Stream<String> detectedNames = detectedMethods.stream().map(LifecycleMethod::getIdentifier);
 		Stream<String> mergedNames = (existingNames != null ?
 				Stream.concat(detectedNames, Stream.of(existingNames)) : detectedNames);

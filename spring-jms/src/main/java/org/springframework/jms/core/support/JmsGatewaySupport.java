@@ -19,11 +19,11 @@ package org.springframework.jms.core.support;
 import jakarta.jms.ConnectionFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jspecify.annotations.Nullable;
 
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.lang.Nullable;
 
 /**
  * Convenient superclass for application classes that need JMS access.

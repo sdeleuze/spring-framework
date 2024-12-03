@@ -16,8 +16,9 @@
 
 package org.springframework.test.context.transaction;
 
+import org.jspecify.annotations.Nullable;
+
 import org.springframework.core.NamedInheritableThreadLocal;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link InheritableThreadLocal}-based holder for the current {@link TransactionContext}.

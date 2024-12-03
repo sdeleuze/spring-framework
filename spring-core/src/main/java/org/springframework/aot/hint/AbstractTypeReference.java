@@ -18,7 +18,7 @@ package org.springframework.aot.hint;
 
 import java.util.Objects;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Base {@link TypeReference} implementation that ensures consistent behaviour
