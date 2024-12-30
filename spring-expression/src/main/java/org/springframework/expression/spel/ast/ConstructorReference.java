@@ -124,7 +124,7 @@ public class ConstructorReference extends SpelNodeImpl {
 	 * @throws EvaluationException if there is a problem creating the object
 	 */
 	private TypedValue createNewInstance(ExpressionState state) throws EvaluationException {
-		Object[] arguments = new Object[getChildCount() - 1];
+		@Nullable Object[] arguments = new Object[getChildCount() - 1];
 		List<TypeDescriptor> argumentTypes = new ArrayList<>(getChildCount() - 1);
 		for (int i = 0; i < arguments.length; i++) {
 			TypedValue childValue = this.children[i + 1].getValueInternal(state);
@@ -359,7 +359,7 @@ public class ConstructorReference extends SpelNodeImpl {
 	private Object createReferenceTypeArray(ExpressionState state, TypeConverter typeConverter, SpelNodeImpl[] children,
 			Class<?> componentType) {
 
-		Object[] array = (Object[]) Array.newInstance(componentType, children.length);
+		@Nullable Object[] array = (Object[]) Array.newInstance(componentType, children.length);
 		TypeDescriptor targetType = TypeDescriptor.valueOf(componentType);
 		for (int i = 0; i < array.length; i++) {
 			Object value = children[i].getValue(state);

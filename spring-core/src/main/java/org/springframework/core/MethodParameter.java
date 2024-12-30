@@ -705,7 +705,7 @@ public class MethodParameter {
 		}
 		ParameterNameDiscoverer discoverer = this.parameterNameDiscoverer;
 		if (discoverer != null) {
-			String[] parameterNames = null;
+			@Nullable String[] parameterNames = null;
 			if (this.executable instanceof Method method) {
 				parameterNames = discoverer.getParameterNames(method);
 			}

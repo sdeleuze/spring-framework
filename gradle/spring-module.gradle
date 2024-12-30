@@ -119,6 +119,7 @@ tasks.withType(JavaCompile).configureEach {
         option("NullAway:CustomContractAnnotations", "org.springframework.lang.Contract")
         // TODO Replace by proper flag when supported, see https://github.com/uber/NullAway/issues/574
 		option("NullAway:AnnotatedPackages", "")
+		option("NullAway:JSpecifyMode", "true")
     }
 }
 tasks.compileJava {

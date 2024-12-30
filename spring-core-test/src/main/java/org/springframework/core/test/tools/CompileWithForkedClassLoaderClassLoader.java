@@ -37,7 +37,7 @@ final class CompileWithForkedClassLoaderClassLoader extends ClassLoader {
 
 	private final ClassLoader testClassLoader;
 
-	private Function<String, byte[]> classResourceLookup = name -> null;
+	private Function<String, byte @Nullable []> classResourceLookup = name -> null;
 
 
 	public CompileWithForkedClassLoaderClassLoader(ClassLoader testClassLoader) {
@@ -48,7 +48,7 @@ final class CompileWithForkedClassLoaderClassLoader extends ClassLoader {
 
 	// Invoked reflectively by DynamicClassLoader
 	@SuppressWarnings("unused")
-	void setClassResourceLookup(Function<String, byte[]> classResourceLookup) {
+	void setClassResourceLookup(Function<String, byte @Nullable []> classResourceLookup) {
 		this.classResourceLookup = classResourceLookup;
 	}
 

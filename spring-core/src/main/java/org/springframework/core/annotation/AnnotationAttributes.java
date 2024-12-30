@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
  * @see AnnotatedElementUtils
  */
 @SuppressWarnings("serial")
-public class AnnotationAttributes extends LinkedHashMap<String, Object> {
+public class AnnotationAttributes extends LinkedHashMap<String, @Nullable Object> {
 
 	private static final String UNKNOWN = "unknown";
 
@@ -376,10 +376,10 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
 
 	@Override
 	public String toString() {
-		Iterator<Map.Entry<String, Object>> entries = entrySet().iterator();
+		Iterator<Map.Entry<String, @Nullable Object>> entries = entrySet().iterator();
 		StringBuilder sb = new StringBuilder("{");
 		while (entries.hasNext()) {
-			Map.Entry<String, Object> entry = entries.next();
+			Map.Entry<String, @Nullable Object> entry = entries.next();
 			sb.append(entry.getKey());
 			sb.append('=');
 			sb.append(valueToString(entry.getValue()));
@@ -391,7 +391,7 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
 		return sb.toString();
 	}
 
-	private String valueToString(Object value) {
+	private String valueToString(@Nullable Object value) {
 		if (value == this) {
 			return "(this Map)";
 		}

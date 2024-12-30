@@ -71,7 +71,7 @@ public class DynamicClassLoader extends ClassLoader {
 					"setClassResourceLookup", Function.class);
 			ReflectionUtils.makeAccessible(setClassResourceLookupMethod);
 			ReflectionUtils.invokeMethod(setClassResourceLookupMethod,
-					getParent(), (Function<String, byte[]>) this::findClassBytes);
+					getParent(), (Function<String, byte @Nullable []>) this::findClassBytes);
 			this.defineClassMethod = lookupMethod(parentClass,
 					"defineDynamicClass", String.class, byte[].class, int.class, int.class);
 			ReflectionUtils.makeAccessible(this.defineClassMethod);

@@ -250,11 +250,13 @@ final class AttributeMethods {
 		return cache.computeIfAbsent(annotationType, AttributeMethods::compute);
 	}
 
+	@SuppressWarnings("NullAway") // TODO Refine AttributeMethods null-safety
 	private static AttributeMethods compute(Class<? extends Annotation> annotationType) {
 		Method[] methods = annotationType.getDeclaredMethods();
 		int size = methods.length;
 		for (int i = 0; i < methods.length; i++) {
 			if (!isAttributeMethod(methods[i])) {
+				//noinspection DataFlowIssue
 				methods[i] = null;
 				size--;
 			}

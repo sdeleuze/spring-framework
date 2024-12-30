@@ -825,9 +825,9 @@ public class ResolvableType implements Serializable {
 	 * @see #getGenerics()
 	 * @see #resolve()
 	 */
-	public Class<?>[] resolveGenerics() {
+	public @Nullable Class<?>[] resolveGenerics() {
 		ResolvableType[] generics = getGenerics();
-		Class<?>[] resolvedGenerics = new Class<?>[generics.length];
+		@Nullable Class<?>[] resolvedGenerics = new Class<?>[generics.length];
 		for (int i = 0; i < generics.length; i++) {
 			resolvedGenerics[i] = generics[i].resolve();
 		}

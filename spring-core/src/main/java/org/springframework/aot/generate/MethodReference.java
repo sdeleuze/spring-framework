@@ -106,7 +106,7 @@ public interface MethodReference {
 		 * @param function the resolver function
 		 * @return a new {@link ArgumentCodeGenerator} instance backed by the function
 		 */
-		static ArgumentCodeGenerator from(Function<TypeName, CodeBlock> function) {
+		static ArgumentCodeGenerator from(Function<TypeName, @Nullable CodeBlock> function) {
 			return function::apply;
 		}
 

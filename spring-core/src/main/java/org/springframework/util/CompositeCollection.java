@@ -83,7 +83,7 @@ class CompositeCollection<E> implements Collection<E> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "NullAway"}) // Null-safety of Java super method not yet managed
 	public <T> T[] toArray(T[] a) {
 		int size = this.size();
 		T[] result;

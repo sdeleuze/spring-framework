@@ -205,7 +205,7 @@ final class SerializableTypeWrapper {
 				if (returnValue == null) {
 					return null;
 				}
-				Type[] result = new Type[((Type[]) returnValue).length];
+				@Nullable Type[] result = new Type[((Type[]) returnValue).length];
 				for (int i = 0; i < result.length; i++) {
 					result[i] = forTypeProvider(new MethodInvokeTypeProvider(this.provider, method, i));
 				}

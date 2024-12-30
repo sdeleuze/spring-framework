@@ -105,7 +105,7 @@ public class StandardAnnotationMetadata extends StandardClassMetadata implements
 	}
 
 	@Override
-	public @Nullable Map<String, Object> getAnnotationAttributes(String annotationName, boolean classValuesAsString) {
+	public @Nullable Map<String, @Nullable Object> getAnnotationAttributes(String annotationName, boolean classValuesAsString) {
 		if (this.nestedAnnotationsAsMap) {
 			return AnnotationMetadata.super.getAnnotationAttributes(annotationName, classValuesAsString);
 		}
@@ -114,7 +114,8 @@ public class StandardAnnotationMetadata extends StandardClassMetadata implements
 	}
 
 	@Override
-	public @Nullable MultiValueMap<String, Object> getAllAnnotationAttributes(String annotationName, boolean classValuesAsString) {
+	@SuppressWarnings("NullAway") // Null-safety of Java super method not yet managed
+	public @Nullable MultiValueMap<String, @Nullable Object> getAllAnnotationAttributes(String annotationName, boolean classValuesAsString) {
 		if (this.nestedAnnotationsAsMap) {
 			return AnnotationMetadata.super.getAllAnnotationAttributes(annotationName, classValuesAsString);
 		}

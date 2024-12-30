@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
  * @param <K> the key type
  * @param <V> the value element type
  */
-public interface MultiValueMap<K, V> extends Map<K, List<V>> {
+public interface MultiValueMap<K, V extends @Nullable Object> extends Map<K, List<V>> {
 
 	/**
 	 * Return the first value for the given key.

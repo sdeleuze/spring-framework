@@ -54,7 +54,7 @@ interface AnnotationsProcessor<C, R> {
 	 * {@code null} elements)
 	 * @return a {@code non-null} result if no further processing is required
 	 */
-	@Nullable R doWithAnnotations(C context, int aggregateIndex, @Nullable Object source, Annotation[] annotations);
+	@Nullable R doWithAnnotations(C context, int aggregateIndex, @Nullable Object source, @Nullable Annotation[] annotations);
 
 	/**
 	 * Get the final result to be returned. By default this method returns
