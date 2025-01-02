@@ -291,7 +291,8 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 			}
 		}
 
-		Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
+		@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
+		Map<String, @Nullable Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
 		if (attributes.isEmpty() && qualifier == null) {
 			// If no attributes, the qualifier must be present
 			return false;

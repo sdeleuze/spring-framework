@@ -74,7 +74,7 @@ public interface AutowiredArguments {
 	 * Return the arguments as an object array.
 	 * @return the arguments as an object array
 	 */
-	Object[] toArray();
+	@Nullable Object[] toArray();
 
 	/**
 	 * Factory method to create a new {@link AutowiredArguments} instance from
@@ -82,7 +82,7 @@ public interface AutowiredArguments {
 	 * @param arguments the arguments
 	 * @return a new {@link AutowiredArguments} instance
 	 */
-	static AutowiredArguments of(Object[] arguments) {
+	static AutowiredArguments of(@Nullable Object[] arguments) {
 		Assert.notNull(arguments, "'arguments' must not be null");
 		return () -> arguments;
 	}

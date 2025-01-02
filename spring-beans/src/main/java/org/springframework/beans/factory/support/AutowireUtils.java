@@ -173,7 +173,7 @@ abstract class AutowireUtils {
 	 * @since 3.2.5
 	 */
 	public static Class<?> resolveReturnTypeForFactoryMethod(
-			Method method, Object[] args, @Nullable ClassLoader classLoader) {
+			Method method, @Nullable Object[] args, @Nullable ClassLoader classLoader) {
 
 		Assert.notNull(method, "Method must not be null");
 		Assert.notNull(args, "Argument array must not be null");

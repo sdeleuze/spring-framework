@@ -114,14 +114,23 @@ class BeanDefinitionPropertiesCodeGenerator {
 
 	CodeBlock generateCode(RootBeanDefinition beanDefinition) {
 		CodeBlock.Builder code = CodeBlock.builder();
-		addStatementForValue(code, beanDefinition, BeanDefinition::getScope,
-				this::hasScope, "$L.setScope($S)");
+		String scope = beanDefinition.getScope();
+		if (scope != null) {
+			addStatementForValue(code, beanDefinition, bd -> scope,
+					this::hasScope, "$L.setScope($S)");
+		}
 		addStatementForValue(code, beanDefinition, AbstractBeanDefinition::isBackgroundInit,
 				"$L.setBackgroundInit($L)");
-		addStatementForValue(code, beanDefinition, AbstractBeanDefinition::getLazyInit,
-				"$L.setLazyInit($L)");
-		addStatementForValue(code, beanDefinition, BeanDefinition::getDependsOn,
-				this::hasDependsOn, "$L.setDependsOn($L)", this::toStringVarArgs);
+		Boolean lazyInit = beanDefinition.getLazyInit();
+		if (lazyInit != null) {
+			addStatementForValue(code, beanDefinition, bd -> lazyInit,
+					"$L.setLazyInit($L)");
+		}
+		String [] dependsOn = beanDefinition.getDependsOn();
+		if (dependsOn != null) {
+			addStatementForValue(code, beanDefinition, bd -> dependsOn,
+					this::hasDependsOn, "$L.setDependsOn($L)", this::toStringVarArgs);
+		}
 		addStatementForValue(code, beanDefinition, BeanDefinition::isAutowireCandidate,
 				"$L.setAutowireCandidate($L)");
 		addStatementForValue(code, beanDefinition, AbstractBeanDefinition::isDefaultCandidate,
@@ -138,8 +147,9 @@ class BeanDefinitionPropertiesCodeGenerator {
 				"$L.setInitMethodNames($L)");
 		addInitDestroyMethods(code, beanDefinition, beanDefinition.getDestroyMethodNames(),
 				"$L.setDestroyMethodNames($L)");
-		if (beanDefinition.getFactoryBeanName() != null) {
-			addStatementForValue(code, beanDefinition, BeanDefinition::getFactoryBeanName,
+		String factoryBeanName = beanDefinition.getFactoryBeanName();
+		if (factoryBeanName != null) {
+			addStatementForValue(code, beanDefinition, bd -> factoryBeanName,
 					"$L.setFactoryBeanName(\"$L\")");
 		}
 		addConstructorArgumentValues(code, beanDefinition);

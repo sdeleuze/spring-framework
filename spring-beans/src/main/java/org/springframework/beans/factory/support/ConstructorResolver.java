@@ -814,7 +814,7 @@ class ConstructorResolver {
 	/**
 	 * Resolve the prepared arguments stored in the given bean definition.
 	 */
-	private Object[] resolvePreparedArguments(String beanName, RootBeanDefinition mbd, BeanWrapper bw,
+	private @Nullable Object[] resolvePreparedArguments(String beanName, RootBeanDefinition mbd, BeanWrapper bw,
 			Executable executable, Object[] argsToResolve) {
 
 		TypeConverter customConverter = this.beanFactory.getCustomTypeConverter();
@@ -823,7 +823,7 @@ class ConstructorResolver {
 				new BeanDefinitionValueResolver(this.beanFactory, beanName, mbd, converter);
 		Class<?>[] paramTypes = executable.getParameterTypes();
 
-		Object[] resolvedArgs = new Object[argsToResolve.length];
+		@Nullable Object[] resolvedArgs = new Object[argsToResolve.length];
 		for (int argIndex = 0; argIndex < argsToResolve.length; argIndex++) {
 			Object argValue = argsToResolve[argIndex];
 			Class<?> paramType = paramTypes[argIndex];
@@ -1351,6 +1351,7 @@ class ConstructorResolver {
 			this.preparedArguments = args;
 		}
 
+		@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
 		public int getTypeDifferenceWeight(Class<?>[] paramTypes) {
 			// If valid arguments found, determine type difference weight.
 			// Try type difference weight on both the converted arguments and

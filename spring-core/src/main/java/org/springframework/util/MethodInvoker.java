@@ -49,7 +49,7 @@ public class MethodInvoker {
 
 	private @Nullable String staticMethod;
 
-	private Object @Nullable [] arguments;
+	private @Nullable Object @Nullable [] arguments;
 
 	/** The method we will call. */
 	private @Nullable Method methodObject;
@@ -127,14 +127,14 @@ public class MethodInvoker {
 	 * Set arguments for the method invocation. If this property is not set,
 	 * or the Object array is of length 0, a method with no arguments is assumed.
 	 */
-	public void setArguments(Object @Nullable ... arguments) {
+	public void setArguments(@Nullable Object... arguments) {
 		this.arguments = arguments;
 	}
 
 	/**
 	 * Return the arguments for the method invocation.
 	 */
-	public Object[] getArguments() {
+	public @Nullable Object[] getArguments() {
 		return (this.arguments != null ? this.arguments : EMPTY_ARGUMENTS);
 	}
 
@@ -166,7 +166,7 @@ public class MethodInvoker {
 		Assert.notNull(targetClass, "Either 'targetClass' or 'targetObject' is required");
 		Assert.notNull(targetMethod, "Property 'targetMethod' is required");
 
-		Object[] arguments = getArguments();
+		@Nullable Object[] arguments = getArguments();
 		Class<?>[] argTypes = new Class<?>[arguments.length];
 		for (int i = 0; i < arguments.length; ++i) {
 			argTypes[i] = (arguments[i] != null ? arguments[i].getClass() : Object.class);
@@ -206,7 +206,7 @@ public class MethodInvoker {
 	 */
 	protected @Nullable Method findMatchingMethod() {
 		String targetMethod = getTargetMethod();
-		Object[] arguments = getArguments();
+		@Nullable Object[] arguments = getArguments();
 		int argCount = arguments.length;
 
 		Class<?> targetClass = getTargetClass();

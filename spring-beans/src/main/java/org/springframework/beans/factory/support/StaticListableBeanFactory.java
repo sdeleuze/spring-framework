@@ -155,6 +155,7 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
 	public Object getBean(String name, @Nullable Object @Nullable ... args) throws BeansException {
 		if (!ObjectUtils.isEmpty(args)) {
 			throw new UnsupportedOperationException(
@@ -178,6 +179,7 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
 	public <T> T getBean(Class<T> requiredType, @Nullable Object @Nullable ... args) throws BeansException {
 		if (!ObjectUtils.isEmpty(args)) {
 			throw new UnsupportedOperationException(

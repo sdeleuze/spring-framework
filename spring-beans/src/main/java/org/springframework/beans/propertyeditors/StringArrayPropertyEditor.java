@@ -126,8 +126,9 @@ public class StringArrayPropertyEditor extends PropertyEditorSupport {
 	}
 
 	@Override
+	@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
 	public void setAsText(String text) throws IllegalArgumentException {
-		String[] array = StringUtils.delimitedListToStringArray(text, this.separator, this.charsToDelete);
+		@Nullable String[] array = StringUtils.delimitedListToStringArray(text, this.separator, this.charsToDelete);
 		if (this.emptyArrayAsNull && array.length == 0) {
 			setValue(null);
 		}

@@ -58,6 +58,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 
 
 	@Override
+	@SuppressWarnings("NullAway") // Dataflow analysis limitation
 	public final @Nullable BeanDefinition parse(Element element, ParserContext parserContext) {
 		AbstractBeanDefinition definition = parseInternal(element, parserContext);
 		if (definition != null && !parserContext.isNested()) {

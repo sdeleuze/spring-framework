@@ -162,7 +162,7 @@ public final class AutowiredMethodArgumentsResolver extends AutowiredElementReso
 		Assert.isInstanceOf(AutowireCapableBeanFactory.class, beanFactory);
 		AutowireCapableBeanFactory autowireCapableBeanFactory = (AutowireCapableBeanFactory) beanFactory;
 		int argumentCount = method.getParameterCount();
-		Object[] arguments = new Object[argumentCount];
+		@Nullable Object[] arguments = new Object[argumentCount];
 		Set<String> autowiredBeanNames = CollectionUtils.newLinkedHashSet(argumentCount);
 		TypeConverter typeConverter = beanFactory.getTypeConverter();
 		for (int i = 0; i < argumentCount; i++) {

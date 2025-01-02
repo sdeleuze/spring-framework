@@ -200,7 +200,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 		}
 		else {
 			Executable executable = this.lookup.get(registeredBean);
-			Object[] arguments = resolveArguments(registeredBean, executable).toArray();
+			@Nullable Object[] arguments = resolveArguments(registeredBean, executable).toArray();
 			return invokeBeanSupplier(executable, () -> (T) instantiate(registeredBean, executable, arguments));
 		}
 	}
@@ -242,7 +242,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 
 	private AutowiredArguments resolveArguments(RegisteredBean registeredBean, Executable executable) {
 		int parameterCount = executable.getParameterCount();
-		Object[] resolved = new Object[parameterCount];
+		@Nullable Object[] resolved = new Object[parameterCount];
 		Assert.isTrue(this.shortcutBeanNames == null || this.shortcutBeanNames.length == resolved.length,
 				() -> "'shortcuts' must contain " + resolved.length + " elements");
 
@@ -341,7 +341,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 		}
 	}
 
-	private Object instantiate(RegisteredBean registeredBean, Executable executable, Object[] args) {
+	private Object instantiate(RegisteredBean registeredBean, Executable executable, @Nullable Object[] args) {
 		if (executable instanceof Constructor<?> constructor) {
 			return BeanUtils.instantiateClass(constructor, args);
 		}

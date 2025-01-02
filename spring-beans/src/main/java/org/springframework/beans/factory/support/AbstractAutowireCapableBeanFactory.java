@@ -548,7 +548,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * @see #instantiateUsingFactoryMethod
 	 * @see #autowireConstructor
 	 */
-	protected Object doCreateBean(String beanName, RootBeanDefinition mbd, Object @Nullable [] args)
+	protected Object doCreateBean(String beanName, RootBeanDefinition mbd, @Nullable Object @Nullable [] args)
 			throws BeanCreationException {
 
 		// Instantiate the bean.
@@ -753,7 +753,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 							// Fully resolve parameter names and argument values.
 							ConstructorArgumentValues cav = mbd.getConstructorArgumentValues();
 							Class<?>[] paramTypes = candidate.getParameterTypes();
-							String[] paramNames = null;
+							@Nullable String[] paramNames = null;
 							if (cav.containsNamedArgument()) {
 								ParameterNameDiscoverer pnd = getParameterNameDiscoverer();
 								if (pnd != null) {
@@ -761,7 +761,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 								}
 							}
 							Set<ConstructorArgumentValues.ValueHolder> usedValueHolders = CollectionUtils.newHashSet(paramTypes.length);
-							Object[] args = new Object[paramTypes.length];
+							@Nullable Object[] args = new Object[paramTypes.length];
 							for (int i = 0; i < args.length; i++) {
 								ConstructorArgumentValues.ValueHolder valueHolder = cav.getArgumentValue(
 										i, paramTypes[i], (paramNames != null ? paramNames[i] : null), usedValueHolders);
@@ -1157,6 +1157,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * @see #autowireConstructor
 	 * @see #instantiateBean
 	 */
+	@SuppressWarnings("NullAway") // https://github.com/uber/NullAway/issues/1011
 	protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd, @Nullable Object @Nullable [] args) {
 		// Make sure bean class is actually resolved at this point.
 		Class<?> beanClass = resolveBeanClass(mbd, beanName);

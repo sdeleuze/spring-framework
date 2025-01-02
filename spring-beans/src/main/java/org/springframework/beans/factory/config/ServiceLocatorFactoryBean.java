@@ -311,7 +311,7 @@ public class ServiceLocatorFactoryBean implements FactoryBean<Object>, BeanFacto
 	 */
 	protected Exception createServiceLocatorException(Constructor<Exception> exceptionConstructor, BeansException cause) {
 		Class<?>[] paramTypes = exceptionConstructor.getParameterTypes();
-		Object[] args = new Object[paramTypes.length];
+		@Nullable Object[] args = new Object[paramTypes.length];
 		for (int i = 0; i < paramTypes.length; i++) {
 			if (String.class == paramTypes[i]) {
 				args[i] = cause.getMessage();
