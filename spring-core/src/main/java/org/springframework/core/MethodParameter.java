@@ -39,6 +39,9 @@ import kotlin.Unit;
 import kotlin.reflect.KFunction;
 import kotlin.reflect.KParameter;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
 import org.springframework.util.Assert;
@@ -389,7 +392,7 @@ public class MethodParameter {
 	/**
 	 * Return whether this method indicates a parameter which is not required:
 	 * either in the form of Java 8's {@link java.util.Optional}, any variant
-	 * of a parameter-level {@code Nullable} annotation (such as from JSpecify,
+	 * of a parameter-level {@code @Nullable} annotation (such as from JSpecify,
 	 * JSR-305 or Jakarta set of annotations), or a language-level nullable type
 	 * declaration or {@code Continuation} parameter in Kotlin.
 	 * @since 4.3
@@ -400,25 +403,58 @@ public class MethodParameter {
 	}
 
 	/**
-	 * Check whether this method parameter is annotated with any variant of a
-	 * {@code Nullable} annotation, for example, {@code org.springframework.lang.Nullable},
-	 * {@code org.jspecify.annotations.Nullable} or {@code jakarta.annotation.Nullable}.
+	 * Return the {@link Nullness nullness} of this {@code MethodParameter} based on JSpecify
+	 * annotations (at type, method, class or package level), other variants of
+	 * {@code @Nullable} annotations or language-level nullable types in Kotlin.
+	 * @since 7.0
 	 */
-	private boolean hasNullableAnnotation() {
+	public Nullness getNullness() {
+		// Check Kotlin nullness
+		if (KotlinDetector.isKotlinReflectPresent() && KotlinDetector.isKotlinType(getContainingClass())) {
+			return (KotlinDelegate.isNullable(this) ? Nullness.NULLABLE : Nullness.NON_NULL);
+		}
+		// Check @Nullable annotations regardless of the package (cover also Spring and JSR 305 annotations)
 		for (Annotation ann : getParameterAnnotations()) {
 			if ("Nullable".equals(ann.annotationType().getSimpleName())) {
-				return true;
+				return Nullness.NULLABLE;
 			}
 		}
-		if (this.parameterIndex >= 0) {
-			AnnotatedType annotatedType = this.executable.getAnnotatedParameterTypes()[this.parameterIndex];
-			for (Annotation ann : annotatedType.getAnnotations()) {
-				if ("Nullable".equals(ann.annotationType().getSimpleName())) {
-					return true;
-				}
-			}
+		// Check JSpecify annotations
+		AnnotatedType annotatedType = (this.parameterIndex < 0 ?
+				this.executable.getAnnotatedReturnType() :
+				this.executable.getAnnotatedParameterTypes()[this.parameterIndex]);
+		if (annotatedType.isAnnotationPresent(Nullable.class)) {
+			return Nullness.NULLABLE;
 		}
-		return false;
+		if (annotatedType.isAnnotationPresent(NonNull.class)) {
+			return Nullness.NON_NULL;
+		}
+		return getDefaultNullness();
+	}
+
+	private Nullness getDefaultNullness() {
+		Nullness nullness = Nullness.UNSPECIFIED;
+		// Package level
+		Class<?> declaringClass = this.executable.getDeclaringClass();
+		Package declaringPackage = declaringClass.getPackage();
+		if (declaringPackage.isAnnotationPresent(NullMarked.class)) {
+			nullness = Nullness.NON_NULL;
+		}
+		// Class level
+		if (declaringClass.isAnnotationPresent(NullMarked.class)) {
+			nullness = Nullness.NON_NULL;
+		}
+		else if (declaringClass.isAnnotationPresent(NullUnmarked.class)) {
+			nullness = Nullness.UNSPECIFIED;
+		}
+		// Method level
+		if (this.executable.isAnnotationPresent(NullMarked.class)) {
+			nullness = Nullness.NON_NULL;
+		}
+		else if (this.executable.isAnnotationPresent(NullUnmarked.class)) {
+			nullness = Nullness.UNSPECIFIED;
+		}
+		return nullness;
 	}
 
 	/**
@@ -923,6 +959,11 @@ public class MethodParameter {
 	 * Inner class to avoid a hard dependency on Kotlin at runtime.
 	 */
 	private static class KotlinDelegate {
+
+
+		public static boolean isNullable(MethodParameter param) {
+			throw new UnsupportedOperationException("Not implemented yet");
+		}
 
 		/**
 		 * Check whether the specified {@link MethodParameter} represents a nullable Kotlin type,
