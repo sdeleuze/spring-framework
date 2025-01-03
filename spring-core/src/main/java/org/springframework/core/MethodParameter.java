@@ -39,6 +39,9 @@ import kotlin.Unit;
 import kotlin.reflect.KFunction;
 import kotlin.reflect.KParameter;
 import kotlin.reflect.jvm.ReflectJvmMapping;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
 import org.springframework.util.Assert;
@@ -399,6 +402,39 @@ public class MethodParameter {
 				(KotlinDetector.isKotlinReflectPresent() &&
 						KotlinDetector.isKotlinType(getContainingClass()) &&
 						KotlinDelegate.isOptional(this)));
+	}
+
+	public Nullness getNullness() {
+		AnnotatedType annotatedType = (this.parameterIndex < 0 ?
+				this.executable.getAnnotatedReturnType() :
+				this.executable.getAnnotatedParameterTypes()[this.parameterIndex]);
+		if (annotatedType.getAnnotation(Nullable.class) != null) {
+			return Nullness.NULLABLE;
+		}
+		if (annotatedType.getAnnotation(NonNull.class) != null) {
+			return Nullness.NON_NULL;
+		}
+		if (this.executable.isAnnotationPresent(NullMarked.class)) {
+			return Nullness.NULLABLE;
+		}
+		if (this.executable.isAnnotationPresent(NullUnmarked.class)) {
+			return Nullness.UNSPECIFIED;
+		}
+		Class<?> declaringClass = this.executable.getDeclaringClass();
+		if (declaringClass.isAnnotationPresent(NullMarked.class)) {
+			return Nullness.NULLABLE;
+		}
+		if (declaringClass.isAnnotationPresent(NullUnmarked.class)) {
+			return Nullness.UNSPECIFIED;
+		}
+		Package declaringPackage = declaringClass.getPackage();
+		if (declaringPackage.isAnnotationPresent(NullMarked.class)) {
+			return Nullness.NULLABLE;
+		}
+		if (declaringPackage.isAnnotationPresent(NullUnmarked.class)) {
+			return Nullness.UNSPECIFIED;
+		}
+		return Nullness.UNSPECIFIED;
 	}
 
 	/**
