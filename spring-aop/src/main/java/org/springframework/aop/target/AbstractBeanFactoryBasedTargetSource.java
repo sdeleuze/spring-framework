@@ -69,6 +69,7 @@ public abstract class AbstractBeanFactoryBasedTargetSource implements TargetSour
 	 * BeanFactory that owns this TargetSource. We need to hold onto this
 	 * reference so that we can create new prototype instances as necessary.
 	 */
+	@SuppressWarnings("serial")
 	private @Nullable BeanFactory beanFactory;
 
 
