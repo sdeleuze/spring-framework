@@ -44,6 +44,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
+import org.springframework.lang.Nullness;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -400,61 +401,6 @@ public class MethodParameter {
 	public boolean isOptional() {
 		return (getParameterType() == Optional.class || hasNullableAnnotation() ||
 				(KotlinDetector.isKotlinType(getContainingClass()) && KotlinDelegate.isOptional(this)));
-	}
-
-	/**
-	 * Return the {@link Nullness nullness} of this {@code MethodParameter} based on JSpecify
-	 * annotations (at type, method, class or package level), other variants of
-	 * {@code @Nullable} annotations or language-level nullable types in Kotlin.
-	 * @since 7.0
-	 */
-	public Nullness getNullness() {
-		// Check Kotlin nullness
-		if (KotlinDetector.isKotlinReflectPresent() && KotlinDetector.isKotlinType(getContainingClass())) {
-			return (KotlinDelegate.isNullable(this) ? Nullness.NULLABLE : Nullness.NON_NULL);
-		}
-		// Check @Nullable annotations regardless of the package (cover also Spring and JSR 305 annotations)
-		for (Annotation ann : getParameterAnnotations()) {
-			if ("Nullable".equals(ann.annotationType().getSimpleName())) {
-				return Nullness.NULLABLE;
-			}
-		}
-		// Check JSpecify annotations
-		AnnotatedType annotatedType = (this.parameterIndex < 0 ?
-				this.executable.getAnnotatedReturnType() :
-				this.executable.getAnnotatedParameterTypes()[this.parameterIndex]);
-		if (annotatedType.isAnnotationPresent(Nullable.class)) {
-			return Nullness.NULLABLE;
-		}
-		if (annotatedType.isAnnotationPresent(NonNull.class)) {
-			return Nullness.NON_NULL;
-		}
-		return getDefaultNullness();
-	}
-
-	private Nullness getDefaultNullness() {
-		Nullness nullness = Nullness.UNSPECIFIED;
-		// Package level
-		Class<?> declaringClass = this.executable.getDeclaringClass();
-		Package declaringPackage = declaringClass.getPackage();
-		if (declaringPackage.isAnnotationPresent(NullMarked.class)) {
-			nullness = Nullness.NON_NULL;
-		}
-		// Class level
-		if (declaringClass.isAnnotationPresent(NullMarked.class)) {
-			nullness = Nullness.NON_NULL;
-		}
-		else if (declaringClass.isAnnotationPresent(NullUnmarked.class)) {
-			nullness = Nullness.UNSPECIFIED;
-		}
-		// Method level
-		if (this.executable.isAnnotationPresent(NullMarked.class)) {
-			nullness = Nullness.NON_NULL;
-		}
-		else if (this.executable.isAnnotationPresent(NullUnmarked.class)) {
-			nullness = Nullness.UNSPECIFIED;
-		}
-		return nullness;
 	}
 
 	/**
