@@ -36,12 +36,12 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionCustomizer;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.RegistrableApplicationContext;
 import org.springframework.core.io.ProtocolResolver;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -104,7 +104,7 @@ import org.springframework.util.Assert;
  * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
  * @see org.springframework.beans.factory.support.PropertiesBeanDefinitionReader
  */
-public class GenericApplicationContext extends AbstractApplicationContext implements BeanDefinitionRegistry {
+public class GenericApplicationContext extends AbstractApplicationContext implements RegistrableApplicationContext {
 
 	private final DefaultListableBeanFactory beanFactory;
 
@@ -478,7 +478,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 
 	//---------------------------------------------------------------------
-	// Convenient methods for registering individual beans
+	// Implementation of RegistrableApplicationContext
 	//---------------------------------------------------------------------
 
 	/**
@@ -491,6 +491,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * (may be {@code null} or empty)
 	 * @since 5.2 (since 5.0 on the AnnotationConfigApplicationContext subclass)
 	 */
+	@Override
 	public <T> void registerBean(Class<T> beanClass, @Nullable Object... constructorArgs) {
 		registerBean(null, beanClass, constructorArgs);
 	}
@@ -506,6 +507,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * (may be {@code null} or empty)
 	 * @since 5.2 (since 5.0 on the AnnotationConfigApplicationContext subclass)
 	 */
+	@Override
 	public <T> void registerBean(@Nullable String beanName, Class<T> beanClass, @Nullable Object... constructorArgs) {
 		registerBean(beanName, beanClass, (Supplier<T>) null,
 				bd -> {
@@ -525,6 +527,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * @since 5.0
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
 	 */
+	@Override
 	public final <T> void registerBean(Class<T> beanClass, BeanDefinitionCustomizer... customizers) {
 		registerBean(null, beanClass, null, customizers);
 	}
@@ -540,6 +543,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * @since 5.0
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
 	 */
+	@Override
 	public final <T> void registerBean(
 			@Nullable String beanName, Class<T> beanClass, BeanDefinitionCustomizer... customizers) {
 
@@ -558,6 +562,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * @since 5.0
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
 	 */
+	@Override
 	public final <T> void registerBean(
 			Class<T> beanClass, Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
 
@@ -579,6 +584,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * {@link BeanDefinition}, for example, setting a lazy-init or primary flag
 	 * @since 5.0
 	 */
+	@Override
 	public <T> void registerBean(@Nullable String beanName, Class<T> beanClass,
 			@Nullable Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
 

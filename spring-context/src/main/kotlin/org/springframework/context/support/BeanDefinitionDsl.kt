@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2024 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import org.springframework.beans.factory.getBeanProvider
 import org.springframework.beans.factory.support.AbstractBeanDefinition
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils
 import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.FunctionalInitializer
+import org.springframework.context.RegistrableApplicationContext
 import org.springframework.core.env.ConfigurableEnvironment
 import org.springframework.core.env.Profiles
 import java.util.function.Supplier
@@ -70,6 +72,8 @@ import java.util.function.Supplier
  */
 fun beans(init: BeanDefinitionDsl.() -> Unit) = BeanDefinitionDsl(init)
 
+fun beans(context: RegistrableApplicationContext, init: BeanDefinitionDsl.() -> Unit) = BeanDefinitionDsl(init).initialize(context)
+
 /**
  * Class implementing functional bean definition Kotlin DSL.
  *
@@ -81,7 +85,7 @@ fun beans(init: BeanDefinitionDsl.() -> Unit) = BeanDefinitionDsl(init)
  */
 open class BeanDefinitionDsl internal constructor (private val init: BeanDefinitionDsl.() -> Unit,
 							 private val condition: (ConfigurableEnvironment) -> Boolean = { true })
-	: ApplicationContextInitializer<GenericApplicationContext> {
+	: FunctionalInitializer {
 
 	@PublishedApi
 	internal val children = arrayListOf<BeanDefinitionDsl>()
@@ -90,7 +94,7 @@ open class BeanDefinitionDsl internal constructor (private val init: BeanDefinit
 	 * @see BeanSupplierContext
 	 */
 	@PublishedApi
-	internal lateinit var context: GenericApplicationContext
+	internal lateinit var context: RegistrableApplicationContext
 
 	/**
 	 * Shortcut for `context.environment`
@@ -1155,7 +1159,7 @@ open class BeanDefinitionDsl internal constructor (private val init: BeanDefinit
 	 * Limit access to `ref()` and `provider()` to bean supplier lambdas.
 	 * @since 5.2
 	 */
-	open class BeanSupplierContext(@PublishedApi internal val context: GenericApplicationContext) {
+	open class BeanSupplierContext(@PublishedApi internal val context: RegistrableApplicationContext) {
 
 		/**
 		 * Get a reference to the bean by type or type + name with the syntax
@@ -1204,7 +1208,7 @@ open class BeanDefinitionDsl internal constructor (private val init: BeanDefinit
 	 * Register the bean defined via the DSL on the provided application context.
 	 * @param context The `ApplicationContext` to use for registering the beans
 	 */
-	override fun initialize(context: GenericApplicationContext) {
+	override fun initialize(context: RegistrableApplicationContext) {
 		this.context = context
 		init()
 		for (child in children) {
