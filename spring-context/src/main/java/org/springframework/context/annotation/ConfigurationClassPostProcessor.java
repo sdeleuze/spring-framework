@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -48,7 +49,7 @@ import org.springframework.aot.hint.TypeReference;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
-import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.aot.BeanFactoryInitializationAotContribution;
 import org.springframework.beans.factory.aot.BeanFactoryInitializationAotProcessor;
@@ -78,9 +79,11 @@ import org.springframework.beans.factory.support.RegisteredBean;
 import org.springframework.beans.factory.support.RegisteredBean.InstantiationDescriptor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationStartupAware;
+import org.springframework.context.BeanRegistrar;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ConfigurationClassEnhancer.EnhancedConfiguration;
+import org.springframework.context.support.BeanRegistryAdapter;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -305,7 +308,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		}
 
 		enhanceConfigurationClasses(beanFactory);
-		beanFactory.addBeanPostProcessor(new ImportAwareBeanPostProcessor(beanFactory));
+		beanFactory.addBeanPostProcessor(new ImportAwareBeanPostProcessor(beanFactory, this.environment));
 	}
 
 	@Override
@@ -543,10 +546,13 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 	private static class ImportAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
 
-		private final BeanFactory beanFactory;
+		private final ListableBeanFactory beanFactory;
 
-		public ImportAwareBeanPostProcessor(BeanFactory beanFactory) {
+		private final @Nullable Environment environment;
+
+		public ImportAwareBeanPostProcessor(ListableBeanFactory beanFactory, @Nullable Environment environment) {
 			this.beanFactory = beanFactory;
+			this.environment = environment;
 		}
 
 		@Override
@@ -567,6 +573,13 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 				if (importingClass != null) {
 					importAware.setImportMetadata(importingClass);
 				}
+			}
+			if (bean instanceof BeanRegistrar beanRegistrar) {
+				Assert.isInstanceOf(BeanDefinitionRegistry.class, this.beanFactory,
+						"Cannot support bean registrars since " + this.beanFactory.getClass().getName() +
+								" does not implement BeanDefinitionRegistry");
+				beanRegistrar.register(new BeanRegistryAdapter((BeanDefinitionRegistry) this.beanFactory, this.beanFactory),
+						Objects.requireNonNull(this.environment));
 			}
 			return bean;
 		}
