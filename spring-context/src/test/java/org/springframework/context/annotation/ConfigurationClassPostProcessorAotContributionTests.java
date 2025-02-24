@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2024 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package org.springframework.context.annotation;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -38,6 +39,9 @@ import org.springframework.aot.hint.predicate.RuntimeHintsPredicates;
 import org.springframework.aot.test.generate.TestGenerationContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.aot.BeanFactoryInitializationAotContribution;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -47,13 +51,16 @@ import org.springframework.beans.testfixture.beans.factory.aot.MockBeanFactoryIn
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.context.testfixture.beans.factory.SampleBeanRegistrar;
 import org.springframework.context.testfixture.context.annotation.CglibConfiguration;
 import org.springframework.context.testfixture.context.annotation.ImportAwareConfiguration;
 import org.springframework.context.testfixture.context.annotation.ImportConfiguration;
 import org.springframework.context.testfixture.context.annotation.SimpleConfiguration;
+import org.springframework.context.testfixture.context.annotation.registrar.BeanRegistrarConfiguration;
 import org.springframework.context.testfixture.context.generator.SimpleComponent;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.DefaultPropertySourceFactory;
 import org.springframework.core.test.tools.Compiled;
@@ -66,6 +73,7 @@ import org.springframework.util.Assert;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
 /**
@@ -74,6 +82,7 @@ import static org.assertj.core.api.Assertions.entry;
  * @author Phillip Webb
  * @author Stephane Nicoll
  * @author Sam Brannen
+ * @author Sebastien Deleuze
  */
 class ConfigurationClassPostProcessorAotContributionTests {
 
@@ -437,6 +446,50 @@ class ConfigurationClassPostProcessorAotContributionTests {
 			this.processor.postProcessBeanFactory(this.beanFactory);
 			return RegisteredBean.of(this.beanFactory, "test");
 		}
+	}
+
+	@Nested
+	class BeanRegistrarTests {
+
+		@Test
+		void applyToBeanRegistrarConfiguration() throws NoSuchMethodException {
+			BeanFactoryInitializationAotContribution contribution = getContribution(
+					CommonAnnotationBeanPostProcessor.class, InitDestroyAnnotationBeanPostProcessor.class, BeanRegistrarConfiguration.class);
+			contribution.applyTo(generationContext, beanFactoryInitializationCode);
+			Constructor<SampleBeanRegistrar.Foo> fooConstructor = SampleBeanRegistrar.Foo.class.getConstructor();
+			compile((initializer, compiled) -> {
+				GenericApplicationContext freshContext = new GenericApplicationContext();
+				initializer.accept(freshContext);
+				freshContext.refresh();
+				assertThat(freshContext.getBean(SampleBeanRegistrar.Bar.class).foo()).isEqualTo(freshContext.getBean(SampleBeanRegistrar.Foo.class));
+				assertThatThrownBy(() -> freshContext.getBean(SampleBeanRegistrar.Baz.class)).isInstanceOf(NoSuchBeanDefinitionException.class);
+				assertThat(freshContext.getBean(SampleBeanRegistrar.Init.class).initialized).isTrue();
+				assertThat(RuntimeHintsPredicates.reflection().onConstructorInvocation(fooConstructor)).accepts(generationContext.getRuntimeHints());
+				assertThat(RuntimeHintsPredicates.reflection().onMethodInvocation(SampleBeanRegistrar.Init.class, "postConstruct")).accepts(generationContext.getRuntimeHints());
+				freshContext.close();
+			});
+		}
+
+		private void compile(BiConsumer<Consumer<GenericApplicationContext>, Compiled> result) {
+			MethodReference methodReference = beanFactoryInitializationCode.getInitializers().get(0);
+			beanFactoryInitializationCode.getTypeBuilder().set(type -> {
+				ArgumentCodeGenerator argCodeGenerator = ArgumentCodeGenerator
+						.of(ListableBeanFactory.class, "applicationContext.getBeanFactory()")
+						.and(ArgumentCodeGenerator.of(Environment.class, "applicationContext.getEnvironment()"));
+				CodeBlock methodInvocation = methodReference.toInvokeCodeBlock(argCodeGenerator,
+						beanFactoryInitializationCode.getClassName());
+				type.addModifiers(Modifier.PUBLIC);
+				type.addSuperinterface(ParameterizedTypeName.get(Consumer.class, GenericApplicationContext.class));
+				type.addMethod(MethodSpec.methodBuilder("accept").addModifiers(Modifier.PUBLIC)
+						.addParameter(GenericApplicationContext.class, "applicationContext")
+						.addStatement(methodInvocation)
+						.build());
+			});
+			generationContext.writeGeneratedContent();
+			TestCompiler.forSystem().with(generationContext).compile(compiled ->
+					result.accept(compiled.getInstance(Consumer.class), compiled));
+		}
+
 	}
 
 

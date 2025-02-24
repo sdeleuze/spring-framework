@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
 package org.springframework.context.support
 
 import org.assertj.core.api.Assertions.assertThat

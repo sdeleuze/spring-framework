@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.springframework.beans.factory.BeanRegistrar;
+
 /**
  * Indicates one or more <em>component classes</em> to import &mdash; typically
  * {@link Configuration @Configuration} classes.
@@ -57,7 +59,7 @@ public @interface Import {
 
 	/**
 	 * {@link Configuration @Configuration}, {@link ImportSelector},
-	 * {@link ImportBeanDefinitionRegistrar}, or regular component classes to import.
+	 * {@link ImportBeanDefinitionRegistrar}, {@link BeanRegistrar} or regular component classes to import.
 	 */
 	Class<?>[] value();
 
