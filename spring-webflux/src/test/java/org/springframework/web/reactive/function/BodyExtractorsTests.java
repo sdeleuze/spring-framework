@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2024 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import reactor.test.publisher.TestPublisher;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.codec.ByteBufferDecoder;
@@ -50,7 +53,7 @@ import org.springframework.http.ReactiveHttpInputMessage;
 import org.springframework.http.codec.DecoderHttpMessageReader;
 import org.springframework.http.codec.FormHttpMessageReader;
 import org.springframework.http.codec.HttpMessageReader;
-import org.springframework.http.codec.json.Jackson2JsonDecoder;
+import org.springframework.http.codec.json.JacksonJsonDecoder;
 import org.springframework.http.codec.multipart.DefaultPartHttpMessageReader;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.http.codec.multipart.FormFieldPart;
@@ -66,7 +69,7 @@ import org.springframework.web.testfixture.http.server.reactive.MockServerHttpRe
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.InstanceOfAssertFactories.type;
-import static org.springframework.http.codec.json.Jackson2CodecSupport.JSON_VIEW_HINT;
+import static org.springframework.http.codec.JacksonCodecSupport.JSON_VIEW_HINT;
 
 /**
  * @author Arjen Poutsma
@@ -89,7 +92,7 @@ class BodyExtractorsTests {
 		messageReaders.add(new DecoderHttpMessageReader<>(new ByteBufferDecoder()));
 		messageReaders.add(new DecoderHttpMessageReader<>(StringDecoder.allMimeTypes()));
 		messageReaders.add(new DecoderHttpMessageReader<>(new Jaxb2XmlDecoder()));
-		messageReaders.add(new DecoderHttpMessageReader<>(new Jackson2JsonDecoder()));
+		messageReaders.add(new DecoderHttpMessageReader<>(new JacksonJsonDecoder()));
 		messageReaders.add(new FormHttpMessageReader());
 		DefaultPartHttpMessageReader partReader = new DefaultPartHttpMessageReader();
 		messageReaders.add(partReader);
@@ -154,6 +157,20 @@ class BodyExtractorsTests {
 				.expectNext(expected)
 				.expectComplete()
 				.verify();
+	}
+
+	@Test
+	void test() {
+		JsonMapper mapper = JsonMapper.builder()
+				// TODO Will be the default as of Jackson 3.O0.0-rc4
+				.disable(MapperFeature.DEFAULT_VIEW_INCLUSION)
+				// TODO https://github.com/FasterXML/jackson-databind/issues/5133
+				.disable(DeserializationFeature.FAIL_ON_UNEXPECTED_VIEW_PROPERTIES)
+				.build();
+		String data = "{\"username\":\"foo\",\"password\":\"bar\"}";
+		User user = mapper.readerFor(User.class).withView(SafeToDeserialize.class).readValue(data);
+		assertThat(user.getUsername()).isEqualTo("foo");
+		assertThat(user.getPassword()).isNull();
 	}
 
 	@Test

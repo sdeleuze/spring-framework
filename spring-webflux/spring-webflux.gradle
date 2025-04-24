@@ -11,6 +11,8 @@ dependencies {
 	compileOnly("com.google.code.findbugs:jsr305")
 	optional(project(":spring-context"))
 	optional(project(":spring-context-support"))  // for FreeMarker support
+	optional("tools.jackson.core:jackson-databind")
+	optional("tools.jackson.dataformat:jackson-dataformat-smile")
 	optional("com.fasterxml.jackson.core:jackson-databind")
 	optional("com.fasterxml.jackson.dataformat:jackson-dataformat-smile")
 	optional("com.google.protobuf:protobuf-java-util")

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2024 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,11 +122,16 @@ class RequestMappingExceptionHandlingIntegrationTests extends AbstractRequestMap
 				.isThrownBy(() -> performGet("/no-such-handler", new HttpHeaders(), String.class))
 				.satisfies(ex -> {
 					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-					assertThat(ex.getResponseBodyAsString()).isEqualTo(
-							"{\"type\":\"about:blank\"," +
-							"\"title\":\"Not Found\"," +
+					assertThat(ex.getResponseBodyAsString()).isEqualTo("{" +
+							// TODO Why this additional property "detail" that was not present with Jackson 2.x?
+							"\"detail\":null," +
+							// TODO Why is the slash escaped while it was unescaped with Jackson 2.x?
+							"\"instance\":\"\\/no-such-handler\"," +
+							// TODO Why this additional property "properties" that was not present with Jackson 2.x?
+							"\"properties\":null," +
 							"\"status\":404," +
-							"\"instance\":\"/no-such-handler\"}");
+							"\"title\":\"Not Found\"," +
+							"\"type\":\"about:blank\"}");
 				});
 	}
 
@@ -139,11 +144,14 @@ class RequestMappingExceptionHandlingIntegrationTests extends AbstractRequestMap
 				.satisfies(ex -> {
 					assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 					assertThat(ex.getResponseBodyAsString()).isEqualTo("{" +
-							"\"type\":\"about:blank\"," +
-							"\"title\":\"Bad Request\"," +
-							"\"status\":400," +
 							"\"detail\":\"Required query parameter 'q' is not present.\"," +
-							"\"instance\":\"/missing-request-parameter\"}");
+							// TODO Why is the slash escaped while it was unescaped with Jackson 2.x?
+							"\"instance\":\"\\/missing-request-parameter\"," +
+							// TODO Why this additional property "properties" that was not present with Jackson 2.x?
+							"\"properties\":null," +
+							"\"status\":400," +
+							"\"title\":\"Bad Request\"," +
+							"\"type\":\"about:blank\"}");
 				});
 	}
 

@@ -12,6 +12,7 @@ dependencies {
 	optional("javax.cache:cache-api")
 	optional("org.freemarker:freemarker")
 	optional("org.quartz-scheduler:quartz")
+	optional("tools.jackson.core:jackson-databind")
 	testFixturesApi("org.junit.jupiter:junit-jupiter-api")
 	testFixturesImplementation("org.assertj:assertj-core")
 	testFixturesImplementation("org.mockito:mockito-core")

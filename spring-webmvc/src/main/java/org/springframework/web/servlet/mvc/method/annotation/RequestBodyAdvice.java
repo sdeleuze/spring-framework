@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,14 @@ package org.springframework.web.servlet.mvc.method.annotation;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 import org.jspecify.annotations.Nullable;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.SmartHttpMessageConverter;
 
 /**
  * Allows customizing the request before its body is read and converted into an
@@ -64,6 +66,19 @@ public interface RequestBodyAdvice {
 			Type targetType, Class<? extends HttpMessageConverter<?>> converterType) throws IOException;
 
 	/**
+	 * Invoked to determine hints if the converter is a {@link SmartHttpMessageConverter}.
+	 * @param parameter the target method parameter
+	 * @param targetType the target type, not necessarily the same as the method
+	 * parameter type, for example, for {@code HttpEntity<String>}.
+	 * @param converterType the selected converter type
+	 * @return the hints determined otherwise {@code null}
+	 */
+	default @Nullable Map<String, Object> determineHints(MethodParameter parameter,
+			Type targetType, Class<? extends SmartHttpMessageConverter<?>> converterType) {
+		return null;
+	}
+
+	/**
 	 * Invoked third (and last) after the request body is converted to an Object.
 	 * @param body set to the converter Object before the first advice is called
 	 * @param inputMessage the request
@@ -89,6 +104,5 @@ public interface RequestBodyAdvice {
 	 */
 	@Nullable Object handleEmptyBody(@Nullable Object body, HttpInputMessage inputMessage, MethodParameter parameter,
 			Type targetType, Class<? extends HttpMessageConverter<?>> converterType);
-
 
 }

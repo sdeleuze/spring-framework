@@ -28,12 +28,12 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.xmlunit.assertj.XmlAssert;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.target.SingletonTargetSource;
@@ -51,9 +51,9 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.http.converter.xml.JacksonXmlHttpMessageConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -116,7 +116,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
 		this.servletRequest.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		@SuppressWarnings("unchecked")
@@ -151,7 +151,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
 		this.servletRequest.setContentType("application/json");
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		SimpleBean result = (SimpleBean) processor.resolveArgument(
@@ -207,7 +207,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
 		this.servletRequest.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		SimpleBean result = (SimpleBean) processor.resolveArgument(methodParam, container, request, factory);
@@ -226,7 +226,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
 		this.servletRequest.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		@SuppressWarnings("unchecked")
@@ -246,7 +246,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
 		this.servletRequest.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-		HttpMessageConverter<Object> target = new MappingJackson2HttpMessageConverter();
+		HttpMessageConverter<Object> target = new JacksonJsonHttpMessageConverter();
 		HttpMessageConverter<?> proxy = ProxyFactory.getProxy(HttpMessageConverter.class, new SingletonTargetSource(target));
 		List<HttpMessageConverter<?>> converters = List.of(proxy);
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
@@ -262,7 +262,7 @@ class RequestResponseBodyMethodProcessorTests {
 		this.servletRequest.addHeader("Accept", "text/plain; q=0.5, application/json");
 
 		List<HttpMessageConverter<?>> converters =
-				List.of(new MappingJackson2HttpMessageConverter(), new StringHttpMessageConverter());
+				List.of(new JacksonJsonHttpMessageConverter(), new StringHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		processor.writeWithMessageConverters("Foo", returnTypeString, request);
@@ -331,15 +331,14 @@ class RequestResponseBodyMethodProcessorTests {
 
 		this.servletRequest.addHeader("Accept", halFormsMediaType + "," + halMediaType);
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+		JsonMapper mapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
 
 		SimpleBean simpleBean = new SimpleBean();
 		simpleBean.setId(12L);
 		simpleBean.setName("Jason");
 
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.registerObjectMappersForType(SimpleBean.class, map -> map.put(halMediaType, objectMapper));
+		JacksonJsonHttpMessageConverter converter = new JacksonJsonHttpMessageConverter();
+		converter.registerObjectMappersForType(SimpleBean.class, map -> map.put(halMediaType, mapper));
 		RequestResponseBodyMethodProcessor processor =
 				new RequestResponseBodyMethodProcessor(List.of(converter));
 		MethodParameter returnType = new MethodParameter(getClass().getDeclaredMethod("getSimpleBean"), -1);
@@ -380,7 +379,7 @@ class RequestResponseBodyMethodProcessorTests {
 
 		RequestResponseBodyMethodProcessor processor =
 				new RequestResponseBodyMethodProcessor(List.of(
-						new MappingJackson2HttpMessageConverter(), new MappingJackson2XmlHttpMessageConverter()));
+						new JacksonJsonHttpMessageConverter(), new JacksonXmlHttpMessageConverter()));
 
 		MethodParameter returnType =
 				new MethodParameter(getClass().getDeclaredMethod("handleAndReturnProblemDetail"), -1);
@@ -504,7 +503,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(
 				converters, null, List.of(new JsonViewResponseBodyAdvice()));
 
@@ -523,7 +522,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		HttpEntityMethodProcessor processor = new HttpEntityMethodProcessor(
 				converters, null, List.of(new JsonViewResponseBodyAdvice()));
 
@@ -542,7 +541,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2XmlHttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonXmlHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(
 				converters, null, List.of(new JsonViewResponseBodyAdvice()));
 
@@ -561,7 +560,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2XmlHttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonXmlHttpMessageConverter());
 		HttpEntityMethodProcessor processor = new HttpEntityMethodProcessor(
 				converters, null, List.of(new JsonViewResponseBodyAdvice()));
 
@@ -584,7 +583,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(
 				converters, null, List.of(new JsonViewRequestBodyAdvice()));
 
@@ -607,7 +606,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		HttpEntityMethodProcessor processor = new HttpEntityMethodProcessor(
 				converters, null, List.of(new JsonViewRequestBodyAdvice()));
 
@@ -635,7 +634,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2XmlHttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonXmlHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(
 				converters, null, List.of(new JsonViewRequestBodyAdvice()));
 
@@ -661,7 +660,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2XmlHttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonXmlHttpMessageConverter());
 		HttpEntityMethodProcessor processor = new HttpEntityMethodProcessor(
 				converters, null, List.of(new JsonViewRequestBodyAdvice()));
 
@@ -682,7 +681,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		Object returnValue = new JacksonController().handleTypeInfoList();
@@ -699,7 +698,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		Object returnValue = new JacksonController().handleSubType();
@@ -716,7 +715,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new JacksonController(), method);
 		MethodParameter methodReturnType = handlerMethod.getReturnType();
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		Object returnValue = new JacksonController().handleSubTypeList();
@@ -738,7 +737,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new MyControllerImplementingInterface(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		assertThat(processor.supportsParameter(methodParameter)).isTrue();
@@ -756,7 +755,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new SubControllerImplementingInterface(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		assertThat(processor.supportsParameter(methodParameter)).isTrue();
@@ -774,7 +773,7 @@ class RequestResponseBodyMethodProcessorTests {
 		HandlerMethod handlerMethod = new HandlerMethod(new SubControllerImplementingAbstractMethod(), method);
 		MethodParameter methodParameter = handlerMethod.getMethodParameters()[0];
 
-		List<HttpMessageConverter<?>> converters = List.of(new MappingJackson2HttpMessageConverter());
+		List<HttpMessageConverter<?>> converters = List.of(new JacksonJsonHttpMessageConverter());
 		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
 
 		assertThat(processor.supportsParameter(methodParameter)).isTrue();
@@ -1068,8 +1067,6 @@ class RequestResponseBodyMethodProcessorTests {
 			bean.setWithView1("with");
 			bean.setWithView2("with");
 			bean.setWithoutView("without");
-			ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-			mav.addObject("bean", bean);
 			return new ResponseEntity<>(bean, HttpStatus.OK);
 		}
 

@@ -61,6 +61,7 @@ dependencies {
 	testImplementation(testFixtures(project(":spring-core")))
 	testImplementation(testFixtures(project(":spring-tx")))
 	testImplementation(testFixtures(project(":spring-web")))
+	testImplementation("tools.jackson.core:jackson-databind")
 	testImplementation("com.fasterxml.jackson.core:jackson-databind")
 	testImplementation("com.rometools:rome")
 	testImplementation("com.thoughtworks.xstream:xstream")

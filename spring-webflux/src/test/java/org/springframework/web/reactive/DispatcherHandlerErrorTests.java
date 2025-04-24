@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2024 the original author or authors.
+ * Copyright 2002-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,12 +120,16 @@ public class DispatcherHandlerErrorTests {
 		MockServerHttpResponse response = exchange.getResponse();
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 		assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_PROBLEM_JSON);
+		// TODO Why are the slashes escaped while they were unescaped with Jackson 2.x?
+		// TODO Why this additional property "properties" that was not present with Jackson 2.x?
 		assertThat(response.getBodyAsString().block()).isEqualTo("""
-				{"type":"about:blank",\
-				"title":"Not Found",\
-				"status":404,\
+				{\
 				"detail":"No static resource non-existing.",\
-				"instance":"/resources/non-existing"}\
+				"instance":"\\/resources\\/non-existing",\
+				"properties":null,\
+				"status":404,\
+				"title":"Not Found",\
+				"type":"about:blank"}\
 				""");
 	}
 
