@@ -55,22 +55,10 @@ javadoc {
 }
 
 /**
- * Produce KDoc for all Spring Framework modules in "build/docs/kdoc"
- */
-rootProject.tasks.dokkaHtmlMultiModule.configure {
-	dependsOn {
-		tasks.named("javadoc")
-	}
-	moduleName.set("spring-framework")
-	outputDirectory.set(project.java.docsDir.dir("kdoc-api").get().asFile)
-	includes.from("$rootProject.rootDir/framework-docs/src/docs/api/dokka-overview.md")
-}
-
-/**
  * Zip all Java docs (javadoc & kdoc) into a single archive
  */
 tasks.register('docsZip', Zip) {
-	dependsOn = ['javadoc', rootProject.tasks.dokkaHtmlMultiModule]
+	dependsOn = ['javadoc', 'dokkaHtmlMultiModule']
 	group = "distribution"
 	description = "Builds -${archiveClassifier} archive containing api and reference " +
 			"for deployment at https://docs.spring.io/spring-framework/docs/."
@@ -83,7 +71,7 @@ tasks.register('docsZip', Zip) {
 	from(javadoc) {
 		into "javadoc-api"
 	}
-	from(rootProject.tasks.dokkaHtmlMultiModule.outputDirectory) {
+	from(rootProject.getLayout().getBuildDirectory().dir("dokka/html")) {
 		into "kdoc-api"
 	}
 }
