@@ -788,7 +788,7 @@ public class MvcUriComponentsBuilder {
 				enhancer.setSuperclass(controllerType);
 				enhancer.setInterfaces(new Class<?>[] {MethodInvocationInfo.class});
 				enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
-				enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts());
+				enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts() || AotDetector.hasGeneratedComponentIndex());
 				enhancer.setCallbackType(MethodInterceptor.class);
 
 				Class<?> proxyClass = enhancer.createClass();

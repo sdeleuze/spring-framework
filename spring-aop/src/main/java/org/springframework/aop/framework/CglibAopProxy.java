@@ -204,7 +204,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			enhancer.setSuperclass(proxySuperClass);
 			enhancer.setInterfaces(AopProxyUtils.completeProxiedInterfaces(this.advised));
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
-			enhancer.setAttemptLoad(enhancer.getUseCache() && AotDetector.useGeneratedArtifacts());
+			enhancer.setAttemptLoad(enhancer.getUseCache() && (AotDetector.useGeneratedArtifacts() || AotDetector.hasGeneratedComponentIndex()));
 			enhancer.setStrategy(KotlinDetector.isKotlinType(proxySuperClass) ?
 					new ClassLoaderAwareGeneratorStrategy(classLoader) :
 					new ClassLoaderAwareGeneratorStrategy(classLoader, undeclaredThrowableStrategy)
