@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jspecify.annotations.Nullable;
 
 import org.springframework.aop.scope.ScopedProxyFactoryBean;
+import org.springframework.aot.generate.GeneratedArtifact;
 import org.springframework.aot.AotDetector;
 import org.springframework.asm.Opcodes;
 import org.springframework.asm.Type;
@@ -181,7 +182,7 @@ class ConfigurationClassEnhancer {
 		enhancer.setInterfaces(new Class<?>[] {EnhancedConfiguration.class});
 		enhancer.setUseFactory(false);
 		enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
-		enhancer.setAttemptLoad(enhancer.getUseCache() && AotDetector.useGeneratedArtifacts());
+		enhancer.setAttemptLoad(enhancer.getUseCache() && AotDetector.useGeneratedArtifacts(GeneratedArtifact.PREDEFINED_CLASSES));
 		enhancer.setStrategy(new BeanFactoryAwareGeneratorStrategy(classLoader));
 		enhancer.setCallbackFilter(CALLBACK_FILTER);
 		enhancer.setCallbackTypes(CALLBACK_FILTER.getCallbackTypes());
@@ -575,7 +576,7 @@ class ConfigurationClassEnhancer {
 			Enhancer enhancer = new Enhancer();
 			enhancer.setSuperclass(factoryBean.getClass());
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
-			enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts());
+			enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts(GeneratedArtifact.PREDEFINED_CLASSES));
 			enhancer.setCallbackType(MethodInterceptor.class);
 
 			// Ideally create enhanced FactoryBean proxy without constructor side effects,

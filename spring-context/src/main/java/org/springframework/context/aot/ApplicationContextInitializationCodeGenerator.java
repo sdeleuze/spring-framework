@@ -25,6 +25,7 @@ import javax.lang.model.element.Modifier;
 
 import org.jspecify.annotations.Nullable;
 
+import org.springframework.aot.generate.GeneratedArtifact;
 import org.springframework.aot.generate.GeneratedClass;
 import org.springframework.aot.generate.GeneratedMethods;
 import org.springframework.aot.generate.GenerationContext;
@@ -67,9 +68,12 @@ class ApplicationContextInitializationCodeGenerator implements BeanFactoryInitia
 
 	private final List<MethodReference> initializers = new ArrayList<>();
 
+	private final boolean shouldGenerate;
+
 
 	ApplicationContextInitializationCodeGenerator(GenericApplicationContext applicationContext, GenerationContext generationContext) {
 		this.applicationContext = applicationContext;
+		this.shouldGenerate = generationContext.generatedArtifacts(GeneratedArtifact.BEAN_REGISTRATION);
 		this.generatedClass = generationContext.getGeneratedClasses()
 				.addForFeature("ApplicationContextInitializer", this::generateType);
 		this.generatedClass.reserveMethodNames(INITIALIZE_METHOD);
@@ -91,7 +95,9 @@ class ApplicationContextInitializationCodeGenerator implements BeanFactoryInitia
 		method.addAnnotation(Override.class);
 		method.addModifiers(Modifier.PUBLIC);
 		method.addParameter(GenericApplicationContext.class, APPLICATION_CONTEXT_VARIABLE);
-		method.addCode(generateInitializeCode());
+		if (this.shouldGenerate) {
+			method.addCode(generateInitializeCode());
+		}
 		return method.build();
 	}
 

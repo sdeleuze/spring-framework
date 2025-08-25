@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jspecify.annotations.Nullable;
 
+import org.springframework.aot.generate.GeneratedArtifact;
 import org.springframework.aot.AotDetector;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
@@ -154,7 +155,7 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 			Enhancer enhancer = new Enhancer();
 			enhancer.setSuperclass(beanDefinition.getBeanClass());
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
-			enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts());
+			enhancer.setAttemptLoad(AotDetector.useGeneratedArtifacts(GeneratedArtifact.PREDEFINED_CLASSES));
 			if (this.owner instanceof ConfigurableBeanFactory cbf) {
 				ClassLoader cl = cbf.getBeanClassLoader();
 				enhancer.setStrategy(new ClassLoaderAwareGeneratorStrategy(cl));

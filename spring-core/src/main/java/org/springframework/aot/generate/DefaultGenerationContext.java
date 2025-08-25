@@ -17,6 +17,7 @@
 package org.springframework.aot.generate;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,6 +34,7 @@ import org.springframework.util.Assert;
  * @author Phillip Webb
  * @author Stephane Nicoll
  * @author Sam Brannen
+ * @author Sebastien Deleuze
  * @since 6.0
  */
 public class DefaultGenerationContext implements GenerationContext {
@@ -44,6 +46,8 @@ public class DefaultGenerationContext implements GenerationContext {
 	private final GeneratedFiles generatedFiles;
 
 	private final RuntimeHints runtimeHints;
+
+	private final Set<GeneratedArtifact> generatedArtifacts;
 
 
 	/**
@@ -68,7 +72,23 @@ public class DefaultGenerationContext implements GenerationContext {
 	 */
 	public DefaultGenerationContext(ClassNameGenerator classNameGenerator, GeneratedFiles generatedFiles,
 			RuntimeHints runtimeHints) {
-		this(new GeneratedClasses(classNameGenerator), generatedFiles, runtimeHints);
+		this(new GeneratedClasses(classNameGenerator), generatedFiles, runtimeHints,
+				Set.of(GeneratedArtifact.BEAN_REGISTRATION, GeneratedArtifact.PREDEFINED_CLASSES, GeneratedArtifact.CLASSPATH_INDEXES, GeneratedArtifact.REACHABILITY_METADATA));
+	}
+
+	/**
+	 * Create a new {@link DefaultGenerationContext} instance backed by the
+	 * specified {@link ClassNameGenerator}, {@link GeneratedFiles}, and
+	 * {@link RuntimeHints}.
+	 * @param classNameGenerator the naming convention to use for generated
+	 * class names
+	 * @param generatedFiles the generated files
+	 * @param runtimeHints the runtime hints
+	 * @param generatedArtifacts the list of artifact types to be generated
+	 */
+	public DefaultGenerationContext(ClassNameGenerator classNameGenerator, GeneratedFiles generatedFiles,
+			RuntimeHints runtimeHints, Set<GeneratedArtifact> generatedArtifacts) {
+		this(new GeneratedClasses(classNameGenerator), generatedFiles, runtimeHints, generatedArtifacts);
 	}
 
 	/**
@@ -79,15 +99,17 @@ public class DefaultGenerationContext implements GenerationContext {
 	 * @param runtimeHints the runtime hints
 	 */
 	DefaultGenerationContext(GeneratedClasses generatedClasses,
-			GeneratedFiles generatedFiles, RuntimeHints runtimeHints) {
+			GeneratedFiles generatedFiles, RuntimeHints runtimeHints, Set<GeneratedArtifact> generatedArtifacts) {
 
 		Assert.notNull(generatedClasses, "'generatedClasses' must not be null");
 		Assert.notNull(generatedFiles, "'generatedFiles' must not be null");
 		Assert.notNull(runtimeHints, "'runtimeHints' must not be null");
+		Assert.notNull(generatedArtifacts, "'generatedArtifacts' must not be null");
 		this.sequenceGenerator = new ConcurrentHashMap<>();
 		this.generatedClasses = generatedClasses;
 		this.generatedFiles = generatedFiles;
 		this.runtimeHints = runtimeHints;
+		this.generatedArtifacts = generatedArtifacts;
 	}
 
 	/**
@@ -106,6 +128,7 @@ public class DefaultGenerationContext implements GenerationContext {
 		this.generatedClasses = existing.generatedClasses.withFeatureNamePrefix(featureName);
 		this.generatedFiles = existing.generatedFiles;
 		this.runtimeHints = existing.runtimeHints;
+		this.generatedArtifacts = existing.generatedArtifacts;
 	}
 
 
@@ -127,6 +150,11 @@ public class DefaultGenerationContext implements GenerationContext {
 	@Override
 	public DefaultGenerationContext withName(String name) {
 		return new DefaultGenerationContext(this, name);
+	}
+
+	@Override
+	public boolean generatedArtifacts(GeneratedArtifact artifactType) {
+		return this.generatedArtifacts.contains(artifactType);
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.springframework.context.aot;
 
 import java.util.function.Consumer;
 
+import org.springframework.aot.generate.GeneratedArtifact;
 import org.springframework.aot.generate.GeneratedFiles;
 import org.springframework.aot.generate.GeneratedFiles.Kind;
 import org.springframework.aot.generate.GenerationContext;
@@ -48,10 +49,16 @@ class CglibClassHandler {
 
 	private final GeneratedFiles generatedFiles;
 
+	private final boolean shouldGenerateClasses;
+
+	private final boolean shouldGenerateHints;
+
 
 	CglibClassHandler(GenerationContext generationContext) {
 		this.runtimeHints = generationContext.getRuntimeHints();
 		this.generatedFiles = generationContext.getGeneratedFiles();
+		this.shouldGenerateClasses = generationContext.generatedArtifacts(GeneratedArtifact.PREDEFINED_CLASSES);
+		this.shouldGenerateHints = generationContext.generatedArtifacts(GeneratedArtifact.REACHABILITY_METADATA);
 	}
 
 
@@ -61,9 +68,11 @@ class CglibClassHandler {
 	 * @param content the bytecode of the generated class
 	 */
 	public void handleGeneratedClass(String cglibClassName, byte[] content) {
-		registerHints(TypeReference.of(cglibClassName));
-		String path = cglibClassName.replace(".", "/") + ".class";
-		this.generatedFiles.addFile(Kind.CLASS, path, new ByteArrayResource(content));
+		if (shouldGenerateClasses) {
+			registerHints(TypeReference.of(cglibClassName));
+			String path = cglibClassName.replace(".", "/") + ".class";
+			this.generatedFiles.addFile(Kind.CLASS, path, new ByteArrayResource(content));
+		}
 	}
 
 	/**
@@ -71,11 +80,15 @@ class CglibClassHandler {
 	 * @param cglibClass a cglib class that has been loaded
 	 */
 	public void handleLoadedClass(Class<?> cglibClass) {
-		registerHints(TypeReference.of(cglibClass));
+		if (shouldGenerateClasses) {
+			registerHints(TypeReference.of(cglibClass));
+		}
 	}
 
 	private void registerHints(TypeReference cglibTypeReference) {
-		this.runtimeHints.reflection().registerType(cglibTypeReference, instantiateCglibProxy);
+		if (shouldGenerateHints) {
+			this.runtimeHints.reflection().registerType(cglibTypeReference, instantiateCglibProxy);
+		}
 	}
 
 }

@@ -16,6 +16,8 @@
 
 package org.springframework.aot.generate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
@@ -47,6 +49,8 @@ class DefaultGenerationContextTests {
 
 	private final RuntimeHints runtimeHints = new RuntimeHints();
 
+	private final List<GeneratedArtifact> generatedArtifacts = new ArrayList<>();
+
 
 	@Test
 	void createWithOnlyGeneratedFilesCreatesContext() {
@@ -59,7 +63,7 @@ class DefaultGenerationContextTests {
 	@Test
 	void createCreatesContext() {
 		DefaultGenerationContext context = new DefaultGenerationContext(
-				this.generatedClasses, this.generatedFiles, this.runtimeHints);
+				this.generatedClasses, this.generatedFiles, this.runtimeHints, this.generatedArtifacts);
 		assertThat(context.getGeneratedFiles()).isNotNull();
 		assertThat(context.getRuntimeHints()).isNotNull();
 	}
@@ -68,7 +72,7 @@ class DefaultGenerationContextTests {
 	void createWhenGeneratedClassesIsNullThrowsException() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> new DefaultGenerationContext((GeneratedClasses) null,
-						this.generatedFiles, this.runtimeHints))
+						this.generatedFiles, this.runtimeHints, this.generatedArtifacts))
 				.withMessage("'generatedClasses' must not be null");
 	}
 
@@ -76,7 +80,7 @@ class DefaultGenerationContextTests {
 	void createWhenGeneratedFilesIsNullThrowsException() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> new DefaultGenerationContext(this.generatedClasses,
-						null, this.runtimeHints))
+						null, this.runtimeHints, this.generatedArtifacts))
 				.withMessage("'generatedFiles' must not be null");
 	}
 
@@ -84,28 +88,28 @@ class DefaultGenerationContextTests {
 	void createWhenRuntimeHintsIsNullThrowsException() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> new DefaultGenerationContext(this.generatedClasses,
-						this.generatedFiles, null))
+						this.generatedFiles, null, this.generatedArtifacts))
 				.withMessage("'runtimeHints' must not be null");
 	}
 
 	@Test
 	void getGeneratedClassesReturnsClassNameGenerator() {
 		DefaultGenerationContext context = new DefaultGenerationContext(
-				this.generatedClasses, this.generatedFiles, this.runtimeHints);
+				this.generatedClasses, this.generatedFiles, this.runtimeHints, this.generatedArtifacts);
 		assertThat(context.getGeneratedClasses()).isSameAs(this.generatedClasses);
 	}
 
 	@Test
 	void getGeneratedFilesReturnsGeneratedFiles() {
 		DefaultGenerationContext context = new DefaultGenerationContext(
-				this.generatedClasses, this.generatedFiles, this.runtimeHints);
+				this.generatedClasses, this.generatedFiles, this.runtimeHints, this.generatedArtifacts);
 		assertThat(context.getGeneratedFiles()).isSameAs(this.generatedFiles);
 	}
 
 	@Test
 	void getRuntimeHintsReturnsRuntimeHints() {
 		DefaultGenerationContext context = new DefaultGenerationContext(
-				this.generatedClasses, this.generatedFiles, this.runtimeHints);
+				this.generatedClasses, this.generatedFiles, this.runtimeHints, this.generatedArtifacts);
 		assertThat(context.getRuntimeHints()).isSameAs(this.runtimeHints);
 	}
 
