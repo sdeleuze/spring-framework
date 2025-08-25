@@ -19,9 +19,12 @@ package org.springframework.context.aot;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.jspecify.annotations.Nullable;
 
+import org.springframework.aot.generate.GeneratedArtifact;
 import org.springframework.aot.generate.FileSystemGeneratedFiles;
 import org.springframework.aot.generate.GeneratedFiles.Kind;
 import org.springframework.aot.hint.RuntimeHints;
@@ -143,12 +146,15 @@ public abstract class AbstractAotProcessor<T> {
 
 		private final String artifactId;
 
-		private Settings(Path sourceOutput, Path resourceOutput, Path classOutput, String groupId, String artifactId) {
+		private final Set<GeneratedArtifact> generatedArtifacts;
+
+		private Settings(Path sourceOutput, Path resourceOutput, Path classOutput, String groupId, String artifactId, Set<GeneratedArtifact> generatedArtifacts) {
 			this.sourceOutput = sourceOutput;
 			this.resourceOutput = resourceOutput;
 			this.classOutput = classOutput;
 			this.groupId = groupId;
 			this.artifactId = artifactId;
+			this.generatedArtifacts = generatedArtifacts;
 		}
 
 		/**
@@ -193,6 +199,10 @@ public abstract class AbstractAotProcessor<T> {
 			return this.artifactId;
 		}
 
+		public Set<GeneratedArtifact> getGeneratedArtifacts() {
+			return this.generatedArtifacts;
+		}
+
 
 		/**
 		 * Fluent builder API for {@link Settings}.
@@ -208,6 +218,8 @@ public abstract class AbstractAotProcessor<T> {
 			private @Nullable String groupId;
 
 			private @Nullable String artifactId;
+
+			private final Set<GeneratedArtifact> generatedArtifacts1 = new HashSet<>();
 
 			private Builder() {
 				// internal constructor
@@ -267,6 +279,12 @@ public abstract class AbstractAotProcessor<T> {
 				return this;
 			}
 
+			public Builder generatedArtifact(GeneratedArtifact generatedArtifact) {
+				Assert.notNull(generatedArtifact, "'generatedArtifact' must not be null");
+				this.generatedArtifacts1.add(generatedArtifact);
+				return this;
+			}
+
 			/**
 			 * Build the {@link Settings} configured in this {@code Builder}.
 			 */
@@ -277,7 +295,7 @@ public abstract class AbstractAotProcessor<T> {
 				Assert.notNull(this.groupId, "'groupId' must not be null");
 				Assert.notNull(this.artifactId, "'artifactId' must not be null");
 				return new Settings(this.sourceOutput, this.resourceOutput, this.classOutput,
-						this.groupId, this.artifactId);
+						this.groupId, this.artifactId, this.generatedArtifacts1);
 			}
 		}
 	}

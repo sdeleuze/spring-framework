@@ -62,6 +62,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 /**
  * A component provider that scans for candidate components starting from a
@@ -125,6 +127,8 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	private @Nullable MetadataReaderFactory metadataReaderFactory;
 
 	private @Nullable CandidateComponentsIndex componentsIndex;
+
+	public static MultiValueMap<String, String> aotComponents = new LinkedMultiValueMap<>();
 
 
 	/**
@@ -442,6 +446,13 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 								logger.debug("Identified candidate component class: " + resource);
 							}
 							candidates.add(sbd);
+							for (TypeFilter filter : this.includeFilters) {
+								if (filter.match(metadataReader, getMetadataReaderFactory())) {
+									String stereotype = extractStereotype(filter);
+									aotComponents.add(metadataReader.getClassMetadata().getClassName(), stereotype);
+								}
+							}
+
 						}
 						else {
 							if (debugEnabled) {
@@ -450,6 +461,11 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 						}
 					}
 					else {
+						for (String typeAnnotation : metadataReader.getAnnotationMetadata().getAnnotationTypes()) {
+							if (typeAnnotation.startsWith("jakarta.") || typeAnnotation.startsWith("javax.")) {
+								aotComponents.add(metadataReader.getClassMetadata().getClassName(), typeAnnotation);
+							}
+						}
 						if (traceEnabled) {
 							logger.trace("Ignored because not matching any filter: " + resource);
 						}

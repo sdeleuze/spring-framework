@@ -22,12 +22,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.springframework.aot.generate.GeneratedArtifact;
+import org.springframework.aot.AotDetector;
 import org.springframework.aot.generate.ClassNameGenerator;
 import org.springframework.aot.generate.DefaultGenerationContext;
 import org.springframework.aot.generate.FileSystemGeneratedFiles;
 import org.springframework.aot.hint.ExecutableMode;
 import org.springframework.aot.hint.ReflectionHints;
+import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.TypeReference;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.javapoet.ClassName;
@@ -101,14 +106,18 @@ public abstract class ContextAotProcessor extends AbstractAotProcessor<ClassName
 	 */
 	protected ClassName performAotProcessing(GenericApplicationContext applicationContext) {
 		FileSystemGeneratedFiles generatedFiles = createFileSystemGeneratedFiles();
+		Set<GeneratedArtifact> generatedArtifacts = getSettings().getGeneratedArtifacts();
 		DefaultGenerationContext generationContext = new DefaultGenerationContext(
-				createClassNameGenerator(), generatedFiles);
+				createClassNameGenerator(), generatedFiles, new RuntimeHints(), generatedArtifacts);
 		ApplicationContextAotGenerator generator = new ApplicationContextAotGenerator();
 		ClassName generatedInitializerClassName = generator.processAheadOfTime(applicationContext, generationContext);
 		registerEntryPointHint(generationContext, generatedInitializerClassName);
 		generationContext.writeGeneratedContent();
-		writeHints(generationContext.getRuntimeHints());
-		writeNativeImageProperties(getDefaultNativeImageArguments(getApplicationClass().getName()));
+		if (generationContext.generatedArtifacts(GeneratedArtifact.REACHABILITY_METADATA)) {
+			writeHints(generationContext.getRuntimeHints());
+			writeNativeImageProperties(getDefaultNativeImageArguments(getApplicationClass().getName()));
+		}
+		writeAotProperties(generatedArtifacts);
 		return generatedInitializerClassName;
 	}
 
@@ -171,6 +180,27 @@ public abstract class ContextAotProcessor extends AbstractAotProcessor<ClassName
 		}
 		catch (IOException ex) {
 			throw new IllegalStateException("Failed to write native-image.properties", ex);
+		}
+	}
+
+	private void writeAotProperties(Set<GeneratedArtifact> generatedArtifacts) {
+		if (CollectionUtils.isEmpty(generatedArtifacts)) {
+			return;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(AotDetector.AOT_ARTIFACTS);
+		sb.append("=");
+		sb.append(String.join(",", generatedArtifacts.stream().map(Enum::toString).collect(Collectors.toSet())));
+		Path file = getSettings().getResourceOutput().resolve("META-INF/spring/aot.properties");
+		try {
+			if (!Files.exists(file)) {
+				Files.createDirectories(file.getParent());
+				Files.createFile(file);
+			}
+			Files.writeString(file, sb.toString());
+		}
+		catch (IOException ex) {
+			throw new IllegalStateException("Failed to write aot.properties", ex);
 		}
 	}
 

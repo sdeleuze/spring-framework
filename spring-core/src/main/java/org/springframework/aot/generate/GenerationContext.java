@@ -77,4 +77,10 @@ public interface GenerationContext {
 	 */
 	GenerationContext withName(String name);
 
+	/**
+	 * Whether the provided artifact type should be generated or not.
+	 * @return whether the provided artifact type should be generated or not
+	 */
+	boolean generatedArtifacts(GeneratedArtifact artifactType);
+
 }
