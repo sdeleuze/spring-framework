@@ -19,6 +19,7 @@ package org.springframework.core
 import io.micrometer.observation.Observation
 import io.micrometer.observation.tck.TestObservationRegistry
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.assertj.core.api.Assertions
@@ -60,7 +61,7 @@ class PropagationContextElementTests {
 	fun restoresFromThreadLocal() {
 		val observation = Observation.createNotStarted("coroutine", observationRegistry)
 		observation.observe {
-			val result = runBlocking(Dispatchers.IO) {
+			val result = runBlocking(PropagationContextElement(Dispatchers.IO)) {
                 suspendingFunction("test")
             }
 			Assertions.assertThat(result).isEqualTo("coroutine")
@@ -69,24 +70,21 @@ class PropagationContextElementTests {
 
 	@Test
 	fun restoresFromReactorContext() {
-		val method = PropagationContextElementTests::class.java.getDeclaredMethod("suspendingFunction", String::class.java, Continuation::class.java)
-		val publisher = CoroutinesUtils.invokeSuspendingFunction(method, this, "test", null)
-
 		val observation = Observation.createNotStarted("coroutine", observationRegistry)
+		val method = PropagationContextElementTests::class.java.getDeclaredMethod("suspendingFunction", String::class.java, Continuation::class.java)
 		observation.observe {
+			val publisher = CoroutinesUtils.invokeSuspendingFunction(PropagationContextElement(Dispatchers.Unconfined), method, this, "test")
 			StepVerifier.create(publisher)
 				.expectNext("coroutine")
 				.verifyComplete()
 		}
 	}
 
-
 	suspend fun suspendingFunction(value: String): String? {
-		return withContext(PropagationContextElement(coroutineContext)) {
-            val currentObservation = observationRegistry.currentObservation
-            Assertions.assertThat(currentObservation).isNotNull
-            currentObservation?.context?.name
-        }
+		delay(1)
+		val currentObservation = observationRegistry.currentObservation
+		Assertions.assertThat(currentObservation).isNotNull
+		return currentObservation?.context?.name
 	}
 
 }
