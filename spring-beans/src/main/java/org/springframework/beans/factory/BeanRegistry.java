@@ -24,7 +24,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.env.Environment;
@@ -55,18 +54,32 @@ public interface BeanRegistry {
 	void registerAlias(String name, String alias);
 
 	/**
-	 * Register a bean from the given bean class, which will be instantiated using the
+	 * Register a bean from the given class, which will be instantiated using the
 	 * related {@link BeanUtils#getResolvableConstructor resolvable constructor} if any.
+	 * <p>For registering a bean with a generic type, consider
+	 * {@link #registerBean(ParameterizedTypeReference)}.
 	 * @param beanClass the class of the bean
 	 * @return the generated bean name
+	 * @see #registerBean(Class)
 	 */
 	<T> String registerBean(Class<T> beanClass);
 
 	/**
-	 * Register a bean from the given bean class, customizing it with the customizer
+	 * Register a bean from the given generics-containing type, which will be
+	 * instantiated using the related
+	 * {@link BeanUtils#getResolvableConstructor resolvable constructor} if any.
+	 * @param beanType the generics-containing target type of the bean
+	 * @return the generated bean name
+	 */
+	<T> String registerBean(ParameterizedTypeReference<T> beanType);
+
+	/**
+	 * Register a bean from the given class, customizing it with the customizer
 	 * callback. The bean will be instantiated using the supplier that can be configured
 	 * in the customizer callback, or will be tentatively instantiated with its
 	 * {@link BeanUtils#getResolvableConstructor resolvable constructor} otherwise.
+	 * <p>For registering a bean with a generic type, consider
+	 * {@link #registerBean(ParameterizedTypeReference, Consumer)}.
 	 * @param beanClass the class of the bean
 	 * @param customizer callback to customize other bean properties than the name
 	 * @return the generated bean name
@@ -74,23 +87,58 @@ public interface BeanRegistry {
 	<T> String registerBean(Class<T> beanClass, Consumer<Spec<T>> customizer);
 
 	/**
+	 * Register a bean from the given generics-containing type, customizing it
+	 * with the customizer callback. The bean will be instantiated using the supplier
+	 * that can be configured in the customizer callback, or will be tentatively instantiated
+	 * with its {@link BeanUtils#getResolvableConstructor resolvable constructor} otherwise.
+	 * @param beanType the generics-containing target type of the bean
+	 * @param customizer callback to customize other bean properties than the name
+	 * @return the generated bean name
+	 */
+	<T> String registerBean(ParameterizedTypeReference<T> beanType, Consumer<Spec<T>> customizer);
+
+	/**
 	 * Register a bean from the given bean class, which will be instantiated using the
 	 * related {@link BeanUtils#getResolvableConstructor resolvable constructor} if any.
+	 * <p>For registering a bean with a generic type, consider
+	 * {@link #registerBean(String, ParameterizedTypeReference)}.
 	 * @param name the name of the bean
 	 * @param beanClass the class of the bean
 	 */
 	<T> void registerBean(String name, Class<T> beanClass);
 
 	/**
+	 * Register a bean from the given the given generics-containing type, which
+	 * will be instantiated using the related
+	 * {@link BeanUtils#getResolvableConstructor resolvable constructor} if any.
+	 * @param name the name of the bean
+	 * @param beanType the generics-containing target type of the bean
+	 */
+	<T> void registerBean(String name, ParameterizedTypeReference<T> beanType);
+
+	/**
 	 * Register a bean from the given bean class, customizing it with the customizer
 	 * callback. The bean will be instantiated using the supplier that can be configured
 	 * in the customizer callback, or will be tentatively instantiated with its
 	 * {@link BeanUtils#getResolvableConstructor resolvable constructor} otherwise.
+	 * <p>For registering a bean with a generic type, consider
+	 * {@link #registerBean(String, ParameterizedTypeReference, Consumer)}.
 	 * @param name the name of the bean
 	 * @param beanClass the class of the bean
 	 * @param customizer callback to customize other bean properties than the name
 	 */
 	<T> void registerBean(String name, Class<T> beanClass, Consumer<Spec<T>> customizer);
+
+	/**
+	 * Register a bean from the given generics-containing type, customizing it
+	 * with the customizer callback. The bean will be instantiated using the supplier
+	 * that can be configured in the customizer callback, or will be tentatively instantiated
+	 * with its {@link BeanUtils#getResolvableConstructor resolvable constructor} otherwise.
+	 * @param name the name of the bean
+	 * @param beanType the generics-containing target type of the bean
+	 * @param customizer callback to customize other bean properties than the name
+	 */
+	<T> void registerBean(String name, ParameterizedTypeReference<T> beanType, Consumer<Spec<T>> customizer);
 
 
 	/**
@@ -164,20 +212,6 @@ public interface BeanRegistry {
 		 * @see AbstractBeanDefinition#setInstanceSupplier(Supplier)
 		 */
 		Spec<T> supplier(Function<SupplierContext, T> supplier);
-
-		/**
-		 * Set a generics-containing target type of this bean.
-		 * @see #targetType(ResolvableType)
-		 * @see RootBeanDefinition#setTargetType(ResolvableType)
-		 */
-		Spec<T> targetType(ParameterizedTypeReference<? extends T> type);
-
-		/**
-		 * Set a generics-containing target type of this bean.
-		 * @see #targetType(ParameterizedTypeReference)
-		 * @see RootBeanDefinition#setTargetType(ResolvableType)
-		 */
-		Spec<T> targetType(ResolvableType type);
 	}
 
 
@@ -208,12 +242,12 @@ public interface BeanRegistry {
 		/**
 		 * Return a provider for the specified bean, allowing for lazy on-demand retrieval
 		 * of instances, including availability and uniqueness options.
-		 * <p>For matching a generic type, consider {@link #beanProvider(ResolvableType)}.
-		 * @param requiredType type the bean must match; can be an interface or superclass
+		 * <p>For matching a generic type, consider {@link #beanProvider(ParameterizedTypeReference)}.
+		 * @param beanClass type the bean must match; can be an interface or superclass
 		 * @return a corresponding provider handle
 		 * @see BeanFactory#getBeanProvider(Class)
 		 */
-		<T> ObjectProvider<T> beanProvider(Class<T> requiredType);
+		<T> ObjectProvider<T> beanProvider(Class<T> beanClass);
 
 		/**
 		 * Return a provider for the specified bean, allowing for lazy on-demand retrieval
@@ -229,11 +263,11 @@ public interface BeanRegistry {
 		 * Java compiler warning), consider calling {@link #beanProvider(Class)} with the
 		 * raw type as a second step if no full generic match is
 		 * {@link ObjectProvider#getIfAvailable() available} with this variant.
-		 * @param requiredType type the bean must match; can be a generic type declaration
+		 * @param beanType generics-containing type the bean must match; can be an interface or superclass
 		 * @return a corresponding provider handle
 		 * @see BeanFactory#getBeanProvider(ResolvableType)
 		 */
-		<T> ObjectProvider<T> beanProvider(ResolvableType requiredType);
+		<T> ObjectProvider<T> beanProvider(ParameterizedTypeReference<T> beanType);
 	}
 
 }
