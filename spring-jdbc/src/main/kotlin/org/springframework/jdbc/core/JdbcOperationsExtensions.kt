@@ -24,8 +24,8 @@ import java.sql.ResultSet
  * @author Mario Arias
  * @since 5.0
  */
-inline fun <reified T> JdbcOperations.queryForObject(sql: String): T =
-		queryForObject(sql, T::class.java as Class<*>) as T
+inline fun <reified T : Any> JdbcOperations.queryForObject(sql: String): T? =
+		queryForObject(sql, T::class.java)
 
 /**
  * Extensions for [JdbcOperations.queryForObject] providing a RowMapper-like function
@@ -44,8 +44,8 @@ inline fun <reified T> JdbcOperations.queryForObject(sql: String, vararg args: A
  * @author Mario Arias
  * @since 5.0
  */
-inline fun <reified T> JdbcOperations.queryForObject(sql: String, args: Array<out Any?>, argTypes: IntArray): T =
-		queryForObject(sql, args, argTypes, T::class.java as Class<*>) as T
+inline fun <reified T : Any> JdbcOperations.queryForObject(sql: String, args: Array<out Any?>, argTypes: IntArray): T? =
+		queryForObject(sql, args, argTypes, T::class.java)
 
 /**
  * Extension for [JdbcOperations.queryForObject] providing a
@@ -54,8 +54,8 @@ inline fun <reified T> JdbcOperations.queryForObject(sql: String, args: Array<ou
  * @author Sébastien Deleuze
  * @since 7.0
  */
-inline fun <reified T> JdbcOperations.queryForObject(sql: String, vararg args: Any?): T =
-		queryForObject(sql, T::class.java as Class<*>, *args) as T
+inline fun <reified T : Any> JdbcOperations.queryForObject(sql: String, vararg args: Any?): T? =
+		queryForObject(sql, T::class.java, *args)
 
 /**
  * Extension for [JdbcOperations.queryForList] providing a `queryForList<Foo>("...")` variant.
@@ -63,9 +63,8 @@ inline fun <reified T> JdbcOperations.queryForObject(sql: String, vararg args: A
  * @author Mario Arias
  * @since 5.0
  */
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T> JdbcOperations.queryForList(sql: String): List<T> =
-		queryForList(sql, T::class.java as Class<*>) as List<T>
+inline fun <reified T : Any> JdbcOperations.queryForList(sql: String): List<T?> =
+		queryForList(sql, T::class.java)
 
 /**
  * Extension for [JdbcOperations.queryForList] providing a
@@ -74,10 +73,9 @@ inline fun <reified T> JdbcOperations.queryForList(sql: String): List<T> =
  * @author Mario Arias
  * @since 5.0
  */
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T> JdbcOperations.queryForList(sql: String, args: Array<out Any?>,
-												   argTypes: IntArray): List<T> =
-		queryForList(sql, args, argTypes, T::class.java as Class<*>) as List<T>
+inline fun <reified T : Any> JdbcOperations.queryForList(sql: String, args: Array<out Any?>,
+												   argTypes: IntArray): List<T?> =
+		queryForList(sql, args, argTypes, T::class.java)
 
 /**
  * Extension for [JdbcOperations.queryForList] providing a
@@ -86,9 +84,8 @@ inline fun <reified T> JdbcOperations.queryForList(sql: String, args: Array<out 
  * @author Sebastien Deleuze
  * @since 7.0
  */
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T> JdbcOperations.queryForList(sql: String, vararg args: Any?): List<T> =
-		queryForList(sql, T::class.java as Class<*>, *args) as List<T>
+inline fun <reified T : Any> JdbcOperations.queryForList(sql: String, vararg args: Any?): List<T?> =
+		queryForList(sql, T::class.java, *args)
 
 
 /**
