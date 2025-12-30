@@ -23,6 +23,8 @@ import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.Message;
 import com.google.protobuf.util.JsonFormat;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import org.springframework.http.MediaType;
 import org.springframework.protobuf.Msg;
@@ -140,6 +142,16 @@ class ProtobufHttpMessageConverterTests {
 		MediaType contentType = ProtobufHttpMessageConverter.PROTOBUF;
 		this.converter.write(this.testMsg, contentType, outputMessage);
 		assertThat(outputMessage.getHeaders().getContentLength()).isEqualTo(-1);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"application/x-protobuf", "text/plain", "application/json"})
+	void shouldNotFlushOutputStream(String mediaType) throws IOException {
+		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
+		MediaType contentType = MediaType.parseMediaType(mediaType);
+		this.converter.write(this.testMsg, contentType, outputMessage);
+
+		assertThat(outputMessage.getFlushCount()).isZero();
 	}
 
 }

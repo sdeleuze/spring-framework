@@ -231,7 +231,7 @@ public abstract class AbstractHttpMessageConverter<T> implements HttpMessageConv
 		}
 		else {
 			writeInternal(t, outputMessage);
-			outputMessage.getBody().flush();
+			//outputMessage.getBody().flush();
 		}
 	}
 

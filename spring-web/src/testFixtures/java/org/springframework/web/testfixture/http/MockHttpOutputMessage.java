@@ -17,6 +17,7 @@
 package org.springframework.web.testfixture.http;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
@@ -36,7 +37,7 @@ public class MockHttpOutputMessage implements HttpOutputMessage {
 
 	private final HttpHeaders headers = new HttpHeaders();
 
-	private final ByteArrayOutputStream body = new ByteArrayOutputStream(1024);
+	private final MockHttpBody httpBody = new MockHttpBody(new ByteArrayOutputStream(1024));
 
 
 	@Override
@@ -46,14 +47,14 @@ public class MockHttpOutputMessage implements HttpOutputMessage {
 
 	@Override
 	public OutputStream getBody() throws IOException {
-		return this.body;
+		return this.httpBody;
 	}
 
 	/**
 	 * Return the body content as a byte array.
 	 */
 	public byte[] getBodyAsBytes() {
-		return this.body.toByteArray();
+		return this.httpBody.outputStream.toByteArray();
 	}
 
 	/**
@@ -68,7 +69,33 @@ public class MockHttpOutputMessage implements HttpOutputMessage {
 	 * @param charset the charset to use to turn the body content into a String
 	 */
 	public String getBodyAsString(Charset charset) {
-		return StreamUtils.copyToString(this.body, charset);
+		return StreamUtils.copyToString(this.httpBody.outputStream, charset);
+	}
+
+	/**
+	 * Return the number of times the body output stream was flushed.
+	 */
+	public int getFlushCount() {
+		return this.httpBody.flushCount;
+	}
+
+	static class MockHttpBody extends FilterOutputStream {
+
+		final ByteArrayOutputStream outputStream;
+
+		int flushCount;
+
+		public MockHttpBody(ByteArrayOutputStream outputStream) {
+			super(outputStream);
+			this.outputStream = outputStream;
+		}
+
+		@Override
+		public void flush() throws IOException {
+			this.flushCount++;
+			this.outputStream.flush();
+		}
+
 	}
 
 }

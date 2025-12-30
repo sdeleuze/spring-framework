@@ -27,7 +27,9 @@ import org.springframework.web.testfixture.http.MockHttpOutputMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/** @author Arjen Poutsma */
+/**
+ * Tests for {@link ByteArrayHttpMessageConverter}.
+ **/
 class ByteArrayHttpMessageConverterTests {
 
 	private ByteArrayHttpMessageConverter converter;
@@ -91,6 +93,15 @@ class ByteArrayHttpMessageConverterTests {
 		MockHttpOutputMessage outputMessage2 = new MockHttpOutputMessage();
 		converter.write(body, null, outputMessage2);
 		assertThat(outputMessage2.getBodyAsBytes()).isEqualTo(body);
+	}
+
+	@Test
+	void shouldNotFlushOutputStream() throws IOException {
+		MockHttpOutputMessage flushOutput = new MockHttpOutputMessage();
+		byte[] body = new byte[]{0x1, 0x2};
+		converter.write(body, null, flushOutput);
+
+		assertThat(flushOutput.getFlushCount()).isZero();
 	}
 
 }

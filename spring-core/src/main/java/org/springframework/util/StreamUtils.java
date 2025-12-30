@@ -239,6 +239,20 @@ public abstract class StreamUtils {
 		return new NonClosingOutputStream(out);
 	}
 
+	/**
+	 * Return a variant of the given {@link OutputStream} where only
+	 * calls to {@code write()} methods have an effect;
+	 * {@link OutputStream#close() close()} and
+	 * {@link OutputStream#flush() flush()} are no-ops.
+	 * @param out the OutputStream to decorate
+	 * @return a version of the OutputStream that ignores calls to flush and close
+	 * @since 7.0.3
+	 */
+	public static OutputStream writeOnly(OutputStream out) {
+		Assert.notNull(out, "No OutputStream specified");
+		return new WriteOnlyOutputStream(out);
+	}
+
 
 	private static final class NonClosingInputStream extends FilterInputStream {
 
@@ -286,6 +300,29 @@ public abstract class StreamUtils {
 
 		@Override
 		public void close() throws IOException {
+		}
+	}
+
+	private static final class WriteOnlyOutputStream extends FilterOutputStream {
+
+		public WriteOnlyOutputStream(OutputStream out) {
+			super(out);
+		}
+
+		@Override
+		public void write(byte[] b, int off, int let) throws IOException {
+			// It is critical that we override this method for performance
+			this.out.write(b, off, let);
+		}
+
+		@Override
+		public void flush() throws IOException {
+			// no-op
+		}
+
+		@Override
+		public void close() throws IOException {
+			// no-op
 		}
 	}
 

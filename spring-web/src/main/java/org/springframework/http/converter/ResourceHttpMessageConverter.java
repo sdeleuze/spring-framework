@@ -156,7 +156,7 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 			try {
 				OutputStream out = outputMessage.getBody();
 				in.transferTo(out);
-				out.flush();
+				//out.flush();
 			}
 			catch (NullPointerException ignored) {
 				// see SPR-13620

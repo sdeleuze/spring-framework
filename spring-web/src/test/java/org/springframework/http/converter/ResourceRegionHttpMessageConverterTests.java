@@ -198,4 +198,14 @@ class ResourceRegionHttpMessageConverterTests {
 		assertThat(outputMessage.getBodyAsString(StandardCharsets.UTF_8)).isEqualTo("Spring");
 	}
 
+	@Test
+	void shouldNotFlushOutputStream() throws Exception {
+		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
+		Resource body = new ClassPathResource("byterangeresource.txt", getClass());
+		ResourceRegion region = HttpRange.createByteRange(0, 5).toResourceRegion(body);
+		converter.write(region, MediaType.TEXT_PLAIN, outputMessage);
+
+		assertThat(outputMessage.getFlushCount()).isZero();
+	}
+
 }

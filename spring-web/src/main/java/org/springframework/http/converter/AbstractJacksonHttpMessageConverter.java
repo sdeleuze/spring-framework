@@ -401,7 +401,7 @@ public abstract class AbstractJacksonHttpMessageConverter<T extends ObjectMapper
 		T mapper = selectMapper(clazz, contentType);
 		Assert.state(mapper != null, () -> "No ObjectMapper for " + clazz.getName());
 
-		OutputStream outputStream = StreamUtils.nonClosing(outputMessage.getBody());
+		OutputStream outputStream = StreamUtils.writeOnly(outputMessage.getBody());
 		Class<?> jsonView = null;
 		FilterProvider filters = null;
 		JavaType javaType = null;

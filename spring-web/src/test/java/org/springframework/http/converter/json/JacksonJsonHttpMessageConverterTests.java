@@ -637,6 +637,15 @@ class JacksonJsonHttpMessageConverterTests {
 		assertThat(this.converter.read(Map.class, inputMessage)).isNull();
 	}
 
+	@Test
+	void shouldNotFlushOutputStream() throws IOException {
+		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
+		MyBean body = new MyBean();
+		body.setString("Foo");
+		this.converter.write(body, null, outputMessage);
+		assertThat(outputMessage.getFlushCount()).isZero();
+	}
+
 
 	interface MyInterface {
 

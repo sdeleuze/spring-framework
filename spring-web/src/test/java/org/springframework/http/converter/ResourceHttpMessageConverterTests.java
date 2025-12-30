@@ -41,6 +41,7 @@ import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.mock;
 
 /**
+ * Tests for {@link ResourceHttpMessageConverter}.
  * @author Arjen Poutsma
  * @author Kazuki Shimizu
  * @author Brian Clozel
@@ -155,6 +156,15 @@ class ResourceHttpMessageConverterTests {
 		converter.write(resource, MediaType.APPLICATION_OCTET_STREAM, outputMessage);
 
 		assertThat(outputMessage.getHeaders().getContentLength()).isEqualTo(0);
+	}
+
+	@Test
+	void shouldNotFlushOutputStream() throws IOException {
+		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
+		Resource body = new ClassPathResource("logo.jpg", getClass());
+		converter.write(body, null, outputMessage);
+
+		assertThat(outputMessage.getFlushCount()).isZero();
 	}
 
 }

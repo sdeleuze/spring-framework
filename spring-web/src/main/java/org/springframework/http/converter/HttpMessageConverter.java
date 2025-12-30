@@ -17,6 +17,7 @@
 package org.springframework.http.converter;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -101,7 +102,8 @@ public interface HttpMessageConverter<T> {
 	 * default content type of the converter must be used. If not {@code null}, this media type must have
 	 * previously been passed to the {@link #canWrite canWrite} method of this interface, which must have
 	 * returned {@code true}.
-	 * @param outputMessage the message to write to
+	 * @param outputMessage the message to write to. Message converters are not responsible for
+	 * {@link OutputStream#flush() flushing} nor {@link OutputStream#close() closing} the output stream.
 	 * @throws IOException in case of I/O errors
 	 * @throws HttpMessageNotWritableException in case of conversion errors
 	 */

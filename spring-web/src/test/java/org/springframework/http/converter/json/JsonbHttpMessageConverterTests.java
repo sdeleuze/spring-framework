@@ -273,6 +273,13 @@ class JsonbHttpMessageConverterTests {
 		assertThat(outputMessage.getBodyAsString(StandardCharsets.UTF_8)).isEqualTo(")))\"foo\"");
 	}
 
+	@Test
+	void shouldNotFlushOutputStream() throws IOException {
+		MockHttpOutputMessage outputMessage = new MockHttpOutputMessage();
+		this.converter.writeInternal("foo", null, outputMessage);
+		assertThat(outputMessage.getFlushCount()).isZero();
+	}
+
 
 	public static class MyBase {
 

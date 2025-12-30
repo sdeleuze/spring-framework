@@ -185,5 +185,13 @@ class StringHttpMessageConverterTests {
 		assertThat(outputMessage2.getBodyAsString()).isEqualTo(body);
 	}
 
+	@Test
+	void shouldNotFlushOutput() throws IOException {
+		MockHttpOutputMessage flushOutput = new MockHttpOutputMessage();
+		String body = "Hello World";
+		converter.write(body, TEXT_PLAIN_UTF_8, flushOutput);
+
+		assertThat(flushOutput.getFlushCount()).isZero();
+	}
 
 }

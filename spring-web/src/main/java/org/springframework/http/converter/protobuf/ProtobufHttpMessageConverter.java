@@ -18,6 +18,7 @@ package org.springframework.http.converter.protobuf;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
@@ -41,6 +42,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
+import org.springframework.util.StreamUtils;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_PLAIN;
@@ -218,6 +220,7 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 			throws IOException, HttpMessageNotWritableException {
 
 		MediaType contentType = outputMessage.getHeaders().getContentType();
+		OutputStream outputStream = StreamUtils.writeOnly(outputMessage.getBody());
 		if (contentType == null) {
 			contentType = getDefaultContentType(message);
 		}
@@ -229,19 +232,19 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 		if (PROTOBUF.isCompatibleWith(contentType) ||
 				PLUS_PROTOBUF.isCompatibleWith(contentType)) {
 			setProtoHeader(outputMessage, message);
-			CodedOutputStream codedOutputStream = CodedOutputStream.newInstance(outputMessage.getBody());
+			CodedOutputStream codedOutputStream = CodedOutputStream.newInstance(outputStream);
 			message.writeTo(codedOutputStream);
 			codedOutputStream.flush();
 		}
 		else if (TEXT_PLAIN.isCompatibleWith(contentType)) {
-			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputMessage.getBody(), charset);
+			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, charset);
 			TextFormat.printer().print(message, outputStreamWriter);
 			outputStreamWriter.flush();
-			outputMessage.getBody().flush();
+			//outputMessage.getBody().flush();
 		}
 		else if (this.protobufFormatDelegate != null) {
 			this.protobufFormatDelegate.print(message, outputMessage, contentType, charset);
-			outputMessage.getBody().flush();
+			//outputMessage.getBody().flush();
 		}
 	}
 
@@ -342,7 +345,8 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 				throws IOException, HttpMessageConversionException {
 
 			if (contentType.isCompatibleWith(APPLICATION_JSON)) {
-				OutputStreamWriter writer = new OutputStreamWriter(outputMessage.getBody(), charset);
+				OutputStream outputStream = StreamUtils.writeOnly(outputMessage.getBody());
+				OutputStreamWriter writer = new OutputStreamWriter(outputStream, charset);
 				this.printer.appendTo(message, writer);
 				writer.flush();
 			}
