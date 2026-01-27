@@ -197,7 +197,7 @@ public class RetryTask<V extends @Nullable Object, E extends Exception> implemen
 	 * but declaring the {@link RetryOperations} interface for flexibility)
 	 */
 	public static Runnable wrap(Runnable task, RetryOperations retryTemplate) {
-		RetryTask<Void, RuntimeException> rt = new RetryTask<>(TaskCallback.from(task), retryTemplate) {
+		RetryTask<@Nullable Void, RuntimeException> rt = new RetryTask<>(TaskCallback.from(task), retryTemplate) {
 			@Override
 			public String getName() {
 				return task.getClass().getName();
