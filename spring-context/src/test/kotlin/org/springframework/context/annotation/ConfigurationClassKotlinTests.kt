@@ -55,6 +55,54 @@ class ConfigurationClassKotlinTests {
 		context.refresh()
 	}
 
+	@Test
+	fun `Configuration with nullable constructor parameter with default value is autowired`() {
+		val context = AnnotationConfigApplicationContext(FooConfiguration::class.java,
+			ConfigurationWithNullableDefault::class.java)
+		assertThat(context.getBean<Bar>().foo).isSameAs(context.getBean<Foo>())
+	}
+
+	@Test
+	fun `Configuration with non-null constructor parameter with default value is autowired`() {
+		val context = AnnotationConfigApplicationContext(FooConfiguration::class.java,
+			ConfigurationWithDefault::class.java)
+		assertThat(context.getBean<Bar>().foo).isSameAs(context.getBean<Foo>())
+	}
+
+	@Test
+	fun `Configuration with constructor parameter with default value falls back when no bean`() {
+		val context = AnnotationConfigApplicationContext(ConfigurationWithDefault::class.java)
+		assertThat(context.getBean<Bar>().foo).isNotNull()
+		assertThat(context.getBeanProvider(Foo::class.java).ifAvailable).isNull()
+	}
+
+	@Test
+	fun `Configuration with nullable constructor parameter with non-null default value falls back when no bean`() {
+		val context = AnnotationConfigApplicationContext(ConfigurationWithNullableNonNullDefault::class.java)
+		assertThat(context.getBean<Bar>().foo).isNotNull()
+	}
+
+	@Test
+	fun `Configuration with mixed constructor parameters with default values`() {
+		val context = AnnotationConfigApplicationContext(FooConfiguration::class.java,
+			ConfigurationWithMixedDefaults::class.java)
+		val config = context.getBean<ConfigurationWithMixedDefaults>()
+		assertThat(config.javaClass).isNotEqualTo(ConfigurationWithMixedDefaults::class.java)
+		assertThat(config.foo).isSameAs(context.getBean<Foo>())
+		assertThat(config.name).isEqualTo("default")
+		assertThat(config.count).isEqualTo(42)
+	}
+
+	@Test
+	fun `Configuration with mixed constructor parameters with default values falls back when no bean`() {
+		val context = AnnotationConfigApplicationContext(ConfigurationWithMixedDefaults::class.java)
+		val config = context.getBean<ConfigurationWithMixedDefaults>()
+		assertThat(config.javaClass).isNotEqualTo(ConfigurationWithMixedDefaults::class.java)
+		assertThat(config.foo).isNull()
+		assertThat(config.name).isEqualTo("default")
+		assertThat(config.count).isEqualTo(42)
+	}
+
 
 	@Configuration
 	class FinalConfigurationWithProxy {
@@ -87,6 +135,41 @@ class ConfigurationClassKotlinTests {
 				return object: BeanPostProcessor{}
 			}
 		}
+	}
+
+	@Configuration(proxyBeanMethods = false)
+	class FooConfiguration {
+
+		@Bean
+		fun foo() = Foo()
+	}
+
+	@Configuration
+	open class ConfigurationWithNullableDefault(val foo: Foo? = null) {
+
+		@Bean
+		open fun bar() = Bar(foo!!)
+	}
+
+	@Configuration
+	open class ConfigurationWithDefault(val foo: Foo = Foo()) {
+
+		@Bean
+		open fun bar() = Bar(foo)
+	}
+
+	@Configuration
+	open class ConfigurationWithNullableNonNullDefault(val foo: Foo? = Foo()) {
+
+		@Bean
+		open fun bar() = Bar(foo!!)
+	}
+
+	@Configuration
+	open class ConfigurationWithMixedDefaults(val name: String = "default", val foo: Foo?, val count: Int = 42) {
+
+		@Bean
+		open fun bar() = Bar(foo ?: Foo())
 	}
 
 	class Foo

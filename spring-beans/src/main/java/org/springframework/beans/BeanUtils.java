@@ -50,6 +50,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ConcurrentReferenceHashMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -184,28 +185,36 @@ public abstract class BeanUtils {
 		Assert.notNull(ctor, "Constructor must not be null");
 		try {
 			ReflectionUtils.makeAccessible(ctor);
-			if (KOTLIN_REFLECT_PRESENT && KotlinDetector.isKotlinType(ctor.getDeclaringClass())) {
-				return KotlinDelegate.instantiateClass(ctor, args);
-			}
-			else {
-				int parameterCount = ctor.getParameterCount();
-				Assert.isTrue(args.length <= parameterCount, "Can't specify more arguments than constructor parameters");
-				if (parameterCount == 0) {
-					return ctor.newInstance();
+			if (KOTLIN_REFLECT_PRESENT) {
+				Class<?> declaringClass = ctor.getDeclaringClass();
+				if (KotlinDetector.isKotlinType(declaringClass)) {
+					return KotlinDelegate.instantiateClass(ctor, args);
 				}
-				Class<?>[] parameterTypes = ctor.getParameterTypes();
-				@Nullable Object[] argsWithDefaultValues = new Object[args.length];
-				for (int i = 0 ; i < args.length; i++) {
-					if (args[i] == null) {
-						Class<?> parameterType = parameterTypes[i];
-						argsWithDefaultValues[i] = (parameterType.isPrimitive() ? DEFAULT_TYPE_VALUES.get(parameterType) : null);
-					}
-					else {
-						argsWithDefaultValues[i] = args[i];
+				Class<?> userClass = ClassUtils.getUserClass(declaringClass);
+				if (userClass != declaringClass && KotlinDetector.isKotlinType(userClass)) {
+					T instance = KotlinDelegate.instantiateSubclass(ctor, userClass, args);
+					if (instance != null) {
+						return instance;
 					}
 				}
-				return ctor.newInstance(argsWithDefaultValues);
 			}
+			int parameterCount = ctor.getParameterCount();
+			Assert.isTrue(args.length <= parameterCount, "Can't specify more arguments than constructor parameters");
+			if (parameterCount == 0) {
+				return ctor.newInstance();
+			}
+			Class<?>[] parameterTypes = ctor.getParameterTypes();
+			@Nullable Object[] argsWithDefaultValues = new Object[args.length];
+			for (int i = 0 ; i < args.length; i++) {
+				if (args[i] == null) {
+					Class<?> parameterType = parameterTypes[i];
+					argsWithDefaultValues[i] = (parameterType.isPrimitive() ? DEFAULT_TYPE_VALUES.get(parameterType) : null);
+				}
+				else {
+					argsWithDefaultValues[i] = args[i];
+				}
+			}
+			return ctor.newInstance(argsWithDefaultValues);
 		}
 		catch (InstantiationException ex) {
 			throw new BeanInstantiationException(ctor, "Is it an abstract class?", ex);
@@ -928,6 +937,83 @@ public abstract class BeanUtils {
 				}
 			}
 			return kotlinConstructor.callBy(argParameters);
+		}
+
+		/**
+		 * Instantiate a generated subclass (for example, a CGLIB proxy) of a Kotlin class
+		 * using the provided constructor, applying the Kotlin default values of the
+		 * superclass constructor for optional parameters with a {@code null} argument.
+		 * <p>This relies on the generated subclass declaring an equivalent of the
+		 * synthetic Kotlin constructor handling default values.
+		 * @param ctor the constructor of the generated subclass to instantiate
+		 * @param userClass the Kotlin superclass
+		 * @param args the constructor arguments to apply
+		 * (use {@code null} for unspecified parameter if needed)
+		 * @return the new instance, or {@code null} if not applicable (no Kotlin
+		 * default value to apply, or no matching constructor found), in which case
+		 * the caller should invoke the provided constructor as usual
+		 */
+		private static <T> @Nullable T instantiateSubclass(Constructor<T> ctor, Class<?> userClass, @Nullable Object... args)
+				throws IllegalAccessException, InvocationTargetException, InstantiationException {
+
+			Class<?>[] parameterTypes = ctor.getParameterTypes();
+			Assert.isTrue(args.length <= parameterTypes.length, "Can't specify more arguments than constructor parameters");
+			if (args.length == parameterTypes.length && !ObjectUtils.containsElement(args, null)) {
+				// All arguments specified: no Kotlin default value to apply
+				return null;
+			}
+			KFunction<?> kotlinConstructor;
+			try {
+				kotlinConstructor = ReflectJvmMapping.getKotlinFunction(userClass.getDeclaredConstructor(parameterTypes));
+			}
+			catch (NoSuchMethodException ex) {
+				return null;
+			}
+			if (kotlinConstructor == null) {
+				return null;
+			}
+			List<KParameter> parameters = kotlinConstructor.getParameters();
+			if (parameters.size() != parameterTypes.length ||
+					!parameters.stream().allMatch(p -> KParameter.Kind.VALUE.equals(p.getKind()))) {
+				return null;
+			}
+
+			int maskCount = (parameterTypes.length + Integer.SIZE - 1) / Integer.SIZE;
+			int[] masks = new int[maskCount];
+			boolean defaultValueApplied = false;
+			for (int i = 0; i < parameterTypes.length; i++) {
+				if ((i >= args.length || args[i] == null) && parameters.get(i).isOptional()) {
+					masks[i / Integer.SIZE] |= (1 << (i % Integer.SIZE));
+					defaultValueApplied = true;
+				}
+			}
+			if (!defaultValueApplied) {
+				return null;
+			}
+
+			Class<?>[] defaultsParameterTypes = new Class<?>[parameterTypes.length + maskCount + 1];
+			System.arraycopy(parameterTypes, 0, defaultsParameterTypes, 0, parameterTypes.length);
+			Arrays.fill(defaultsParameterTypes, parameterTypes.length, parameterTypes.length + maskCount, int.class);
+			defaultsParameterTypes[defaultsParameterTypes.length - 1] = DefaultConstructorMarker.class;
+			Constructor<T> defaultsCtor;
+			try {
+				defaultsCtor = ctor.getDeclaringClass().getDeclaredConstructor(defaultsParameterTypes);
+			}
+			catch (NoSuchMethodException ex) {
+				return null;
+			}
+
+			@Nullable Object[] defaultsArgs = new Object[defaultsParameterTypes.length];
+			for (int i = 0; i < parameterTypes.length; i++) {
+				Object arg = (i < args.length ? args[i] : null);
+				defaultsArgs[i] = (arg == null && parameterTypes[i].isPrimitive() ?
+						DEFAULT_TYPE_VALUES.get(parameterTypes[i]) : arg);
+			}
+			for (int i = 0; i < maskCount; i++) {
+				defaultsArgs[parameterTypes.length + i] = masks[i];
+			}
+			ReflectionUtils.makeAccessible(defaultsCtor);
+			return defaultsCtor.newInstance(defaultsArgs);
 		}
 
 		public static boolean hasDefaultConstructorMarker(Constructor<?> ctor) {
